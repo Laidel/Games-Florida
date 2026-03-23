@@ -3,75 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Games-Florida - Catálogo</title>
+    <title>LAIDEL v8.2 - Green Track</title>
     <style>
-        /* Estilo para que la imagen sea movible y escalable */
-        .contenedor-imagen {
-            overflow: auto; /* Permite mover la imagen si es más grande que el cuadro */
+        /* BLOQUE 2: Estilos Visuales (Colores y Layout) */
+        :root { --green: #00ff00; --bg: #000; }
+        body { background: var(--bg); color: var(--green); font-family: monospace; margin: 0; padding: 10px; text-align: center; }
+        
+        /* BLOQUE 3: Visor de Imagen con Scroll y Zoom */
+        .visor-box {
+            border: 2px solid var(--green);
+            background: #050505;
+            margin: 10px 0;
+            overflow: auto; /* Permite mover la imagen al hacer zoom */
             display: flex;
             justify-content: center;
-            align-items: center;
-            border: 2px solid #0f0;
-            margin: 10px;
-            background: #000;
+            max-height: 50vh;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            /* Mejora la calidad al ampliar */
-            image-rendering: auto; 
+        #img-visor { max-width: 100%; height: auto; display: block; }
+
+        /* BLOQUE 4: Botones y Paneles */
+        .panel { border: 1px solid var(--green); padding: 10px; margin-bottom: 10px; }
+        .btn { 
+            background: var(--bg); color: var(--green); border: 1px solid var(--green);
+            padding: 12px; width: 100%; margin: 5px 0; font-weight: bold; cursor: pointer;
         }
-        body { background-color: #000; color: #0f0; font-family: sans-serif; text-align: center; }
-        .btn { padding: 15px; margin: 5px; border-radius: 10px; font-weight: bold; cursor: pointer; display: inline-block; }
-        .btn-add { background: #0f0; color: #000; width: 80%; font-size: 1.2em; }
-        .btn-back { background: #f44; color: #fff; }
+        .btn-buy { background: var(--green); color: var(--bg); font-size: 1.2em; }
+        .precio-grande { font-size: 2.5em; color: #ffff00; }
     </style>
 </head>
 <body>
 
-    <div id="detalle-juego">
-        <h2 id="nombre-juego">Cargando...</h2>
-        <h1 id="precio-visor">PRECIO: $0</h1>
-        
-        <button class="btn btn-add">AÑADIR AL CARRITO</button>
-        
-        <div class="contenedor-imagen">
-            <img id="img-visor" src="" alt="Portada del juego">
-        </div>
-
-        <div>
-            <button class="btn" style="background:#050">-</button>
-            <button class="btn" style="background:#050">RESET</button>
-            <button class="btn" style="background:#050">+</button>
-            <button class="btn btn-back">ATRÁS</button>
-        </div>
-        
-        <button class="btn" style="background:#f00; color:#fff; width: 90%; margin-top: 20px;">
-            ▶ VER GAMEPLAY EN YOUTUBE
-        </button>
+    <div class="panel">
+        <div id="nombre-juego">GAMES FLORIDA</div>
+        <div class="precio-grande" id="precio-visor">PRECIO: $0</div>
     </div>
 
-    <script>
-        // CONFIGURACIÓN IMPORTANTE: Ruta de tus archivos
-        const rutaArchivos = 'Archivos/'; 
+    <button class="btn btn-buy" onclick="agregarAlCarrito()">🛒 AÑADIR AL CARRITO</button>
 
-        async function cargarDatos() {
+    <div class="visor-box">
+        <img id="img-visor" src="" alt="Cargando...">
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;">
+        <button class="btn" onclick="navegar(-1)">◀ ANTERIOR</button>
+        <button class="btn" onclick="resetZoom()">RESET</button>
+        <button class="btn" onclick="navegar(1)">SIGUIENTE ▶</button>
+    </div>
+
+    <button class="btn" style="color:red; border-color:red;" onclick="location.reload()">CERRAR / REINICIAR</button>
+
+    <script>
+        /* BLOQUE 7: Variables Globales y Rutas */
+        const CARPETA = 'Archivos/'; 
+        let precios = {};
+        let taxi = 0;
+        let misImagenes = [];
+        let indiceActual = 0;
+
+        /* BLOQUE 8: Carga Automática de Configuración (Precios y Taxi) */
+        async function iniciarApp() {
             try {
-                // Ahora busca precio.txt DENTRO de la carpeta Archivos
-                const resp = await fetch(rutaArchivos + 'precio.txt');
-                const texto = await resp.text();
-                
-                // Aquí va tu lógica de búsqueda de precios...
-                // Ejemplo rápido para que veas el cambio:
-                console.log("Precios cargados desde la carpeta Archivos");
-            } catch (e) {
-                console.error("Error cargando precios: ", e);
-            }
+                // Cargar precios.txt
+                const resP = await fetch(CARPETA + 'precio.txt');
+                const txtP = await resP.text();
+                txtP.split('\n').forEach(l => {
+                    const [n, p] = l.split(':');
+                    if(n) precios[n.trim()] = p ? p.trim() : "0";
+                });
+
+                // Cargar taxi.txt
+                const resT = await fetch(CARPETA + 'taxi.txt');
+                const txtT = await resT.text();
+                taxi = parseInt(txtT) || 0;
+
+                console.log("Configuración cargada desde /Archivos");
+            } catch (e) { console.log("Error inicial:", e); }
         }
 
-        // Llamar a la carga al iniciar
-        cargarDatos();
+        /* BLOQUE 9: Sincronización con el Teléfono (Input invisible) */
+        const inputLocal = document.createElement('input');
+        inputLocal.type = 'file';
+        inputLocal.webkitdirectory = true;
+        inputLocal.onchange = (e) => {
+            misImagenes = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+            if(misImagenes.length > 0) mostrarImagen(0);
+        };
+
+        /* BLOQUE 10: Mostrar Imagen y Precio */
+        function mostrarImagen(idx) {
+            if(misImagenes.length === 0) return;
+            indiceActual = idx;
+            const archivo = misImagenes[idx];
+            const imgElement = document.getElementById('img-visor');
+            const url = URL.createObjectURL(archivo);
+            
+            imgElement.src = url;
+            document.getElementById('nombre-juego').innerText = archivo.name.toUpperCase();
+            
+            // Buscar precio en la lista cargada de GitHub
+            const precioEncontrado = precios[archivo.name] || "Consultar";
+            document.getElementById('precio-visor').innerText = "PRECIO: $" + precioEncontrado;
+        }
+
+        /* BLOQUE 11: Lógica de Navegación */
+        function navegar(dir) {
+            let nuevoIdx = indiceActual + dir;
+            if(nuevoIdx >= 0 && nuevoIdx < misImagenes.length) mostrarImagen(nuevoIdx);
+        }
+
+        /* BLOQUE 12: Lógica del Carrito */
+        function agregarAlCarrito() {
+            const nombre = document.getElementById('nombre-juego').innerText;
+            const precio = document.getElementById('precio-visor').innerText;
+            alert(`Añadido: ${nombre}\n${precio}\n+ Domicilio: $${taxi}`);
+        }
+
+        /* BLOQUE 13: Reset de Imagen */
+        function resetZoom() {
+            const img = document.getElementById('img-visor');
+            img.style.width = "100%";
+            document.querySelector('.visor-box').scrollLeft = 0;
+            document.querySelector('.visor-box').scrollTop = 0;
+        }
+
+        /* BLOQUE 14: Botón de Sincronizar (Añadido al final para fácil acceso) */
+        const btnSync = document.createElement('button');
+        btnSync.className = 'btn';
+        btnSync.style.background = '#005500';
+        btnSync.innerText = '📁 SINCRONIZAR CARPETA DRIVE';
+        btnSync.onclick = () => inputLocal.click();
+        document.body.insertBefore(btnSync, document.body.firstChild);
+
+        /* BLOQUE 15: Ejecución Inicial */
+        window.onload = iniciarApp;
     </script>
 </body>
 </html>
