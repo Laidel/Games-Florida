@@ -3,139 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>LAIDEL v8.2 - Green Track</title>
+    <title>GAMES FLORIDA - LAIDEL</title>
     <style>
-        /* BLOQUE 2: Estilos Visuales (Colores y Layout) */
-        :root { --green: #00ff00; --bg: #000; }
-        body { background: var(--bg); color: var(--green); font-family: monospace; margin: 0; padding: 10px; text-align: center; }
+        :root { --g: #00ff00; --b: #000; }
+        body { background: var(--b); color: var(--g); font-family: monospace; margin: 0; padding: 5px; overflow-x: hidden; }
         
-        /* BLOQUE 3: Visor de Imagen con Scroll y Zoom */
-        .visor-box {
-            border: 2px solid var(--green);
-            background: #050505;
+        /* Visor Resistente con Zoom */
+        .visor-marco {
+            border: 2px solid var(--g);
+            height: 60vh;
             margin: 10px 0;
-            overflow: auto; /* Permite mover la imagen al hacer zoom */
             display: flex;
             justify-content: center;
-            max-height: 50vh;
+            align-items: center;
+            overflow: auto; /* Esencial para mover la foto con zoom */
+            background: #080808;
         }
         #img-visor { max-width: 100%; height: auto; display: block; }
 
-        /* BLOQUE 4: Botones y Paneles */
-        .panel { border: 1px solid var(--green); padding: 10px; margin-bottom: 10px; }
+        .ui-panel { border: 1px solid var(--g); padding: 10px; background: #111; }
+        .precio { font-size: 2.2em; color: yellow; margin: 5px 0; }
         .btn { 
-            background: var(--bg); color: var(--green); border: 1px solid var(--green);
-            padding: 12px; width: 100%; margin: 5px 0; font-weight: bold; cursor: pointer;
+            background: var(--b); color: var(--g); border: 1px solid var(--g);
+            padding: 15px; width: 100%; margin: 4px 0; font-weight: bold; font-size: 1.1em;
         }
-        .btn-buy { background: var(--green); color: var(--bg); font-size: 1.2em; }
-        .precio-grande { font-size: 2.5em; color: #ffff00; }
+        .btn-sync { background: #004400; border-color: #00ff00; }
+        .btn-buy { background: var(--g); color: var(--b); }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="panel">
-        <div id="nombre-juego">GAMES FLORIDA</div>
-        <div class="precio-grande" id="precio-visor">PRECIO: $0</div>
+    <button class="btn btn-sync" onclick="document.getElementById('fileInput').click()">📁 SINCRONIZAR CARPETA</button>
+    <input type="file" id="fileInput" webkitdirectory style="display:none">
+
+    <div class="ui-panel">
+        <div id="txt-nombre">ESPERANDO ARCHIVOS...</div>
+        <div class="precio" id="txt-precio">$0.00</div>
     </div>
 
-    <button class="btn btn-buy" onclick="agregarAlCarrito()">🛒 AÑADIR AL CARRITO</button>
+    <button class="btn btn-buy" onclick="comprar()">🛒 AÑADIR AL CARRITO</button>
 
-    <div class="visor-box">
-        <img id="img-visor" src="" alt="Cargando...">
+    <div class="visor-marco">
+        <img id="img-visor" src="" alt="Usa el botón Sincronizar">
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;">
-        <button class="btn" onclick="navegar(-1)">◀ ANTERIOR</button>
-        <button class="btn" onclick="resetZoom()">RESET</button>
-        <button class="btn" onclick="navegar(1)">SIGUIENTE ▶</button>
+    <div class="grid-3">
+        <button class="btn" onclick="mover(-1)">◀</button>
+        <button class="btn" onclick="reset()">RESET</button>
+        <button class="btn" onclick="mover(1)">▶</button>
     </div>
 
-    <button class="btn" style="color:red; border-color:red;" onclick="location.reload()">CERRAR / REINICIAR</button>
+    <button class="btn" style="color:red; border-color:red; margin-top:20px;" onclick="location.reload()">REINICIAR APP</button>
 
     <script>
-        /* BLOQUE 7: Variables Globales y Rutas */
-        const CARPETA = 'Archivos/'; 
-        let precios = {};
-        let taxi = 0;
-        let misImagenes = [];
-        let indiceActual = 0;
+        const RUTA = 'Archivos/';
+        let db_precios = {};
+        let db_taxi = 0;
+        let mis_fotos = [];
+        let index = 0;
 
-        /* BLOQUE 8: Carga Automática de Configuración (Precios y Taxi) */
-        async function iniciarApp() {
+        // 1. CARGAR CONFIGURACIÓN DE GITHUB
+        async function cargarConfig() {
             try {
-                // Cargar precios.txt
-                const resP = await fetch(CARPETA + 'precio.txt');
-                const txtP = await resP.text();
-                txtP.split('\n').forEach(l => {
-                    const [n, p] = l.split(':');
-                    if(n) precios[n.trim()] = p ? p.trim() : "0";
-                });
-
-                // Cargar taxi.txt
-                const resT = await fetch(CARPETA + 'taxi.txt');
-                const txtT = await resT.text();
-                taxi = parseInt(txtT) || 0;
-
-                console.log("Configuración cargada desde /Archivos");
-            } catch (e) { console.log("Error inicial:", e); }
+                const resP = await fetch(RUTA + 'precio.txt');
+                if(resP.ok) {
+                    const t = await resP.text();
+                    t.split('\n').forEach(l => {
+                        let partes = l.split(':');
+                        if(partes.length == 2) db_precios[partes[0].trim()] = partes[1].trim();
+                    });
+                }
+                const resT = await fetch(RUTA + 'taxi.txt');
+                if(resT.ok) {
+                    const t = await resT.text();
+                    db_taxi = parseInt(t) || 0;
+                }
+            } catch(e) { console.log("Modo local activo"); }
         }
 
-        /* BLOQUE 9: Sincronización con el Teléfono (Input invisible) */
-        const inputLocal = document.createElement('input');
-        inputLocal.type = 'file';
-        inputLocal.webkitdirectory = true;
-        inputLocal.onchange = (e) => {
-            misImagenes = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
-            if(misImagenes.length > 0) mostrarImagen(0);
+        // 2. MANEJO DE ARCHIVOS LOCALES
+        document.getElementById('fileInput').onchange = function(e) {
+            mis_fotos = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+            if(mis_fotos.length > 0) ver(0);
         };
 
-        /* BLOQUE 10: Mostrar Imagen y Precio */
-        function mostrarImagen(idx) {
-            if(misImagenes.length === 0) return;
-            indiceActual = idx;
-            const archivo = misImagenes[idx];
-            const imgElement = document.getElementById('img-visor');
-            const url = URL.createObjectURL(archivo);
+        // 3. VISOR DE IMÁGENES
+        function ver(i) {
+            index = i;
+            const f = mis_fotos[i];
+            const img = document.getElementById('img-visor');
+            const nom = document.getElementById('txt-nombre');
+            const pre = document.getElementById('txt-precio');
+
+            img.src = URL.createObjectURL(f);
+            nom.innerText = f.name.toUpperCase();
             
-            imgElement.src = url;
-            document.getElementById('nombre-juego').innerText = archivo.name.toUpperCase();
-            
-            // Buscar precio en la lista cargada de GitHub
-            const precioEncontrado = precios[archivo.name] || "Consultar";
-            document.getElementById('precio-visor').innerText = "PRECIO: $" + precioEncontrado;
+            let p = db_precios[f.name] || "CONSULTAR";
+            pre.innerText = p.includes('$') ? p : "$" + p;
         }
 
-        /* BLOQUE 11: Lógica de Navegación */
-        function navegar(dir) {
-            let nuevoIdx = indiceActual + dir;
-            if(nuevoIdx >= 0 && nuevoIdx < misImagenes.length) mostrarImagen(nuevoIdx);
+        function mover(d) {
+            let n = index + d;
+            if(n >= 0 && n < mis_fotos.length) ver(n);
         }
 
-        /* BLOQUE 12: Lógica del Carrito */
-        function agregarAlCarrito() {
-            const nombre = document.getElementById('nombre-juego').innerText;
-            const precio = document.getElementById('precio-visor').innerText;
-            alert(`Añadido: ${nombre}\n${precio}\n+ Domicilio: $${taxi}`);
-        }
-
-        /* BLOQUE 13: Reset de Imagen */
-        function resetZoom() {
+        function reset() {
             const img = document.getElementById('img-visor');
             img.style.width = "100%";
-            document.querySelector('.visor-box').scrollLeft = 0;
-            document.querySelector('.visor-box').scrollTop = 0;
+            const marco = document.querySelector('.visor-marco');
+            marco.scrollLeft = 0;
+            marco.scrollTop = 0;
         }
 
-        /* BLOQUE 14: Botón de Sincronizar (Añadido al final para fácil acceso) */
-        const btnSync = document.createElement('button');
-        btnSync.className = 'btn';
-        btnSync.style.background = '#005500';
-        btnSync.innerText = '📁 SINCRONIZAR CARPETA DRIVE';
-        btnSync.onclick = () => inputLocal.click();
-        document.body.insertBefore(btnSync, document.body.firstChild);
+        function comprar() {
+            const n = document.getElementById('txt-nombre').innerText;
+            const p = document.getElementById('txt-precio').innerText;
+            alert("PEDIDO:\n" + n + "\n" + p + "\n+ ENVÍO: $" + db_taxi + "\n\nEnviando a WhatsApp...");
+        }
 
-        /* BLOQUE 15: Ejecución Inicial */
-        window.onload = iniciarApp;
+        window.onload = cargarConfig;
     </script>
 </body>
 </html>
