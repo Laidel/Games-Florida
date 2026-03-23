@@ -2,127 +2,168 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>Florida Games v15.0 - Web Edition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GAMES FLORIDA - LAIDEL</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        :root { --g: #00ff00; --b: #000; }
-        body { background: var(--b); color: var(--g); font-family: monospace; margin: 0; padding: 5px; overflow-x: hidden; }
+        :root { --neon: #00ff41; --bg: #000; --red: #ff4444; --dark-neon: #008f11; --taxi-yellow: #ffcc00; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* Visor Resistente con Zoom */
-        .visor-marco {
-            border: 2px solid var(--g);
-            height: 60vh;
-            margin: 10px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: auto; /* Esencial para mover la foto con zoom */
-            background: #080808;
-        }
-        #img-visor { max-width: 100%; height: auto; display: block; }
+        #welcomeScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 5px solid var(--neon); }
+        .welcome-title { color: var(--neon); font-size: 2rem; text-shadow: 0 0 15px var(--neon); margin-bottom: 30px; padding: 0 20px; }
+        
+        .action-btn { background: var(--neon); color: #000; border: 4px solid var(--dark-neon); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 10px; box-shadow: 0 4px 0 var(--dark-neon); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
+        .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
+        
+        .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
+        .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; }
+        .price-tag { position: absolute; top: 22px; right: 5px; background: rgba(0,0,0,0.85); color: var(--neon); font-size: 0.65rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
 
-        .ui-panel { border: 1px solid var(--g); padding: 10px; background: #111; }
-        .precio { font-size: 2.2em; color: yellow; margin: 5px 0; }
-        .btn { 
-            background: var(--b); color: var(--g); border: 1px solid var(--g);
-            padding: 15px; width: 100%; margin: 4px 0; font-weight: bold; font-size: 1.1em;
-        }
-        .btn-sync { background: #004400; border-color: #00ff00; }
-        .btn-buy { background: var(--g); color: var(--b); }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+        .ticket-input { width: 100%; background: #111; color: #fff; border: 1px solid #333; padding: 12px; margin-bottom: 5px; font-family: monospace; outline: none; font-size: 0.9rem; font-weight: bold; }
+        .taxi-container { display: flex; flex-direction: column; gap: 5px; padding: 10px; border: 1px solid #333; border-radius: 8px; margin-bottom: 15px; background: #050505; color: #fff; }
+        .taxi-row { display: flex; justify-content: space-between; align-items: center; }
+        
+        .white-price { color: #ffffff !important; font-weight: bold; }
+        
+        .ticket-footer { margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--neon); text-align: center; font-size: 0.75rem; color: #fff; }
+        .console-menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 10px; width: 100%; }
+        .console-btn { background: #111; color: var(--neon); border: 1px solid var(--neon); padding: 6px 2px; font-size: 0.55rem; border-radius: 4px; font-weight: bold; text-align: center; min-height: 35px; display: flex; align-items: center; justify-content: center; }
+        .console-btn.active { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); border-color: #fff; }
+        .search-box { width: 100%; background: #111; border: 2px solid var(--neon); border-radius: 8px; padding: 12px; color: var(--neon); margin-bottom: 15px; outline: none; font-family: monospace; }
+        
+        #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000000; flex-direction: column; overflow: hidden; }
+        #zoomContainer { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; }
+        #expandedImg { max-width: 95%; transition: transform 0.2s; border: 2px solid var(--neon); }
     </style>
 </head>
 <body>
+    <audio id="sndClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
 
-    <button class="btn btn-sync" onclick="document.getElementById('fileInput').click()">📁 SINCRONIZAR CARPETA</button>
-    <input type="file" id="fileInput" webkitdirectory style="display:none">
-
-    <div class="ui-panel">
-        <div id="txt-nombre">ESPERANDO ARCHIVOS...</div>
-        <div class="precio" id="txt-precio">$0.00</div>
+    <div id="welcomeScreen">
+        <h1 class="welcome-title">Florida Games</h1>
+        <button class="action-btn" style="width:280px" onclick="enterApp()">INICIAR APP</button>
     </div>
 
-    <button class="btn btn-buy" onclick="comprar()">🛒 AÑADIR AL CARRITO</button>
-
-    <div class="visor-marco">
-        <img id="img-visor" src="" alt="Usa el botón Sincronizar">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; max-width:500px; margin-bottom:10px;">
+        <button class="action-btn" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black; border:4px solid var(--neon);"><b>CATÁLOGO</b></button>
+        <button class="action-btn" onclick="showPage('cartScreen')" style="background:#FFEB3B; color:black; border:4px solid var(--neon);">🛒<b>CARRITO</b></button>
     </div>
 
-    <div class="grid-3">
-        <button class="btn" onclick="mover(-1)">◀</button>
-        <button class="btn" onclick="reset()">RESET</button>
-        <button class="btn" onclick="mover(1)">▶</button>
+    <div class="container">
+        <div id="catalogScreen">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
+            <button class="action-btn" style="margin-bottom:10px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR DRIVE</b></button>
+            <div class="grid-3x" id="imageGrid"></div>
+        </div>
+
+        <div id="cartScreen" style="display:none;">
+            <div id="captureArea" style="background:#000; padding:15px; border:1px solid var(--neon); border-radius:8px;">
+                <h3 style="color:var(--neon); text-align:center; border-bottom:2px dashed var(--neon); padding-bottom:10px;">TICKET FLORIDA GAMES</h3>
+                <div id="cartList"></div>
+                <h2 id="finalPrice" class="white-price" style="text-align:right;">$0.00</h2>
+            </div>
+            <button class="action-btn" onclick="takeSnapshot()">📸 GENERAR TICKET</button>
+        </div>
     </div>
 
-    <button class="btn" style="color:red; border-color:red; margin-top:20px;" onclick="location.reload()">REINICIAR APP</button>
+    <div id="lightbox" onclick="closeLightbox()">
+        <div id="zoomContainer"><img id="expandedImg" src=""></div>
+    </div>
 
     <script>
-        const RUTA = 'Archivos/';
-        let db_precios = {};
-        let db_taxi = 0;
-        let mis_fotos = [];
-        let index = 0;
+        const RUTA_NUBE = 'Archivos/'; // Carpeta en tu GitHub
+        let allItems = [], cart = [], priceList = {}, taxiP = 0;
 
-        // 1. CARGAR CONFIGURACIÓN DE GITHUB
-        async function cargarConfig() {
+        async function enterApp() {
+            document.getElementById('welcomeScreen').style.display='none';
+            await cargarDatosNube(); // Intenta cargar precios automáticamente
+        }
+
+        async function cargarDatosNube() {
             try {
-                const resP = await fetch(RUTA + 'precio.txt');
+                const resP = await fetch(RUTA_NUBE + 'precio.txt');
                 if(resP.ok) {
                     const t = await resP.text();
                     t.split('\n').forEach(l => {
-                        let partes = l.split(':');
-                        if(partes.length == 2) db_precios[partes[0].trim()] = partes[1].trim();
+                        const [n, p] = l.split(':');
+                        if(n && p) priceList[n.trim()] = parseFloat(p.trim());
                     });
                 }
-                const resT = await fetch(RUTA + 'taxi.txt');
+                const resT = await fetch(RUTA_NUBE + 'taxi.txt');
                 if(resT.ok) {
-                    const t = await resT.text();
-                    db_taxi = parseInt(t) || 0;
+                    const tT = await resT.text();
+                    taxiP = parseFloat(tT.trim()) || 0;
                 }
-            } catch(e) { console.log("Modo local activo"); }
+                console.log("Datos de la nube cargados");
+            } catch(e) { console.log("Usando modo manual"); }
         }
 
-        // 2. MANEJO DE ARCHIVOS LOCALES
-        document.getElementById('fileInput').onchange = function(e) {
-            mis_fotos = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
-            if(mis_fotos.length > 0) ver(0);
-        };
-
-        // 3. VISOR DE IMÁGENES
-        function ver(i) {
-            index = i;
-            const f = mis_fotos[i];
-            const img = document.getElementById('img-visor');
-            const nom = document.getElementById('txt-nombre');
-            const pre = document.getElementById('txt-precio');
-
-            img.src = URL.createObjectURL(f);
-            nom.innerText = f.name.toUpperCase();
-            
-            let p = db_precios[f.name] || "CONSULTAR";
-            pre.innerText = p.includes('$') ? p : "$" + p;
+        function showPage(id){ 
+            document.getElementById('catalogScreen').style.display = (id==='catalogScreen'?'block':'none'); 
+            document.getElementById('cartScreen').style.display = (id==='cartScreen'?'block':'none'); 
         }
 
-        function mover(d) {
-            let n = index + d;
-            if(n >= 0 && n < mis_fotos.length) ver(n);
+        async function loadFolder(input){
+            const files = Array.from(input.files);
+            files.filter(f => f.type.startsWith('image/')).forEach(file => {
+                const url = URL.createObjectURL(file);
+                const p = priceList[file.name] || 0;
+                allItems.push({ url, name: file.name, price: p });
+            });
+            renderGrid();
         }
 
-        function reset() {
-            const img = document.getElementById('img-visor');
-            img.style.width = "100%";
-            const marco = document.querySelector('.visor-marco');
-            marco.scrollLeft = 0;
-            marco.scrollTop = 0;
+        function renderGrid(){
+            const grid = document.getElementById('imageGrid');
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            grid.innerHTML = '';
+            allItems.filter(i => i.name.toUpperCase().includes(search)).forEach(i => {
+                const d = document.createElement('div');
+                d.className = 'grid-item';
+                d.innerHTML = `
+                    <div class="price-tag">$${i.price}</div>
+                    <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}')">
+                    <button class="action-btn" style="font-size:0.6rem;" onclick="addCart('${i.name}', ${i.price})">AÑADIR</button>`;
+                grid.appendChild(d);
+            });
         }
 
-        function comprar() {
-            const n = document.getElementById('txt-nombre').innerText;
-            const p = document.getElementById('txt-precio').innerText;
-            alert("PEDIDO:\n" + n + "\n" + p + "\n+ ENVÍO: $" + db_taxi + "\n\nEnviando a WhatsApp...");
+        function openZoom(url){
+            document.getElementById('expandedImg').src = url;
+            document.getElementById('lightbox').style.display = 'flex';
         }
 
-        window.onload = cargarConfig;
+        function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; }
+
+        function addCart(n, p) { 
+            cart.push({ n, p }); 
+            updateCart(); 
+            alert("Añadido: " + n);
+        }
+
+        function updateCart() {
+            const list = document.getElementById('cartList');
+            let total = 0; list.innerHTML = '';
+            cart.forEach(item => {
+                total += item.p;
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; border-bottom:1px solid #222;">
+                    <span>${item.n}</span> <span class="white-price">$${item.p}</span>
+                </div>`;
+            });
+            document.getElementById('finalPrice').innerText = "TOTAL: $" + total;
+        }
+
+        function takeSnapshot() { 
+            html2canvas(document.getElementById('captureArea')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'ticket.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
     </script>
 </body>
 </html>
