@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v17.0 - Matrix Cloud Edition</title>
+    <title>Florida Games v17.6 - ARCHIVOS & SOUND Fix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -58,9 +58,9 @@
     </style>
 </head>
 <body>
-    <audio id="sndClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
-    <audio id="sndAdd" src="https://assets.mixkit.co/active_storage/sfx/595/595-preview.mp3"></audio>
-    <audio id="sndTrash" src="https://assets.mixkit.co/active_storage/sfx/253/253-preview.mp3"></audio>
+    <audio id="sndClick" src="ARCHIVOS/click.mp3"></audio>
+    <audio id="sndAdd" src="ARCHIVOS/add.mp3"></audio>
+    <audio id="sndTrash" src="ARCHIVOS/trash.mp3"></audio>
 
     <div id="welcomeScreen">
         <h1 class="welcome-title">Florida Games</h1>
@@ -99,9 +99,9 @@
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
-            <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR DATOS LOCAL</b></button>
+            <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR LOCAL (ARCHIVOS)</b></button>
             
-            <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR DATOS EN LA NUBE</b></button>
+            <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR NUBE</b></button>
             
             <div class="grid-3x" id="imageGrid"></div>
         </div>
@@ -158,10 +158,23 @@
     </div>
 
     <script>
+        // 2. CONFIGURACIÓN DE RUTAS EN MAYÚSCULAS
+        const RUTA_PRINCIPAL = "ARCHIVOS";
+        const CARPETA_FIGURAS = "FIGURAS 3D";
+
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'TODO';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
 
-        function playSnd(id){ const s=document.getElementById(id); if(s){ s.pause(); s.currentTime=0; s.play().catch(e=>{}); } }
+        // Función de sonido mejorada para depurar
+        function playSnd(id){ 
+            const s=document.getElementById(id); 
+            if(s){ 
+                s.pause(); 
+                s.currentTime=0; 
+                s.play().catch(e => console.error("Error al reproducir sonido " + id + ": Revisa si el archivo está en ARCHIVOS/")); 
+            } 
+        }
+
         function enterApp(){ document.getElementById('welcomeScreen').style.display='none'; }
         function showPage(id){ 
             closeLightbox(); 
@@ -228,11 +241,10 @@
             renderGrid();
         }
 
-        /* --- LÓGICA NUBE AVANZADA CON BUSCADOR DE CARPETAS --- */
         async function loadFromCloud() {
             const usuario = "Laidel"; 
             const repositorio = "Games-Florida";
-            const pathPrincipal = "Archivos";
+            const pathPrincipal = RUTA_PRINCIPAL;
             
             try {
                 const response = await fetch(`https://api.github.com/repos/${usuario}/${repositorio}/contents/${pathPrincipal}`);
@@ -240,8 +252,6 @@
                 const mainContent = await response.json();
                 
                 allItems = [];
-
-                // Cargar precio.txt y taxi.txt si existen en /Archivos
                 const pFile = mainContent.find(f => f.name.toLowerCase() === 'precio.txt');
                 if (pFile) {
                     const resP = await fetch(pFile.download_url);
@@ -258,7 +268,6 @@
                     taxiP = parseFloat(tT.trim()) || 0;
                 }
 
-                // Explorar archivos y carpetas
                 for (const item of mainContent) {
                     if (item.type === "file" && item.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
                         processItem(item.download_url, item.name, "OTRO");
@@ -268,14 +277,16 @@
                         const subFiles = await subRes.json();
                         subFiles.forEach(subFile => {
                             if (subFile.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                                processItem(subFile.download_url, subFile.name, item.name.toUpperCase());
+                                let folderName = item.name.toUpperCase();
+                                if(folderName === "FIGURAS 3D") folderName = "FIGURAS 3D";
+                                processItem(subFile.download_url, subFile.name, folderName);
                             }
                         });
                     }
                 }
-                alert("SINCRONIZACIÓN NUBE COMPLETADA ✅");
+                alert("NUBE SINCRONIZADA ✅");
                 renderGrid();
-            } catch (e) { alert("Error al leer GitHub. Revisa tu carpeta 'Archivos'."); }
+            } catch (e) { alert("Error: Revisa que la carpeta se llame 'ARCHIVOS' en GitHub."); }
         }
 
         function processItem(url, name, category) {
