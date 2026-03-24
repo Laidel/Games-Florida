@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v17.6 - ARCHIVOS Fix</title>
+    <title>Florida Games v17.7 - High Speed Load</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -51,7 +51,8 @@
         
         #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000000; flex-direction: column; overflow: hidden; touch-action: none; }
         #zoomContainer { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; cursor: grab; position: relative; padding-bottom: 80px; }
-        #expandedImg { max-width: 95%; max-height: 90%; border: 2px solid var(--neon); box-shadow: 0 0 20px var(--neon); transition: transform 0.1s ease-out; z-index: 1; transform-origin: center center; }
+        /* SIN BORDES EN AMPLIACIÓN */
+        #expandedImg { max-width: 100%; max-height: 90%; border: none; box-shadow: none; transition: transform 0.1s ease-out; z-index: 1; transform-origin: center center; }
         .zoom-info-panel { background: rgba(0,0,0,0.85); width: 100%; padding: 15px; display: flex; flex-direction: column; align-items: center; border-bottom: 2px solid var(--neon); position: absolute; top: 0; z-index: 10; }
         .youtube-bar { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; background: rgba(0,0,0,0.95); border-top: 2px solid var(--neon); z-index: 20; display: flex; justify-content: center; }
         .yt-btn { margin: 0; background: #ff0000; color: white; border: 2px solid white; box-shadow: 0 0 15px #ff0000; font-size: 1.1rem; width: 90%; }
@@ -98,9 +99,6 @@
                 <button class="console-btn" onclick="filterCat('XBOX360')">X360</button>
             </div>
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
-            
-            <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
-            <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR LOCAL</b></button>
             
             <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR NUBE (ARCHIVOS)</b></button>
             
@@ -212,29 +210,6 @@
             resetZoom();
         }
 
-        async function loadFolder(input){
-            const files = Array.from(input.files); allItems = [];
-            const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
-            if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
-            const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
-            if(tF){ const tT = await tF.text(); taxiP = parseFloat(tT.trim()) || 0; }
-            files.filter(f => f.type.startsWith('image/')).forEach(file => {
-                const url = URL.createObjectURL(file); const p = priceList[file.name] || 0;
-                const path = file.webkitRelativePath.toUpperCase();
-                let cat = 'OTRO';
-                if(path.includes('SNES')) cat='SNES'; else if(path.includes('NES')) cat='NES'; 
-                else if(path.includes('3DS')) cat='3DS'; else if(path.includes('DS')) cat='DS'; 
-                else if(path.includes('FIGURAS')) cat='FIGURAS 3D'; else if(path.includes('N64')) cat='N64'; 
-                else if(path.includes('PC')) cat='PC'; else if(path.includes('PELI')) cat='PELICULAS'; 
-                else if(path.includes('PS1')) cat='PS1'; else if(path.includes('PS2')) cat='PS2';
-                else if(path.includes('PS4')) cat='PS4'; else if(path.includes('PSP')) cat='PSP'; 
-                else if(path.includes('SEGA')) cat='SEGA'; else if(path.includes('SWIT')) cat='SWITCH';
-                else if(path.includes('WII')) cat='Wii'; else if(path.includes('XBOX')) cat='XBOX360';
-                allItems.push({ url, name: file.name, price: p, cat });
-            });
-            renderGrid();
-        }
-
         async function loadFromCloud() {
             const usuario = "Laidel"; 
             const repositorio = "Games-Florida";
@@ -246,6 +221,7 @@
                 const mainContent = await response.json();
                 
                 allItems = [];
+                // Cargar precios.txt
                 const pFile = mainContent.find(f => f.name.toLowerCase() === 'precio.txt');
                 if (pFile) {
                     const resP = await fetch(pFile.download_url);
@@ -255,6 +231,7 @@
                         if (n && p) priceList[n.trim()] = parseFloat(p.trim());
                     });
                 }
+                // Cargar taxi.txt
                 const tFile = mainContent.find(f => f.name.toLowerCase() === 'taxi.txt');
                 if (tFile) {
                     const resT = await fetch(tFile.download_url);
@@ -262,36 +239,41 @@
                     taxiP = parseFloat(tT.trim()) || 0;
                 }
 
+                // Procesar Carpetas de Consolas
                 for (const item of mainContent) {
-                    if (item.type === "file" && item.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                        processItem(item.download_url, item.name, "OTRO");
-                    } 
-                    else if (item.type === "dir") {
+                    if (item.type === "dir") {
                         const subRes = await fetch(item.url);
                         const subFiles = await subRes.json();
-                        subFiles.forEach(subFile => {
-                            if (subFile.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                                processItem(subFile.download_url, subFile.name, item.name.toUpperCase());
+                        
+                        // Buscamos si existe carpeta THUMBNAILS dentro de la consola
+                        const thumbDir = subFiles.find(f => f.name.toUpperCase() === 'THUMBNAILS' && f.type === 'dir');
+                        let thumbFiles = [];
+                        if(thumbDir) {
+                            const tRes = await fetch(thumbDir.url);
+                            thumbFiles = await tRes.json();
+                        }
+
+                        subFiles.forEach(file => {
+                            if (file.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
+                                const p = priceList[file.name] || 0;
+                                // Si existe miniatura con mismo nombre, la usamos para el grid
+                                const thumb = thumbFiles.find(t => t.name === file.name);
+                                const gridUrl = thumb ? thumb.download_url : file.download_url;
+                                
+                                allItems.push({ 
+                                    url: file.download_url, // Imagen Grande para Zoom (400x400)
+                                    gridUrl: gridUrl,       // Imagen Pequeña para Grid (200x200)
+                                    name: file.name, 
+                                    price: p, 
+                                    cat: item.name.toUpperCase() 
+                                });
                             }
                         });
                     }
                 }
-                alert("NUBE ACTUALIZADA DESDE ARCHIVOS ✅");
+                alert("NUBE SINCRONIZADA ✅");
                 renderGrid();
-            } catch (e) { alert("Error: Revisa que la carpeta se llame ARCHIVOS en tu GitHub."); }
-        }
-
-        function processItem(url, name, category) {
-            const p = priceList[name] || 0;
-            let finalCat = category;
-            const upper = name.toUpperCase();
-            if(upper.includes('SNES')) finalCat='SNES';
-            else if(upper.includes('NES') && !upper.includes('SNES')) finalCat='NES';
-            else if(upper.includes('PS1')) finalCat='PS1';
-            else if(upper.includes('PS2')) finalCat='PS2';
-            else if(upper.includes('PS4')) finalCat='PS4';
-            else if(upper.includes('SWIT')) finalCat='SWITCH';
-            allItems.push({ url, name, price: p, cat: finalCat });
+            } catch (e) { alert("Error al conectar con GitHub."); }
         }
 
         function filterCat(c){
@@ -311,7 +293,7 @@
                 const d = document.createElement('div'); d.className = 'grid-item';
                 d.innerHTML = `<div style="font-size:0.5rem; color:var(--neon); padding:3px; text-align:center; height:20px; overflow:hidden;">${i.name.split('.')[0].toUpperCase()}</div>
                     <div class="price-tag">$${i.price}</div>
-                    <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}')">
+                    <img src="${i.gridUrl}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}')">
                     <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0; border-width:2px;" onclick="playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price})">AÑADIR</button>`;
                 grid.appendChild(d);
             });
