@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v17.6 - ARCHIVOS & SOUND Fix</title>
+    <title>Florida Games v17.6 - ARCHIVOS Fix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -58,6 +58,7 @@
     </style>
 </head>
 <body>
+
     <audio id="sndClick" src="ARCHIVOS/click.mp3"></audio>
     <audio id="sndAdd" src="ARCHIVOS/add.mp3"></audio>
     <audio id="sndTrash" src="ARCHIVOS/trash.mp3"></audio>
@@ -99,9 +100,9 @@
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
-            <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR LOCAL (ARCHIVOS)</b></button>
+            <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR LOCAL</b></button>
             
-            <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR NUBE</b></button>
+            <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR NUBE (ARCHIVOS)</b></button>
             
             <div class="grid-3x" id="imageGrid"></div>
         </div>
@@ -158,21 +159,13 @@
     </div>
 
     <script>
-        // 2. CONFIGURACIÓN DE RUTAS EN MAYÚSCULAS
         const RUTA_PRINCIPAL = "ARCHIVOS";
-        const CARPETA_FIGURAS = "FIGURAS 3D";
-
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'TODO';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
 
-        // Función de sonido mejorada para depurar
         function playSnd(id){ 
             const s=document.getElementById(id); 
-            if(s){ 
-                s.pause(); 
-                s.currentTime=0; 
-                s.play().catch(e => console.error("Error al reproducir sonido " + id + ": Revisa si el archivo está en ARCHIVOS/")); 
-            } 
+            if(s){ s.pause(); s.currentTime=0; s.play().catch(e => console.log("Audio Bloqueado")); } 
         }
 
         function enterApp(){ document.getElementById('welcomeScreen').style.display='none'; }
@@ -183,6 +176,7 @@
             if(id==='cartScreen') updateDateTime();
             window.scrollTo(0,0);
         }
+
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); }
         function adjustZoom(a){ scale = Math.min(Math.max(0.5, scale + a), 5); updateT(); }
         function resetZoom(){ scale = 1; pX = 0; pY = 0; updateT(); }
@@ -228,14 +222,14 @@
                 const url = URL.createObjectURL(file); const p = priceList[file.name] || 0;
                 const path = file.webkitRelativePath.toUpperCase();
                 let cat = 'OTRO';
-                if(path.includes('SNES')) cat='SNES'; else if(path.includes('NES') && !path.includes('SNES')) cat='NES'; 
-                else if(path.includes('3DS')) cat='3DS'; else if(path.includes('DS') && !path.includes('3DS')) cat='DS'; 
+                if(path.includes('SNES')) cat='SNES'; else if(path.includes('NES')) cat='NES'; 
+                else if(path.includes('3DS')) cat='3DS'; else if(path.includes('DS')) cat='DS'; 
                 else if(path.includes('FIGURAS')) cat='FIGURAS 3D'; else if(path.includes('N64')) cat='N64'; 
                 else if(path.includes('PC')) cat='PC'; else if(path.includes('PELI')) cat='PELICULAS'; 
                 else if(path.includes('PS1')) cat='PS1'; else if(path.includes('PS2')) cat='PS2';
                 else if(path.includes('PS4')) cat='PS4'; else if(path.includes('PSP')) cat='PSP'; 
                 else if(path.includes('SEGA')) cat='SEGA'; else if(path.includes('SWIT')) cat='SWITCH';
-                else if(path.includes('WII')) cat='Wii'; else if(path.includes('XBOX') || path.includes('360')) cat='XBOX360';
+                else if(path.includes('WII')) cat='Wii'; else if(path.includes('XBOX')) cat='XBOX360';
                 allItems.push({ url, name: file.name, price: p, cat });
             });
             renderGrid();
@@ -244,11 +238,11 @@
         async function loadFromCloud() {
             const usuario = "Laidel"; 
             const repositorio = "Games-Florida";
-            const pathPrincipal = RUTA_PRINCIPAL;
+            const pathPrincipal = RUTA_PRINCIPAL; 
             
             try {
                 const response = await fetch(`https://api.github.com/repos/${usuario}/${repositorio}/contents/${pathPrincipal}`);
-                if (!response.ok) throw new Error("Falla de red");
+                if (!response.ok) throw new Error("Carpeta no encontrada");
                 const mainContent = await response.json();
                 
                 allItems = [];
@@ -277,16 +271,14 @@
                         const subFiles = await subRes.json();
                         subFiles.forEach(subFile => {
                             if (subFile.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                                let folderName = item.name.toUpperCase();
-                                if(folderName === "FIGURAS 3D") folderName = "FIGURAS 3D";
-                                processItem(subFile.download_url, subFile.name, folderName);
+                                processItem(subFile.download_url, subFile.name, item.name.toUpperCase());
                             }
                         });
                     }
                 }
-                alert("NUBE SINCRONIZADA ✅");
+                alert("NUBE ACTUALIZADA DESDE ARCHIVOS ✅");
                 renderGrid();
-            } catch (e) { alert("Error: Revisa que la carpeta se llame 'ARCHIVOS' en GitHub."); }
+            } catch (e) { alert("Error: Revisa que la carpeta se llame ARCHIVOS en tu GitHub."); }
         }
 
         function processItem(url, name, category) {
