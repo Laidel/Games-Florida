@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v18.0 - Zoom HD Fix</title>
+    <title>Florida Games v18.1 - THUMBNAILS Fix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -22,7 +22,7 @@
 
         .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
         .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; }
+        .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .price-tag { position: absolute; top: 22px; right: 5px; background: rgba(0,0,0,0.85); color: var(--neon); font-size: 0.65rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
 
         .ticket-input { width: 100%; background: #111; color: #fff; border: 1px solid #333; padding: 12px; margin-bottom: 5px; font-family: monospace; outline: none; font-size: 0.9rem; font-weight: bold; }
@@ -189,7 +189,7 @@
 
         function openZoom(urlHD, price, name){
             const cleanName = name.split('.')[0];
-            document.getElementById('expandedImg').src = urlHD; // USAR IMAGEN HD
+            document.getElementById('expandedImg').src = urlHD;
             document.getElementById('zoomName').innerText = cleanName.toUpperCase();
             document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
             document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(urlHD, name, price); closeLightbox(); };
@@ -214,7 +214,7 @@
                 else if(path.includes('PS4')) cat='PS4'; else if(path.includes('PSP')) cat='PSP'; 
                 else if(path.includes('SEGA')) cat='SEGA'; else if(path.includes('SWIT')) cat='SWITCH';
                 else if(path.includes('WII')) cat='WII'; else if(path.includes('XBOX')) cat='XBOX360';
-                allItems.push({ url, urlHD: url, name: file.name, price: p, cat });
+                allItems.push({ url: url, urlHD: url, name: file.name, price: p, cat: cat });
             });
             renderGrid();
         }
@@ -241,19 +241,36 @@
                     if (item.type === "dir") {
                         const subRes = await fetch(item.url);
                         const subFiles = await subRes.json();
+                        
+                        // Buscamos si existe la carpeta THUMBNAILS dentro de la consola
                         const thumbDir = subFiles.find(f => f.name.toUpperCase() === "THUMBNAILS");
-                        let thumbs = [];
-                        if (thumbDir) { const tRes = await fetch(thumbDir.url); thumbs = await tRes.json(); }
+                        
+                        if (thumbDir) {
+                            const tRes = await fetch(thumbDir.url);
+                            const thumbs = await tRes.json();
 
-                        subFiles.forEach(f => {
-                            if (f.type === "file" && f.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                                const tMatch = thumbs.find(t => t.name === f.name);
-                                processItem(tMatch ? tMatch.download_url : f.download_url, f.download_url, f.name, item.name.toUpperCase());
-                            }
-                        });
+                            thumbs.forEach(tFile => {
+                                if (tFile.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
+                                    // La miniatura está en la carpeta THUMBNAILS
+                                    const urlMini = tFile.download_url;
+                                    // La HD tiene el mismo nombre pero está en la carpeta superior (subFiles)
+                                    const hdFile = subFiles.find(f => f.name === tFile.name);
+                                    const urlHD = hdFile ? hdFile.download_url : urlMini;
+                                    
+                                    processItem(urlMini, urlHD, tFile.name, item.name.toUpperCase());
+                                }
+                            });
+                        } else {
+                            // Si no hay carpeta THUMBNAILS, cargamos las imágenes de la raíz (comportamiento v17)
+                            subFiles.forEach(f => {
+                                if (f.type === "file" && f.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
+                                    processItem(f.download_url, f.download_url, f.name, item.name.toUpperCase());
+                                }
+                            });
+                        }
                     }
                 }
-                alert("NUBE SINCRONIZADA ✅ (Zoom HD Activado)"); renderGrid();
+                alert("NUBE SINCRONIZADA ✅ (Filtro THUMBNAILS Aplicado)"); renderGrid();
             } catch (e) { alert("Error de Nube."); }
         }
 
@@ -295,29 +312,17 @@
             grid.innerHTML = '';
             allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
                 const d = document.createElement('div'); d.className = 'grid-item';
-                d.innerHTML = `<div style="font-size:0.5rem; color:var(--neon); padding:3px; text-align:center; height:20px; overflow:hidden;">${i.name.split('.')[0].toUpperCase()}</div>
+                d.innerHTML = `<div style="font-size:0.45rem; color:var(--neon); padding:3px; text-align:center; height:22px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>
                     <div class="price-tag">$${i.price}</div>
                     <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.urlHD}', ${i.price}, '${i.name}')">
-                    <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0; border-width:2px;" onclick="playSnd('sndAdd'); addCart('${i.urlHD}', '${i.name}', ${i.price})">AÑADIR</button>`;
+                    <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0; border-width:2px; border-radius:0;" onclick="playSnd('sndAdd'); addCart('${i.urlHD}', '${i.name}', ${i.price})">AÑADIR</button>`;
                 grid.appendChild(d);
             });
         }
 
         function addCart(u, n, p) { cart.push({ u, n, p }); updateCart(); }
         function delItem(i) { playSnd('sndTrash'); cart.splice(i, 1); updateCart(); }
-        
-        function updateCart() {
-            const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
-            const status = document.getElementById('taxiStatus'); const val = document.getElementById('taxiVal');
-            count.innerText = cart.length; count.style.display = cart.length>0?'block':'none';
-            let total = 0; list.innerHTML = '';
-            cart.forEach((item, i) => { total += item.p; list.innerHTML += `<div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;"><img src="${item.u}" style="width:30px; height:30px; border-radius:4px;"><div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div><div class="white-price" style="font-size:0.8rem;">$${item.p}</div><button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button></div>`; });
-            if(document.getElementById('check-taxi').checked) { total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2); } 
-            else { status.innerText = "NO INCLUIDO"; status.style.color = "var(--red)"; val.innerText = "$0.00"; }
-            document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2);
-            updateDateTime();
-        }
-
+        function updateCart() { const count = document.getElementById('cartCount'); const list = document.getElementById('cartList'); const status = document.getElementById('taxiStatus'); const val = document.getElementById('taxiVal'); count.innerText = cart.length; count.style.display = cart.length>0?'block':'none'; let total = 0; list.innerHTML = ''; cart.forEach((item, i) => { total += item.p; list.innerHTML += `<div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;"><img src="${item.u}" style="width:30px; height:30px; border-radius:4px;"><div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div><div class="white-price" style="font-size:0.8rem;">$${item.p}</div><button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button></div>`; }); if(document.getElementById('check-taxi').checked) { total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2); } else { status.innerText = "NO INCLUIDO"; status.style.color = "var(--red)"; val.innerText = "$0.00"; } document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2); updateDateTime(); }
         function updateDateTime() { const now = new Date(); if(document.getElementById('ticketDateTime')) document.getElementById('ticketDateTime').innerText = now.toLocaleDateString() + " - " + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
         function takeSnapshot() { updateDateTime(); const btnGen = document.getElementById('btnGenerate'); const btnWA = document.getElementById('btnWA'); html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000", scale: 2 }).then(canvas => { const link = document.createElement('a'); link.href = canvas.toDataURL("image/png"); link.download = 'Ticket_Florida_' + Date.now() + '.png'; link.click(); btnGen.classList.add('btn-disabled'); btnGen.innerHTML = "✅ TICKET GENERADO"; btnWA.style.display = "block"; btnWA.classList.add('btn-whatsapp-active'); }); }
         function resetTicketButtons() { const btnGen = document.getElementById('btnGenerate'); const btnWA = document.getElementById('btnWA'); btnGen.classList.remove('btn-disabled'); btnGen.innerHTML = "📸 GENERAR TICKET"; btnWA.classList.remove('btn-whatsapp-active'); btnWA.style.display = "none"; playSnd('sndClick'); }
