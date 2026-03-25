@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v18.0 - Zoom HD</title>
+    <title>Florida Games v18.0 - Zoom HD Fix</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -41,6 +41,8 @@
         
         .white-price { color: #ffffff !important; font-weight: bold; }
         .ticket-footer { margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--neon); text-align: center; font-size: 0.75rem; color: #fff; }
+        .atencion-amarillo { color: var(--taxi-yellow) !important; font-weight: bold; }
+        .tel-verde { color: var(--neon); font-weight: bold; }
         
         .console-menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 10px; width: 100%; }
         .console-btn { background: #111; color: var(--neon); border: 1px solid var(--neon); padding: 6px 2px; font-size: 0.55rem; border-radius: 4px; font-weight: bold; text-align: center; min-height: 35px; display: flex; align-items: center; justify-content: center; }
@@ -84,12 +86,22 @@
                 <button class="console-btn" onclick="filterCat('PS2')">PS2</button>
                 <button class="console-btn" onclick="filterCat('PS4')">PS4</button>
                 <button class="console-btn" onclick="filterCat('SWITCH')">SWITCH</button>
+                <button class="console-btn" onclick="filterCat('PSP')">PSP</button>
+                <button class="console-btn" onclick="filterCat('Wii')">Wii</button>
+                <button class="console-btn" onclick="filterCat('N64')">N64</button>
+                <button class="console-btn" onclick="filterCat('3DS')">3DS</button>
+                <button class="console-btn" onclick="filterCat('DS')">DS</button>
                 <button class="console-btn" onclick="filterCat('FIGURAS 3D')">FIG 3D</button>
+                <button class="console-btn" onclick="filterCat('PELICULAS')">PELIS</button>
+                <button class="console-btn" onclick="filterCat('PC')">PC</button>
+                <button class="console-btn" onclick="filterCat('SEGA')">SEGA</button>
+                <button class="console-btn" onclick="filterCat('XBOX360')">X360</button>
             </div>
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
             <button class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="playSnd('sndClick'); document.getElementById('folderInput').click()">📂 <b>SINCRONIZAR LOCAL</b></button>
+            
             <button class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid #0D47A1;" onclick="playSnd('sndClick'); loadFromCloud()">☁️ <b>SINCRONIZAR NUBE (ARCHIVOS)</b></button>
             
             <div class="grid-3x" id="imageGrid"></div>
@@ -119,6 +131,7 @@
                 </div>
                 <div class="ticket-footer">
                     <div id="ticketDateTime"></div>
+                    <div style="margin-top:5px;"><span class="tel-verde">📞</span> <span class="atencion-amarillo">Atención al Cliente:</span> 54935185</div>
                 </div>
             </div>
             <button id="btnGenerate" class="action-btn" onclick="playSnd('sndClick'); takeSnapshot()">📸 GENERAR TICKET</button>
@@ -150,16 +163,9 @@
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'TODO';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
 
-        function playSnd(id){ const s=document.getElementById(id); if(s){ s.pause(); s.currentTime=0; s.play().catch(()=>{}); } }
+        function playSnd(id){ const s=document.getElementById(id); if(s){ s.pause(); s.currentTime=0; s.play().catch(e => {}); } }
         function enterApp(){ document.getElementById('welcomeScreen').style.display='none'; }
-        function showPage(id){ 
-            closeLightbox(); 
-            document.getElementById('catalogScreen').style.display = (id==='catalogScreen'?'block':'none'); 
-            document.getElementById('cartScreen').style.display = (id==='cartScreen'?'block':'none'); 
-            if(id==='cartScreen') updateDateTime();
-            window.scrollTo(0,0);
-        }
-
+        function showPage(id){ closeLightbox(); document.getElementById('catalogScreen').style.display = (id==='catalogScreen'?'block':'none'); document.getElementById('cartScreen').style.display = (id==='cartScreen'?'block':'none'); if(id==='cartScreen') updateDateTime(); window.scrollTo(0,0); }
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); }
         function adjustZoom(a){ scale = Math.min(Math.max(0.5, scale + a), 5); updateT(); }
         function resetZoom(){ scale = 1; pX = 0; pY = 0; updateT(); }
@@ -179,17 +185,14 @@
                 prevDiff = curDiff;
             } else if (isDrag) { pX = e.clientX - start.x; pY = e.clientY - start.y; updateT(); }
         };
-        zCon.onpointerup = zCon.onpointercancel = e => {
-            evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
-            if (evCache.length < 2) prevDiff = -1; if (evCache.length === 0) isDrag = false;
-        };
+        zCon.onpointerup = zCon.onpointercancel = e => { evCache = evCache.filter(ev => ev.pointerId !== e.pointerId); if (evCache.length < 2) prevDiff = -1; if (evCache.length === 0) isDrag = false; };
 
-        function openZoom(zoomUrl, price, name){
+        function openZoom(urlHD, price, name){
             const cleanName = name.split('.')[0];
-            document.getElementById('expandedImg').src = zoomUrl; // CARGA LA HD (500x500)
+            document.getElementById('expandedImg').src = urlHD; // USAR IMAGEN HD
             document.getElementById('zoomName').innerText = cleanName.toUpperCase();
             document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
-            document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(zoomUrl, name, price); closeLightbox(); };
+            document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(urlHD, name, price); closeLightbox(); };
             document.getElementById('btnGameplay').onclick = function() { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); };
             document.getElementById('lightbox').style.display = 'flex';
             resetZoom();
@@ -200,9 +203,18 @@
             const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
             if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
             files.filter(f => f.type.startsWith('image/')).forEach(file => {
-                const url = URL.createObjectURL(file);
-                const p = priceList[file.name] || 0;
-                allItems.push({ url, zoomUrl: url, name: file.name, price: p, cat: 'LOCAL' });
+                const url = URL.createObjectURL(file); const p = priceList[file.name] || 0;
+                const path = file.webkitRelativePath.toUpperCase();
+                let cat = 'OTRO';
+                if(path.includes('SNES')) cat='SNES'; else if(path.includes('NES')) cat='NES'; 
+                else if(path.includes('3DS')) cat='3DS'; else if(path.includes('DS')) cat='DS'; 
+                else if(path.includes('FIGURAS')) cat='FIGURAS 3D'; else if(path.includes('N64')) cat='N64'; 
+                else if(path.includes('PC')) cat='PC'; else if(path.includes('PELI')) cat='PELICULAS'; 
+                else if(path.includes('PS1')) cat='PS1'; else if(path.includes('PS2')) cat='PS2';
+                else if(path.includes('PS4')) cat='PS4'; else if(path.includes('PSP')) cat='PSP'; 
+                else if(path.includes('SEGA')) cat='SEGA'; else if(path.includes('SWIT')) cat='SWITCH';
+                else if(path.includes('WII')) cat='WII'; else if(path.includes('XBOX')) cat='XBOX360';
+                allItems.push({ url, urlHD: url, name: file.name, price: p, cat });
             });
             renderGrid();
         }
@@ -219,36 +231,62 @@
                     const resP = await fetch(pFile.download_url); const text = await resP.text();
                     text.split('\n').forEach(l => { const [n, p] = l.split(':'); if (n && p) priceList[n.trim()] = parseFloat(p.trim()); });
                 }
+                const tFile = mainContent.find(f => f.name.toLowerCase() === 'taxi.txt');
+                if (tFile) {
+                    const resT = await fetch(tFile.download_url); const tT = await resT.text();
+                    taxiP = parseFloat(tT.trim()) || 0;
+                }
 
                 for (const item of mainContent) {
                     if (item.type === "dir") {
-                        const subRes = await fetch(item.url); const subFiles = await subRes.json();
-                        const tDir = subFiles.find(f => f.name.toUpperCase() === "THUMBNAILS");
+                        const subRes = await fetch(item.url);
+                        const subFiles = await subRes.json();
+                        const thumbDir = subFiles.find(f => f.name.toUpperCase() === "THUMBNAILS");
                         let thumbs = [];
-                        if (tDir) { const thumbRes = await fetch(tDir.url); thumbs = await thumbRes.json(); }
+                        if (thumbDir) { const tRes = await fetch(thumbDir.url); thumbs = await tRes.json(); }
 
                         subFiles.forEach(f => {
                             if (f.type === "file" && f.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
-                                const p = priceList[f.name] || 0;
                                 const tMatch = thumbs.find(t => t.name === f.name);
-                                allItems.push({ 
-                                    url: tMatch ? tMatch.download_url : f.download_url, // Miniatura
-                                    zoomUrl: f.download_url, // ALTA RESOLUCIÓN (500x500)
-                                    name: f.name, 
-                                    price: p, 
-                                    cat: item.name.toUpperCase() 
-                                });
+                                processItem(tMatch ? tMatch.download_url : f.download_url, f.download_url, f.name, item.name.toUpperCase());
                             }
                         });
                     }
                 }
-                alert("NUBE SINCRONIZADA ✅ (Zoom HD listo)"); renderGrid();
+                alert("NUBE SINCRONIZADA ✅ (Zoom HD Activado)"); renderGrid();
             } catch (e) { alert("Error de Nube."); }
+        }
+
+        function processItem(urlMini, urlHD, name, category) {
+            const p = priceList[name] || 0;
+            let finalCat = category;
+            const upper = name.toUpperCase();
+            if(upper.includes('SNES')) finalCat='SNES';
+            else if(upper.includes('NES') && !upper.includes('SNES')) finalCat='NES';
+            else if(upper.includes('PS1')) finalCat='PS1';
+            else if(upper.includes('PS2')) finalCat='PS2';
+            else if(upper.includes('PS4')) finalCat='PS4';
+            else if(upper.includes('SWIT')) finalCat='SWITCH';
+            else if(upper.includes('PSP')) finalCat='PSP';
+            else if(upper.includes('WII')) finalCat='Wii';
+            else if(upper.includes('N64')) finalCat='N64';
+            else if(upper.includes('3DS')) finalCat='3DS';
+            else if(upper.includes('DS') && !upper.includes('3DS')) finalCat='DS';
+            else if(upper.includes('FIGURA')) finalCat='FIGURAS 3D';
+            else if(upper.includes('PELI')) finalCat='PELICULAS';
+            else if(upper.includes('PC')) finalCat='PC';
+            else if(upper.includes('SEGA')) finalCat='SEGA';
+            else if(upper.includes('XBOX')) finalCat='XBOX360';
+            allItems.push({ url: urlMini, urlHD: urlHD, name: name, price: p, cat: finalCat });
         }
 
         function filterCat(c){
             playSnd('sndClick'); currentCat = c;
-            document.querySelectorAll('.console-btn').forEach(b => b.classList.toggle('active', b.innerText === c || (c==='TODO' && b.innerText==='TODO')));
+            const map = { 'FIG 3D': 'FIGURAS 3D', 'PELIS': 'PELICULAS', 'X360': 'XBOX360' };
+            document.querySelectorAll('.console-btn').forEach(b => {
+                let btnTxt = b.innerText; if(map[btnTxt]) btnTxt = map[btnTxt];
+                b.classList.toggle('active', btnTxt === c || (c==='TODO' && b.innerText==='TODO'));
+            });
             renderGrid();
         }
 
@@ -257,32 +295,33 @@
             grid.innerHTML = '';
             allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
                 const d = document.createElement('div'); d.className = 'grid-item';
-                d.innerHTML = `<div style="font-size:0.5rem; color:var(--neon); padding:3px; text-align:center; height:18px; overflow:hidden;">${i.name.split('.')[0].toUpperCase()}</div>
+                d.innerHTML = `<div style="font-size:0.5rem; color:var(--neon); padding:3px; text-align:center; height:20px; overflow:hidden;">${i.name.split('.')[0].toUpperCase()}</div>
                     <div class="price-tag">$${i.price}</div>
-                    <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.zoomUrl}', ${i.price}, '${i.name}')">
-                    <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0;" onclick="playSnd('sndAdd'); addCart('${i.zoomUrl}', '${i.name}', ${i.price})">AÑADIR</button>`;
+                    <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.urlHD}', ${i.price}, '${i.name}')">
+                    <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0; border-width:2px;" onclick="playSnd('sndAdd'); addCart('${i.urlHD}', '${i.name}', ${i.price})">AÑADIR</button>`;
                 grid.appendChild(d);
             });
         }
 
         function addCart(u, n, p) { cart.push({ u, n, p }); updateCart(); }
         function delItem(i) { playSnd('sndTrash'); cart.splice(i, 1); updateCart(); }
+        
         function updateCart() {
             const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
+            const status = document.getElementById('taxiStatus'); const val = document.getElementById('taxiVal');
             count.innerText = cart.length; count.style.display = cart.length>0?'block':'none';
             let total = 0; list.innerHTML = '';
             cart.forEach((item, i) => { total += item.p; list.innerHTML += `<div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;"><img src="${item.u}" style="width:30px; height:30px; border-radius:4px;"><div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div><div class="white-price" style="font-size:0.8rem;">$${item.p}</div><button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button></div>`; });
+            if(document.getElementById('check-taxi').checked) { total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2); } 
+            else { status.innerText = "NO INCLUIDO"; status.style.color = "var(--red)"; val.innerText = "$0.00"; }
             document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2);
+            updateDateTime();
         }
 
-        function updateDateTime() {
-            const now = new Date();
-            document.getElementById('ticketDateTime').innerText = now.toLocaleDateString() + " - " + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }
-
-        function takeSnapshot() { html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000", scale: 2 }).then(canvas => { const link = document.createElement('a'); link.href = canvas.toDataURL("image/png"); link.download = 'Ticket_Florida.png'; link.click(); }); }
+        function updateDateTime() { const now = new Date(); if(document.getElementById('ticketDateTime')) document.getElementById('ticketDateTime').innerText = now.toLocaleDateString() + " - " + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); }
+        function takeSnapshot() { updateDateTime(); const btnGen = document.getElementById('btnGenerate'); const btnWA = document.getElementById('btnWA'); html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000", scale: 2 }).then(canvas => { const link = document.createElement('a'); link.href = canvas.toDataURL("image/png"); link.download = 'Ticket_Florida_' + Date.now() + '.png'; link.click(); btnGen.classList.add('btn-disabled'); btnGen.innerHTML = "✅ TICKET GENERADO"; btnWA.style.display = "block"; btnWA.classList.add('btn-whatsapp-active'); }); }
+        function resetTicketButtons() { const btnGen = document.getElementById('btnGenerate'); const btnWA = document.getElementById('btnWA'); btnGen.classList.remove('btn-disabled'); btnGen.innerHTML = "📸 GENERAR TICKET"; btnWA.classList.remove('btn-whatsapp-active'); btnWA.style.display = "none"; playSnd('sndClick'); }
         function openWhatsApp() { const n = document.getElementById('cName').value || "Cliente"; window.open(`https://wa.me/54935185?text=${encodeURIComponent("Hola Florida Games, soy "+n+". Envío pedido.")}`, '_blank'); }
-        function resetTicketButtons() { document.getElementById('btnGenerate').classList.remove('btn-disabled'); document.getElementById('btnWA').style.display='none'; }
     </script>
 </body>
 </html>
