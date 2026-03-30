@@ -16,6 +16,8 @@
             --blue-btn: #2196F3; 
             --dark-blue: #0D47A1; 
             --deep-blue: #001f3f; 
+            --purple: #9C27B0;
+            --dark-purple: #7B1FA2;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
@@ -44,7 +46,7 @@
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
 
         /* Estilos Descargas */
-        .download-box { background: #111; border: 2px solid var(--neon); border-radius: 8px; padding: 15px; margin-top: 15px; display: none; }
+        .download-box { background: #111; border: 2px solid var(--purple); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
         .download-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 8px 0; font-size: 0.75rem; }
         .download-link { color: var(--neon); text-decoration: none; font-weight: bold; border: 1px solid var(--neon); padding: 2px 6px; border-radius: 4px; }
 
@@ -53,8 +55,9 @@
         .btn-loading .spinner { display: inline-block; }
         .btn-loading .btn-icon { display: none; }
         
-        .header-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; width: 100%; max-width: 600px; margin-bottom: 10px; }
-        .btn-nav { height: 70px; padding: 5px; flex-direction: column; line-height: 1.1; justify-content: center; border: 4px solid transparent; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.6rem !important; }
+        /* HEADER AJUSTADO A 5 COLUMNAS */
+        .header-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; max-width: 600px; margin-bottom: 10px; }
+        .btn-nav { height: 75px; padding: 4px; flex-direction: column; line-height: 1.1; justify-content: center; border: 4px solid transparent; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.52rem !important; }
         .btn-nav.active { border: 4px solid var(--neon) !important; box-shadow: 0 0 20px var(--neon), 0 4px 0 var(--dark-neon) !important; color: #000 !important; }
 
         .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
@@ -119,16 +122,28 @@
         <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black;">
             <span style="font-size:1rem;">📂</span><b>CATÁLOGO</b>
         </button>
+        <button id="btn-downloads-nav" class="action-btn btn-nav" onclick="toggleDownloads()" style="background:var(--purple); border-color:var(--dark-purple); box-shadow: 0 4px 0 var(--dark-purple); color:white;">
+            <span style="font-size:1rem;">⬇️</span><b>DESCARGAS</b>
+        </button>
         <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border-color:var(--dark-red); box-shadow: 0 4px 0 var(--dark-red); color:white;">
             <span style="font-size:1rem;">🎬</span><b>VISUALES</b>
         </button>
         <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--blue-btn); border-color:var(--dark-blue); box-shadow: 0 4px 0 var(--dark-blue); color:white;">
-            <span style="font-size:1rem;">⭐</span><b>TIENDA EXTRA</b>
+            <span style="font-size:1rem;">⭐</span><b>EXTRA</b>
         </button>
         <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="position:relative; background:#FFEB3B; color:black;">
             <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--red); color:white; font-size:10px; padding:2px 6px; border-radius:50%; z-index:10; border:1px solid white;">0</div>
             <span style="font-size:1rem;">🛒</span><b>CARRITO</b>
         </button>
+    </div>
+
+    <div id="boxDownloads" class="download-box">
+        <h4 style="color:var(--neon); margin:0 0 10px 0; text-align:center;">RECURSOS GRATUITOS</h4>
+        <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>5. REVISTAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/REVISTAS.pdf" target="_blank" class="download-link">Download</a></div>
     </div>
 
     <div class="container">
@@ -220,19 +235,6 @@
                 </div>
             </div>
 
-            <button class="action-btn" style="background:#FFF; color:#000; border-color:#ccc; box-shadow: 0 4px 0 #999;" onclick="toggleDownloads()">
-                <span style="color:var(--neon); font-size:1.2rem;">⬇</span> <b>DESCARGAS GRATIS</b>
-            </button>
-
-            <div id="boxDownloads" class="download-box">
-                <h4 style="color:var(--neon); margin:0 0 10px 0; text-align:center;">RECURSOS GRATUITOS</h4>
-                <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>5. REVISTAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/REVISTAS.pdf" target="_blank" class="download-link">Download</a></div>
-            </div>
-
             <button id="btnGenerate" class="action-btn" onclick="playSnd('sndClick'); takeSnapshot()">📸 GENERAR TICKET</button>
             <button id="btnWA" class="action-btn secondary-btn" onclick="playSnd('sndClick'); openWhatsApp()" style="display:none;">💬 ENVIAR POR WHATSAPP</button>
             <button class="action-btn" style="background:#333; color:#fff; border:none;" onclick="resetTicketButtons()">🔄 NUEVO PEDIDO</button>
@@ -274,6 +276,7 @@
         function showPage(id){ 
             closeLightbox(); 
             playSnd('sndClick');
+            document.getElementById('boxDownloads').style.display = 'none';
             document.getElementById('catalogScreen').style.display = 'none'; 
             document.getElementById('cartScreen').style.display = 'none'; 
             document.getElementById('extraScreen').style.display = 'none'; 
@@ -294,7 +297,13 @@
         function toggleDownloads() {
             playSnd('sndClick');
             const box = document.getElementById('boxDownloads');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
+            const isVisible = box.style.display === 'block';
+            
+            // Si el catálogo u otras páginas están abiertas, no las cerramos, solo mostramos/ocultamos el menú de descargas encima
+            box.style.display = isVisible ? 'none' : 'block';
+            
+            // Opcional: Si quieres que el botón de descargas resalte cuando está abierto
+            document.getElementById('btn-downloads-nav').style.boxShadow = isVisible ? `0 4px 0 var(--dark-purple)` : `0 0 15px var(--purple), 0 4px 0 var(--dark-purple)`;
         }
 
         function filterVisual(cat) { showPage('catalogScreen'); filterCat(cat); }
