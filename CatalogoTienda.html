@@ -208,11 +208,29 @@
                             <div id="taxiVal" class="white-price" style="font-size:1rem;">$0.00</div>
                             <div class="taxi-pattern"><div class="c-y"></div><div class="c-b"></div><div class="c-y"></div><div class="c-b"></div><div class="c-y"></div><div class="c-b"></div></div>
                         </div>
-                    </div>class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
+                    </div>
+                </div>
+                <div id="cartList"></div>
+                <div style="text-align:right; border-top:2px solid var(--neon); padding-top:10px; margin-top:10px;">
+                    <h2 id="finalPrice" class="white-price" style="margin:0; font-size:1.8rem;">$0.00</h2>
+                </div>
+                <div class="ticket-footer">
+                    <div id="ticketDateTime"></div>
+                    <div style="margin-top:5px;"><span class="tel-verde">📞</span> <span class="atencion-amarillo">Atención al Cliente:</span> 54935185</div>
+                </div>
+            </div>
+
+            <button class="action-btn" style="background:#FFF; color:#000; border-color:#ccc; box-shadow: 0 4px 0 #999;" onclick="toggleDownloads()">
+                <span style="color:var(--neon); font-size:1.2rem;">⬇</span> <b>DESCARGAS GRATIS</b>
+            </button>
+
+            <div id="boxDownloads" class="download-box">
+                <h4 style="color:var(--neon); margin:0 0 10px 0; text-align:center;">RECURSOS GRATUITOS</h4>
+                <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
                 <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
                 <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
                 <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>5. REVISTAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/REVISTAS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>5. REVISTAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/REVISTAS.pdf" target="_blank" class="download-link">Download</a></div>
             </div>
 
             <button id="btnGenerate" class="action-btn" onclick="playSnd('sndClick'); takeSnapshot()">📸 GENERAR TICKET</button>
