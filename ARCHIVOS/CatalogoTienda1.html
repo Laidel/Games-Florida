@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Florida Games v21.0 - Lidel Stable Update</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root { 
+            --neon: #00ff41; 
+            --bg: #000; 
+            --red: #ff4444; 
+            --dark-red: #b71c1c; 
+            --dark-neon: #008f11; 
+            --taxi-yellow: #ffcc00; 
+            --blue-btn: #2196F3; 
+            --dark-blue: #0D47A1; 
+            --deep-blue: #001f3f; 
+            --purple: #9C27B0;
+            --dark-purple: #7B1FA2;
+        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        
+        /* PANTALLA DE BIENVENIDA REPARADA (RUTA LOCAL) */
+        #welcomeScreen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 9999999; 
+            background-color: var(--deep-blue); 
+            background-image: url('Bienvenida.png'); /* Busca la imagen en la misma carpeta */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; border: none;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        #welcomeScreen.fade-out { opacity: 0; visibility: hidden; }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-title { color: white; font-size: 1.5rem; text-shadow: 2px 2px 10px #000; margin-bottom: 30px; padding: 0 20px; text-transform: uppercase; animation: fadeInDown 1.2s ease-out; font-weight: bold; }
+        .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: #fff; font-weight: bold; text-shadow: 1px 1px 2px #000; }
+        
+        .action-btn { background: var(--neon); color: #000; border: 4px solid var(--dark-neon); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 10px; box-shadow: 0 4px 0 var(--dark-neon); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.75rem; position: relative; }
+        .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--dark-neon); }
+        .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
+
+        /* Estilos Descargas */
+        .download-box { background: #111; border: 2px solid var(--purple); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
+        .download-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 8px 0; font-size: 0.75rem; }
+        .download-link { color: var(--neon); text-decoration: none; font-weight: bold; border: 1px solid var(--neon); padding: 2px 6px; border-radius: 4px; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .spinner { display: none; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.75s linear infinite; }
+        .btn-loading .spinner { display: inline-block; }
+        .btn-loading .btn-icon { display: none; }
+        
+        .header-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; max-width: 600px; margin-bottom: 10px; }
+        .btn-nav { height: 75px; padding: 4px; flex-direction: column; line-height: 1.1; justify-content: center; border: 4px solid transparent; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.52rem !important; }
+        .btn-nav.active { border: 4px solid var(--neon) !important; box-shadow: 0 0 20px var(--neon), 0 4px 0 var(--dark-neon) !important; color: #000 !important; }
+
+        .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
+        .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        
+        .price-tag { position: absolute; top: 22px; right: 5px; background: rgba(0,0,0,0.85); color: var(--neon); font-size: 0.65rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
+        .ticket-input { width: 100%; background: #111; color: #fff; border: 1px solid #333; padding: 12px; margin-bottom: 5px; font-family: monospace; outline: none; font-size: 0.9rem; font-weight: bold; }
+        
+        /* TAXI Y TICKET */
+        .taxi-container { display: flex; flex-direction: column; gap: 5px; padding: 10px; border: 1px solid #333; border-radius: 8px; margin-bottom: 15px; background: #050505; color: #fff; }
+        .taxi-row { display: flex; justify-content: space-between; align-items: center; }
+        .taxi-pattern { display: grid; grid-template-columns: repeat(3, 12px); grid-template-rows: repeat(2, 12px); border: 1px solid #fff; line-height: 0; }
+        .c-y { background: var(--taxi-yellow); width: 12px; height: 12px; }
+        .c-b { background: #000; width: 12px; height: 12px; }
+        
+        .switch-taxi { position: relative; display: inline-block; width: 50px; height: 26px; }
+        .switch-taxi input { opacity: 0; width: 0; height: 0; }
+        .slider-taxi { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #222; transition: .4s; border-radius: 34px; border: 1px solid #fff; }
+        .slider-taxi:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: #fff; transition: .4s; border-radius: 50%; }
+        input:checked + .slider-taxi { background-color: var(--taxi-yellow); border-color: #000; }
+        input:checked + .slider-taxi:before { transform: translateX(24px); background-color: #000; }
+        
+        .white-price { color: #ffffff !important; font-weight: bold; }
+        .ticket-footer { margin-top: 15px; padding-top: 10px; border-top: 1px dashed var(--neon); text-align: center; font-size: 0.75rem; color: #fff; }
+        .atencion-amarillo { color: var(--taxi-yellow) !important; font-weight: bold; }
+        .tel-verde { color: var(--neon); font-weight: bold; }
+        
+        .console-menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 10px; width: 100%; }
+        .console-btn { background: #111; color: var(--neon); border: 1px solid var(--neon); padding: 6px 2px; font-size: 0.55rem; border-radius: 4px; font-weight: bold; text-align: center; min-height: 35px; display: flex; align-items: center; justify-content: center; }
+        .console-btn.active { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); border-color: #fff; }
+        
+        .search-box { width: 100%; background: #111; border: 2px solid var(--neon); border-radius: 8px; padding: 12px; color: var(--neon); margin-bottom: 15px; outline: none; font-family: monospace; }
+        
+        #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000000; flex-direction: column; overflow: hidden; touch-action: none; }
+        #zoomContainer { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; position: relative; padding-bottom: 80px; }
+        #expandedImg { max-width: 95%; max-height: 90%; border: 2px solid var(--neon); box-shadow: 0 0 20px var(--neon); transition: transform 0.1s ease-out; z-index: 1; }
+        
+        .zoom-info-panel { background: rgba(0,0,0,0.85); width: 100%; padding: 15px; display: flex; flex-direction: column; align-items: center; border-bottom: 2px solid var(--neon); position: absolute; top: 0; z-index: 10; }
+        .youtube-bar { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; background: rgba(0,0,0,0.95); border-top: 2px solid var(--neon); z-index: 20; display: flex; justify-content: center; }
+        .yt-btn { margin: 0; background: #ff0000; color: white; border: 2px solid white; box-shadow: 0 0 15px #ff0000; font-size: 1.1rem; width: 90%; }
+        
+        .version-tag { text-align: center; font-size: 0.6rem; color: #444; margin-top: 10px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <audio id="sndClick" src="click.mp3"></audio>
+    <audio id="sndAdd" src="add.mp3"></audio>
+    <audio id="sndTrash" src="trash.mp3"></audio>
+
+    <div id="welcomeScreen">
+        <h1 class="welcome-title">BIENVENIDO A LA TIENDA DE JUEGOS FLORIDA</h1>
+        <button class="action-btn" style="width:280px; background:white; color:black; border-color:#ccc; box-shadow: 0 6px 0 #999; font-size: 1rem;" onclick="playSnd('sndClick'); enterApp()">ENTRAR A LA TIENDA</button>
+        <div class="version-tag-welcome">v21.0</div>
+    </div>
+
+    <div class="header-grid">
+        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black;">
+            <span style="font-size:1rem;">📂</span><b>CATÁLOGO</b>
+        </button>
+        <button id="btn-downloads-nav" class="action-btn btn-nav" onclick="toggleDownloads()" style="background:var(--purple); border-color:var(--dark-purple); box-shadow: 0 4px 0 var(--dark-purple); color:white;">
+            <span style="font-size:1rem;">⬇️</span><b>DESCARGAS</b>
+        </button>
+        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border-color:var(--dark-red); box-shadow: 0 4px 0 var(--dark-red); color:white;">
+            <span style="font-size:1rem;">🎬</span><b>VISUALES</b>
+        </button>
+        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--blue-btn); border-color:var(--dark-blue); box-shadow: 0 4px 0 var(--dark-blue); color:white;">
+            <span style="font-size:1rem;">⭐</span><b>EXTRA</b>
+        </button>
+        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="position:relative; background:#FFEB3B; color:black;">
+            <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--red); color:white; font-size:10px; padding:2px 6px; border-radius:50%; z-index:10; border:1px solid white;">0</div>
+            <span style="font-size:1rem;">🛒</span><b>CARRITO</b>
+        </button>
+    </div>
+
+    <div id="boxDownloads" class="download-box">
+        <h4 style="color:var(--neon); margin:0 0 10px 0; text-align:center;">RECURSOS GRATUITOS</h4>
+        <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>2. LISTADOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
+        <div class="download-item"><span>3. COSAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
+    </div>
+
+    <div class="container">
+        <div id="catalogScreen">
+            <div class="console-menu">
+                <button class="console-btn active" onclick="filterCat('TODO')">TODO</button>
+                <button class="console-btn" onclick="filterCat('SNES')">SNES</button>
+                <button class="console-btn" onclick="filterCat('NES')">NES</button>
+                <button class="console-btn" onclick="filterCat('PS1')">PS1</button>
+                <button class="console-btn" onclick="filterCat('PS2')">PS2</button>
+                <button class="console-btn" onclick="filterCat('PC')">PC</button>
+                <button class="console-btn" onclick="filterCat('SWITCH')">SWIT</button>
+                <button class="console-btn" onclick="filterCat('FIGURAS 3D')">3D</button>
+            </div>
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
+            
+            <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
+            
+            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="startSyncLocal()">
+                <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR LOCAL</b></span>
+            </button>
+            
+            <div class="grid-3x" id="imageGrid"></div>
+        </div>
+
+        <div id="visualesScreen" style="display:none; text-align:center;"><h2>🎬 SECCIÓN CINE</h2></div>
+        <div id="extraScreen" style="display:none; text-align:center;"><h2>⭐ TIENDA EXTRA</h2></div>
+
+        <div id="cartScreen" style="display:none;">
+            <div id="captureArea" style="background:#000; padding:15px; border:1px solid var(--neon); border-radius:8px;">
+                <h3 style="color:var(--neon); text-align:center; border-bottom:2px dashed var(--neon); padding-bottom:10px;">TICKET FLORIDA GAMES</h3>
+                <input type="text" id="cName" class="ticket-input" placeholder="CLIENTE">
+                <div id="cartList"></div>
+                <h2 id="finalPrice" class="white-price" style="text-align:right;">TOTAL: $0.00</h2>
+            </div>
+            <button class="action-btn" onclick="takeSnapshot()">📸 GENERAR TICKET</button>
+        </div>
+        <div class="version-tag">Florida Games App v21.0 - Lidel Stable</div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <div class="zoom-info-panel">
+            <div id="zoomName" style="color:#fff; font-size:1rem;"></div>
+            <div id="zoomPrice" style="color:var(--neon); font-size:1.5rem; font-weight:bold;"></div>
+        </div>
+        <div id="zoomContainer"><img id="expandedImg" src=""></div>
+        <div class="youtube-bar"><button id="btnZoomAdd" class="action-btn" style="width:90%;">AÑADIR AL CARRITO</button></div>
+    </div>
+
+    <script>
+        let allItems = [], cart = [], priceList = {}, currentCat = 'TODO';
+
+        function playSnd(id){ const s=document.getElementById(id); if(s){ s.pause(); s.currentTime=0; s.play().catch(e => {}); } }
+        
+        function enterApp(){ 
+            const screen = document.getElementById('welcomeScreen');
+            screen.classList.add('fade-out');
+            setTimeout(() => { screen.style.display = 'none'; }, 800);
+        }
+        
+        function showPage(id){ 
+            playSnd('sndClick');
+            ['catalogScreen','cartScreen','extraScreen','visualesScreen'].forEach(p => document.getElementById(p).style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function toggleDownloads() {
+            playSnd('sndClick');
+            const box = document.getElementById('boxDownloads');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function startSyncLocal() { document.getElementById('folderInput').click(); }
+
+        async function loadFolder(input){
+            const files = Array.from(input.files); 
+            allItems = [];
+            files.forEach(file => {
+                if(file.type.startsWith('image/')){
+                    const url = URL.createObjectURL(file);
+                    allItems.push({ url: url, name: file.name, price: 0, cat: 'TODO' });
+                }
+            });
+            renderGrid();
+        }
+
+        function filterCat(c){ playSnd('sndClick'); currentCat = c; renderGrid(); }
+
+        function renderGrid(){
+            const grid = document.getElementById('imageGrid');
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            grid.innerHTML = '';
+            allItems.filter(i => i.name.toUpperCase().includes(search)).forEach(i => {
+                const d = document.createElement('div'); d.className = 'grid-item';
+                d.innerHTML = `<img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', 0, '${i.name}')">`;
+                grid.appendChild(d);
+            });
+        }
+
+        function openZoom(url, price, name){
+            document.getElementById('expandedImg').src = url;
+            document.getElementById('zoomName').innerText = name.toUpperCase();
+            document.getElementById('zoomPrice').innerText = "$" + price;
+            document.getElementById('btnZoomAdd').onclick = (e) => { e.stopPropagation(); addCart(url, name, price); closeLightbox(); };
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+        function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; }
+
+        function addCart(u, n, p) { playSnd('sndAdd'); cart.push({ u, n, p }); updateCart(); }
+        function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
+            document.getElementById('cartCount').style.display = cart.length > 0 ? 'block' : 'none';
+            let total = 0;
+            const list = document.getElementById('cartList');
+            list.innerHTML = '';
+            cart.forEach(item => {
+                total += item.p;
+                list.innerHTML += `<div style="border-bottom:1px solid #222; padding:5px; font-size:0.7rem;">${item.n} - $${item.p}</div>`;
+            });
+            document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2);
+        }
+
+        function takeSnapshot() { 
+            html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000" }).then(canvas => { 
+                const link = document.createElement('a'); 
+                link.href = canvas.toDataURL("image/png"); 
+                link.download = 'Ticket_' + Date.now() + '.png'; 
+                link.click(); 
+            }); 
+        }
+    </script>
+</body>
+</html>
