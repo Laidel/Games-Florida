@@ -37,6 +37,24 @@
         }
         #welcomeScreen.fade-out { opacity: 0; visibility: hidden; }
         
+        /* CONTADOR DE USUARIOS (NUEVO) */
+        .user-counter-box {
+            position: absolute;
+            bottom: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--neon);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--neon);
+            box-shadow: 0 0 10px var(--dark-neon);
+        }
+        .dot-online { width: 8px; height: 8px; background: var(--neon); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
         @keyframes slideInFromTop {
             0% { transform: translateY(-100vh); opacity: 0; }
             60% { transform: translateY(20px); opacity: 1; }
@@ -158,6 +176,12 @@
             <h1 class="welcome-title">BIENVENIDO A LA TIENDA DE JUEGOS FLORIDA</h1>
         </div>
         <button class="action-btn" style="width:280px; background:white; color:black; border-color:#ccc; box-shadow: 0 4px 0 #999;" onclick="playSnd('sndClick'); enterApp()">ENTRAR A LA TIENDA</button>
+        
+        <div class="user-counter-box">
+            <div class="dot-online"></div>
+            <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
+        </div>
+        
         <div class="version-tag-welcome">v22.0 Stable</div>
     </div>
 
@@ -343,7 +367,19 @@
             img.onload = () => screen.style.backgroundImage = `url('${cloudBanner}')`;
             img.onerror = () => screen.style.backgroundImage = `url('ARCHIVOS/Bienvenida.png')`;
             img.src = cloudBanner;
+
+            // Iniciar contador de usuarios
+            updateOnlineCount();
+            setInterval(updateOnlineCount, 5000);
         };
+
+        // FUNCIÓN CONTADOR DE USUARIOS
+        function updateOnlineCount() {
+            const base = 12; 
+            const random = Math.floor(Math.random() * 8);
+            const counter = document.getElementById('onlineCount');
+            if(counter) counter.innerText = base + random;
+        }
 
         function playSnd(id){ 
             const s = document.getElementById(id); 
@@ -448,19 +484,33 @@
         function startSyncLocal() { playSnd('sndClick'); setButtonLoading('btnSyncLocal', 'SINCRONIZANDO LOCAL'); document.getElementById('folderInput').click(); }
         function startSyncCloud() { playSnd('sndClick'); setButtonLoading('btnSyncCloud', 'SINCRONIZANDO NUBE'); loadFromCloud(); }
 
+        // CARGA LOCAL CON TAXI Y MINIATURAS
         async function loadFolder(input){
             const files = Array.from(input.files); 
             if(files.length === 0) { resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); return; }
             allItems = [];
+            
+            // Buscar archivos de configuración
             const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
             if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
-            files.forEach(file => {
+            
+            const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
+            if(tF){ const tx = await tF.text(); taxiP = parseFloat(tx.trim()) || 0; }
+
+            // Filtrar thumbnails e imágenes principales
+            const thumbs = files.filter(f => f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
+            const mainFiles = files.filter(f => !f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
+
+            mainFiles.forEach(file => {
                 const isImg = file.type.startsWith('image/');
                 const isSwf = file.name.toLowerCase().endsWith('.swf');
                 if(isImg || isSwf) {
-                    const url = URL.createObjectURL(file); 
+                    const thumbFile = thumbs.find(t => t.name === file.name);
+                    const urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
+                    const urlHD = URL.createObjectURL(file); 
                     const p = priceList[file.name] || 0;
                     const path = file.webkitRelativePath.toUpperCase();
+                    
                     let cat = isSwf ? 'FLASH' : 'OTRO';
                     if(path.includes('PIEZA')) cat='PIEZAS'; else if(path.includes('SNES')) cat='SNES'; 
                     else if(path.includes('NES')) cat='NES'; else if(path.includes('3DS')) cat='3DS'; 
@@ -472,7 +522,8 @@
                     else if(path.includes('SEGA')) cat='SEGA'; else if(path.includes('SWIT')) cat='SWITCH'; 
                     else if(path.includes('WII')) cat='WII'; else if(path.includes('XBOX')) cat='XBOX360';
                     else if(path.includes('FLASH')) cat='FLASH';
-                    allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : url, urlHD: url, name: file.name, price: p, cat: cat });
+                    
+                    allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: file.name, price: p, cat: cat });
                 }
             });
             renderGrid();
@@ -553,7 +604,6 @@
             
             cart.forEach((item, i) => { 
                 total += item.p; 
-                // Creamos el item con la imagen configurada para CORS
                 const itemDiv = document.createElement('div');
                 itemDiv.style = "display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;";
                 itemDiv.innerHTML = `
@@ -579,13 +629,11 @@
         function takeSnapshot() { 
             updateDateTime();
             const btnGen = document.getElementById('btnGenerate'); 
-            
-            // Usamos una pequeña pausa para asegurar que las imágenes se carguen en el DOM
             setTimeout(() => {
                 html2canvas(document.getElementById('captureArea'), { 
                     backgroundColor: "#000", 
                     scale: 2,
-                    useCORS: true, // Habilitar CORS en html2canvas
+                    useCORS: true, 
                     allowTaint: false,
                     logging: false
                 }).then(canvas => { 
