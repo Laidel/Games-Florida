@@ -37,7 +37,6 @@
         }
         #welcomeScreen.fade-out { opacity: 0; visibility: hidden; }
         
-        /* Animación de entrada y Luces de Casino */
         @keyframes slideInFromTop {
             0% { transform: translateY(-100vh); opacity: 0; }
             60% { transform: translateY(20px); opacity: 1; }
@@ -77,7 +76,6 @@
         .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
 
-        /* Resto de estilos */
         .console-select-container { width: 100%; margin-bottom: 10px; }
         .console-select { 
             width: 100%; background: #111; color: var(--neon); 
@@ -119,7 +117,6 @@
         .c-y { background: var(--taxi-yellow); width: 12px; height: 12px; }
         .c-b { background: #000; width: 12px; height: 12px; }
         
-        /* MODAL FLASH / RUFFLE */
         #flashModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 2000000; flex-direction: column; }
         #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); }
         #ruffle-container { flex: 1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -316,7 +313,7 @@
                 </div>
             </div>
         </div>
-        <div id="zoomContainer"><img id="expandedImg" src=""></div>
+        <div id="zoomContainer"><img id="expandedImg" src="" crossorigin="anonymous"></div>
         <div class="youtube-bar"><button id="btnGameplay" class="action-btn yt-btn"><span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b></button></div>
     </div>
 
@@ -342,6 +339,7 @@
             const screen = document.getElementById('welcomeScreen');
             const cloudBanner = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/Bienvenida.png`;
             const img = new Image();
+            img.crossOrigin = "anonymous";
             img.onload = () => screen.style.backgroundImage = `url('${cloudBanner}')`;
             img.onerror = () => screen.style.backgroundImage = `url('ARCHIVOS/Bienvenida.png')`;
             img.src = cloudBanner;
@@ -537,7 +535,7 @@
                 d.innerHTML = `
                     <div style="font-size:0.45rem; color:var(--neon); padding:3px; text-align:center; height:22px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>
                     <div class="price-tag">$${i.price}</div>
-                    <img src="${i.url}" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.urlHD}', ${i.price}, '${i.name}')">
+                    <img src="${i.url}" crossorigin="anonymous" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.urlHD}', ${i.price}, '${i.name}')">
                     <button class="action-btn" style="font-size:0.55rem; padding:5px; margin:0; border-width:2px; border-radius:0; ${btnStyle}" onclick="${btnAction}">${btnLabel}</button>`;
                 grid.appendChild(d);
             });
@@ -550,11 +548,23 @@
             const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
             const status = document.getElementById('taxiStatus'); const val = document.getElementById('taxiVal');
             count.innerText = cart.length; count.style.display = cart.length>0?'block':'none'; 
-            let total = 0; list.innerHTML = ''; 
+            let total = 0; 
+            list.innerHTML = ''; 
+            
             cart.forEach((item, i) => { 
                 total += item.p; 
-                list.innerHTML += `<div style="display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;"><img src="${item.u}" style="width:30px; height:30px; border-radius:4px;"><div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div><div class="white-price" style="font-size:0.8rem;">$${item.p}</div><button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button></div>`; 
+                // Creamos el item con la imagen configurada para CORS
+                const itemDiv = document.createElement('div');
+                itemDiv.style = "display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;";
+                itemDiv.innerHTML = `
+                    <img src="${item.u}" crossorigin="anonymous" style="width:30px; height:30px; border-radius:4px; object-fit:cover;">
+                    <div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div>
+                    <div class="white-price" style="font-size:0.8rem;">$${item.p}</div>
+                    <button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button>
+                `;
+                list.appendChild(itemDiv);
             }); 
+
             if(document.getElementById('check-taxi').checked) { 
                 total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2);
             } else {
@@ -569,10 +579,24 @@
         function takeSnapshot() { 
             updateDateTime();
             const btnGen = document.getElementById('btnGenerate'); 
-            html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000", scale: 2 }).then(canvas => { 
-                const link = document.createElement('a'); link.href = canvas.toDataURL("image/png"); link.download = 'Ticket_Florida_' + Date.now() + '.png'; link.click(); 
-                btnGen.innerHTML = "✅ TICKET GENERADO"; document.getElementById('btnWA').style.display = "block"; 
-            }); 
+            
+            // Usamos una pequeña pausa para asegurar que las imágenes se carguen en el DOM
+            setTimeout(() => {
+                html2canvas(document.getElementById('captureArea'), { 
+                    backgroundColor: "#000", 
+                    scale: 2,
+                    useCORS: true, // Habilitar CORS en html2canvas
+                    allowTaint: false,
+                    logging: false
+                }).then(canvas => { 
+                    const link = document.createElement('a'); 
+                    link.href = canvas.toDataURL("image/png"); 
+                    link.download = 'Ticket_Florida_' + Date.now() + '.png'; 
+                    link.click(); 
+                    btnGen.innerHTML = "✅ TICKET GENERADO"; 
+                    document.getElementById('btnWA').style.display = "block"; 
+                }); 
+            }, 100);
         }
 
         function resetTicketButtons() { document.getElementById('btnGenerate').innerHTML = "📸 GENERAR TICKET"; document.getElementById('btnWA').style.display = "none"; playSnd('sndClick'); }
