@@ -247,7 +247,7 @@
         <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black;">
             <span style="font-size:1rem;">📂</span><b>CATÁLOGO</b>
         </button>
-        <button id="btn-downloads-nav" class="action-btn btn-nav" onclick="toggleDownloads()" style="background:var(--purple); border-color:var(--dark-purple); box-shadow: 0 4px 0 var(--dark-purple); color:white;">
+        <button id="btn-downloads-nav" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--purple); border-color:var(--dark-purple); box-shadow: 0 4px 0 var(--dark-purple); color:white;">
             <span style="font-size:1rem;">⬇️</span><b>DESCARGAS</b>
         </button>
         <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border-color:var(--dark-red); box-shadow: 0 4px 0 var(--dark-red); color:white;">
@@ -262,16 +262,18 @@
         </button>
     </div>
 
-    <div id="boxDownloads" class="download-box">
-        <h4 style="color:var(--neon); margin:0 0 10px 0; text-align:center;">RECURSOS GRATUITOS</h4>
-        <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
-        <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
-        <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
-        <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
-        <div class="download-item"><span>5. Juegos FLASH PLAYER</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">Clic Aqui</a></div>
-    </div>
-
     <div class="container">
+        <div id="downloadsScreen" style="display:none;">
+            <div class="download-box" style="display:block; width:100%; border:none; background:transparent;">
+                <h2 style="color:var(--purple); text-align:center; margin-top:10px;">RECURSOS GRATUITOS</h2>
+                <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>5. Juegos FLASH PLAYER</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">Clic Aqui</a></div>
+            </div>
+        </div>
+
         <div id="catalogScreen">
             <div class="console-select-container">
                 <select id="consoleFilter" class="console-select" onchange="filterCat(this.value)">
@@ -440,7 +442,6 @@
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'TODO';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
 
-        // SISTEMA DE CONFIGURACION UNIFICADO
         let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
         let isConfigMode = false;
         let targetButton = null;
@@ -468,7 +469,7 @@
             updateOnlineCount();
             setInterval(updateOnlineCount, 5000);
             renderAlphabet();
-            loadKeyConfig(); // Cargar configuración guardada
+            loadKeyConfig();
         };
 
         function renderAlphabet() {
@@ -494,7 +495,6 @@
             });
         }
 
-        // LÓGICA DE CONFIGURACIÓN NUEVA
         function toggleConfigMode() {
             playSnd('sndClick');
             isConfigMode = !isConfigMode;
@@ -519,7 +519,6 @@
                 }
                 return;
             }
-            // Funcionamiento normal de juego
             key(keyConfig[btnId], isDown);
         }
 
@@ -528,10 +527,7 @@
             keyConfig[targetButton] = keyCode;
             const label = document.getElementById('label' + targetButton);
             if(label) label.innerText = keyName;
-            
-            // Guardar en LocalStorage
             localStorage.setItem('lidelKeyConfig', JSON.stringify(keyConfig));
-            
             playSnd('sndAdd');
             alert(`Botón ${targetButton} asignado a tecla ${keyName}`);
             cancelConfig();
@@ -549,7 +545,6 @@
             const saved = localStorage.getItem('lidelKeyConfig');
             if(saved) {
                 keyConfig = JSON.parse(saved);
-                // Actualizar etiquetas visuales
                 for(let btn in keyConfig) {
                     const label = document.getElementById('label' + btn);
                     if(label) {
@@ -600,11 +595,11 @@
         function showPage(id){ 
             closeLightbox(); 
             playSnd('sndClick');
-            document.getElementById('boxDownloads').style.display = 'none';
             document.getElementById('catalogScreen').style.display = 'none'; 
             document.getElementById('cartScreen').style.display = 'none'; 
             document.getElementById('extraScreen').style.display = 'none'; 
             document.getElementById('visualesScreen').style.display = 'none';
+            document.getElementById('downloadsScreen').style.display = 'none';
             document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById('btn-' + id.replace('Screen',''));
             if(btn) btn.classList.add('active');
@@ -614,7 +609,6 @@
 
         function filterVisual(cat) { showPage('catalogScreen'); document.getElementById('consoleFilter').value = cat; filterCat(cat); }
         function filterCat(c){ playSnd('sndClick'); currentCat = c; renderGrid(); }
-        function toggleDownloads() { playSnd('sndClick'); const box = document.getElementById('boxDownloads'); box.style.display = (box.style.display === 'block') ? 'none' : 'block'; }
         function showPiezas() { playSnd('sndClick'); showPage('catalogScreen'); filterCat('PIEZAS'); }
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); }
         function adjustZoom(a){ scale = Math.min(Math.max(0.5, scale + a), 5); updateT(); }
