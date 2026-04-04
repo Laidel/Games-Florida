@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v22.0 - Lidel Ultimate Unified</title>
+    <title>Florida Games v23.0 - Lidel Ultimate Unified</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -23,7 +23,6 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* PANTALLA DE BIENVENIDA */
         #welcomeScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             z-index: 9999999; 
@@ -134,13 +133,11 @@
         .c-y { background: var(--taxi-yellow); width: 12px; height: 12px; }
         .c-b { background: #000; width: 12px; height: 12px; }
         
-        /* MODAL FLASH Y CONTROLES SNES PRO */
         #flashModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 2000000; flex-direction: column; }
         #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); }
         #ruffle-container { flex: 1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
         #ruffle-container ruffle-player { width: 100% !important; height: 100% !important; }
 
-        /* CONTROLES MÁS PEQUEÑOS */
         .flash-controls { 
             background: #151515; border-top: 2px solid var(--taxi-yellow); 
             padding: 10px 5px; display: flex; justify-content: space-between;
@@ -168,10 +165,13 @@
             cursor: pointer; font-weight: bold; box-shadow: 0 2px 0 #000;
         }
         .btn-pill:active { transform: translateY(1px); box-shadow: none; background: var(--neon); color: #000; }
-        
-        /* BOTÓN CFG DINÁMICO */
+        .btn-pill.config-target { border-color: var(--taxi-yellow); box-shadow: 0 0 10px var(--taxi-yellow); animation: flashYellow 0.5s infinite; }
+
+        @keyframes flashYellow { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
         .cfg-wrapper { position: relative; }
-        .btn-cfg { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #666; background: #222; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; }
+        .btn-cfg { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #666; background: #222; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .btn-cfg.active { border-color: var(--taxi-yellow); box-shadow: 0 0 15px var(--taxi-yellow); background: #444; transform: rotate(45deg); }
         
         .config-menu { 
             display: none; position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
@@ -182,7 +182,6 @@
         .key-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; max-height: 150px; overflow-y: auto; padding: 5px; }
         .key-btn { background: #333; color: white; border: 1px solid #555; font-size: 0.55rem; padding: 6px 2px; cursor: pointer; border-radius: 3px; text-align: center; }
         .key-btn:active { background: var(--neon); color: #000; }
-        .key-btn.active-set { background: var(--taxi-yellow); color: #000; border-color: #fff; font-weight: bold; }
 
         .abxy-diamond { display: grid; grid-template-areas: ". x ." "y . a" ". b ."; gap: 6px; }
         .btn-snes-action { 
@@ -194,13 +193,7 @@
         .btn-snes-action span { font-size: 0.45rem; text-transform: uppercase; font-weight: bold; pointer-events: none; }
         .btn-snes-action b { font-size: 0.8rem; pointer-events: none; }
         .btn-snes-action:active { transform: translateY(3px); box-shadow: none; filter: brightness(1.2); }
-        
-        /* Botón de configuración pequeño dentro del botón de acción */
-        .btn-mini-cfg {
-            position: absolute; top: -5px; right: -5px; width: 18px; height: 18px;
-            background: #fff; color: #000; border-radius: 50%; font-size: 10px;
-            display: flex; align-items: center; justify-content: center; border: 1px solid #000;
-        }
+        .btn-snes-action.config-target { border: 3px solid var(--taxi-yellow); box-shadow: 0 0 15px var(--taxi-yellow); animation: flashYellow 0.5s infinite; }
 
         .btn-x { grid-area: x; background: var(--blue-btn); }
         .btn-y { grid-area: y; background: #4CAF50; }
@@ -243,13 +236,11 @@
             <h1 class="welcome-title">BIENVENIDO A LA TIENDA DE JUEGOS FLORIDA</h1>
         </div>
         <button class="action-btn" style="width:280px; background:white; color:black; border-color:#ccc; box-shadow: 0 4px 0 #999;" onclick="playSnd('sndClick'); enterApp()">ENTRAR A LA TIENDA</button>
-        
         <div class="user-counter-box">
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        
-        <div class="version-tag-welcome">v22.0 Stable</div>
+        <div class="version-tag-welcome">v23.0 Stable</div>
     </div>
 
     <div class="header-grid">
@@ -351,7 +342,6 @@
                 <input type="text" id="cName" class="ticket-input" placeholder="CLIENTE">
                 <input type="text" id="cAddr" class="ticket-input" placeholder="DIRECCIÓN">
                 <input type="text" id="cComment" class="ticket-input" placeholder="COMENTARIO" style="margin-bottom:10px;">
-                
                 <div class="taxi-container">
                     <div class="taxi-row">
                         <span style="font-size:0.75rem;">¿INCLUIR ENVÍO (TAXI)?</span>
@@ -374,12 +364,11 @@
                     <div style="margin-top:5px;"><span class="tel-verde">📞</span> <span class="atencion-amarillo">Atención al Cliente:</span> 54935185</div>
                 </div>
             </div>
-
             <button id="btnGenerate" class="action-btn" onclick="playSnd('sndClick'); takeSnapshot()">📸 GENERAR TICKET</button>
             <button id="btnWA" class="action-btn secondary-btn" onclick="playSnd('sndClick'); openWhatsApp()" style="display:none;">💬 ENVIAR POR WHATSAPP</button>
             <button class="action-btn" style="background:#333; color:#fff; border:none;" onclick="resetTicketButtons()">🔄 NUEVO PEDIDO</button>
         </div>
-        <div class="version-tag">Florida Games App v22.0 - 2026</div>
+        <div class="version-tag">Florida Games App v23.0 - 2026</div>
     </div>
 
     <div id="flashModal">
@@ -388,7 +377,6 @@
             <button onclick="closeFlash()" style="background:red; color:white; border:none; padding:5px 15px; font-weight:bold; border-radius:4px; cursor:pointer;">CERRAR X</button>
         </div>
         <div id="ruffle-container"></div>
-        
         <div class="flash-controls">
             <div class="d-pad">
                 <button class="btn-game" style="grid-area:up;" onpointerdown="key(38,1)" onpointerup="key(38,0)">▲</button>
@@ -396,37 +384,31 @@
                 <button class="btn-game" style="grid-area:right;" onpointerdown="key(39,1)" onpointerup="key(39,0)">▶</button>
                 <button class="btn-game" style="grid-area:down;" onpointerdown="key(40,1)" onpointerup="key(40,0)">▼</button>
             </div>
-
             <div class="center-group">
                 <div class="cfg-wrapper">
-                    <div class="btn-cfg" onclick="toggleConfig()">⚙️</div>
+                    <div id="mainConfigBtn" class="btn-cfg" onclick="toggleConfigMode()">⚙️</div>
                     <div id="configMenu" class="config-menu">
                         <h5>ASIGNAR TECLA A: <span id="targetBtnName" style="color:#fff;">---</span></h5>
                         <div class="key-grid" id="alphabetGrid"></div>
-                        <button class="action-btn" style="margin-top:8px; padding:5px; font-size:0.5rem; background:red; border-color:maroon; color:white;" onclick="toggleConfig()">CERRAR</button>
+                        <button class="action-btn" style="margin-top:8px; padding:5px; font-size:0.5rem; background:red; border-color:maroon; color:white;" onclick="cancelConfig()">CANCELAR</button>
                     </div>
                 </div>
                 <div class="pill-btns">
-                    <div class="btn-pill" onpointerdown="triggerKey('SELECT',1)" onpointerup="triggerKey('SELECT',0)" onclick="selectBtnToConfig('SELECT')">SELECT</div>
-                    <div class="btn-pill" onpointerdown="triggerKey('START',1)" onpointerup="triggerKey('START',0)" onclick="selectBtnToConfig('START')">START</div>
+                    <div id="btnSELECT" class="btn-pill" onpointerdown="handleControlPress('SELECT', 1)" onpointerup="handleControlPress('SELECT', 0)">SELECT</div>
+                    <div id="btnSTART" class="btn-pill" onpointerdown="handleControlPress('START', 1)" onpointerup="handleControlPress('START', 0)">START</div>
                 </div>
             </div>
-
             <div class="abxy-diamond">
-                <button id="btnX" class="btn-snes-action btn-x" onpointerdown="triggerKey('X',1)" onpointerup="triggerKey('X',0)">
-                    <div class="btn-mini-cfg" onclick="event.stopPropagation(); selectBtnToConfig('X')">⚙️</div>
+                <button id="btnX" class="btn-snes-action btn-x" onpointerdown="handleControlPress('X', 1)" onpointerup="handleControlPress('X', 0)">
                     <span id="labelX">SALTAR</span><b>X</b>
                 </button>
-                <button id="btnY" class="btn-snes-action btn-y" onpointerdown="triggerKey('Y',1)" onpointerup="triggerKey('Y',0)">
-                    <div class="btn-mini-cfg" onclick="event.stopPropagation(); selectBtnToConfig('Y')">⚙️</div>
+                <button id="btnY" class="btn-snes-action btn-y" onpointerdown="handleControlPress('Y', 1)" onpointerup="handleControlPress('Y', 0)">
                     <span id="labelY">ACCIÓN</span><b>Y</b>
                 </button>
-                <button id="btnA" class="btn-snes-action btn-a" onpointerdown="triggerKey('A',1)" onpointerup="triggerKey('A',0)">
-                    <div class="btn-mini-cfg" onclick="event.stopPropagation(); selectBtnToConfig('A')">⚙️</div>
+                <button id="btnA" class="btn-snes-action btn-a" onpointerdown="handleControlPress('A', 1)" onpointerup="handleControlPress('A', 0)">
                     <span id="labelA">CORRER</span><b>A</b>
                 </button>
-                <button id="btnB" class="btn-snes-action btn-b" onpointerdown="triggerKey('B',1)" onpointerup="triggerKey('B',0)">
-                    <div class="btn-mini-cfg" onclick="event.stopPropagation(); selectBtnToConfig('B')">⚙️</div>
+                <button id="btnB" class="btn-snes-action btn-b" onpointerdown="handleControlPress('B', 1)" onpointerup="handleControlPress('B', 0)">
                     <span id="labelB">USAR</span><b>B</b>
                 </button>
             </div>
@@ -458,9 +440,10 @@
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'TODO';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
 
-        // Configuración de teclas extendida
+        // SISTEMA DE CONFIGURACION UNIFICADO
         let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
-        let selectedBtn = null;
+        let isConfigMode = false;
+        let targetButton = null;
 
         const sounds = {
             sndClick: `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`,
@@ -485,6 +468,7 @@
             updateOnlineCount();
             setInterval(updateOnlineCount, 5000);
             renderAlphabet();
+            loadKeyConfig(); // Cargar configuración guardada
         };
 
         function renderAlphabet() {
@@ -500,38 +484,81 @@
                 {n:"4", c:52}, {n:"5", c:53}, {n:"6", c:54}, {n:"7", c:55}, {n:"8", c:56}, {n:"9", c:57},
                 {n:"F1", c:112}, {n:"F2", c:113}, {n:"F3", c:114}, {n:"F4", c:115}, {n:"F5", c:116}, {n:"F6", c:117}
             ];
+            grid.innerHTML = '';
             keys.forEach(k => {
                 const btn = document.createElement('button');
                 btn.className = 'key-btn';
                 btn.innerText = k.n;
-                btn.onclick = () => assignKey(k.n, k.c);
+                btn.onclick = () => saveNewKey(k.n, k.c);
                 grid.appendChild(btn);
             });
         }
 
-        function toggleConfig() {
+        // LÓGICA DE CONFIGURACIÓN NUEVA
+        function toggleConfigMode() {
             playSnd('sndClick');
-            const m = document.getElementById('configMenu');
-            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+            isConfigMode = !isConfigMode;
+            const gear = document.getElementById('mainConfigBtn');
+            if(isConfigMode) {
+                gear.classList.add('active');
+                alert("MODO CONFIGURACIÓN: Toca un botón del control para asignarle una tecla.");
+            } else {
+                cancelConfig();
+            }
         }
 
-        function selectBtnToConfig(btnId) {
-            selectedBtn = btnId;
-            document.getElementById('targetBtnName').innerText = "BOTÓN " + btnId;
-            document.getElementById('configMenu').style.display = 'block';
+        function handleControlPress(btnId, isDown) {
+            if(isConfigMode) {
+                if(isDown) {
+                    playSnd('sndClick');
+                    targetButton = btnId;
+                    document.querySelectorAll('.btn-snes-action, .btn-pill').forEach(b => b.classList.remove('config-target'));
+                    document.getElementById('btn' + btnId).classList.add('config-target');
+                    document.getElementById('targetBtnName').innerText = btnId;
+                    document.getElementById('configMenu').style.display = 'block';
+                }
+                return;
+            }
+            // Funcionamiento normal de juego
+            key(keyConfig[btnId], isDown);
         }
 
-        function assignKey(name, code) {
-            if(!selectedBtn) return;
-            keyConfig[selectedBtn] = code;
-            const label = document.getElementById('label' + selectedBtn);
-            if(label) label.innerText = name;
-            playSnd('sndClick');
-            toggleConfig();
+        function saveNewKey(keyName, keyCode) {
+            if(!targetButton) return;
+            keyConfig[targetButton] = keyCode;
+            const label = document.getElementById('label' + targetButton);
+            if(label) label.innerText = keyName;
+            
+            // Guardar en LocalStorage
+            localStorage.setItem('lidelKeyConfig', JSON.stringify(keyConfig));
+            
+            playSnd('sndAdd');
+            alert(`Botón ${targetButton} asignado a tecla ${keyName}`);
+            cancelConfig();
         }
 
-        function triggerKey(btnId, down) {
-            key(keyConfig[btnId], down);
+        function cancelConfig() {
+            isConfigMode = false;
+            targetButton = null;
+            document.getElementById('mainConfigBtn').classList.remove('active');
+            document.getElementById('configMenu').style.display = 'none';
+            document.querySelectorAll('.btn-snes-action, .btn-pill').forEach(b => b.classList.remove('config-target'));
+        }
+
+        function loadKeyConfig() {
+            const saved = localStorage.getItem('lidelKeyConfig');
+            if(saved) {
+                keyConfig = JSON.parse(saved);
+                // Actualizar etiquetas visuales
+                for(let btn in keyConfig) {
+                    const label = document.getElementById('label' + btn);
+                    if(label) {
+                        const keys = [{n:"ESC", c:27}, {n:"TAB", c:9}, {n:"BSP", c:8}, {n:"ENT", c:13}, {n:"SHF", c:16}, {n:"CTR", c:17}, {n:"ALT", c:18}, {n:"SPC", c:32}, {n:"A", c:65}, {n:"B", c:66}, {n:"C", c:67}, {n:"D", c:68}, {n:"E", c:69}, {n:"F", c:70}, {n:"G", c:71}, {n:"H", c:72}, {n:"I", c:73}, {n:"J", c:74}, {n:"K", c:75}, {n:"L", c:76}, {n:"M", c:77}, {n:"N", c:78}, {n:"O", c:79}, {n:"P", c:80}, {n:"Q", c:81}, {n:"R", c:82}, {n:"S", c:83}, {n:"T", c:84}, {n:"U", c:85}, {n:"V", c:86}, {n:"W", c:87}, {n:"X", c:88}, {n:"Y", c:89}, {n:"Z", c:90}];
+                        const found = keys.find(k => k.c === keyConfig[btn]);
+                        if(found) label.innerText = found.n;
+                    }
+                }
+            }
         }
 
         function updateOnlineCount() {
@@ -545,8 +572,6 @@
             const evType = down ? 'keydown' : 'keyup';
             const player = document.querySelector('ruffle-player');
             const eventProps = { key: String.fromCharCode(code), keyCode: code, which: code, bubbles: true, cancelable: true, view: window };
-
-            // Mapeo especial para teclas no alfabéticas
             if (code === 32) eventProps.key = ' ';
             else if (code === 37) eventProps.key = 'ArrowLeft';
             else if (code === 38) eventProps.key = 'ArrowUp';
@@ -556,7 +581,6 @@
             else if (code === 9) eventProps.key = 'Tab';
             else if (code === 13) eventProps.key = 'Enter';
             else if (code === 8) eventProps.key = 'Backspace';
-
             const event = new KeyboardEvent(evType, eventProps);
             if (player) { player.focus(); player.dispatchEvent(event); }
             window.dispatchEvent(event);
@@ -581,33 +605,16 @@
             document.getElementById('cartScreen').style.display = 'none'; 
             document.getElementById('extraScreen').style.display = 'none'; 
             document.getElementById('visualesScreen').style.display = 'none';
-            
             document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
             const btn = document.getElementById('btn-' + id.replace('Screen',''));
             if(btn) btn.classList.add('active');
-            
             document.getElementById(id).style.display = 'block';
             window.scrollTo(0,0); 
         }
 
-        function filterVisual(cat) { 
-            showPage('catalogScreen'); 
-            document.getElementById('consoleFilter').value = cat;
-            filterCat(cat); 
-        }
-
-        function filterCat(c){
-            playSnd('sndClick'); 
-            currentCat = c;
-            renderGrid();
-        }
-
-        function toggleDownloads() {
-            playSnd('sndClick');
-            const box = document.getElementById('boxDownloads');
-            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
-        }
-
+        function filterVisual(cat) { showPage('catalogScreen'); document.getElementById('consoleFilter').value = cat; filterCat(cat); }
+        function filterCat(c){ playSnd('sndClick'); currentCat = c; renderGrid(); }
+        function toggleDownloads() { playSnd('sndClick'); const box = document.getElementById('boxDownloads'); box.style.display = (box.style.display === 'block') ? 'none' : 'block'; }
         function showPiezas() { playSnd('sndClick'); showPage('catalogScreen'); filterCat('PIEZAS'); }
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); }
         function adjustZoom(a){ scale = Math.min(Math.max(0.5, scale + a), 5); updateT(); }
@@ -655,10 +662,7 @@
             player.addEventListener("loadedmetadata", () => { player.focus(); });
         }
 
-        function closeFlash() {
-            document.getElementById('flashModal').style.display = 'none';
-            document.getElementById('ruffle-container').innerHTML = '';
-        }
+        function closeFlash() { document.getElementById('flashModal').style.display = 'none'; document.getElementById('ruffle-container').innerHTML = ''; cancelConfig(); }
 
         function setButtonLoading(btnId, text) { const btn = document.getElementById(btnId); btn.classList.add('btn-loading'); btn.querySelector('.btn-text').innerHTML = `<b>${text}...</b>`; }
         function resetButtonLoading(btnId, text) { const btn = document.getElementById(btnId); btn.classList.remove('btn-loading'); btn.querySelector('.btn-text').innerHTML = `<b>${text}</b>`; }
@@ -726,8 +730,7 @@
                             });
                         } else {
                             subFiles.forEach(f => {
-                                if (f.type === "file" && (f.name.match(/\.(jpg|jpeg|png|webp|swf)$/i))) 
-                                processItem(f.download_url, f.download_url, f.name, item.name.toUpperCase());
+                                if (f.type === "file" && (f.name.match(/\.(jpg|jpeg|png|webp|swf)$/i))) processItem(f.download_url, f.download_url, f.name, item.name.toUpperCase());
                             });
                         }
                     }
@@ -778,19 +781,11 @@
                 total += item.p; 
                 const itemDiv = document.createElement('div');
                 itemDiv.style = "display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;";
-                itemDiv.innerHTML = `
-                    <img src="${item.u}" crossorigin="anonymous" style="width:30px; height:30px; border-radius:4px; object-fit:cover;">
-                    <div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div>
-                    <div class="white-price" style="font-size:0.8rem;">$${item.p}</div>
-                    <button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button>
-                `;
+                itemDiv.innerHTML = `<img src="${item.u}" crossorigin="anonymous" style="width:30px; height:30px; border-radius:4px; object-fit:cover;"><div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div><div class="white-price" style="font-size:0.8rem;">$${item.p}</div><button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button>`;
                 list.appendChild(itemDiv);
             }); 
-            if(document.getElementById('check-taxi').checked) { 
-                total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2);
-            } else {
-                status.innerText = "NO INCLUIDO"; status.style.color = "var(--red)"; val.innerText = "$0.00";
-            }
+            if(document.getElementById('check-taxi').checked) { total += taxiP; status.innerText = "INCLUIDO"; status.style.color = "var(--neon)"; val.innerText = "$" + taxiP.toFixed(2); } 
+            else { status.innerText = "NO INCLUIDO"; status.style.color = "var(--red)"; val.innerText = "$0.00"; }
             document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2); 
             updateDateTime(); 
         }
@@ -802,12 +797,8 @@
             const btnGen = document.getElementById('btnGenerate'); 
             setTimeout(() => {
                 html2canvas(document.getElementById('captureArea'), { backgroundColor: "#000", scale: 2, useCORS: true, allowTaint: false, logging: false }).then(canvas => { 
-                    const link = document.createElement('a'); 
-                    link.href = canvas.toDataURL("image/png"); 
-                    link.download = 'Ticket_Florida_' + Date.now() + '.png'; 
-                    link.click(); 
-                    btnGen.innerHTML = "✅ TICKET GENERADO"; 
-                    document.getElementById('btnWA').style.display = "block"; 
+                    const link = document.createElement('a'); link.href = canvas.toDataURL("image/png"); link.download = 'Ticket_Florida_' + Date.now() + '.png'; link.click(); 
+                    btnGen.innerHTML = "✅ TICKET GENERADO"; document.getElementById('btnWA').style.display = "block"; 
                 }); 
             }, 100);
         }
