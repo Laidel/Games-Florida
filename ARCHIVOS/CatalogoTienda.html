@@ -113,8 +113,13 @@
         .btn-loading .btn-icon { display: none; }
         
         .header-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; max-width: 600px; margin-bottom: 10px; }
-        .btn-nav { height: 75px; padding: 4px; flex-direction: column; line-height: 1.1; justify-content: center; border: 4px solid transparent; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.52rem !important; }
-        .btn-nav.active { border: 4px solid var(--neon) !important; box-shadow: 0 0 20px var(--neon), 0 4px 0 var(--dark-neon) !important; color: #000 !important; }
+        .btn-nav { height: 75px; padding: 4px; display: flex; flex-direction: column; line-height: 1.1; justify-content: center; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.52rem !important; }
+        
+        /* BORDE NEÓN PARA BOTÓN ACTIVO SIN CAMBIAR EL FONDO */
+        .btn-nav.active { 
+            border: 4px solid var(--neon) !important; 
+            box-shadow: 0 0 15px var(--neon) !important;
+        }
 
         .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
         .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -244,19 +249,19 @@
     </div>
 
     <div class="header-grid">
-        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black;">
+        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black; border: 4px solid transparent;">
             <span style="font-size:1rem;">📂</span><b>CATÁLOGO</b>
         </button>
-        <button id="btn-downloads-nav" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--purple); border-color:var(--dark-purple); box-shadow: 0 4px 0 var(--dark-purple); color:white;">
+        <button id="btn-downloads" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--purple); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-purple); color:white;">
             <span style="font-size:1rem;">⬇️</span><b>DESCARGAS</b>
         </button>
-        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border-color:var(--dark-red); box-shadow: 0 4px 0 var(--dark-red); color:white;">
+        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-red); color:white;">
             <span style="font-size:1rem;">🎬</span><b>VISUALES</b>
         </button>
-        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--blue-btn); border-color:var(--dark-blue); box-shadow: 0 4px 0 var(--dark-blue); color:white;">
+        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--blue-btn); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-blue); color:white;">
             <span style="font-size:1rem;">⭐</span><b>EXTRA</b>
         </button>
-        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="position:relative; background:#FFEB3B; color:black;">
+        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="position:relative; background:#FFEB3B; color:black; border: 4px solid transparent;">
             <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--red); color:white; font-size:10px; padding:2px 6px; border-radius:50%; z-index:10; border:1px solid white;">0</div>
             <span style="font-size:1rem;">🛒</span><b>CARRITO</b>
         </button>
@@ -601,8 +606,12 @@
             document.getElementById('visualesScreen').style.display = 'none';
             document.getElementById('downloadsScreen').style.display = 'none';
             document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
-            const btn = document.getElementById('btn-' + id.replace('Screen',''));
+            
+            // Unificar ID para navegación
+            const btnId = 'btn-' + id.replace('Screen','');
+            const btn = document.getElementById(btnId);
             if(btn) btn.classList.add('active');
+            
             document.getElementById(id).style.display = 'block';
             window.scrollTo(0,0); 
         }
