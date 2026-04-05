@@ -21,8 +21,21 @@
             --dark-purple: #7B1FA2;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 45px; }
         
+        /* MONITOR DE DATOS Y CRONÓMETRO */
+        #topMonitor {
+            position: fixed; top: 0; left: 0; width: 100%; height: 30px;
+            background: #000; color: #fff; border-bottom: 1px solid #333;
+            display: flex; justify-content: center; align-items: center;
+            gap: 15px; font-size: 0.7rem; font-weight: bold; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .status-led { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+        .led-online { background: var(--neon); box-shadow: 0 0 5px var(--neon); }
+        .led-offline { background: var(--red); box-shadow: 0 0 5px var(--red); }
+
         #welcomeScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             z-index: 9999999; 
@@ -115,7 +128,6 @@
         .header-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; width: 100%; max-width: 600px; margin-bottom: 10px; }
         .btn-nav { height: 75px; padding: 4px; display: flex; flex-direction: column; line-height: 1.1; justify-content: center; transition: border 0.2s ease, box-shadow 0.2s ease; font-size: 0.52rem !important; }
         
-        /* BORDE NEÓN PARA BOTÓN ACTIVO SIN CAMBIAR EL FONDO */
         .btn-nav.active { 
             border: 4px solid var(--neon) !important; 
             box-shadow: 0 0 15px var(--neon) !important;
@@ -139,7 +151,7 @@
         .c-b { background: #000; width: 12px; height: 12px; }
         
         #flashModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 2000000; flex-direction: column; }
-        #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); }
+        #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); margin-top: 30px; /* Evita que el monitor lo tape */ }
         #ruffle-container { flex: 1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
         #ruffle-container ruffle-player { width: 100% !important; height: 100% !important; }
 
@@ -231,6 +243,11 @@
     </style>
 </head>
 <body>
+
+    <div id="topMonitor">
+        <div><span id="ledStatus" class="status-led led-online"></span><span id="monitorData">CONSUMO DE DATOS: 0.00 KB</span></div>
+        <div id="monitorTime">SESIÓN: 00:00:00</div>
+    </div>
 
     <audio id="sndClick" preload="auto"></audio>
     <audio id="sndAdd" preload="auto"></audio>
@@ -451,6 +468,10 @@
         let isConfigMode = false;
         let targetButton = null;
 
+        // VARIABLES DE MONITOR (DATOS Y CRONÓMETRO)
+        let totalBytes = 0;
+        let sessionSeconds = 0;
+
         const sounds = {
             sndClick: `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`,
             sndAdd: `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/add.mp3`,
@@ -458,6 +479,15 @@
         };
 
         window.onload = function() {
+            // Iniciar Cronómetro de Sesión
+            setInterval(updateSessionTimer, 1000);
+            // Iniciar Contador de Datos
+            startDataCounter();
+            // Monitorear Internet
+            checkInternet();
+            window.addEventListener('online', checkInternet);
+            window.addEventListener('offline', checkInternet);
+
             for (let id in sounds) {
                 const el = document.getElementById(id);
                 el.src = sounds[id];
@@ -476,6 +506,57 @@
             renderAlphabet();
             loadKeyConfig();
         };
+
+        // FUNCIONES DEL MONITOR
+        function updateSessionTimer() {
+            sessionSeconds++;
+            const hrs = String(Math.floor(sessionSeconds / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((sessionSeconds % 3600) / 60)).padStart(2, '0');
+            const secs = String(sessionSeconds % 60).padStart(2, '0');
+            document.getElementById('monitorTime').innerText = `SESIÓN: ${hrs}:${mins}:${secs}`;
+        }
+
+        function checkInternet() {
+            const led = document.getElementById('ledStatus');
+            if (navigator.onLine) {
+                led.className = "status-led led-online";
+            } else {
+                led.className = "status-led led-offline";
+            }
+        }
+
+        function startDataCounter() {
+            if (PerformanceObserver.supportedEntryTypes.includes("resource")) {
+                const observer = new PerformanceObserver((list) => {
+                    list.getEntries().forEach((entry) => {
+                        if (entry.transferSize) totalBytes += entry.transferSize;
+                        else if (entry.decodedBodySize) totalBytes += entry.decodedBodySize;
+                        updateDataUI();
+                    });
+                });
+                observer.observe({ type: 'resource', buffered: true });
+            }
+
+            const originalFetch = window.fetch;
+            window.fetch = function() {
+                return originalFetch.apply(this, arguments).then(response => {
+                    const clone = response.clone();
+                    clone.blob().then(blob => {
+                        totalBytes += blob.size;
+                        updateDataUI();
+                    });
+                    return response;
+                });
+            };
+        }
+
+        function updateDataUI() {
+            let displaySize = "";
+            if (totalBytes < 1024) displaySize = totalBytes + " B";
+            else if (totalBytes < 1024 * 1024) displaySize = (totalBytes / 1024).toFixed(2) + " KB";
+            else displaySize = (totalBytes / (1024 * 1024)).toFixed(2) + " MB";
+            document.getElementById('monitorData').innerText = "CONSUMO DE DATOS: " + displaySize;
+        }
 
         function renderAlphabet() {
             const grid = document.getElementById('alphabetGrid');
@@ -607,7 +688,6 @@
             document.getElementById('downloadsScreen').style.display = 'none';
             document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
             
-            // Unificar ID para navegación
             const btnId = 'btn-' + id.replace('Screen','');
             const btn = document.getElementById(btnId);
             if(btn) btn.classList.add('active');
@@ -677,6 +757,9 @@
             const files = Array.from(input.files); 
             if(files.length === 0) { resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); return; }
             allItems = [];
+            files.forEach(f => { totalBytes += f.size; });
+            updateDataUI();
+
             const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
             if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
             const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
@@ -728,12 +811,12 @@
                             thumbs.forEach(tFile => {
                                 if (tFile.name.match(/\.(jpg|jpeg|png|webp)$/i)) {
                                     const hdFile = subFiles.find(f => f.name === tFile.name);
-                                    processItem(tFile.download_url, hdFile ? hdFile.download_url : tFile.download_url, tFile.name, item.name.toUpperCase());
+                                    processItem(tFile.download_url, hdFile ? hdFile.download_url : tFile.download_url, tFile.name, item.name.toUpperCase(), hdFile ? hdFile.size : 0);
                                 }
                             });
                         } else {
                             subFiles.forEach(f => {
-                                if (f.type === "file" && (f.name.match(/\.(jpg|jpeg|png|webp|swf)$/i))) processItem(f.download_url, f.download_url, f.name, item.name.toUpperCase());
+                                if (f.type === "file" && (f.name.match(/\.(jpg|jpeg|png|webp|swf)$/i))) processItem(f.download_url, f.download_url, f.name, item.name.toUpperCase(), f.size);
                             });
                         }
                     }
@@ -742,7 +825,7 @@
             } catch (e) { resetButtonLoading('btnSyncCloud', 'SINCRONIZAR NUBE'); }
         }
 
-        function processItem(urlMini, urlHD, name, category) {
+        function processItem(urlMini, urlHD, name, category, size = 0) {
             const p = priceList[name] || 0;
             const isSwf = name.toLowerCase().endsWith('.swf');
             let finalCat = isSwf ? 'FLASH' : category; 
@@ -750,6 +833,7 @@
             if(upper.includes('SNES')) finalCat='SNES'; else if(upper.includes('NES') && !upper.includes('SNES')) finalCat='NES'; 
             else if(upper.includes('PS1')) finalCat='PS1'; else if(upper.includes('PS2')) finalCat='PS2'; 
             else if(upper.includes('FLASH')) finalCat='FLASH';
+            if (size > 0) { totalBytes += size; updateDataUI(); }
             allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: name, price: p, cat: finalCat });
         }
 
