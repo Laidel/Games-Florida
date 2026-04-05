@@ -257,7 +257,7 @@
     <div id="topMonitor">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span id="ledStatus" class="status-led led-online"></span>
-            <span id="onlineStatusText">🔵 ON LINE</span>
+            <span id="onlineStatusText">ON LINE 😃</span>
         </div>
         <div id="monitorData">DATOS: 0.00 KB</div>
         <div id="monitorTime">SESIÓN: 00:00:00</div>
@@ -280,35 +280,42 @@
     </div>
 
     <div class="header-grid">
-        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:#FFFFFF; color:black; border: 4px solid transparent;">
-            <span style="font-size:1rem;">📂</span><b>CATÁLOGO</b>
+        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+            <span style="font-size:2.5rem;">🎮</span><b>CATÁLOGO DE JUEGOS</b>
         </button>
-        <button id="btn-downloads" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--purple); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-purple); color:white;">
-            <span style="font-size:1rem;">⬇️</span><b>DESCARGAS</b>
+        <button id="btn-downloads" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+            <span style="font-size:2.5rem;">📥</span><b>DESCARGAS</b>
         </button>
-        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--red); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-red); color:white;">
-            <span style="font-size:1rem;">🎬</span><b>VISUALES</b>
+        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+            <span style="font-size:2.5rem;">🎬</span><b>VISUALES</b>
         </button>
-        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--blue-btn); border: 4px solid transparent; box-shadow: 0 4px 0 var(--dark-blue); color:white;">
-            <span style="font-size:1rem;">⭐</span><b>EXTRA</b>
+        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+            <span style="font-size:2.5rem;">💰</span><b>TIENDA EXTRA</b>
         </button>
-        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="position:relative; background:#FFEB3B; color:black; border: 4px solid transparent;">
-            <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--red); color:white; font-size:10px; padding:2px 6px; border-radius:50%; z-index:10; border:1px solid white;">0</div>
-            <span style="font-size:1rem;">🛒</span><b>CARRITO</b>
+        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')"
+
+ style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;"
+
+><div id="cartCount"
+
+ style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:10px; padding:2px 6px; border-radius:50%; z-index:10; border;box-shadow: 0 4px 0 var(--black); color:white;">0</div>
+            <span style="font-size:2.5rem;">🛒</span><b>CARRITO DE COMPRAS</b>
         </button>
     </div>
 
     <div class="container">
         <div id="downloadsScreen" style="display:none;">
             <div class="download-box" style="display:block; width:100%; border:none; background:transparent;">
-                <h2 style="color:var(--purple); text-align:center; margin-top:10px;">RECURSOS GRATUITOS</h2>
+                <h2 style="color:var(--white); text-align:center; margin-top:10px;">RECURSOS GRATUITOS</h2>
                 <div class="download-item"><span>1. PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">Download</a></div>
                 <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>3. COSAS DE LOS JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>4. PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
-                <div class="download-item"><span>5. Juegos FLASH PLAYER</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">Clic Aqui</a></div>
-            </div>
-        </div>
+                <div class="download-item"><span>3. COSAS PARA LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">Download</a></div>
+                <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">JUGAR 🌟</a></div>
+            <div
+<div class="download-item"><span>6. REVISTAS</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">VER 🌟</a></div>
+</div>
+</div>
 
         <div id="catalogScreen">
             <div class="console-select-container">
@@ -348,7 +355,7 @@
         </div>
 
         <div id="visualesScreen" style="display:none;">
-            <h2 style="color:var(--red); text-align:center; margin-top:10px;">VISUALES</h2>
+            <h2 style="color:var(--white); text-align:center; margin-top:10px;">VISUALES</h2>
             <div class="extra-menu">
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('PELICULAS')">🎬 PELÍCULAS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('NOVELAS')">📺 NOVELAS</div>
@@ -361,7 +368,7 @@
         </div>
 
         <div id="extraScreen" style="display:none;">
-            <h2 style="color:var(--blue-btn); text-align:center; margin-top:10px;">TIENDA EXTRA</h2>
+            <h2 style="color:var(--taxi-yellow); text-align:center; margin-top:10px;">TIENDA EXTRA</h2>
             <div class="extra-menu">
                 <div class="extra-btn" onclick="filterVisual('ROPA')">👕 ROPA</div>
                 <div class="extra-btn" onclick="filterVisual('ELECTRODOMESTICOS')">🔌 ELECTRODOMÉSTICOS</div>
@@ -376,7 +383,7 @@
 
         <div id="cartScreen" style="display:none;">
             <div id="captureArea" style="background:#000; padding:15px; border:1px solid var(--neon); border-radius:8px;">
-                <h3 style="color:var(--neon); text-align:center; border-bottom:2px dashed var(--neon); padding-bottom:10px; margin-top:0;">TICKET FLORIDA GAMES</h3>
+                <h3 style="color:var(--white); text-align:center; border-bottom:2px dashed var(--neon); padding-bottom:10px; margin-top:0;">TICKET FLORIDA GAMES</h3>
                 <input type="text" id="cName" class="ticket-input" placeholder="CLIENTE">
                 <input type="text" id="cAddr" class="ticket-input" placeholder="DIRECCIÓN">
                 <input type="text" id="cComment" class="ticket-input" placeholder="COMENTARIO" style="margin-bottom:10px;">
@@ -550,13 +557,13 @@
 
             function setOnline() {
                 led.className = "status-led led-online";
-                txt.innerText = "🔵 ON LINE";
+                txt.innerText = "ON LINE 😀";
                 txt.style.color = "var(--online-blue)";
             }
 
             function setOffline() {
                 led.className = "status-led led-offline";
-                txt.innerText = "🔴 OFF LINE";
+                txt.innerText = "OFF LINE 👀🕯";
                 txt.style.color = "var(--red)";
             }
         }
