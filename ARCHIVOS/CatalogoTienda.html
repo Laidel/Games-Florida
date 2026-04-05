@@ -151,18 +151,22 @@
         .c-b { background: #000; width: 12px; height: 12px; }
         
         #flashModal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 2000000; flex-direction: column; }
-        #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); margin-top: 30px; /* Evita que el monitor lo tape */ }
+        #flashHeader { background: #111; padding: 10px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--neon); margin-top: 30px; }
         #ruffle-container { flex: 1; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
         #ruffle-container ruffle-player { width: 100% !important; height: 100% !important; }
 
+        /* AJUSTE PARA ALINEACIÓN HORIZONTAL DEL D-PAD Y BOTONES ABXY */
         .flash-controls { 
             background: #151515; border-top: 2px solid var(--taxi-yellow); 
             padding: 10px 5px; display: flex; justify-content: space-between;
-            align-items: center; height: 230px; user-select: none;
+            align-items: flex-end; /* Alinea los elementos a la base del contenedor */
+            height: 230px; user-select: none;
         }
+
         .d-pad { 
             display: grid; grid-template-areas: ". up ." "left . right" ". down ."; 
             gap: 4px; width: 110px; 
+            margin-bottom: 75px; /* SUBIDO DE 45px A 75px PARA ALINEAR CON EL RESTO */
         }
         .btn-game { 
             background: #222; border: 2px solid var(--neon); color: var(--neon); 
@@ -173,7 +177,7 @@
         }
         .btn-game:active { background: var(--neon); color: #000; box-shadow: none; transform: translateY(3px); }
 
-        .center-group { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .center-group { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 10px; }
         .pill-btns { display: flex; gap: 10px; margin-top: 10px; }
         .btn-pill { 
             width: 45px; height: 18px; background: #333; border: 2px solid #555; 
@@ -200,7 +204,11 @@
         .key-btn { background: #333; color: white; border: 1px solid #555; font-size: 0.55rem; padding: 6px 2px; cursor: pointer; border-radius: 3px; text-align: center; }
         .key-btn:active { background: var(--neon); color: #000; }
 
-        .abxy-diamond { display: grid; grid-template-areas: ". x ." "y . a" ". b ."; gap: 6px; }
+        .abxy-diamond { 
+            display: grid; grid-template-areas: ". x ." "y . a" ". b ."; 
+            gap: 6px; 
+            margin-bottom: 45px; 
+        }
         .btn-snes-action { 
             width: 52px; height: 52px; border-radius: 50%; border: none; 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -468,7 +476,6 @@
         let isConfigMode = false;
         let targetButton = null;
 
-        // VARIABLES DE MONITOR (DATOS Y CRONÓMETRO)
         let totalBytes = 0;
         let sessionSeconds = 0;
 
@@ -479,11 +486,8 @@
         };
 
         window.onload = function() {
-            // Iniciar Cronómetro de Sesión
             setInterval(updateSessionTimer, 1000);
-            // Iniciar Contador de Datos
             startDataCounter();
-            // Monitorear Internet
             checkInternet();
             window.addEventListener('online', checkInternet);
             window.addEventListener('offline', checkInternet);
@@ -507,7 +511,6 @@
             loadKeyConfig();
         };
 
-        // FUNCIONES DEL MONITOR
         function updateSessionTimer() {
             sessionSeconds++;
             const hrs = String(Math.floor(sessionSeconds / 3600)).padStart(2, '0');
@@ -518,11 +521,8 @@
 
         function checkInternet() {
             const led = document.getElementById('ledStatus');
-            if (navigator.onLine) {
-                led.className = "status-led led-online";
-            } else {
-                led.className = "status-led led-offline";
-            }
+            if (navigator.onLine) led.className = "status-led led-online";
+            else led.className = "status-led led-offline";
         }
 
         function startDataCounter() {
@@ -536,7 +536,6 @@
                 });
                 observer.observe({ type: 'resource', buffered: true });
             }
-
             const originalFetch = window.fetch;
             window.fetch = function() {
                 return originalFetch.apply(this, arguments).then(response => {
@@ -588,9 +587,7 @@
             if(isConfigMode) {
                 gear.classList.add('active');
                 alert("MODO CONFIGURACIÓN: Toca un botón del control para asignarle una tecla.");
-            } else {
-                cancelConfig();
-            }
+            } else cancelConfig();
         }
 
         function handleControlPress(btnId, isDown) {
@@ -687,11 +684,9 @@
             document.getElementById('visualesScreen').style.display = 'none';
             document.getElementById('downloadsScreen').style.display = 'none';
             document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
-            
             const btnId = 'btn-' + id.replace('Screen','');
             const btn = document.getElementById(btnId);
             if(btn) btn.classList.add('active');
-            
             document.getElementById(id).style.display = 'block';
             window.scrollTo(0,0); 
         }
@@ -759,7 +754,6 @@
             allItems = [];
             files.forEach(f => { totalBytes += f.size; });
             updateDataUI();
-
             const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
             if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
             const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
