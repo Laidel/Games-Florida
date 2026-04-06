@@ -37,6 +37,17 @@
         .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 0.6rem; cursor: pointer; }
         .data-saver-label input { margin: 0; cursor: pointer; }
 
+        /* CANVAS DE AHORRO DE DATOS */
+        #dataSaverCanvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            pointer-events: none;
+            display: none;
+        }
+
         .status-led { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
         .led-online { background: var(--online-blue); box-shadow: 0 0 8px var(--online-blue); }
         .led-offline { background: var(--red); box-shadow: 0 0 8px var(--red); }
@@ -265,6 +276,8 @@
     </style>
 </head>
 <body>
+
+    <canvas id="dataSaverCanvas" width="300" height="150"></canvas>
 
     <div id="topMonitor">
         <div style="display: flex; align-items: center; gap: 5px;">
@@ -513,6 +526,92 @@ __________________________________
         let sessionSeconds = 0;
         let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
 
+        // NUEVO: FUNCION SONIDO ELECTRONICO (Ahorro de Datos)
+        function playSaverSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(isDataSaver ? 880 : 440, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(isDataSaver ? 1760 : 220, audioCtx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.2);
+            } catch(e) { console.log("Audio no soportado"); }
+        }
+
+        // NUEVO: ANIMACION CANVAS (Ahorro de Datos)
+        function showDataSaverAnim() {
+            const canvas = document.getElementById('dataSaverCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.style.display = 'block';
+            let alpha = 0;
+            let scaleAnim = 0.5;
+            const text = isDataSaver ? "AHORRO ACTIVADO 📉" : "AHORRO DESACTIVADO 🚀";
+            const color = isDataSaver ? "#ffcc00" : "#00ff41";
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.scale(scaleAnim, scaleAnim);
+                
+                // Fondo
+                ctx.fillStyle = "rgba(0,0,0,0.8)";
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.roundRect(-140, -40, 280, 80, 15);
+                ctx.fill();
+                ctx.stroke();
+
+                // Texto
+                ctx.font = "bold 14px Courier New";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = color;
+                ctx.globalAlpha = alpha;
+                ctx.fillText(text, 0, 0);
+                ctx.restore();
+
+                if (alpha < 1) {
+                    alpha += 0.1;
+                    scaleAnim += 0.05;
+                    requestAnimationFrame(draw);
+                } else {
+                    setTimeout(() => fadeOut(), 800);
+                }
+            }
+
+            function fadeOut() {
+                if (alpha > 0) {
+                    alpha -= 0.1;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.save();
+                    ctx.translate(canvas.width / 2, canvas.height / 2);
+                    ctx.scale(scaleAnim, scaleAnim);
+                    ctx.fillStyle = "rgba(0,0,0," + (alpha * 0.8) + ")";
+                    ctx.strokeStyle = color;
+                    ctx.globalAlpha = alpha;
+                    ctx.beginPath();
+                    ctx.roundRect(-140, -40, 280, 80, 15);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.fillStyle = color;
+                    ctx.fillText(text, 0, 0);
+                    ctx.restore();
+                    requestAnimationFrame(fadeOut);
+                } else {
+                    canvas.style.display = 'none';
+                }
+            }
+            draw();
+        }
+
         // Función para forzar incremento manual si es necesario (ej: clics o sonidos)
         function trackData(bytes) {
             totalBytes += bytes;
@@ -559,6 +658,8 @@ __________________________________
         function toggleDataSaver() {
             isDataSaver = document.getElementById('dataSaverCheck').checked;
             localStorage.setItem('dataSaverEnabled', isDataSaver);
+            playSaverSound();   // SONIDO
+            showDataSaverAnim(); // CANVAS
             renderGrid();
         }
 
@@ -583,9 +684,8 @@ __________________________________
             function setOffline() { led.className = "status-led led-offline"; txt.innerText = "OFF LINE 👀🕯"; txt.style.color = "var(--red)"; }
         }
 
-        // MOTOR DE DETECCION AUTOMATICA DE DATOS ARREGLADO
+        // MOTOR DE DETECCION AUTOMATICA DE DATOS
         function startDataCounter() {
-            // Este observador detecta cada recurso (imagen, json, script) que se baja por la red
             try {
                 const observer = new PerformanceObserver((list) => {
                     list.getEntries().forEach((entry) => {
@@ -594,10 +694,9 @@ __________________________________
                         else if (entry.encodedBodySize > 0) size = entry.encodedBodySize;
                         else if (entry.decodedBodySize > 0) size = entry.decodedBodySize;
                         
-                        // Si el navegador oculta el tamaño por CORS, estimamos según el tipo
                         if (size === 0 && entry.entryType === 'resource') {
-                            if (entry.initiatorType === 'img') size = 45000; // ~45KB por miniatura
-                            if (entry.initiatorType === 'fetch') size = 2000; // ~2KB por json
+                            if (entry.initiatorType === 'img') size = 45000;
+                            if (entry.initiatorType === 'fetch') size = 2000;
                         }
                         
                         totalBytes += size;
@@ -606,7 +705,7 @@ __________________________________
                 });
                 observer.observe({ type: 'resource', buffered: true });
             } catch (e) {
-                console.log("PerformanceObserver no soportado, usando modo manual.");
+                console.log("PerformanceObserver no soportado.");
             }
         }
 
@@ -761,7 +860,7 @@ __________________________________
             document.getElementById('btnGameplay').onclick = function() { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); };
             document.getElementById('lightbox').style.display = 'flex';
             resetZoom();
-            trackData(300000); // Rastrear carga de imagen HD (~300KB)
+            trackData(300000); 
         }
 
         function openFlash(url, name) {
@@ -771,11 +870,11 @@ __________________________________
             const container = document.getElementById('ruffle-container');
             container.innerHTML = '';
             const ruffle = window.RufflePlayer ? window.RufflePlayer.newest() : null;
-            if(!ruffle) { alert("Cargando Motor... Conéctate a internet."); return; }
+            if(!ruffle) { alert("Cargando Motor..."); return; }
             const player = ruffle.createPlayer();
             container.appendChild(player);
             player.load(url);
-            trackData(1500000); // Rastrear carga de juego Flash (~1.5MB estimación)
+            trackData(1500000);
         }
 
         function closeFlash() { document.getElementById('flashModal').style.display = 'none'; document.getElementById('ruffle-container').innerHTML = ''; cancelConfig(); }
