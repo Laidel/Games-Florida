@@ -261,7 +261,7 @@
     <div id="topMonitor">
         <div style="display: flex; align-items: center; gap: 8px;">
             <span id="ledStatus" class="status-led led-online"></span>
-            <span id="onlineStatusText">ON LINE 😃</span>
+            <span id="onlineStatusText">ON LINE 😀</span>
         </div>
         <div id="monitorData">DATOS: 0.00 KB</div>
         <div id="monitorTime">SESIÓN: 00:00:00</div>
@@ -296,13 +296,8 @@
         <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
             <span style="font-size:2.5rem;">💰</span><b>TIENDA EXTRA</b>
         </button>
-        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')"
-
- style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;"
-
-><div id="cartCount"
-
- style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:20px; padding:2px 6px; border-radius:50%; z-index:10; border;box-shadow: 0 4px 0 var(--black); color:white;">0</div>
+        <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+            <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:20px; padding:2px 6px; border-radius:50%; z-index:10; border;box-shadow: 0 4px 0 var(--black); color:white;">0</div>
             <span style="font-size:2.5rem;">🛒</span><b>CARRITO DE COMPRAS</b>
         </button>
     </div>
@@ -310,31 +305,26 @@
     <div class="container">
         <div id="downloadsScreen" style="display:none;">
             <div class="download-box" style="display:block; width:100%; border:none; background:transparent;">
-                <h1 style="color:var(--taxi-yellow); text-align:center; margin-top:0px;">🤪      
-RECURSOS</h2>
+                <h1 style="color:var(--taxi-yellow); text-align:center; margin-top:0px;">🤪 RECURSOS</h1>
 __________________________________
-                <div class="download-item"><span>1. PROGRAMAS Y APLICATIVOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link">DESCARGAR 📥</a></div>
+                <div class="download-item"><span>1. PROGRAMAS Y APLICATIVOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
 __________________________________
-                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link">CARGAR LISTA 📝</a></div>
+                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link" onclick="playSnd('sndClick')">CARGAR LISTA 📝</a></div>
 __________________________________
-                <div class="download-item"><span>3. COSAS DE LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link">DESCARGAR 📥</a></div>
+                <div class="download-item"><span>3. COSAS DE LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
 __________________________________
-                <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link">DESCARGAR 📥</a></div>
+                <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
 __________________________________
-                <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link">JUGAR 🌟</a></div>
+                <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link" onclick="playSnd('sndClick')">JUGAR 🌟</a></div>
 __________________________________
-               <div 
-class="download-item"><span>6. REVISTAS</span> <a href="https://www.facebook.com/Hobbyconsolas/?locale=es_LA" target="_blank"
-class="download-link">VER 🌟</a></
-div>
-</div>
+                <div class="download-item"><span>6. REVISTAS</span> <a href="https://www.facebook.com/Hobbyconsolas/?locale=es_LA" target="_blank" class="download-link" onclick="playSnd('sndClick')">VER 🌟</a></div>
 __________________________________
-<div 
-class="download-item"><span>7. ATENCION AL CLIENTE</span> <a href="https://wa.me/54935185" target="_blank" class="download-link">LLAMAR ⚡️☎️</a></div>
+                <div class="download-item"><span>7. ATENCION AL CLIENTE</span> <a href="https://wa.me/54935185" target="_blank" class="download-link" onclick="playSnd('sndClick')">LLAMAR ⚡️☎️</a></div>
 __________________________________
-Laidel.J Esquivel Bajuelo
-               </div>
-</div>
+                <div style="text-align: center; margin-top: 10px; color: var(--neon); font-size: 0.8rem;">Laidel.J Esquivel Bajuelo</div>
+            </div>
+        </div>
+        
         <div id="catalogScreen">
             <div class="console-select-container">
                 <select id="consoleFilter" class="console-select" onchange="filterCat(this.value)">
@@ -526,17 +516,21 @@ Laidel.J Esquivel Bajuelo
             window.addEventListener('online', checkInternet);
             window.addEventListener('offline', checkInternet);
 
+            // CARGAR SONIDOS CON FALLBACK LOCAL
             for (let id in sounds) {
                 const el = document.getElementById(id);
                 el.src = sounds[id];
+                // Si falla la carga (sin internet), intentar local
                 el.onerror = () => { el.src = `ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
             }
+
+            // CARGAR PORTADA BIENVENIDA CON FALLBACK LOCAL
             const screen = document.getElementById('welcomeScreen');
             const cloudBanner = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/Bienvenida.png`;
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.onload = () => screen.style.backgroundImage = `url('${cloudBanner}')`;
-            img.onerror = () => screen.style.backgroundImage = `url('ARCHIVOS/Bienvenida.png')`;
+            img.onerror = () => { screen.style.backgroundImage = `url('ARCHIVOS/Bienvenida.png')`; };
             img.src = cloudBanner;
 
             updateOnlineCount();
@@ -563,7 +557,8 @@ Laidel.J Esquivel Bajuelo
             }
 
             try {
-                const response = await fetch("https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/click.mp3", { mode: 'no-cors', cache: 'no-store' });
+                // Ping ligero a un recurso pequeño en Github
+                const response = await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { mode: 'no-cors', cache: 'no-store' });
                 setOnline();
             } catch (error) {
                 setOffline();
@@ -723,7 +718,11 @@ Laidel.J Esquivel Bajuelo
 
         function playSnd(id){ 
             const s = document.getElementById(id); 
-            if(s){ s.pause(); s.currentTime = 0; s.play().catch(e => {}); } 
+            if(s){ 
+                s.pause(); 
+                s.currentTime = 0; 
+                s.play().catch(e => { console.log("Error sonido: Audio aún no cargado"); }); 
+            } 
         }
         
         function enterApp(){ 
@@ -790,7 +789,8 @@ Laidel.J Esquivel Bajuelo
             document.getElementById('flashTitle').innerText = name.toUpperCase();
             const container = document.getElementById('ruffle-container');
             container.innerHTML = '';
-            const ruffle = window.RufflePlayer.newest();
+            const ruffle = window.RufflePlayer ? window.RufflePlayer.newest() : null;
+            if(!ruffle) { alert("Cargando Ruffle... Asegúrate de tener internet para la primera carga."); return; }
             const player = ruffle.createPlayer();
             container.appendChild(player);
             player.load(url);
