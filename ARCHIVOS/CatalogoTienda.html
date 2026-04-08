@@ -557,6 +557,7 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
         let totalBytes = 0;
         let sessionSeconds = 0;
         let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
+        let isLastOnlineStatus = null; // Para detectar cambios de señal
 
         // Estructura de iconos para el menú de consolas
         const consoleIcons = [
@@ -580,7 +581,7 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
             { id: 'FIGURAS 3D', label: '3D PRINT', emoji: '🎲' }
         ];
 
-        function playSaverSound() {
+        function playGenericSound(high) {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 const oscillator = audioCtx.createOscillator();
@@ -588,8 +589,8 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
                 oscillator.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 oscillator.type = 'square';
-                oscillator.frequency.setValueAtTime(isDataSaver ? 880 : 440, audioCtx.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(isDataSaver ? 1760 : 220, audioCtx.currentTime + 0.1);
+                oscillator.frequency.setValueAtTime(high ? 880 : 440, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(high ? 1760 : 220, audioCtx.currentTime + 0.1);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.9);
                 oscillator.start();
@@ -597,14 +598,13 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
             } catch(e) { console.log("Audio no soportado"); }
         }
 
-        function showDataSaverAnim() {
+        function showGenericAnim(text, isPositive) {
             const canvas = document.getElementById('dataSaverCanvas');
             const ctx = canvas.getContext('2d');
             canvas.style.display = 'block';
             let alpha = 0;
             let scaleAnim = 0.5;
-            const text = isDataSaver ? "AHORRO ACTIVADO 🟢" : "AHORRO DESACTIVADO 🔴";
-            const color = isDataSaver ? "#ffcc00" : "#00ff41";
+            const color = isPositive ? "#00ff41" : "#ff4444";
 
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -695,8 +695,8 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
         function toggleDataSaver() {
             isDataSaver = document.getElementById('dataSaverCheck').checked;
             localStorage.setItem('dataSaverEnabled', isDataSaver);
-            playSaverSound();
-            showDataSaverAnim();
+            playGenericSound(isDataSaver);
+            showGenericAnim(isDataSaver ? "AHORRO ACTIVADO 🟢" : "AHORRO DESACTIVADO 🔴", !isDataSaver);
             renderGrid();
         }
 
@@ -711,13 +711,33 @@ SI ES QUE TIENES  CORRIENTE 🇨🇺
         async function checkInternet() {
             const led = document.getElementById('ledStatus');
             const txt = document.getElementById('onlineStatusText');
-            if (!navigator.onLine) { setOffline(); return; }
-            try {
-                await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { method: 'HEAD', cache: 'no-store' });
-                setOnline();
-            } catch (error) { setOffline(); }
-            function setOnline() { led.className = "status-led led-online"; txt.innerText = "ON-LINE😀"; txt.style.color = "var(--online-blue)"; }
-            function setOffline() { led.className = "status-led led-offline"; txt.innerText = "OFF-LINE👀"; txt.style.color = "var(--red)"; }
+            let isOnline = false;
+
+            if (navigator.onLine) {
+                try {
+                    await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { method: 'HEAD', cache: 'no-store' });
+                    isOnline = true;
+                } catch (error) { isOnline = false; }
+            }
+
+            if (isOnline) {
+                led.className = "status-led led-online";
+                txt.innerText = "ON-LINE😀";
+                txt.style.color = "var(--online-blue)";
+                if (isLastOnlineStatus === false) {
+                    playGenericSound(true);
+                    showGenericAnim("¡HAY SEÑAL! 😀🌐", true);
+                }
+            } else {
+                led.className = "status-led led-offline";
+                txt.innerText = "OFF-LINE👀";
+                txt.style.color = "var(--red)";
+                if (isLastOnlineStatus === true) {
+                    playGenericSound(false);
+                    showGenericAnim("SE FUE LA SEÑAL 👀🔌", false);
+                }
+            }
+            isLastOnlineStatus = isOnline;
         }
 
         function startDataCounter() {
