@@ -20,6 +20,8 @@
             --purple: #9C27B0;
             --dark-purple: #7B1FA2;
             --online-blue: #2196F3;
+            --white-ok: ##ffcc00
+
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 45px; }
@@ -34,7 +36,7 @@
         }
 
         /* ESTILO AHORRO DE DATOS */
-        .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 1.2rem; cursor: pointer; }
+        .data-saver-label { display: flex; align-items: center; gap: 6px; color: var(--taxi-yellow); font-size: 1.2rem; cursor: pointer; }
         .data-saver-label input { margin: 0; cursor: pointer; }
 
         /* CANVAS DE AHORRO DE DATOS */
@@ -48,10 +50,10 @@
             display: none;
         }
 
-        .status-led { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+        .status-led { width: 20px; height: 15px; border-radius: 50%; display: inline-block; margin-right: 1px; vertical-align: middle; }
         .led-online { background: var(--online-blue); box-shadow: 0 0 8px var(--online-blue); }
         .led-offline { background: var(--red); box-shadow: 0 0 8px var(--red); }
-        #onlineStatusText { font-size: 0.6rem; letter-spacing: 1px; }
+        #onlineStatusText { font-size: 1.12rem; letter-spacing: 1px; }
 
         #welcomeScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
@@ -121,8 +123,8 @@
 
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
         
-        .action-btn { background: var(white); color: #000; border: 4px solid var(--taxi-yellow); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 10px; box-shadow: 0 4px 0 var(--dark-neon); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.75rem; position: relative; }
-        .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--dark-neon); }
+        .action-btn { background: var(white); color: #000; border: 4px solid var(dark); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 var(dark); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
+        .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
         .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
 
@@ -274,7 +276,7 @@
         .atencion-amarillo { color: var(--taxi-yellow) !important; font-weight: bold; }
         .tel-verde { color: var(--neon); font-weight: bold; }
         
-        .search-box { width: 100%; background: #111; border: 2px solid var(--neon); border-radius: 8px; padding: 12px; color: var(--neon); margin-bottom: 15px; outline: none; font-family: monospace; }
+        .search-box { width: 100%; background: #111; border: 2px solid var(--taxi-yellow); border-radius: 8px; padding: 12px; color: var(--white-ok); margin-bottom: 15px; outline: none; font-family: monospace; }
         
         #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000000; flex-direction: column; overflow: hidden; touch-action: none; }
         #zoomContainer { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; cursor: grab; position: relative; padding-bottom: 80px; }
@@ -298,7 +300,7 @@
     <div id="topMonitor">
         <div style="display: flex; align-items: center; gap: 5px;">
             <span id="ledStatus" class="status-led led-online"></span>
-            <span id="onlineStatusText">ON LINE 😀</span>
+            <span id="onlineStatusText">SEÑAL 🙄</span>
         </div>
         <div id="monitorData">DATOS: 0.00 KB</div>
         <label class="data-saver-label">
@@ -383,14 +385,25 @@
                 </select>
             </div>
             
-            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..."
+style="margin-bottom:50px;
+ onkeyup="renderGrid()">
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
             
-            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:5px; background:#4CAF50; color:white; border:4px solid var(--neon);" onclick="startSyncLocal()">
-                <div class="spinner"></div><span class="btn-icon">📂♻️</span> <span class="btn-text"><b>SINCRONIZAR LOCAL</b></span>
+            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#b71c1c; color:white; border:4px solid var(--neon);" onclick="startSyncLocal()">
+                <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR DATOS SIN INTERNET 
+
+MODO APAGON 👀🕯
+
+</b></span>
             </button>
-            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:10px; background:#2196F3; color:white; border:4px solid var(--dark-blue); box-shadow: 0 4px 0 var(--dark-blue);" onclick="startSyncCloud()">
-                <div class="spinner"></div><span class="btn-icon">☁️♻️</span> <span class="btn-text"><b>SINCRONIZAR NUBE</b></span>
+            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:60px; background:#2196F3; color:white; border:4px solid var(--neon); box-shadow: 0 4px 0 var(black);" onclick="startSyncCloud()">
+                <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET
+
+SI ES QUE TIENES  CORRIENTE 🇨🇺
+
+
+</b></span>
             </button>
             <div class="grid-3x" id="imageGrid"></div>
         </div>
@@ -578,9 +591,9 @@
                 oscillator.frequency.setValueAtTime(isDataSaver ? 880 : 440, audioCtx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(isDataSaver ? 1760 : 220, audioCtx.currentTime + 0.1);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.9);
                 oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.2);
+                oscillator.stop(audioCtx.currentTime + 0.9);
             } catch(e) { console.log("Audio no soportado"); }
         }
 
@@ -703,8 +716,8 @@
                 await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { method: 'HEAD', cache: 'no-store' });
                 setOnline();
             } catch (error) { setOffline(); }
-            function setOnline() { led.className = "status-led led-online"; txt.innerText = "ON LINE 😀"; txt.style.color = "var(--online-blue)"; }
-            function setOffline() { led.className = "status-led led-offline"; txt.innerText = "OFF LINE 👀"; txt.style.color = "var(--red)"; }
+            function setOnline() { led.className = "status-led led-online"; txt.innerText = "ON-LINE😀"; txt.style.color = "var(--online-blue)"; }
+            function setOffline() { led.className = "status-led led-offline"; txt.innerText = "OFF-LINE👀"; txt.style.color = "var(--red)"; }
         }
 
         function startDataCounter() {
