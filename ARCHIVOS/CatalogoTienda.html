@@ -553,8 +553,8 @@ class="version2-tag-welcome">2026</div>
 
         const consoleIcons = [
             { id: 'ANDROIDE', label: 'ANDROIDE', emoji: '🐒' },
-            { id: 'SNES', label: 'SNES', emoji: '💎' },
-            { id: 'NES', label: 'NES', emoji: '🪙' },
+            { id: 'SNES', label: 'SUPER NINTENDO', emoji: '💎' },
+            { id: 'NES', label: 'NINTENDO', emoji: '🪙' },
             { id: 'PS1', label: 'PS1', emoji: '🥁' },
             { id: 'PS2', label: 'PS2', emoji: '👑' },
             { id: 'PS3', label: 'PS3', emoji: '⚓️' },
@@ -595,7 +595,10 @@ class="version2-tag-welcome">2026</div>
             canvas.style.display = 'block';
             let alpha = 0;
             let scaleAnim = 0.5;
-            const color = isPositive ? "#ff4444" : "#00ff41";
+            const color = isPositive ?
+ "#ff4444" : "#00ff41";
+
+//"#00ff41" : "#ff4444";
 
 
 //#00ff41
@@ -694,7 +697,7 @@ class="version2-tag-welcome">2026</div>
             isDataSaver = document.getElementById('dataSaverCheck').checked;
             localStorage.setItem('dataSaverEnabled', isDataSaver);
             playGenericSound(isDataSaver);
-            showGenericAnim(isDataSaver ? "ACTIVADO 🟢":"DESACTIVADO 🔴" , !isDataSaver);
+            showGenericAnim(isDataSaver ? "AHORRO ACTIVADO 🟢":"AHORRO DESACTIVADO 🔴" , !isDataSaver);
             renderGrid();
         }
 
@@ -726,12 +729,12 @@ class="version2-tag-welcome">2026</div>
                 led.className = "status-led led-online";
                 txt.innerText = "ON-LINE";
                 txt.style.color = "var(--online-blue)";
-                if (isLastOnlineStatus === false) showGenericAnim("¡HAY SEÑAL! 😀🌐", true);
+                if (isLastOnlineStatus === false) showGenericAnim("¡HAY SEÑAL! 😀🌐", false);
             } else {
                 led.className = "status-led led-offline";
                 txt.innerText = "OFF-LINE";
                 txt.style.color = "var(--red)";
-                if (isLastOnlineStatus === true) showGenericAnim("SE FUE LA SEÑAL 👀🔌", false);
+                if (isLastOnlineStatus === true) showGenericAnim("SE FUE LA SEÑAL 👀🔌", true);
             }
             isLastOnlineStatus = isOnline;
         }
