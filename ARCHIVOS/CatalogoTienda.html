@@ -24,14 +24,14 @@
 
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 45px; }
+        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 1; padding: 1px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 110px; }
         
         /* MONITOR DE DATOS Y CRONÓMETRO */
         #topMonitor {
-            position: fixed; top: 0; left: 0; width: 100%; height: 45px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 90px;
             background: #000; color: #fff; border-bottom: 1px solid #333;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 10px; font-size: 0.95rem; font-weight: bold; z-index: 1000;
+            padding: 0 10px; font-size: 0.9rem; font-weight: bold; z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
@@ -50,10 +50,10 @@
             display: none;
         }
 
-        .status-led { width: 20px; height: 15px; border-radius: 50%; display: inline-block; margin-right: 1px; vertical-align: middle; }
+        .status-led { width: 20px; height: 15px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
         .led-online { background: var(--online-blue); box-shadow: 0 0 8px var(--online-blue); }
         .led-offline { background: var(--red); box-shadow: 0 0 8px var(--red); }
-        #onlineStatusText { font-size: 1.12rem; letter-spacing: 1px; }
+        #onlineStatusText { font-size: 1.12rem; letter-spacing: 0.5px; }
 
         #welcomeScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
@@ -122,6 +122,10 @@
         }
 
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
+
+.Alerta-Tutorial { position: absolute; bottom: 200px; right: 1px; font-size: 1.51rem; color: white; font-weight: bold; }
+
+
         
         .action-btn { background: var(white); color: #000; border: 4px solid var(dark); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 var(dark); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
         .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
@@ -144,7 +148,7 @@
         .download-link { color: var(--neon); text-decoration: none; font-weight: bold; border: 1px solid var(--neon); padding: 2px 6px; border-radius: 4px; }
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .spinner { display: none; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.75s linear infinite; }
+        .spinner { display: none; width: 2rem; height: 2rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.75s linear infinite; }
         .btn-loading .spinner { display: inline-block; }
         .btn-loading .btn-icon { display: none; }
         
@@ -298,13 +302,13 @@
     <canvas id="dataSaverCanvas" width="300" height="150"></canvas>
 
     <div id="topMonitor">
-        <div style="display: flex; align-items: center; gap: 5px;">
+        <div style="display: flex; align-items: center; gap: 2px;">
             <span id="ledStatus" class="status-led led-online"></span>
-            <span id="onlineStatusText">SEÑAL 🙄</span>
+            <span id="onlineStatusText">📶SEÑAL 🙄</span>
         </div>
-        <div id="monitorData">DATOS: 0.00 KB</div>
+        <div id="monitorData">DATOS USADOS: 0.00 KB</div>
         <label class="data-saver-label">
-            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()"> ⚠️MODO AHORRO
+            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()"> ⚡️MODO AHORRO
         </label>
         <div id="monitorTime">SESIÓN: 00:00:00</div>
     </div>
@@ -315,15 +319,20 @@
 
     <div id="welcomeScreen">
         <div class="welcome-title-container" onclick="playSnd('sndClick'); enterApp()">
-            <h1 class="welcome-title">BIENVENIDO A LA TIENDA DE JUEGOS FLORIDA</h1>
+            <h1 class="welcome-title">⭐️TIENDA DE JUEGOS⭐️</h1>
         </div>
         
         <div class="user-counter-box">
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        <div class="version-tag-welcome">v24.1 Stable Optimized</div>
+<div
+class="version-tag-welcome">v24.1 Stable Optimized</div>
+
+<div class="Alerta-Tutorial">🔑 Entra a la Tienda y escanea para cargar base de datos</div>
+
     </div>
+
 
     <div class="header-grid">
         <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
@@ -336,8 +345,14 @@
             <span style="font-size:2.5rem;">🎬</span><b>VISUALES</b>
         </button>
         <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
-            <span style="font-size:2.5rem;">💰</span><b>TIENDA EXTRA</b>
-        </button>
+<span style="font-size:2rem;">
+💰
+<span style="font-size:0.7rem;">EXTERNA
+<b>
+</b>
+ </button>
+
+
         <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
             <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:20px; padding:2px 6px; border-radius:50%; z-index:10; border;box-shadow: 0 4px 0 var(--black); color:white;">0</div>
             <span style="font-size:2.5rem;">🛒</span><b>CARRITO DE COMPRAS</b>
@@ -348,7 +363,7 @@
         <div id="downloadsScreen" style="display:none;">
             <div class="download-box" style="display:block; width:100%; border:none; background:transparent;">
                 <h1 style="color:var(--taxi-yellow); text-align:center; margin-top:0px;">🤪 RECURSOS</h1>
-                <div class="download-item"><span>1. PROGRAMAS Y APLICATIVOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
+                <div class="download-item"><span>1. PROGRAMAS Y HERRAMIENTAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
                 <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link" onclick="playSnd('sndClick')">CARGAR LISTA 📝</a></div>
                 <div class="download-item"><span>3. COSAS DE LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
                 <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
@@ -363,24 +378,24 @@
             <div class="console-select-container">
                 <select id="consoleFilter" class="console-select" onchange="filterCat(this.value)">
                     <option value="CONSOLAS">⭐️ESCOGE VIDEO CONSOLA⭐️</option>
-                    <option value="ANDROIDE">🐒ANDROIDE</option>
-                    <option value="SNES">💎SNES</option>
-                    <option value="NES">🪙NES</option>
-                    <option value="PS1">🥁PS1</option>
-                    <option value="PS2">👑PS2</option>
-                    <option value="PS3">⚓️PS3</option>
-                    <option value="PS4">⚾️PS4</option>
-                    <option value="SWITCH">🔥SWITCH</option>
-                    <option value="PSP">🟠PSP</option>
-                    <option value="Wii">🍎Wii</option>
-                    <option value="N64">🎯N64</option>
-                    <option value="3DS">🪣3DS</option>
-                    <option value="DS">🍉DS</option>
+                    <option value="ANDROIDE">🐒 ANDROIDE</option>
+                    <option value="SNES">💎 SUER NINTENDO</option>
+                    <option value="NES">🪙 NINTENDO</option>
+                    <option value="PS1">🥁 PLAY STATION 1</option>
+                    <option value="PS2">👑 PLAY STATION 2</option>
+                    <option value="PS3">⚓️ PLAY STATION 3</option>
+                    <option value="PS4">⚾️ PLAY STATION 4</option>
+                    <option value="SWITCH">🔥 NINTENDO SWITCH</option>
+                    <option value="PSP">🟠 PSP</option>
+                    <option value="Wii">🍎 NINTENDO Wii</option>
+                    <option value="N64">🎯 NINTENDO 64</option>
+                    <option value="3DS">🪣 NINTENDO 3DS</option>
+                    <option value="DS">🍉 NINTENDO DS</option>
                     <option value="FIGURAS 3D">🎲FIGURAS 3D</option>
-                    <option value="PC">💽PC</option>
-                    <option value="SEGA">💿SEGA</option>
-                    <option value="XBOX360">⚽️XBOX 360</option>
-                    <option value="FLASH">🕹️ JUEGOS FLASH</option>
+                    <option value="PC">💽 PC</option>
+                    <option value="SEGA">💿 SEGA</option>
+                    <option value="XBOX360">⚽️ XBOX 360</option>
+                    <option value="FLASH">🕹️  JUEGOS FLASH</option>
                     <option value="TODO">📚TODO EL CATÁLOGO</option>
                 </select>
             </div>
@@ -556,17 +571,17 @@ style="margin-bottom:20px;
         // Estructura de iconos para el menú de consolas
         const consoleIcons = [
             { id: 'ANDROIDE', label: 'ANDROIDE', emoji: '🐒' },
-            { id: 'SNES', label: 'SNES', emoji: '💎' },
-            { id: 'NES', label: 'NES', emoji: '🪙' },
-            { id: 'PS1', label: 'PS1', emoji: '🥁' },
-            { id: 'PS2', label: 'PS2', emoji: '👑' },
-            { id: 'PS3', label: 'PS3', emoji: '⚓️' },
-            { id: 'PS4', label: 'PS4', emoji: '⚾️' },
-            { id: 'SWITCH', label: 'SWITCH', emoji: '🔥' },
+            { id: 'SNES', label: 'SUPER NINTENDO', emoji: '💎' },
+            { id: 'NES', label: 'NINTENDO', emoji: '🪙' },
+            { id: 'PS1', label: 'PLAY STATION 1', emoji: '🥁' },
+            { id: 'PS2', label: 'PLAY STATION 2', emoji: '👑' },
+            { id: 'PS3', label: 'PLAY STATION 3', emoji: '⚓️' },
+            { id: 'PS4', label: 'PLAY STATION 4', emoji: '⚾️' },
+            { id: 'SWITCH', label: 'NINTENDO SWITCH', emoji: '🔥' },
             { id: 'PSP', label: 'PSP', emoji: '🟠' },
-            { id: 'Wii', label: 'Wii', emoji: '🍎' },
-            { id: 'N64', label: 'N64', emoji: '🎯' },
-            { id: '3DS', label: '3DS', emoji: '🪣' },
+            { id: 'Wii', label: 'NINTENDO Wii', emoji: '🍎' },
+            { id: 'N64', label: 'NINTENDO 64', emoji: '🎯' },
+            { id: '3DS', label: 'NINTENDO 3DS', emoji: '🪣' },
             { id: 'DS', label: 'DS', emoji: '🍉' },
             { id: 'PC', label: 'PC', emoji: '💽' },
             { id: 'SEGA', label: 'SEGA', emoji: '💿' },
@@ -586,9 +601,9 @@ style="margin-bottom:20px;
                 oscillator.frequency.setValueAtTime(high ? 880 : 440, audioCtx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(high ? 1760 : 220, audioCtx.currentTime + 0.1);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.9);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
                 oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.9);
+                oscillator.stop(audioCtx.currentTime + 1.5);
             } catch(e) { console.log("Audio no soportado"); }
         }
 
@@ -598,7 +613,13 @@ style="margin-bottom:20px;
             canvas.style.display = 'block';
             let alpha = 0;
             let scaleAnim = 0.5;
-            const color = isPositive ? "#00ff41" : "#ff4444";
+            const color = isPositive ? "#ff4444" : "#00ff41";
+
+
+
+//00ff41
+
+//ff4444
 
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -716,19 +737,19 @@ style="margin-bottom:20px;
 
             if (isOnline) {
                 led.className = "status-led led-online";
-                txt.innerText = "ON-LINE😀";
+                txt.innerText = "Online 😀";
                 txt.style.color = "var(--online-blue)";
                 if (isLastOnlineStatus === false) {
                     playGenericSound(true);
-                    showGenericAnim("¡HAY SEÑAL! 😀🌐", true);
+                    showGenericAnim("¡HAY SEÑAL! 😀", true);
                 }
             } else {
                 led.className = "status-led led-offline";
-                txt.innerText = "OFF-LINE👀";
+                txt.innerText = "Offline 👀";
                 txt.style.color = "var(--red)";
                 if (isLastOnlineStatus === true) {
                     playGenericSound(false);
-                    showGenericAnim("SE FUE LA SEÑAL 👀🔌", false);
+                    showGenericAnim("SE FUE LA SEÑAL 👀❌️", false);
                 }
             }
             isLastOnlineStatus = isOnline;
@@ -759,7 +780,7 @@ style="margin-bottom:20px;
             if (totalBytes < 1024) displaySize = totalBytes + " B";
             else if (totalBytes < 1048576) displaySize = (totalBytes / 1024).toFixed(2) + " KB";
             else displaySize = (totalBytes / 1048576).toFixed(2) + " MB";
-            document.getElementById('monitorData').innerText = "DATOS: " + displaySize;
+            document.getElementById('monitorData').innerText = "DATOS USADOS: " + displaySize;
         }
 
         function renderAlphabet() {
