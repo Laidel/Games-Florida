@@ -20,8 +20,7 @@
             --purple: #9C27B0;
             --dark-purple: #7B1FA2;
             --online-blue: #2196F3;
-            --white-ok: ##ffcc00
-
+            --white-ok: #ffcc00
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 45px; }
@@ -31,15 +30,13 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 45px;
             background: #000; color: #fff; border-bottom: 1px solid #333;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 10px; font-size: 0.95rem; font-weight: bold; z-index: 1000;
+            padding: 0 10px; font-size: 0.85rem; font-weight: bold; z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* ESTILO AHORRO DE DATOS */
-        .data-saver-label { display: flex; align-items: center; gap: 6px; color: var(--taxi-yellow); font-size: 1.2rem; cursor: pointer; }
+        .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 0.75rem; cursor: pointer; }
         .data-saver-label input { margin: 0; cursor: pointer; }
 
-        /* CANVAS DE AHORRO DE DATOS */
         #dataSaverCanvas {
             position: fixed;
             top: 50%;
@@ -50,10 +47,10 @@
             display: none;
         }
 
-        .status-led { width: 20px; height: 15px; border-radius: 50%; display: inline-block; margin-right: 1px; vertical-align: middle; }
+        .status-led { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle; }
         .led-online { background: var(--online-blue); box-shadow: 0 0 8px var(--online-blue); }
         .led-offline { background: var(--red); box-shadow: 0 0 8px var(--red); }
-        #onlineStatusText { font-size: 1.12rem; letter-spacing: 1px; }
+        #onlineStatusText { font-size: 0.8rem; letter-spacing: 0.5px; }
 
         #welcomeScreen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
@@ -123,7 +120,7 @@
 
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
         
-        .action-btn { background: var(white); color: #000; border: 4px solid var(dark); padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 var(dark); display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
+        .action-btn { background: white; color: #000; border: 4px solid #333; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 #000; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
         .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
         .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
@@ -139,7 +136,7 @@
             background-repeat: no-repeat; background-position: right 15px center; background-size: 18px;
         }
 
-        .download-box { background: #111; border: 2px solid var(red); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
+        .download-box { background: #111; border: 2px solid var(--red); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
         .download-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 8px 0; font-size: 0.75rem; }
         .download-link { color: var(--neon); text-decoration: none; font-weight: bold; border: 1px solid var(--neon); padding: 2px 6px; border-radius: 4px; }
 
@@ -160,7 +157,6 @@
         .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; }
         
-        /* Estilos para los iconos de consola del menú principal */
         .console-icon-card { 
             background: linear-gradient(145deg, #1a1a1a, #000); 
             border: 2px solid #333; border-radius: 12px; 
@@ -172,14 +168,13 @@
         .console-emoji { font-size: 2.5rem; margin-bottom: 5px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
         .console-label { font-size: 0.7rem; font-weight: bold; color: #fff; text-align: center; }
 
-        /* Marcador de posición para ahorro de datos */
         .placeholder-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: #222; color: #555; font-size: 2rem; cursor: pointer; }
 
         .extra-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .extra-btn { background: #111; color: white; border: 2px solid var(--blue-btn); padding: 15px 5px; border-radius: 10px; font-weight: bold; font-size: 0.7rem; text-align: center; box-shadow: 0 4px 0 var(--dark-blue); cursor: pointer; transition: 0.1s; }
         .extra-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--dark-blue); }
 
-        .price-tag { position: absolute; top: 0px; right: 0px; background: rgba(0,0,0,0.85); color: var(white); font-size: 0.95rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
+        .price-tag { position: absolute; top: 0px; right: 0px; background: rgba(0,0,0,0.85); color: white; font-size: 0.95rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
         .ticket-input { width: 100%; background: #111; color: #fff; border: 1px solid #333; padding: 12px; margin-bottom: 5px; font-family: monospace; outline: none; font-size: 1.2rem; font-weight: bold; }
         
         .taxi-container { display: flex; flex-direction: column; gap: 5px; padding: 10px; border: 1px solid #333; border-radius: 8px; margin-bottom: 15px; background: #050505; color: #fff; }
@@ -288,7 +283,6 @@
         
         .version-tag { text-align: center; font-size: 0.6rem; color: #444; margin-top: 10px; width: 100%; }
 
-        /* NUEVO ESTILO SWITCH HD EN LIGHTBOX */
         .hd-switch-container { display: flex; align-items: center; gap: 10px; background: rgba(0,255,65,0.1); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--neon); margin-bottom: 10px; justify-content: center; }
         .hd-label { color: var(--neon); font-size: 0.7rem; font-weight: bold; text-shadow: 0 0 5px var(--neon); }
     </style>
@@ -298,15 +292,15 @@
     <canvas id="dataSaverCanvas" width="300" height="150"></canvas>
 
     <div id="topMonitor">
-        <div style="display: flex; align-items: center; gap: 5px;">
+        <div style="display: flex; align-items: center; min-width: 90px;">
             <span id="ledStatus" class="status-led led-online"></span>
-            <span id="onlineStatusText">SEÑAL 🙄</span>
+            <span id="onlineStatusText">SEÑAL</span>
         </div>
-        <div id="monitorData">DATOS: 0.00 KB</div>
+        <div id="monitorData">0.00 KB</div>
         <label class="data-saver-label">
-            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()"> ⚠️MODO AHORRO
+            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()"> AHORRO
         </label>
-        <div id="monitorTime">SESIÓN: 00:00:00</div>
+        <div id="monitorTime">00:00:00</div>
     </div>
 
     <audio id="sndClick" preload="auto"></audio>
@@ -339,7 +333,7 @@
             <span style="font-size:2.5rem;">💰</span><b>TIENDA EXTRA</b>
         </button>
         <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
-            <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:20px; padding:2px 6px; border-radius:50%; z-index:10; border;box-shadow: 0 4px 0 var(--black); color:white;">0</div>
+            <div id="cartCount" style="display:none; position:absolute; top:-5px; right:-5px; background:var(--dark-red); color:white; font-size:20px; padding:2px 6px; border-radius:50%; z-index:10; box-shadow: 0 4px 0 #000;">0</div>
             <span style="font-size:2.5rem;">🛒</span><b>CARRITO DE COMPRAS</b>
         </button>
     </div>
@@ -385,25 +379,20 @@
                 </select>
             </div>
             
-            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..."
-style="margin-bottom:20px;
- onkeyup="renderGrid()">
+            <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
             
             <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#b71c1c; color:white; border:4px solid var(--neon);" onclick="startSyncLocal()">
-                <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR DATOS SIN INTERNET MODO APAGON 👀🕯
-
-</b></span>
+                <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR DATOS SIN INTERNET MODO APAGON 👀🕯</b></span>
             </button>
-            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:60px; background:#2196F3; color:white; border:4px solid var(--neon); box-shadow: 0 4px 0 var(black);" onclick="startSyncCloud()">
-                <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET MODO NORMAL 🤪
-</b></span>
+            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:60px; background:#2196F3; color:white; border:4px solid var(--neon); box-shadow: 0 4px 0 #000;" onclick="startSyncCloud()">
+                <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET MODO NORMAL 🤪</b></span>
             </button>
             <div class="grid-3x" id="imageGrid"></div>
         </div>
 
         <div id="visualesScreen" style="display:none;">
-            <h2 style="color:var(--white); text-align:center; margin-top:10px;">VISUALES</h2>
+            <h2 style="color:white; text-align:center; margin-top:10px;">VISUALES</h2>
             <div class="extra-menu">
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('PELICULAS')">🎬 PELÍCULAS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('NOVELAS')">📺 NOVELAS</div>
@@ -551,9 +540,8 @@ style="margin-bottom:20px;
         let totalBytes = 0;
         let sessionSeconds = 0;
         let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
-        let isLastOnlineStatus = null; // Para detectar cambios de señal
+        let isLastOnlineStatus = false; // Inicialmente asumimos offline hasta verificar
 
-        // Estructura de iconos para el menú de consolas
         const consoleIcons = [
             { id: 'ANDROIDE', label: 'ANDROIDE', emoji: '🐒' },
             { id: 'SNES', label: 'SNES', emoji: '💎' },
@@ -589,7 +577,7 @@ style="margin-bottom:20px;
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.9);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.9);
-            } catch(e) { console.log("Audio no soportado"); }
+            } catch(e) {}
         }
 
         function showGenericAnim(text, isPositive) {
@@ -646,7 +634,13 @@ style="margin-bottom:20px;
             draw();
         }
 
-        function trackData(bytes) { totalBytes += bytes; updateDataUI(); }
+        function trackData(bytes) { 
+            // Solo cuenta datos si realmente hay internet para evitar falsos positivos offline
+            if(isLastOnlineStatus) {
+                totalBytes += bytes; 
+                updateDataUI(); 
+            }
+        }
 
         const sounds = {
             sndClick: `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`,
@@ -660,15 +654,12 @@ style="margin-bottom:20px;
             setInterval(updateSessionTimer, 1000);
             startDataCounter();
             checkInternet();
-            setInterval(checkInternet, 3000);
-            window.addEventListener('online', checkInternet);
-            window.addEventListener('offline', checkInternet);
+            setInterval(checkInternet, 5000);
 
             for (let id in sounds) {
                 const el = document.getElementById(id);
                 el.src = sounds[id];
                 el.onerror = () => { el.src = `ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
-                el.onloadedmetadata = () => trackData(50000); 
             }
 
             const screen = document.getElementById('welcomeScreen');
@@ -683,7 +674,7 @@ style="margin-bottom:20px;
             setInterval(updateOnlineCount, 5000);
             renderAlphabet();
             loadKeyConfig();
-            renderGrid(); // Render inicial para mostrar los iconos de consolas
+            renderGrid();
         };
 
         function toggleDataSaver() {
@@ -699,37 +690,35 @@ style="margin-bottom:20px;
             const hrs = String(Math.floor(sessionSeconds / 3600)).padStart(2, '0');
             const mins = String(Math.floor((sessionSeconds % 3600) / 60)).padStart(2, '0');
             const secs = String(sessionSeconds % 60).padStart(2, '0');
-            document.getElementById('monitorTime').innerText = `SESIÓN: ${hrs}:${mins}:${secs}`;
+            document.getElementById('monitorTime').innerText = `${hrs}:${mins}:${secs}`;
         }
 
         async function checkInternet() {
             const led = document.getElementById('ledStatus');
             const txt = document.getElementById('onlineStatusText');
-            let isOnline = false;
+            let isOnline = navigator.onLine;
 
-            if (navigator.onLine) {
+            if (isOnline) {
                 try {
-                    await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { method: 'HEAD', cache: 'no-store' });
+                    // Test real de conexión a GitHub para confirmar internet
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 3000);
+                    await fetch(`https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/click.mp3`, { method: 'HEAD', cache: 'no-store', mode: 'no-cors', signal: controller.signal });
+                    clearTimeout(timeoutId);
                     isOnline = true;
                 } catch (error) { isOnline = false; }
             }
 
             if (isOnline) {
                 led.className = "status-led led-online";
-                txt.innerText = "ON-LINE😀";
+                txt.innerText = "ON-LINE";
                 txt.style.color = "var(--online-blue)";
-                if (isLastOnlineStatus === false) {
-                    playGenericSound(true);
-                    showGenericAnim("¡HAY SEÑAL! 😀🌐", true);
-                }
+                if (isLastOnlineStatus === false) showGenericAnim("¡HAY SEÑAL! 😀🌐", true);
             } else {
                 led.className = "status-led led-offline";
-                txt.innerText = "OFF-LINE👀";
+                txt.innerText = "OFF-LINE";
                 txt.style.color = "var(--red)";
-                if (isLastOnlineStatus === true) {
-                    playGenericSound(false);
-                    showGenericAnim("SE FUE LA SEÑAL 👀🔌", false);
-                }
+                if (isLastOnlineStatus === true) showGenericAnim("SE FUE LA SEÑAL 👀🔌", false);
             }
             isLastOnlineStatus = isOnline;
         }
@@ -738,16 +727,16 @@ style="margin-bottom:20px;
             try {
                 const observer = new PerformanceObserver((list) => {
                     list.getEntries().forEach((entry) => {
-                        let size = 0;
-                        if (entry.transferSize > 0) size = entry.transferSize;
-                        else if (entry.encodedBodySize > 0) size = entry.encodedBodySize;
-                        else if (entry.decodedBodySize > 0) size = entry.decodedBodySize;
-                        if (size === 0 && entry.entryType === 'resource') {
-                            if (entry.initiatorType === 'img') size = 45000;
-                            if (entry.initiatorType === 'fetch') size = 2000;
+                        // Solo sumamos si estamos confirmados como online
+                        if(isLastOnlineStatus) {
+                            let size = entry.transferSize || entry.encodedBodySize || entry.decodedBodySize || 0;
+                            if (size === 0 && entry.entryType === 'resource') {
+                                if (entry.initiatorType === 'img') size = 35000;
+                                if (entry.initiatorType === 'fetch') size = 1500;
+                            }
+                            totalBytes += size;
+                            updateDataUI();
                         }
-                        totalBytes += size;
-                        updateDataUI();
                     });
                 });
                 observer.observe({ type: 'resource', buffered: true });
@@ -759,7 +748,7 @@ style="margin-bottom:20px;
             if (totalBytes < 1024) displaySize = totalBytes + " B";
             else if (totalBytes < 1048576) displaySize = (totalBytes / 1024).toFixed(2) + " KB";
             else displaySize = (totalBytes / 1048576).toFixed(2) + " MB";
-            document.getElementById('monitorData').innerText = "DATOS: " + displaySize;
+            document.getElementById('monitorData').innerText = displaySize;
         }
 
         function renderAlphabet() {
@@ -839,7 +828,7 @@ style="margin-bottom:20px;
 
         function playSnd(id){ 
             const s = document.getElementById(id); 
-            if(s){ s.pause(); s.currentTime = 0; s.play().catch(() => {}); trackData(5000); } 
+            if(s){ s.pause(); s.currentTime = 0; s.play().catch(() => {}); trackData(3000); } 
         }
         
         function enterApp(){ 
@@ -860,7 +849,6 @@ style="margin-bottom:20px;
 
         function filterVisual(cat) { showPage('catalogScreen'); document.getElementById('consoleFilter').value = cat; filterCat(cat); }
         
-        // Función modificada para resetear el scroll y renderizar
         function filterCat(c){ 
             playSnd('sndClick'); 
             currentCat = c; 
@@ -892,18 +880,15 @@ style="margin-bottom:20px;
             playSnd('sndClick');
             const cleanName = name.split('.')[0];
             currentZoomItem = { urlMini, price, name, urlHD };
-
-            /* MODIFICADO: Comienza en LOW */
             document.getElementById('check-hd').checked = false; 
             document.getElementById('expandedImg').src = urlMini;
-            
             document.getElementById('zoomName').innerText = cleanName.toUpperCase();
             document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
             document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(urlMini, name, price, urlHD); closeLightbox(); };
             document.getElementById('btnGameplay').onclick = function() { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); };
             document.getElementById('lightbox').style.display = 'flex';
             resetZoom();
-            trackData(50000); 
+            trackData(30000); 
         }
 
         function toggleHDInZoom() {
@@ -911,7 +896,7 @@ style="margin-bottom:20px;
             playSnd('sndClick');
             const isHD = document.getElementById('check-hd').checked;
             document.getElementById('expandedImg').src = isHD ? currentZoomItem.urlHD : currentZoomItem.urlMini;
-            trackData(isHD ? 250000 : 20000);
+            trackData(isHD ? 180000 : 15000);
         }
 
         function openFlash(url, name) {
@@ -925,7 +910,7 @@ style="margin-bottom:20px;
             const player = ruffle.createPlayer();
             container.appendChild(player);
             player.load(url);
-            trackData(1500000);
+            trackData(800000);
         }
 
         function closeFlash() { document.getElementById('flashModal').style.display = 'none'; document.getElementById('ruffle-container').innerHTML = ''; cancelConfig(); }
@@ -951,7 +936,7 @@ style="margin-bottom:20px;
                     const urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
                     const urlHD = URL.createObjectURL(file); 
                     const path = file.webkitRelativePath.toUpperCase();
-                    let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELI') ? 'PELICULAS' : path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' : path.includes('CONSOLAS')?'CONSOLAS' : 'OTRO';
+                    let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELI') ? 'PELICULAS' : path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' : 'OTRO';
                     allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
                 }
             });
@@ -1003,22 +988,17 @@ style="margin-bottom:20px;
             const search = document.getElementById('searchInput').value.toUpperCase();
             grid.innerHTML = '';
 
-            // SI LA CATEGORÍA ES "CONSOLAS", MOSTRAR EL MENÚ DE ICONOS
             if (currentCat === 'CONSOLAS' && search === '') {
                 consoleIcons.forEach(icon => {
                     const card = document.createElement('div');
                     card.className = 'console-icon-card';
                     card.onclick = () => filterCat(icon.id);
-                    card.innerHTML = `
-                        <div class="console-emoji">${icon.emoji}</div>
-                        <div class="console-label">${icon.label}</div>
-                    `;
+                    card.innerHTML = `<div class="console-emoji">${icon.emoji}</div><div class="console-label">${icon.label}</div>`;
                     grid.appendChild(card);
                 });
-                return; // Salir para no renderizar juegos debajo de los iconos
+                return;
             }
 
-            // RENDER NORMAL DE JUEGOS
             allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
                 const isSwf = i.name.toLowerCase().endsWith('.swf');
                 const btnLabel = isSwf ? 'JUGAR' : 'AÑADIR';
@@ -1031,7 +1011,7 @@ style="margin-bottom:20px;
                     <div class="price-tag">$${i.price}</div>
                     ${imgTag}
                     <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${isSwf ? `openFlash('${i.urlHD}', '${i.name}')` : `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`}">${btnLabel}</button>
-                    <div style="font-size:1.05rem; color:var(--white); padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>`;
+                    <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>`;
                 grid.appendChild(d);
             });
         }
