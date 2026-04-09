@@ -595,7 +595,11 @@ class="version2-tag-welcome">2026</div>
             canvas.style.display = 'block';
             let alpha = 0;
             let scaleAnim = 0.5;
-            const color = isPositive ? "#00ff41" : "#ff4444";
+            const color = isPositive ? "#ff4444" : "#00ff41";
+
+
+//#00ff41
+//#ff4444
 
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -690,7 +694,7 @@ class="version2-tag-welcome">2026</div>
             isDataSaver = document.getElementById('dataSaverCheck').checked;
             localStorage.setItem('dataSaverEnabled', isDataSaver);
             playGenericSound(isDataSaver);
-            showGenericAnim(isDataSaver ? "🟢":"🔴" , !isDataSaver);
+            showGenericAnim(isDataSaver ? "ACTIVADO 🟢":"DESACTIVADO 🔴" , !isDataSaver);
             renderGrid();
         }
 
