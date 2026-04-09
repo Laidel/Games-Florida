@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v24.1 - Lidel HD Optimized</title>
+    <title>Florida Games v24.1 - Laidel HD Optimized</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -30,11 +30,11 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 45px;
             background: #000; color: #fff; border-bottom: 1px solid #333;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 10px; font-size: 0.85rem; font-weight: bold; z-index: 1000;
+            padding: 0 10px; font-size: 1.05rem; font-weight: bold; z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 0.75rem; cursor: pointer; }
+        .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 1.15rem; cursor: pointer; }
         .data-saver-label input { margin: 0; cursor: pointer; }
 
         #dataSaverCanvas {
@@ -117,6 +117,10 @@
             border-radius: 8px;
             pointer-events: none;
         }
+
+
+.version2-tag-welcome { position: absolute; bottom: 100px; right: 1px; font-size: 1.1rem; color: white; font-weight: bold; }
+        
 
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
         
@@ -309,14 +313,19 @@
 
     <div id="welcomeScreen">
         <div class="welcome-title-container" onclick="playSnd('sndClick'); enterApp()">
-            <h1 class="welcome-title">BIENVENIDO A LA TIENDA DE JUEGOS FLORIDA</h1>
+            <h1 class="welcome-title">⭐️BIENVENIDO A LA TIENDA DE JUEGOS⭐️</h1>
         </div>
         
         <div class="user-counter-box">
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        <div class="version-tag-welcome">v24.1 Stable Optimized</div>
+        <div
+
+ class="version-tag-welcome">v24.1 Stable Optimized</div>
+
+<div
+class="version2-tag-welcome">2026</div>
     </div>
 
     <div class="header-grid">
@@ -358,19 +367,19 @@
                 <select id="consoleFilter" class="console-select" onchange="filterCat(this.value)">
                     <option value="CONSOLAS">⭐️ESCOGE VIDEO CONSOLA⭐️</option>
                     <option value="ANDROIDE">🐒ANDROIDE</option>
-                    <option value="SNES">💎SNES</option>
-                    <option value="NES">🪙NES</option>
-                    <option value="PS1">🥁PS1</option>
-                    <option value="PS2">👑PS2</option>
-                    <option value="PS3">⚓️PS3</option>
-                    <option value="PS4">⚾️PS4</option>
-                    <option value="SWITCH">🔥SWITCH</option>
+                    <option value="SNES">💎 SUPER NINTENDO</option>
+                    <option value="NES">🪙 NINTENDO</option>
+                    <option value="PS1">🥁 PLAYSTATION 1</option>
+                    <option value="PS2">👑 PLAYSTATION 2</option>
+                    <option value="PS3">⚓️ PLAY STATION 3</option>
+                    <option value="PS4">⚾️ PLAY STATION 4</option>
+                    <option value="SWITCH">🔥 NINTENDO SWITCH</option>
                     <option value="PSP">🟠PSP</option>
-                    <option value="Wii">🍎Wii</option>
-                    <option value="N64">🎯N64</option>
+                    <option value="Wii">🍎 NINTENDO Wii</option>
+                    <option value="N64">🎯 NINTENDO N64</option>
                     <option value="3DS">🪣3DS</option>
                     <option value="DS">🍉DS</option>
-                    <option value="FIGURAS 3D">🎲FIGURAS 3D</option>
+                    <option value="FIGURAS 3D">🎲 FIGURAS IMPRESAS 3D</option>
                     <option value="PC">💽PC</option>
                     <option value="SEGA">💿SEGA</option>
                     <option value="XBOX360">⚽️XBOX 360</option>
@@ -382,10 +391,10 @@
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
             
-            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#b71c1c; color:white; border:4px solid var(--neon);" onclick="startSyncLocal()">
+            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#b71c1c; color:white; border:4px solid var(black);" onclick="startSyncLocal()">
                 <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR DATOS SIN INTERNET MODO APAGON 👀🕯</b></span>
             </button>
-            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:60px; background:#2196F3; color:white; border:4px solid var(--neon); box-shadow: 0 4px 0 #000;" onclick="startSyncCloud()">
+            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:40px; background:#2196F3; color:white; border:4px solid var(black); box-shadow: 0 4px 0 #000;" onclick="startSyncCloud()">
                 <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET MODO NORMAL 🤪</b></span>
             </button>
             <div class="grid-3x" id="imageGrid"></div>
@@ -430,7 +439,7 @@
                         <label class="switch-taxi"><input type="checkbox" id="check-taxi" onchange="playSnd('sndClick'); updateCart()"><span class="slider-taxi"></span></label>
                     </div>
                     <div class="taxi-row" style="margin-top:5px;">
-                        <div id="taxiStatus" style="font-size:1.2rem; color:var(--taxi-yellow);">NO INCLUIDO</div>
+                        <div id="taxiStatus" style="font-size:1.2rem; color:var(--neon);">NO INCLUIDO</div>
                         <div style="display:flex; align-items:center; gap:8px;">
                             <div id="taxiVal" class="white-price" style="font-size:1rem;">$0.00</div>
                             <div class="taxi-pattern"><div class="c-y"></div><div class="c-b"></div><div class="c-y"></div><div class="c-b"></div><div class="c-y"></div><div class="c-b"></div></div>
@@ -681,7 +690,7 @@
             isDataSaver = document.getElementById('dataSaverCheck').checked;
             localStorage.setItem('dataSaverEnabled', isDataSaver);
             playGenericSound(isDataSaver);
-            showGenericAnim(isDataSaver ? "AHORRO ACTIVADO 🟢" : "AHORRO DESACTIVADO 🔴", !isDataSaver);
+            showGenericAnim(isDataSaver ? "🟢":"🔴" , !isDataSaver);
             renderGrid();
         }
 
