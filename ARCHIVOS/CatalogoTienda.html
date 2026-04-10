@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v24.1 - Laidel HD Optimized</title>
+    <title>Florida Games v24.2 - Laidel HD Optimized</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -315,7 +315,7 @@
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        <div class="version-tag-welcome">v24.1 Stable Optimized</div>
+        <div class="version-tag-welcome">v24.2 Stable HD</div>
         <div class="version2-tag-welcome">2026</div>
     </div>
 
@@ -450,7 +450,7 @@
             <button id="btnWA" class="action-btn secondary-btn" onclick="playSnd('sndClick'); openWhatsApp()" style="display:none;">💬 ENVIAR POR WHATSAPP</button>
             <button class="action-btn" style="background:#333; color:#fff; border:none;" onclick="resetTicketButtons()">🪣 NUEVO PEDIDO</button>
         </div>
-        <div class="version-tag">Florida Games App v24.1 - 2026</div>
+        <div class="version-tag">Florida Games App v24.2 - 2026</div>
     </div>
 
     <div id="flashModal">
@@ -542,7 +542,6 @@
         let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
         let isLastOnlineStatus = false;
 
-        // SECCIÓN ACTUALIZADA: NOMBRES DE ARCHIVOS DE ICONOS
         const consoleIcons = [
             { id: 'ANDROIDE', label: 'ANDROIDE', file: 'androide.png' },
             { id: 'SNES', label: 'SUPER NINTENDO', file: 'snes.png' },
@@ -563,6 +562,45 @@
             { id: 'FLASH', label: 'FLASH', file: 'flash.png' },
             { id: 'FIGURAS 3D', label: '3D PRINT', file: 'figuras3d.png' }
         ];
+
+        // --- SISTEMA DE SONIDO SINTETIZADO (AHORRA DATOS) ---
+        function playSyncSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioCtx.currentTime;
+                [0, 0.15, 0.3, 0.45].forEach(delay => {
+                    const osc = audioCtx.createOscillator();
+                    const gn = audioCtx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(delay === 0.3 ? 1200 : 800, now + delay);
+                    gn.gain.setValueAtTime(0.08, now + delay);
+                    gn.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.1);
+                    osc.connect(gn); gn.connect(audioCtx.destination);
+                    osc.start(now + delay); osc.stop(now + delay + 0.1);
+                });
+            } catch(e){}
+        }
+
+        function playSignalSound(isOnline) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gn = audioCtx.createGain();
+                osc.type = 'sine';
+                if(isOnline) { // Ding Dun (Nintendo style)
+                    osc.frequency.setValueAtTime(987.77, now); // B5
+                    osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.1); // E6
+                } else { // Dun Ding (Bajada)
+                    osc.frequency.setValueAtTime(1318.51, now); 
+                    osc.frequency.exponentialRampToValueAtTime(987.77, now + 0.1);
+                }
+                gn.gain.setValueAtTime(0.1, now);
+                gn.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc.connect(gn); gn.connect(audioCtx.destination);
+                osc.start(); osc.stop(now + 0.4);
+            } catch(e){}
+        }
 
         function playGenericSound(high) {
             try {
@@ -710,12 +748,18 @@
                 led.className = "status-led led-online";
                 txt.innerText = "ON-LINE";
                 txt.style.color = "var(--online-blue)";
-                if (isLastOnlineStatus === false) showGenericAnim("¡HAY SEÑAL! 😀🌐", false);
+                if (isLastOnlineStatus === false) { 
+                    playSignalSound(true); 
+                    showGenericAnim("¡HAY SEÑAL! 😀🌐", false); 
+                }
             } else {
                 led.className = "status-led led-offline";
                 txt.innerText = "OFF-LINE";
                 txt.style.color = "var(--red)";
-                if (isLastOnlineStatus === true) showGenericAnim("SE FUE LA SEÑAL 👀🔌", true);
+                if (isLastOnlineStatus === true) { 
+                    playSignalSound(false); 
+                    showGenericAnim("SE FUE LA SEÑAL 👀🔌", true); 
+                }
             }
             isLastOnlineStatus = isOnline;
         }
@@ -912,8 +956,18 @@
         function closeFlash() { document.getElementById('flashModal').style.display = 'none'; document.getElementById('ruffle-container').innerHTML = ''; cancelConfig(); }
         function setButtonLoading(btnId, text) { const btn = document.getElementById(btnId); btn.classList.add('btn-loading'); btn.querySelector('.btn-text').innerHTML = `<b>${text}...</b>`; }
         function resetButtonLoading(btnId, text) { const btn = document.getElementById(btnId); btn.classList.remove('btn-loading'); btn.querySelector('.btn-text').innerHTML = `<b>${text}</b>`; }
-        function startSyncLocal() { playSnd('sndClick'); setButtonLoading('btnSyncLocal', 'SINCRONIZANDO LOCAL'); document.getElementById('folderInput').click(); }
-        function startSyncCloud() { playSnd('sndClick'); setButtonLoading('btnSyncCloud', 'SINCRONIZANDO NUBE'); loadFromCloud(); }
+        
+        function startSyncLocal() { 
+            playSyncSound(); 
+            setButtonLoading('btnSyncLocal', 'SINCRONIZANDO LOCAL'); 
+            document.getElementById('folderInput').click(); 
+        }
+        
+        function startSyncCloud() { 
+            playSyncSound(); 
+            setButtonLoading('btnSyncCloud', 'SINCRONIZANDO NUBE'); 
+            loadFromCloud(); 
+        }
 
         async function loadFolder(input){
             const files = Array.from(input.files); 
@@ -979,7 +1033,7 @@
             allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: name, price: priceList[name] || 0, cat: finalCat });
         }
 
-        // FUNCIÓN RENDERGRID ACTUALIZADA CON ICONOS PNG
+        // --- RENDER GRID ACTUALIZADO (ICONOS DOBLE PROPÓSITO) ---
         function renderGrid(){
             const grid = document.getElementById('imageGrid'); 
             const search = document.getElementById('searchInput').value.toUpperCase();
@@ -992,12 +1046,13 @@
                     card.className = 'console-icon-card';
                     card.onclick = () => filterCat(icon.id);
                     
-                    // Ruta local para el icono
-                    const imgPath = `${RUTA_PRINCIPAL}/${icon.file}`;
+                    const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
+                    const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
                     
                     card.innerHTML = `
-                        <img src="${imgPath}" style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
-                             onerror="this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'">
+                        <img src="${localPath}" 
+                             style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
+                             onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; } else { this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'; }">
                         <div class="console-label">${icon.label}</div>
                     `;
                     grid.appendChild(card);
