@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v24.2 - Laidel HD Optimized</title>
+    <title>Florida Games v24.2.1 - Sync Sound Loop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -315,7 +315,7 @@
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        <div class="version-tag-welcome">v24.2 Stable HD</div>
+        <div class="version-tag-welcome">v24.2.1 Loop Sync</div>
         <div class="version2-tag-welcome">2026</div>
     </div>
 
@@ -450,7 +450,7 @@
             <button id="btnWA" class="action-btn secondary-btn" onclick="playSnd('sndClick'); openWhatsApp()" style="display:none;">💬 ENVIAR POR WHATSAPP</button>
             <button class="action-btn" style="background:#333; color:#fff; border:none;" onclick="resetTicketButtons()">🪣 NUEVO PEDIDO</button>
         </div>
-        <div class="version-tag">Florida Games App v24.2 - 2026</div>
+        <div class="version-tag">Florida Games App v24.2.1 - 2026</div>
     </div>
 
     <div id="flashModal">
@@ -541,6 +541,7 @@
         let sessionSeconds = 0;
         let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
         let isLastOnlineStatus = false;
+        let syncAudioTimer = null; // Para el bucle de sonido
 
         const consoleIcons = [
             { id: 'ANDROIDE', label: 'ANDROIDE', file: 'androide.png' },
@@ -563,22 +564,38 @@
             { id: 'FIGURAS 3D', label: '3D PRINT', file: 'figuras3d.png' }
         ];
 
-        // --- SISTEMA DE SONIDO SINTETIZADO (AHORRA DATOS) ---
-        function playSyncSound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // --- SISTEMA DE SONIDO AJUSTADO MODO RÁFAGA 3DS ---
+        function playSyncLoop() {
+            if (syncAudioTimer) return; 
+            
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+            function playBurst() {
                 const now = audioCtx.currentTime;
-                [0, 0.15, 0.3, 0.45].forEach(delay => {
+                // Genera 4 pulsos rápidos (Rafaga TTTT)
+                [0, 0.08, 0.16, 0.24].forEach(delay => {
                     const osc = audioCtx.createOscillator();
                     const gn = audioCtx.createGain();
                     osc.type = 'square';
-                    osc.frequency.setValueAtTime(delay === 0.3 ? 1200 : 800, now + delay);
-                    gn.gain.setValueAtTime(0.08, now + delay);
-                    gn.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.1);
-                    osc.connect(gn); gn.connect(audioCtx.destination);
-                    osc.start(now + delay); osc.stop(now + delay + 0.1);
+                    osc.frequency.setValueAtTime(1200, now + delay); // Tono agudo tipo 3DS
+                    gn.gain.setValueAtTime(0.04, now + delay);
+                    gn.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.05);
+                    osc.connect(gn); 
+                    gn.connect(audioCtx.destination);
+                    osc.start(now + delay); 
+                    osc.stop(now + delay + 0.05);
                 });
-            } catch(e){}
+            }
+
+            playBurst();
+            syncAudioTimer = setInterval(playBurst, 800); // Espacio entre ráfagas
+        }
+
+        function stopSyncLoop() {
+            if (syncAudioTimer) {
+                clearInterval(syncAudioTimer);
+                syncAudioTimer = null;
+            }
         }
 
         function playSignalSound(isOnline) {
@@ -588,10 +605,10 @@
                 const osc = audioCtx.createOscillator();
                 const gn = audioCtx.createGain();
                 osc.type = 'sine';
-                if(isOnline) { // Ding Dun (Nintendo style)
-                    osc.frequency.setValueAtTime(987.77, now); // B5
-                    osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.1); // E6
-                } else { // Dun Ding (Bajada)
+                if(isOnline) {
+                    osc.frequency.setValueAtTime(987.77, now);
+                    osc.frequency.exponentialRampToValueAtTime(1318.51, now + 0.1);
+                } else {
                     osc.frequency.setValueAtTime(1318.51, now); 
                     osc.frequency.exponentialRampToValueAtTime(987.77, now + 0.1);
                 }
@@ -958,20 +975,24 @@
         function resetButtonLoading(btnId, text) { const btn = document.getElementById(btnId); btn.classList.remove('btn-loading'); btn.querySelector('.btn-text').innerHTML = `<b>${text}</b>`; }
         
         function startSyncLocal() { 
-            playSyncSound(); 
+            playSyncLoop(); 
             setButtonLoading('btnSyncLocal', 'SINCRONIZANDO LOCAL'); 
             document.getElementById('folderInput').click(); 
         }
         
         function startSyncCloud() { 
-            playSyncSound(); 
+            playSyncLoop(); 
             setButtonLoading('btnSyncCloud', 'SINCRONIZANDO NUBE'); 
             loadFromCloud(); 
         }
 
         async function loadFolder(input){
             const files = Array.from(input.files); 
-            if(files.length === 0) { resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); return; }
+            if(files.length === 0) { 
+                stopSyncLoop(); 
+                resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); 
+                return; 
+            }
             allItems = [];
             const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
             if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
@@ -990,6 +1011,7 @@
                     allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
                 }
             });
+            stopSyncLoop(); 
             renderGrid();
             resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
         }
@@ -1021,8 +1043,9 @@
                         }
                     }
                 }
+                stopSyncLoop(); 
                 resetButtonLoading('btnSyncCloud', 'SINCRONIZAR NUBE'); renderGrid();
-            } catch (e) { resetButtonLoading('btnSyncCloud', 'SINCRONIZAR NUBE'); }
+            } catch (e) { stopSyncLoop(); resetButtonLoading('btnSyncCloud', 'SINCRONIZAR NUBE'); }
         }
 
         function processItem(urlMini, urlHD, name, category) {
@@ -1033,22 +1056,18 @@
             allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: name, price: priceList[name] || 0, cat: finalCat });
         }
 
-        // --- RENDER GRID ACTUALIZADO (ICONOS DOBLE PROPÓSITO) ---
         function renderGrid(){
             const grid = document.getElementById('imageGrid'); 
             const search = document.getElementById('searchInput').value.toUpperCase();
             grid.innerHTML = '';
 
-            // SECCIÓN DE ICONOS DE CONSOLAS
             if (currentCat === 'CONSOLAS' && search === '') {
                 consoleIcons.forEach(icon => {
                     const card = document.createElement('div');
                     card.className = 'console-icon-card';
                     card.onclick = () => filterCat(icon.id);
-                    
                     const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
                     const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
-                    
                     card.innerHTML = `
                         <img src="${localPath}" 
                              style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
@@ -1060,7 +1079,6 @@
                 return;
             }
 
-            // SECCIÓN DE JUEGOS
             allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
                 const isSwf = i.name.toLowerCase().endsWith('.swf');
                 const btnLabel = isSwf ? 'JUGAR' : 'AÑADIR';
