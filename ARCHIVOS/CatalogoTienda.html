@@ -20,10 +20,12 @@
             --purple: #9C27B0;
             --dark-purple: #7B1FA2;
             --online-blue: #2196F3;
-            --white-ok: #ffcc00
+            --white: #ffffff;
+            --black: #000000;
+            --blue: #003791;
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: #eee; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; overflow-x: hidden; padding-top: 45px; }
+        body { background: var(--black); color: var(--black); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; min-height: 20vh; overflow-x: hidden; padding-top: 45px; }
         
         #topMonitor {
             position: fixed; top: 0; left: 0; width: 100%; height: 45px;
@@ -120,7 +122,7 @@
         .version2-tag-welcome { position: absolute; bottom: 100px; right: 1px; font-size: 1.1rem; color: white; font-weight: bold; }
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
         
-        .action-btn { background: white; color: #000; border: 4px solid #333; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 #000; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
+        .action-btn { background: orange; color: #000; border: 4px solid #333; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 #000; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
         .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
         .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
@@ -128,17 +130,20 @@
         .console-select-container { width: 100%; margin-bottom: 10px; }
         .console-select { 
             width: 100%; background: #111; color: var(--neon); 
-            border: 2px solid var(--taxi-yellow); padding: 12px; 
+            border: 2px solid var(--neon); padding: 22px; 
             font-family: 'Courier New', monospace; font-weight: bold; 
             border-radius: 8px; outline: none; cursor: pointer;
+text-align: center;
             appearance: none; -webkit-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300ff41' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat; background-position: right 15px center; background-size: 18px;
+            background-repeat: no-repeat; background-position: right 15px center; background-size: 28px;
         }
 
-        .download-box { background: #111; border: 2px solid var(--red); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
-        .download-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 8px 0; font-size: 0.75rem; }
-        .download-link { color: var(--neon); text-decoration: none; font-weight: bold; border: 1px solid var(--neon); padding: 2px 6px; border-radius: 4px; }
+        .download-box { background: #000; border: 5px solid var(--neon); border-radius: 8px; padding: 15px; margin-top: 10px; display: none; width: 100%; max-width: 500px; }
+        .download-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding: 8px 0; font-size: 1.10rem; }
+
+
+        .download-link { color: var(--dark-blue); text-decoration:none; font-weight: bold; border: 5px solid var(--neon); padding: 15px 26px; border-radius: 10px; }
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .spinner { display: none; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin 0.75s linear infinite; }
@@ -340,17 +345,26 @@
 
     <div class="container">
         <div id="downloadsScreen" style="display:none;">
-            <div class="download-box" style="display:block; width:100%; border:none; background:transparent;">
-                <h1 style="color:var(--taxi-yellow); text-align:center; margin-top:0px;">🤪 RECURSOS</h1>
-                <div class="download-item"><span>1. PROGRAMAS Y APLICATIVOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
-                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link" onclick="playSnd('sndClick')">CARGAR LISTA 📝</a></div>
-                <div class="download-item"><span>3. COSAS DE LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
-                <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR 📥</a></div>
-                <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link" onclick="playSnd('sndClick')">JUGAR 🌟</a></div>
-                <div class="download-item"><span>6. REVISTAS</span> <a href="https://www.facebook.com/Hobbyconsolas/?locale=es_LA" target="_blank" class="download-link" onclick="playSnd('sndClick')">VER 🌟</a></div>
-                <div class="download-item"><span>7. ATENCION AL CLIENTE</span> <a href="https://wa.me/54935185" target="_blank" class="download-link" onclick="playSnd('sndClick')">LLAMAR ⚡️☎️</a></div>
-                <div style="text-align: center; margin-top: 10px; color: var(--neon); font-size: 0.8rem;">Laidel.J Esquivel Bajuelo</div>
+            <div class="download-box" style="display:block; width:100%; border:--neon; background:white;">
+                <h1 style="color:var(--red); text-align:center; margin-top:10px;">🤪 RECURSOS </h2>
+                <div class="download-item"><span>1. HERRAMIENTAS Y PROGRAMAS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PROGRAMAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR</a></div>
+
+                <div class="download-item"><span>2. LISTADOS DE JUEGOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/LISTADO-PC.txt" target="_blank" class="download-link" onclick="playSnd('sndClick')">CARGAR LISTA</a></div>
+
+                <div class="download-item"><span>3. COSAS DE LOS JUEGOS DE PC</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/COSAS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR</a></div>
+
+                <div class="download-item"><span>4. BANDEJA DE PEDIDOS</span> <a href="https://raw.githubusercontent.com/Laidel/Games-Florida/main/DESCARGAS/PEDIDOS.zip" target="_blank" class="download-link" onclick="playSnd('sndClick')">DESCARGAR</a></div>
+
+                <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link" onclick="playSnd('sndClick')">JUGAR</a></div>
+
+                <div class="download-item"><span>6. REVISTAS</span> <a href="https://www.facebook.com/Hobbyconsolas/?locale=es_LA" target="_blank" class="download-link" onclick="playSnd('sndClick')">VER</a></div>
+
+                <div
+ class="download-item"><span>
+7. ATENCION AL CLIENTE</span> <a href="https://wa.me/54935185" target="_blank" class="download-link" onclick="playSnd('sndClick')"> ☎️ LLAMAR</a></div>
+                <div style="text-align: center; margin-top: 10px; color: var(white); font-size: 0.8rem;">Laidel.J Esquivel Bajuelo</div>
             </div>
+🌟________________________________🌟
         </div>
         
         <div id="catalogScreen">
@@ -722,7 +736,7 @@
             const img = new Image();
             img.crossOrigin = "anonymous";
             img.onload = () => { screen.style.backgroundImage = `url('${cloudBanner}')`; trackData(200000); };
-            img.onerror = () => { screen.style.backgroundImage = `url('ARCHIVOS/Bienvenida.png')`; };
+            img.onerror = () => { screen.style.backgroundImage = `url('./ARCHIVOS/Bienvenida.png')`; };
             img.src = cloudBanner;
 
             updateOnlineCount();
