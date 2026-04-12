@@ -1,35 +1,26 @@
-const CACHE_NAME = 'florida-games-v3';
+// --- FUNCIÓN PARA BORRAR CACHÉ TOTAL ---
+async function borrarCacheTotal() {
+    if (confirm("¿Seguro que quieres limpiar la caché? La app se reiniciará.")) {
+        if ('serviceWorker' in navigator) {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            for (let r of regs) await r.unregister();
+        }
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+        alert("Caché borrada con éxito.");
+        window.location.reload(true);
+    }
+}
 
-// Archivos críticos
-const INITIAL_ASSETS = [
-    './TiendaVirtual.html',
-    './sw.js'
-];
-
-self.addEventListener('install', e => {
-    e.waitUntil(
-        caches.open(CACHE_NAME).then(cache => {
-            return cache.addAll(INITIAL_ASSETS);
-        }).then(() => self.skipWaiting())
-    );
-});
-
-self.addEventListener('activate', e => {
-    e.waitUntil(clients.claim());
-});
-
-// ESTRATEGIA: Intenta red, si hay éxito guarda en caché. Si falla, usa la caché.
-self.addEventListener('fetch', e => {
-    e.respondWith(
-        fetch(e.request)
-            .then(res => {
-                // Clonamos la respuesta para guardarla en la caché
-                const resClone = res.clone();
-                caches.open(CACHE_NAME).then(cache => {
-                    cache.put(e.request, resClone);
-                });
-                return res;
-            })
-            .catch(() => caches.match(e.request))
-    );
-});
+// --- REGISTRO DEL SERVICE WORKER (Actualizado) ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+        .then(reg => {
+            console.log("Service Worker registrado con éxito en Florida Games");
+        })
+        .catch(err => {
+            console.error("Error al registrar el SW:", err);
+        });
+    });
+}
