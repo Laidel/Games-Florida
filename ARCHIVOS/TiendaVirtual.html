@@ -3,59 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florida Games - Offline Ready</title>
+    <title>Florida Games V8.2</title>
     <style>
-        :root { --neon: #00ff41; --bg: #000; --text: #fff; }
-        body { background: var(--bg); color: var(--text); font-family: sans-serif; text-align: center; padding: 20px; }
-        .status-card { border: 2px solid var(--neon); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .online { color: var(--neon); }
-        .offline { color: #ff4444; }
-        button { background: var(--neon); border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
-        #gameGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
-        .card { background: #111; padding: 10px; border-radius: 5px; border: 1px solid #333; }
-        .icon { width: 40px; height: 40px; }
+        :root { --neon: #00ff41; --bg: #000; }
+        body { background: var(--bg); color: #fff; font-family: sans-serif; text-align: center; padding: 15px; }
+        .box { border: 1px solid var(--neon); padding: 15px; border-radius: 10px; margin-bottom: 15px; background: #111; }
+        #status { font-weight: bold; font-size: 14px; }
+        .btn-sync { background: var(--neon); color: #000; border: none; padding: 15px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
+        .card { background: #1a1a1a; padding: 10px; border-radius: 8px; border: 1px solid #333; font-size: 11px; }
+        .icon { width: 35px; height: 35px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="status-card">
-        <h2 id="net-status">Verificando conexión...</h2>
-        <p id="cache-msg">El sistema de caché está cargando...</p>
+    <div class="box">
+        <div id="status">Cargando Sistema...</div>
+        <small id="cache-info">Esperando Service Worker...</small>
     </div>
 
-    <button onclick="document.getElementById('folderInput').click()">📁 SINCRONIZAR JUEGOS</button>
-    <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="scan(this.files)">
+    <button class="btn-sync" onclick="document.getElementById('fileInput').click()">📁 SINCRONIZAR JUEGOS</button>
+    <input type="file" id="fileInput" webkitdirectory directory multiple style="display:none" onchange="scan(this.files)">
 
-    <div id="gameGrid"></div>
+    <div class="grid" id="gameGrid"></div>
 
     <script>
-        // --- DETECTAR CONEXIÓN ---
-        function updateNet() {
-            const s = document.getElementById('net-status');
-            s.innerText = navigator.onLine ? "ESTADO: ONLINE" : "ESTADO: OFFLINE (MODO CACHÉ)";
-            s.className = navigator.onLine ? "online" : "offline";
-        }
-        window.addEventListener('online', updateNet);
-        window.addEventListener('offline', updateNet);
-        updateNet();
-
-        // --- REGISTRO DEL SERVICE WORKER ---
+        // --- REGISTRO DEL SERVICE WORKER (SW) ---
         if ('serviceWorker' in navigator) {
-            // Se usa '../sw.js' porque el HTML está en /ARCHIVOS/ y el SW en la raíz
-            navigator.serviceWorker.register('../sw.js', { scope: '/Games-Florida/' })
+            // El './sw.js' funcionará si el sw.js está en la MISMA carpeta que este HTML
+            navigator.serviceWorker.register('./sw.js')
             .then(reg => {
-                document.getElementById('cache-msg').innerText = "✅ Catálogo protegido para uso sin internet";
-                console.log("SW Registrado en Florida Games");
+                document.getElementById('cache-info').innerText = "✅ Cache Activada";
+                console.log("SW Registrado");
             })
             .catch(err => {
-                document.getElementById('cache-msg').innerText = "❌ Error en caché: " + err;
+                document.getElementById('cache-info').innerText = "❌ Error: " + err.message;
             });
         }
 
-        // --- LÓGICA DE ICONOS ---
+        // --- DETECTAR CONEXIÓN ---
+        function checkNet() {
+            const s = document.getElementById('status');
+            s.innerText = navigator.onLine ? "🌐 MODO ONLINE" : "🔌 MODO OFFLINE (CACHÉ)";
+            s.style.color = navigator.onLine ? "#00ff41" : "#ff4444";
+        }
+        window.addEventListener('online', checkNet);
+        window.addEventListener('offline', checkNet);
+        checkNet();
+
+        // --- ESCANEO DE JUEGOS ---
         const icons = {
             "chd": "https://img.icons8.com/color/48/mame.png",
-            "zip": "https://img.icons8.com/color/48/super-nintendo.png"
+            "zip": "https://img.icons8.com/color/48/super-nintendo.png",
+            "gba": "https://img.icons8.com/color/48/game-boy-advance.png"
         };
 
         function scan(files) {
@@ -64,7 +64,11 @@
             Array.from(files).forEach(f => {
                 const ext = f.name.split('.').pop().toLowerCase();
                 if(icons[ext]) {
-                    grid.innerHTML += `<div class="card"><img src="${icons[ext]}" class="icon"><br>${f.name.substring(0,10)}</div>`;
+                    grid.innerHTML += `
+                        <div class="card">
+                            <img src="${icons[ext]}" class="icon">
+                            <div>${f.name.substring(0,12)}</div>
+                        </div>`;
                 }
             });
         }
