@@ -23,6 +23,13 @@
             --white: #ffffff;
             --black: #000000;
             --blue: #003791;
+            --cartucho: #FFFF99
+
+
+
+
+
+            
         }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--black); color: var(--black); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; min-height: 20vh; overflow-x: hidden; padding-top: 45px; }
@@ -122,14 +129,14 @@
         .version2-tag-welcome { position: absolute; bottom: 100px; right: 1px; font-size: 1.1rem; color: white; font-weight: bold; }
         .version-tag-welcome { position: absolute; bottom: 10px; right: 15px; font-size: 0.7rem; color: white; font-weight: bold; }
         
-        .action-btn { background: orange; color: #000; border: 4px solid #333; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 #000; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
+        .action-btn { background: #FFFF99; color: #000000; border: 2px solid #00ff41; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 13px; box-shadow: 0 4px 0 #000; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; font-size: 0.99rem; position: relative; }
         .action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
-        .secondary-btn { background: #111; color: var(--neon); border-color: var(--neon); box-shadow: 0 4px 0 #005a17; }
+        .secondary-btn { background: #111; color: var(--white); border-color: var(--white); box-shadow: 0 4px 0 #005a17; }
         .secondary-btn:active { box-shadow: 0 2px 0 #005a17; }
 
         .console-select-container { width: 100%; margin-bottom: 10px; }
         .console-select { 
-            width: 100%; background: #111; color: var(--neon); 
+            width: 100%; background: #111; color: var(--white); 
             border: 2px solid var(--neon); padding: 22px; 
             font-family: 'Courier New', monospace; font-weight: bold; 
             border-radius: 8px; outline: none; cursor: pointer;
@@ -175,8 +182,8 @@ text-align: center;
         .placeholder-img { width: 100%; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: #222; color: #555; font-size: 2rem; cursor: pointer; }
 
         .extra-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .extra-btn { background: #111; color: white; border: 2px solid var(--blue-btn); padding: 15px 5px; border-radius: 10px; font-weight: bold; font-size: 0.7rem; text-align: center; box-shadow: 0 4px 0 var(--dark-blue); cursor: pointer; transition: 0.1s; }
-        .extra-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--dark-blue); }
+        .extra-btn { background: #111; color: white; border: 2px solid var(--blue-btn); padding: 25px 15px; border-radius: 10px; font-weight: bold; font-size: 1rem; text-align: center; box-shadow: 0 4px 0 var(--white); cursor: pointer; transition: 0.1s; }
+        .extra-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--neon); }
 
         .price-tag { position: absolute; top: 0px; right: 0px; background: rgba(0,0,0,0.85); color: white; font-size: 0.95rem; padding: 2px 5px; border: 1px solid var(--neon); z-index: 5; }
         .ticket-input { width: 100%; background: #111; color: #fff; border: 1px solid #333; padding: 12px; margin-bottom: 5px; font-family: monospace; outline: none; font-size: 1.2rem; font-weight: bold; }
@@ -275,7 +282,7 @@ text-align: center;
         .atencion-amarillo { color: var(--taxi-yellow) !important; font-weight: bold; }
         .tel-verde { color: var(--neon); font-weight: bold; }
         
-        .search-box { width: 100%; background: #111; border: 2px solid var(--taxi-yellow); border-radius: 8px; padding: 12px; color: var(--white-ok); margin-bottom: 15px; outline: none; font-family: monospace; }
+        .search-box { width: 100%; background: #111; border: 2px solid var(--white); border-radius: 8px; padding: 12px; color: var(--white); margin-bottom: 15px; outline: none; font-family: monospace; }
         
         #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 1000000; flex-direction: column; overflow: hidden; touch-action: none; }
         #zoomContainer { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; cursor: grab; position: relative; padding-bottom: 80px; }
@@ -325,16 +332,16 @@ text-align: center;
     </div>
 
     <div class="header-grid">
-        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+        <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--white); color:white;">
             <span style="font-size:2.5rem;">🎮</span><b>CATÁLOGO DE JUEGOS</b>
         </button>
-        <button id="btn-downloads" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+        <button id="btn-downloads" class="action-btn btn-nav" onclick="showPage('downloadsScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--white); color:white;">
             <span style="font-size:2.5rem;">📥</span><b>DESCARGAS</b>
         </button>
-        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+        <button id="btn-visuales" class="action-btn btn-nav" onclick="showPage('visualesScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--white); color:white;">
             <span style="font-size:2.5rem;">🎬</span><b>VISUALES</b>
         </button>
-        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
+        <button id="btn-extra" class="action-btn btn-nav" onclick="showPage('extraScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--white); color:white;">
             <span style="font-size:2.5rem;">💰</span><b>TIENDA EXTRA</b>
         </button>
         <button id="btn-cart" class="action-btn btn-nav" onclick="showPage('cartScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--taxi-yellow); color:white;">
@@ -396,10 +403,10 @@ text-align: center;
             <input type="text" id="searchInput" class="search-box" placeholder="🔍 BUSCAR JUEGO..." onkeyup="renderGrid()">
             <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="loadFolder(this)">
             
-            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:#b71c1c; color:white; border:4px solid var(black);" onclick="startSyncLocal()">
+            <button id="btnSyncLocal" class="action-btn" style="margin-bottom:10px; background:--taxi-yellow; color:--white; border:4px solid var(white);" onclick="startSyncLocal()">
                 <div class="spinner"></div><span class="btn-icon">📂</span> <span class="btn-text"><b>SINCRONIZAR DATOS SIN INTERNET MODO APAGON 👀🕯</b></span>
             </button>
-            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:40px; background:#2196F3; color:white; border:4px solid var(black); box-shadow: 0 4px 0 #000;" onclick="startSyncCloud()">
+            <button id="btnSyncCloud" class="action-btn" style="margin-bottom:40px; background:#2196F3; color:--white; border:4px solid var(white);" onclick="startSyncCloud()">
                 <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET MODO NORMAL 🤪</b></span>
             </button>
             <div class="grid-3x" id="imageGrid"></div>
@@ -414,7 +421,7 @@ text-align: center;
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('SERIES_ANIMADAS')">🦸 SERIES ANIMADAS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('ANIMADOS')">🧸 ANIMADOS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('MUSICA')">🎵 MÚSICA</div>
-                <div class="extra-btn" style="border-color:var(--taxi-yellow); color:var(--taxi-yellow);" onclick="filterVisual('FLASH')">🕹️ JUEGOS FLASH</div>
+                <div class="extra-btn" style="border-color:var(--red); color:var(--white);" onclick="filterVisual('FLASH')">🕹️ JUEGOS FLASH</div>
             </div>
         </div>
 
@@ -462,7 +469,7 @@ text-align: center;
             </div>
             <button id="btnGenerate" class="action-btn" onclick="playSnd('sndClick'); takeSnapshot()">📸 GENERAR TICKET</button>
             <button id="btnWA" class="action-btn secondary-btn" onclick="playSnd('sndClick'); openWhatsApp()" style="display:none;">💬 ENVIAR POR WHATSAPP</button>
-            <button class="action-btn" style="background:#333; color:#fff; border:none;" onclick="resetTicketButtons()">🪣 NUEVO PEDIDO</button>
+            <button class="action-btn" style="background:#ffcc00; color:#000000; border:--white;" onclick="resetTicketButtons()">🪣 NUEVO PEDIDO</button>
         </div>
         <div class="version-tag">Florida Games App v24.2.1 - 2026</div>
     </div>
@@ -728,7 +735,7 @@ text-align: center;
             for (let id in sounds) {
                 const el = document.getElementById(id);
                 el.src = sounds[id];
-                el.onerror = () => { el.src = `ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
+                el.onerror = () => { el.src = `./ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
             }
 
             const screen = document.getElementById('welcomeScreen');
