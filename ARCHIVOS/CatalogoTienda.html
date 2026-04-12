@@ -735,7 +735,7 @@ text-align: center;
             for (let id in sounds) {
                 const el = document.getElementById(id);
                 el.src = sounds[id];
-                el.onerror = () => { el.src = `./ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
+                el.onerror = () => { el.src = `ARCHIVOS/${id.replace('snd','').toLowerCase()}.mp3`; };
             }
 
             const screen = document.getElementById('welcomeScreen');
