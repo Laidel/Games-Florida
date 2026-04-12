@@ -1,33 +1,35 @@
-const CACHE_NAME = 'florida-v2'; // Cambié a V2 para forzar actualización
+const CACHE_NAME = 'florida-games-v3';
+
+// Archivos críticos
+const INITIAL_ASSETS = [
+    './TiendaVirtual.html',
+    './sw.js'
+];
 
 self.addEventListener('install', e => {
     e.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
-            return cache.addAll([
-                './TiendaVirtual.html',
-                'https://img.icons8.com/color/48/mame.png'
-            ]).catch(err => console.log("Fallo al guardar: ", err));
-        })
+            return cache.addAll(INITIAL_ASSETS);
+        }).then(() => self.skipWaiting())
     );
 });
 
+self.addEventListener('activate', e => {
+    e.waitUntil(clients.claim());
+});
+
+// ESTRATEGIA: Intenta red, si hay éxito guarda en caché. Si falla, usa la caché.
 self.addEventListener('fetch', e => {
     e.respondWith(
-        fetch(e.request).catch(() => {
-            return caches.match(e.request);
-        })
-    );
-});
-
-// Esto limpia cachés viejas automáticamente al activar
-self.addEventListener('activate', e => {
-    e.waitUntil(
-        caches.keys().then(keys => {
-            return Promise.all(
-                keys.map(key => {
-                    if (key !== CACHE_NAME) return caches.delete(key);
-                })
-            );
-        })
+        fetch(e.request)
+            .then(res => {
+                // Clonamos la respuesta para guardarla en la caché
+                const resClone = res.clone();
+                caches.open(CACHE_NAME).then(cache => {
+                    cache.put(e.request, resClone);
+                });
+                return res;
+            })
+            .catch(() => caches.match(e.request))
     );
 });
