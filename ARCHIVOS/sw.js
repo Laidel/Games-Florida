@@ -1,29 +1,24 @@
-const CACHE_NAME = 'v1_lidel_cache';
-
-// Asegúrate de que los nombres aquí sean EXACTOS a tus archivos
-const ASSETS_TO_CACHE = [
-    './',
-    './TiendaVirtual.html', 
+const CACHE_NAME = 'florida-v1';
+const ASSETS = [
+    './TiendaVirtual.html',
     'https://img.icons8.com/color/48/mame.png',
-    'https://img.icons8.com/color/48/super-nintendo.png'
+    'https://img.icons8.com/color/48/super-nintendo.png',
+    'https://img.icons8.com/color/48/game-boy-advance.png'
 ];
 
-// Instalación
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => {
-            console.log('Intentando guardar archivos...');
-            // Usamos addAll pero si uno falla, lanzará error en consola
-            return cache.addAll(ASSETS_TO_CACHE);
-        })
+self.addEventListener('install', e => {
+    e.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+        .then(() => self.skipWaiting())
     );
 });
 
-// Estrategia: Red primero, si falla, Caché
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        fetch(event.request).catch(() => {
-            return caches.match(event.request);
-        })
+self.addEventListener('activate', e => {
+    e.waitUntil(clients.claim());
+});
+
+self.addEventListener('fetch', e => {
+    e.respondWith(
+        fetch(e.request).catch(() => caches.match(e.request))
     );
 });
