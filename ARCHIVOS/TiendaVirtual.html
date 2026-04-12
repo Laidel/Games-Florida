@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Caché - Lidel</title>
+    <style>
+        body { background: #0b0b0b; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
+        .box { border: 2px solid #2ecc71; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .status-online { color: #2ecc71; }
+        .status-offline { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h1>Estado de Conexión</h1>
+        <p id="net-status">Verificando...</p>
+    </div>
+
+    <div class="box">
+        <p>Si esta página carga incluso sin internet, el <b>Service Worker</b> está funcionando.</p>
+    </div>
+
+    <script>
+        // Lógica para detectar si hay internet
+        const status = document.getElementById('net-status');
+        function updateStatus() {
+            if(navigator.onLine) {
+                status.innerText = "ESTÁS ONLINE (Conectado)";
+                status.className = "status-online";
+            } else {
+                status.innerText = "ESTÁS OFFLINE (Usando Caché)";
+                status.className = "status-offline";
+            }
+        }
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+
+        // --- REGISTRO DEL SERVICE WORKER ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Caché registrada con éxito'))
+                .catch(err => console.error('Error al registrar caché', err));
+            });
+        }
+    </script>
+</body>
+</html>
