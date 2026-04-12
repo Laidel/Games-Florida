@@ -3,47 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Caché - Lidel</title>
+    <title>Florida Games - Offline Ready</title>
     <style>
-        body { background: #0b0b0b; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .box { border: 2px solid #2ecc71; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .status-online { color: #2ecc71; }
-        .status-offline { color: #e74c3c; }
+        :root { --neon: #00ff41; --bg: #000; --text: #fff; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; text-align: center; padding: 20px; }
+        .status-card { border: 2px solid var(--neon); padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .online { color: var(--neon); }
+        .offline { color: #ff4444; }
+        button { background: var(--neon); border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+        #gameGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
+        .card { background: #111; padding: 10px; border-radius: 5px; border: 1px solid #333; }
+        .icon { width: 40px; height: 40px; }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>Estado de Conexión</h1>
-        <p id="net-status">Verificando...</p>
+    <div class="status-card">
+        <h2 id="net-status">Verificando conexión...</h2>
+        <p id="cache-msg">El sistema de caché está cargando...</p>
     </div>
 
-    <div class="box">
-        <p>Si esta página carga incluso sin internet, el <b>Service Worker</b> está funcionando.</p>
-    </div>
+    <button onclick="document.getElementById('folderInput').click()">📁 SINCRONIZAR JUEGOS</button>
+    <input type="file" id="folderInput" webkitdirectory directory multiple style="display:none" onchange="scan(this.files)">
+
+    <div id="gameGrid"></div>
 
     <script>
-        // Lógica para detectar si hay internet
-        const status = document.getElementById('net-status');
-        function updateStatus() {
-            if(navigator.onLine) {
-                status.innerText = "ESTÁS ONLINE (Conectado)";
-                status.className = "status-online";
-            } else {
-                status.innerText = "ESTÁS OFFLINE (Usando Caché)";
-                status.className = "status-offline";
-            }
+        // --- DETECTAR CONEXIÓN ---
+        function updateNet() {
+            const s = document.getElementById('net-status');
+            s.innerText = navigator.onLine ? "ESTADO: ONLINE" : "ESTADO: OFFLINE (MODO CACHÉ)";
+            s.className = navigator.onLine ? "online" : "offline";
         }
-        window.addEventListener('online', updateStatus);
-        window.addEventListener('offline', updateStatus);
-        updateStatus();
+        window.addEventListener('online', updateNet);
+        window.addEventListener('offline', updateNet);
+        updateNet();
 
         // --- REGISTRO DEL SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Caché registrada con éxito'))
-                .catch(err => console.error('Error al registrar caché', err));
+            // Se usa '../sw.js' porque el HTML está en /ARCHIVOS/ y el SW en la raíz
+            navigator.serviceWorker.register('../sw.js', { scope: '/Games-Florida/' })
+            .then(reg => {
+                document.getElementById('cache-msg').innerText = "✅ Catálogo protegido para uso sin internet";
+                console.log("SW Registrado en Florida Games");
+            })
+            .catch(err => {
+                document.getElementById('cache-msg').innerText = "❌ Error en caché: " + err;
+            });
+        }
+
+        // --- LÓGICA DE ICONOS ---
+        const icons = {
+            "chd": "https://img.icons8.com/color/48/mame.png",
+            "zip": "https://img.icons8.com/color/48/super-nintendo.png"
+        };
+
+        function scan(files) {
+            const grid = document.getElementById('gameGrid');
+            grid.innerHTML = "";
+            Array.from(files).forEach(f => {
+                const ext = f.name.split('.').pop().toLowerCase();
+                if(icons[ext]) {
+                    grid.innerHTML += `<div class="card"><img src="${icons[ext]}" class="icon"><br>${f.name.substring(0,10)}</div>`;
+                }
             });
         }
     </script>
