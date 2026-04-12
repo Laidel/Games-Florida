@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florida Games V8.2</title>
+    <title>Florida Games V8.2 - Pro</title>
     <style>
         :root { --neon: #00ff41; --bg: #000; }
         body { background: var(--bg); color: #fff; font-family: sans-serif; text-align: center; padding: 15px; }
@@ -11,37 +11,36 @@
         #status { font-weight: bold; font-size: 14px; }
         .btn-sync { background: var(--neon); color: #000; border: none; padding: 15px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 20px; }
-        .card { background: #1a1a1a; padding: 10px; border-radius: 8px; border: 1px solid #333; font-size: 11px; }
+        .card { background: #1a1a1a; padding: 10px; border-radius: 8px; border: 1px solid #333; font-size: 10px; }
         .icon { width: 35px; height: 35px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <div class="box">
-        <div id="status">Cargando Sistema...</div>
-        <small id="cache-info">Esperando Service Worker...</small>
+        <div id="status">Verificando Sistema...</div>
+        <small id="cache-info">Cargando Service Worker...</small>
     </div>
 
-    <button class="btn-sync" onclick="document.getElementById('fileInput').click()">📁 SINCRONIZAR JUEGOS</button>
+    <button class="btn-sync" onclick="document.getElementById('fileInput').click()">📁 SELECCIONAR CARPETA</button>
     <input type="file" id="fileInput" webkitdirectory directory multiple style="display:none" onchange="scan(this.files)">
 
     <div class="grid" id="gameGrid"></div>
 
     <script>
-        // --- REGISTRO DEL SERVICE WORKER (SW) ---
+        // --- REGISTRO DEL SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
-            // El './sw.js' funcionará si el sw.js está en la MISMA carpeta que este HTML
+            // Buscamos el sw.js en la misma carpeta del HTML
             navigator.serviceWorker.register('./sw.js')
             .then(reg => {
-                document.getElementById('cache-info').innerText = "✅ Cache Activada";
-                console.log("SW Registrado");
+                document.getElementById('cache-info').innerText = "✅ CACHÉ ACTIVADA";
             })
             .catch(err => {
-                document.getElementById('cache-info').innerText = "❌ Error: " + err.message;
+                document.getElementById('cache-info').innerText = "❌ ERROR: " + err.message;
             });
         }
 
-        // --- DETECTAR CONEXIÓN ---
+        // --- ESTADO DE RED ---
         function checkNet() {
             const s = document.getElementById('status');
             s.innerText = navigator.onLine ? "🌐 MODO ONLINE" : "🔌 MODO OFFLINE (CACHÉ)";
@@ -51,7 +50,7 @@
         window.addEventListener('offline', checkNet);
         checkNet();
 
-        // --- ESCANEO DE JUEGOS ---
+        // --- LÓGICA DE ICONOS ---
         const icons = {
             "chd": "https://img.icons8.com/color/48/mame.png",
             "zip": "https://img.icons8.com/color/48/super-nintendo.png",
