@@ -2,7 +2,7 @@ const CACHE_NAME = 'florida-games-v3';
 
 // Archivos críticos
 const INITIAL_ASSETS = [
-    './TiendaVirtual.html',
+    './LimpiezaCache.html',
     './sw.js'
 ];
 
