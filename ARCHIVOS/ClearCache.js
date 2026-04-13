@@ -1,23 +1,23 @@
-// ClearCache.js - Manejador de Caché para la Demo
+// ClearCache.js - Manejador de Caché para la Carpeta ARCHIVOS
 const CACHE_NAME = 'florida-games-demo-v1';
 
-// Archivos esenciales que la demo guardará para funcionar sin internet
+// Al estar este JS dentro de /ARCHIVOS/, las rutas son relativas a esta carpeta
 const INITIAL_ASSETS = [
-    './ARCHIVOS/LimpiezaSistema.html',
-    './ARCHIVOS/ClearCache.js'
+    './LimpiezaSistema.html',
+    './ClearCache.js'
 ];
 
-// Evento de Instalación: Guarda los archivos en la memoria del navegador
+// Evento de Instalación: Guarda los archivos en la memoria local
 self.addEventListener('install', e => {
     e.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
-            console.log("Instalando activos de la demo...");
+            console.log("Instalando activos en /ARCHIVOS/...");
             return cache.addAll(INITIAL_ASSETS);
-        }).then(() => self.skipWaiting()) // Fuerza la activación inmediata
+        }).then(() => self.skipWaiting())
     );
 });
 
-// Evento de Activación: Limpia versiones antiguas de caché para evitar conflictos
+// Evento de Activación: Limpia versiones antiguas y toma el control
 self.addEventListener('activate', e => {
     e.waitUntil(
         caches.keys().then(keys => {
@@ -29,24 +29,21 @@ self.addEventListener('activate', e => {
                     }
                 })
             );
-        }).then(() => self.clients.claim()) // Toma el control de la página actual inmediatamente
+        }).then(() => self.clients.claim())
     );
 });
 
-// Evento Fetch: Estrategia "Network First" (Intenta red, si falla usa caché)
-// Esto permite que si haces un cambio en GitHub, se vea al estar online,
-// pero si no hay señal, cargue lo que tiene guardado.
+// Evento Fetch: Estrategia Network First para permitir actualizaciones
 self.addEventListener('fetch', e => {
     e.respondWith(
         fetch(e.request)
             .then(res => {
-                // Si la respuesta es válida, guardamos una copia actualizada en caché
                 const resClone = res.clone();
                 caches.open(CACHE_NAME).then(cache => {
                     cache.put(e.request, resClone);
                 });
                 return res;
             })
-            .catch(() => caches.match(e.request)) // Si falla el internet, entrega el archivo guardado
+            .catch(() => caches.match(e.request)) // Si no hay red, entrega lo guardado
     );
 });
