@@ -69,7 +69,7 @@
     background-image: url('https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/Bienvenida.png');
     background-position: center bottom 20px; /* 20px separado del borde inferior */
     background-repeat: no-repeat;
-    background-size: 150px auto; /* Tamaño pequeño y controlado */
+    background-size: 200px auto; /* Tamaño pequeño y controlado */
     display: flex; flex-direction: column; align-items: center; 
     justify-content: flex-start; /* Subimos los títulos para que no tapen a los hermanos */
     padding-top: 80px;
@@ -328,6 +328,21 @@ text-align: center;
         <div class="welcome-title-container" onclick="playSnd('sndClick'); enterApp()">
             <h1 class="welcome-title">⭐️BIENVENIDO A LA TIENDA DE JUEGOS⭐️</h1>
         </div>
+
+
+
+<div id="cache-loader-container" style="margin-top: 20px;">
+    <div class="user-counter-box" style="position: relative; bottom: 0; border-color: #ffcc00; color: #ffcc00;">
+        <span class="led-online" style="background: #ffcc00; box-shadow: 0 0 8px #ffcc00;"></span>
+        Cargando Cache Virtual: <span id="load-percentage">0%</span>
+    </div>
+</div>
+
+
+
+
+
+
         
         <div class="user-counter-box">
             <div class="dot-online"></div>
@@ -1253,12 +1268,65 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log("Error SW:", err));
     });
 }
+</script>
 
 
 
 
 
 
-    </script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const percentText = document.getElementById('load-percentage');
+        const loader = document.getElementById('cache-loader-container');
+        let progress = 0;
+        let imageLoaded = false;
+
+        // 1. Intentar cargar la imagen en memoria para monitorearla
+        const imgCheck = new Image();
+        imgCheck.src = 'Bienvenida.png'; // <--- REVISA QUE ESTE NOMBRE SEA EXACTO
+
+        imgCheck.onload = () => {
+            imageLoaded = true;
+            console.log("Imagen de los Bros detectada y cargada.");
+        };
+
+        // 2. Animación del porcentaje
+        const interval = setInterval(() => {
+            // Si la imagen no ha cargado, se queda trabado en 90% a propósito
+            if (progress < 90) {
+                progress += Math.floor(Math.random() * 3) + 1;
+            } else if (imageLoaded) {
+                // Solo si la imagen ya cargó, sube del 90 al 100
+                progress += 2;
+            }
+
+            if (progress > 100) progress = 100;
+            percentText.innerText = progress + "%";
+
+            // 3. Solo cerrar cuando llegue a 100 y la imagen esté lista
+            if (progress === 100 && imageLoaded) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loader.style.transition = "opacity 0.8s ease";
+                    loader.style.opacity = "0";
+                    setTimeout(() => loader.style.display = "none", 800);
+                }, 400);
+            }
+        }, 120); // Velocidad de la carga (puedes subirlo a 200 si quieres que sea más lenta)
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
