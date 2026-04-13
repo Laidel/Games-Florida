@@ -3,7 +3,7 @@ const CACHE_NAME = 'florida-games-v3';
 // Archivos críticos
 const INITIAL_ASSETS = [
     './LimpiezaCache.html',
-    './sw.js'
+    './ClearCache.js'
 ];
 
 self.addEventListener('install', e => {
