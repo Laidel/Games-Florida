@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florida Games - Reset Demo</title>
+    <title>Florida Games - Reset Demo (Carpeta ARCHIVOS)</title>
     <style>
-        /* Estilos basados en tu versión original */
         body { 
             background: #000; 
             color: #fff; 
@@ -52,7 +51,7 @@
     <div class="status">
         <h2 style="color: #00ff41;">SISTEMA DE RESET</h2>
         <h3 id="net-status">Verificando...</h3>
-        <p id="cache-info">Cargando Service Worker...</p>
+        <p id="cache-info">Localizando ClearCache.js en /ARCHIVOS/...</p>
     </div>
 
     <button class="btn-reset" onclick="borrarCacheTotal()">
@@ -61,23 +60,22 @@
 
     <script>
         // --- FUNCIÓN DE LIMPIEZA TOTAL ---
-        // Esta función desinstala el SW y borra las cajas de caché
         async function borrarCacheTotal() {
             if (confirm("⚠️ ¿Estás seguro? Se borrarán todos los archivos guardados para forzar una carga limpia desde GitHub.")) {
                 try {
-                    // 1. Desregistrar todos los Service Workers
+                    // 1. Desregistrar Service Workers
                     if ('serviceWorker' in navigator) {
                         const registros = await navigator.serviceWorker.getRegistrations();
                         for (let r of registros) await r.unregister();
                     }
                     
-                    // 2. Borrar todas las bases de datos de Caché
+                    // 2. Borrar Cachés
                     const llaves = await caches.keys();
                     await Promise.all(llaves.map(k => caches.delete(k)));
 
-                    alert("✅ Caché borrada correctamente.");
+                    alert("✅ Caché de /ARCHIVOS/ borrada correctamente.");
                     
-                    // 3. Recarga forzada ignorando la caché del navegador
+                    // 3. Recarga forzada
                     window.location.reload(true);
                 } catch (error) {
                     alert("Error al limpiar: " + error);
@@ -85,14 +83,14 @@
             }
         }
 
-        // --- REGISTRO DEL SERVICE WORKER (ClearCache.js) ---
+        // --- REGISTRO DEL SERVICE WORKER (Relativo a /ARCHIVOS/) ---
         if ('serviceWorker' in navigator) {
-            // Se registra el archivo .js que creamos anteriormente
+            // Al estar ambos en la misma carpeta, usamos ./
             navigator.serviceWorker.register('./ClearCache.js')
             .then(reg => {
-                document.getElementById('cache-info').innerText = "✅ Service Worker: ACTIVO";
+                document.getElementById('cache-info').innerText = "✅ Service Worker: ACTIVO (En ARCHIVOS)";
                 document.getElementById('cache-info').style.color = "#00ff41";
-                console.log("Demo registrada con éxito en scope:", reg.scope);
+                console.log("Registro exitoso en scope:", reg.scope);
             })
             .catch(err => {
                 document.getElementById('cache-info').innerText = "❌ Error en SW: " + err.message;
