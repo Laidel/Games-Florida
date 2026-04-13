@@ -3,8 +3,8 @@ const CACHE_NAME = 'florida-games-demo-v1';
 
 // Archivos esenciales que la demo guardará para funcionar sin internet
 const INITIAL_ASSETS = [
-    './LimpiezaSistema.html',
-    './ClearCache.js'
+    './ARCHIVOS/LimpiezaSistema.html',
+    './ARCHIVOS/ClearCache.js'
 ];
 
 // Evento de Instalación: Guarda los archivos en la memoria del navegador
