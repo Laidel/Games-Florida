@@ -1,6 +1,58 @@
-<div class="download-item">
-    <span>8. LIMPIEZA DEL SISTEMA</span> 
-    <button class="btn-reset" onclick="borrarCacheTotal()" style="background: #ff4444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">
-        🗑️ FORZAR LIMPIEZA DE CACHÉ
-    </button>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florida Games - Reset</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }
+        .status { border: 2px solid #00ff41; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .btn-reset { background: #ff4444; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="status">
+        <h3 id="net-status">Verificando...</h3>
+        <p id="cache-info">Cargando Service Worker...</p>
+    </div>
+
+    <button class="btn-reset" onclick="borrarCacheTotal()">🗑️ FORZAR LIMPIEZA DE CACHÉ</button>
+
+    <script>
+        // --- FUNCIÓN PARA BORRAR TODO ---
+        async function borrarCacheTotal() {
+            if ('serviceWorker' in navigator) {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                for (let r of regs) await r.unregister();
+            }
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+            alert("Caché borrada. Recargando...");
+            window.location.reload(true);
+        }
+
+        // --- REGISTRO DEL SW ---
+        if ('serviceWorker' in navigator) {
+            // USAR './sw.js' si está en la misma carpeta que el HTML
+            navigator.serviceWorker.register('./sw.js')
+            .then(reg => {
+                document.getElementById('cache-info').innerText = "✅ SW Registrado";
+                console.log("Registrado con éxito");
+            })
+            .catch(err => {
+                document.getElementById('cache-info').innerText = "❌ Error: " + err.message;
+            });
+        }
+
+        function updateStatus() {
+            const s = document.getElementById('net-status');
+            s.innerText = navigator.onLine ? "🌐 ONLINE" : "🔌 OFFLINE (CACHÉ)";
+            s.style.color = navigator.onLine ? "#00ff41" : "#ff4444";
+        }
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+    </script>
+</body>
+</html>
