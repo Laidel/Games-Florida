@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v24.2.1 - Sync Sound Loop</title>
+    <title>⭐️TIENDA DE VIDEOJUEGOS⭐️</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -392,14 +392,17 @@ text-align: center;
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
 
-        <div style="margin-top: 25px; z-index: 1000000; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; border: 1px solid #87CEEB;">
+      <!--  RESET
+
+
+<div style="margin-top: 25px; z-index: 1000000; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; border: 1px solid #87CEEB;">
             <a href="https://laidel.github.io/Games-Florida/ARCHIVOS/TiendaVirtual.html" 
                target="_blank" 
                style="color: #87CEEB; text-decoration: none; font-family: 'Courier New', monospace; font-weight: bold; font-size: 13px; text-shadow: 0 0 10px #87CEEB;">
                🌐 PROBAR TIENDA VIRTUAL (DEMO):<br>
                https://laidel.github.io/Games-Florida/ARCHIVOS/TiendaVirtual.html
             </a>
-        </div>
+        </div> -->
 
         <div class="version2-tag-welcome">2026</div>
         <div class="version-tag-welcome">v24.2.1 Loop Sync</div>
@@ -1249,15 +1252,6 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
                 grid.appendChild(d);
             });
 
-
-
-
-
-
-
-
-
-
         }
 
         function addCart(u, n, p, uHD) { cart.push({ u, n, p, urlHD: uHD }); updateCart(); }
@@ -1284,19 +1278,6 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
             document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2); 
             updateDateTime(); 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1363,11 +1344,6 @@ if ('serviceWorker' in navigator) {
 </script>
 
 
-
-
-
-
-
 <script>
     // Se ejecuta apenas el HTML está listo
     window.addEventListener('DOMContentLoaded', () => {
@@ -1413,7 +1389,7 @@ if ('serviceWorker' in navigator) {
 
 
 
-//comienza el 2
+//comienza el listado
 
 
 
@@ -1436,23 +1412,15 @@ function toggleDataSaverList() {
     }
 }
 
+//otro codigo mas par listado
 
 
-
-
-
-
-
-
-//3
-
-
+// --- FUNCIÓN DE LISTADO DINÁMICO (HÍBRIDA: NUBE + LOCAL) ---
 async function renderTextoLista() {
     const container = document.getElementById('listaItemsContainer');
     if (!container) return;
 
-    // 1. Identificar qué consola está seleccionada
-    // Si el filtro es "CONSOLAS" o "TODO", forzamos a "PC" como predeterminado
+    // 1. Identificar consola (por defecto PC si no hay selección específica)
     let catSeleccionada = currentCat;
     if (catSeleccionada === 'CONSOLAS' || catSeleccionada === 'TODO') {
         catSeleccionada = 'PC';
@@ -1460,79 +1428,80 @@ async function renderTextoLista() {
 
     container.innerHTML = `<p style='color:var(--neon);'>Buscando listado de ${catSeleccionada}...</p>`;
 
-    // 2. Construir el nombre del archivo dinámicamente
-    // Ejemplo: "LISTADO-PS2.txt" o "LISTADO-ANDROIDE.txt"
+    // 2. Definir Rutas
     const nombreArchivo = `LISTADO-${catSeleccionada.toUpperCase()}.txt`;
-    const rutaTxt = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/DESCARGAS/${nombreArchivo}`;
+    const rutaTxtNube = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/DESCARGAS/${nombreArchivo}`;
+    const rutaTxtLocal = `ARCHIVOS/DESCARGAS/${nombreArchivo}`; // Tu carpeta local
 
     try {
-        const response = await fetch(rutaTxt);
+        // INTENTO 1: Descargar desde GitHub
+        const response = await fetch(rutaTxtNube);
         
         if (response.ok) {
             const texto = await response.text();
-            const lineas = texto.split('\n');
-            let htmlLista = "";
-            
-            htmlLista += `<h3 style="color:var(--neon); text-align:center; text-transform: uppercase;">LISTADO DE JUEGOS ${catSeleccionada}</h3>`;
-
-
-            lineas.forEach((linea) => {
-                if(linea.trim() !== "") {
-                    htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; font-size: 0.85rem; color: white;">
-                                    <span style="color:var(--neon)">></span> ${linea.toUpperCase().trim()}
-                                  </div>`;
-                }
-            });
-            container.innerHTML = htmlLista;
+            procesarYMostrarTexto(texto, catSeleccionada, "NUBE ☁️");
             trackData(5000); 
         } else {
-            throw new Error("No existe el archivo .txt");
+            throw new Error("No hay internet o no existe en GitHub");
         }
     } catch (error) {
-        // 3. Respaldo: Si no hay internet o no existe el .txt, usar la memoria local (Modo Apagón)
-        console.log(`No se encontró ${nombreArchivo}, cargando memoria local...`);
-        
-        const juegosFiltrados = allItems.filter(i => i.cat === catSeleccionada);
-        
-        if (juegosFiltrados.length === 0) {
-            container.innerHTML = `
-                <p style='color:gray; text-align:center; padding: 20px;'>
-                    No hay archivo <b style="color:white">${nombreArchivo}</b> en el servidor<br>
-                    y tampoco hay datos locales de <b>${catSeleccionada}</b>.<br>
-                    <small>Sincroniza en MODO APAGÓN.</small>
-                </p>`;
-            return;
+        // INTENTO 2: Si falla la nube, buscar en la CARPETA LOCAL (Modo Apagón)
+        try {
+            const responseLocal = await fetch(rutaTxtLocal);
+            if (responseLocal.ok) {
+                const textoLocal = await responseLocal.text();
+                procesarYMostrarTexto(textoLocal, catSeleccionada, "LOCAL 🏠");
+            } else {
+                throw new Error("Tampoco existe el archivo local");
+            }
+        } catch (err) {
+            // INTENTO 3: Si no hay archivos .txt, mostrar lo que hay en memoria (allItems)
+            mostrarDesdeMemoria(catSeleccionada);
         }
-
-        let htmlLista = `<div style="color:var(--red); text-align:center; font-size:0.7rem; margin-bottom:10px;">MOSTRANDO CACHÉ LOCAL</div>`;
-        juegosFiltrados.forEach((juego, index) => {
-            const nombreLimpio = juego.name.split('.')[0].toUpperCase();
-            htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; color: white;">
-                            <span style="color:var(--taxi-yellow)">${index + 1}.</span> ${nombreLimpio}
-                          </div>`;
-        });
-        container.innerHTML = htmlLista;
     }
 }
 
+// Función auxiliar para formatear el texto del .txt
+function procesarYMostrarTexto(texto, consola, origen) {
+    const container = document.getElementById('listaItemsContainer');
+    const lineas = texto.split('\n');
+    let htmlLista = `<div style="text-align:right; font-size:0.6rem; color:gray; margin-bottom:5px;">ORIGEN: ${origen}</div>`;
+    htmlLista += `<h3 style="color:var(--neon); text-align:center; text-transform: uppercase; margin-top:0;">LISTADO ${consola}</h3>`;
 
+    lineas.forEach((linea) => {
+        if(linea.trim() !== "") {
+            htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; font-size: 0.85rem; color: white;">
+                            <span style="color:var(--neon)">></span> ${linea.toUpperCase().trim()}
+                          </div>`;
+        }
+    });
+    container.innerHTML = htmlLista;
+}
 
+// Función de respaldo si fallan todos los archivos externos
+function mostrarDesdeMemoria(catSeleccionada) {
+    const container = document.getElementById('listaItemsContainer');
+    const juegosFiltrados = allItems.filter(i => i.cat === catSeleccionada);
+    
+    if (juegosFiltrados.length === 0) {
+        container.innerHTML = `<p style='color:gray; text-align:center; padding: 20px;'>No hay archivos .txt ni datos en memoria para <b>${catSeleccionada}</b>.</p>`;
+        return;
+    }
 
+    let htmlLista = `<div style="color:var(--taxi-yellow); text-align:center; font-size:0.7rem; margin-bottom:10px;">MOSTRANDO DESDE MEMORIA VOLÁTIL</div>`;
+    juegosFiltrados.forEach((juego, index) => {
+        const nombreLimpio = juego.name.split('.')[0].toUpperCase();
+        htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; color: white;">
+                        <span style="color:var(--taxi-yellow)">${index + 1}.</span> ${nombreLimpio}
+                      </div>`;
+    });
+    container.innerHTML = htmlLista;
+}
 
-//fin 2 y 3
-
-
-
-
-
-
-
-
-
+//fin
 
 
 </script>
-
 
 </body>
 </html>
