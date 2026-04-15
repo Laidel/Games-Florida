@@ -526,8 +526,9 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
 
 
 <div id="listadoPC" style="display:none; border: 2px solid #00FF00; border-radius: 10px; background: rgba(0,0,0,0.8); padding: 10px; margin: 10px;">
-    <h2 style="color: #00FF00; text-align: center; font-size: 1.2rem; border-bottom: 1px solid #00FF00; padding-bottom: 5px;">LISTADO DE JUEGOS PC
-    </h2>
+    <!--lo deje pa luego probar otra cosa como un mojin
+<h2 style="color: #00FF00; text-align: center; font-size: 1.2rem; border-bottom: 1px solid #00FF00; padding-bottom: 5px;">LISTADO DE JUEGOS PC
+    </h2>-->
 
     <div id="listaItemsContainer" style="color:white; font-family:monospace; font-size:0.9rem; line-height:1.6;"></div>
 </div>
@@ -1053,12 +1054,19 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
         function filterVisual(cat) { showPage('catalogScreen'); document.getElementById('consoleFilter').value = cat; filterCat(cat); }
         
         function filterCat(c){ 
-            playSnd('sndClick'); 
-            currentCat = c; 
-            document.getElementById('consoleFilter').value = c;
-            renderGrid(); 
-            window.scrollTo(0, 0);
-        }
+    playSnd('sndClick'); 
+    currentCat = c; 
+    document.getElementById('consoleFilter').value = c;
+    
+    // Si el checkbox de modo listado está marcado, actualiza la lista
+    if(document.getElementById('dataSaverCheckList').checked) {
+        renderTextoLista();
+    } else {
+        renderGrid(); 
+    }
+    window.scrollTo(0, 0);
+}
+
 
         function showPiezas() { playSnd('sndClick'); showPage('catalogScreen'); filterCat('PIEZAS'); }
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); currentZoomItem = null; }
@@ -1439,25 +1447,76 @@ function toggleDataSaverList() {
 //3
 
 
-function renderTextoLista() {
+async function renderTextoLista() {
     const container = document.getElementById('listaItemsContainer');
-    // Filtramos solo los juegos que pertenecen a la categoría PC
-    const juegosPC = allItems.filter(i => i.cat === 'PC');
-    
-    if (juegosPC.length === 0) {
-        container.innerHTML = "<p style='color:gray; text-align:center;'>Sincroniza los datos para ver la lista...</p>";
-        return;
+    if (!container) return;
+
+    // 1. Identificar qué consola está seleccionada
+    // Si el filtro es "CONSOLAS" o "TODO", forzamos a "PC" como predeterminado
+    let catSeleccionada = currentCat;
+    if (catSeleccionada === 'CONSOLAS' || catSeleccionada === 'TODO') {
+        catSeleccionada = 'PC';
     }
 
-    let htmlLista = "";
-    juegosPC.forEach((juego, index) => {
-        // Limpiamos el nombre para quitar extensiones (.jpg, .exe, etc)
-        const nombreLimpio = juego.name.split('.')[0].toUpperCase();
-        htmlLista += `<div>${index + 1}. ${nombreLimpio}</div>`;
-    });
-    
-    container.innerHTML = htmlLista;
+    container.innerHTML = `<p style='color:var(--neon);'>Buscando listado de ${catSeleccionada}...</p>`;
+
+    // 2. Construir el nombre del archivo dinámicamente
+    // Ejemplo: "LISTADO-PS2.txt" o "LISTADO-ANDROIDE.txt"
+    const nombreArchivo = `LISTADO-${catSeleccionada.toUpperCase()}.txt`;
+    const rutaTxt = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/DESCARGAS/${nombreArchivo}`;
+
+    try {
+        const response = await fetch(rutaTxt);
+        
+        if (response.ok) {
+            const texto = await response.text();
+            const lineas = texto.split('\n');
+            let htmlLista = "";
+            
+            htmlLista += `<h3 style="color:var(--neon); text-align:center; text-transform: uppercase;">LISTADO DE JUEGOS ${catSeleccionada}</h3>`;
+
+
+            lineas.forEach((linea) => {
+                if(linea.trim() !== "") {
+                    htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; font-size: 0.85rem; color: white;">
+                                    <span style="color:var(--neon)">></span> ${linea.toUpperCase().trim()}
+                                  </div>`;
+                }
+            });
+            container.innerHTML = htmlLista;
+            trackData(5000); 
+        } else {
+            throw new Error("No existe el archivo .txt");
+        }
+    } catch (error) {
+        // 3. Respaldo: Si no hay internet o no existe el .txt, usar la memoria local (Modo Apagón)
+        console.log(`No se encontró ${nombreArchivo}, cargando memoria local...`);
+        
+        const juegosFiltrados = allItems.filter(i => i.cat === catSeleccionada);
+        
+        if (juegosFiltrados.length === 0) {
+            container.innerHTML = `
+                <p style='color:gray; text-align:center; padding: 20px;'>
+                    No hay archivo <b style="color:white">${nombreArchivo}</b> en el servidor<br>
+                    y tampoco hay datos locales de <b>${catSeleccionada}</b>.<br>
+                    <small>Sincroniza en MODO APAGÓN.</small>
+                </p>`;
+            return;
+        }
+
+        let htmlLista = `<div style="color:var(--red); text-align:center; font-size:0.7rem; margin-bottom:10px;">MOSTRANDO CACHÉ LOCAL</div>`;
+        juegosFiltrados.forEach((juego, index) => {
+            const nombreLimpio = juego.name.split('.')[0].toUpperCase();
+            htmlLista += `<div style="border-bottom: 1px solid #111; padding: 4px 0; color: white;">
+                            <span style="color:var(--taxi-yellow)">${index + 1}.</span> ${nombreLimpio}
+                          </div>`;
+        });
+        container.innerHTML = htmlLista;
+    }
 }
+
+
+
 
 
 //fin 2 y 3
