@@ -6,12 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
-
-
     <style>
         :root { 
             --neon: #00ff41; 
@@ -658,38 +652,6 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
         </div>
     </div>
 
-
-<div id="magazineViewer" style="display:none; position:fixed; inset:0; background:black; z-index:2000000; flex-direction:column; align-items:center; overflow:hidden;">
-    <div style="background:#111; width:100%; padding:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--red); z-index:10;">
-        <span id="magTitle" style="color:white; font-weight:bold; font-size:0.9rem;">VISOR DE REVISTAS</span>
-        <button onclick="closeMagazine()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:4px; font-weight:bold;">CERRAR X</button>
-    </div>
-    
-    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden; touch-action:none;">
-        <img id="magPage" src="" 
-     style="max-width:100%; max-height:100%; object-fit:contain; 
-            box-shadow: 0 0 20px rgba(255,255,255,0.1); 
-            transition: none; 
-            transform-origin: 0 0;">
-
-    </div>
-
-    <div style="background:#151515; width:100%; padding:20px; display:flex; justify-content:center; align-items:center; gap:20px; border-top:2px solid #333; z-index:10;">
-        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(-1)">◀</button>
-        <span id="magStep" style="color:var(--neon); font-family:monospace; font-size:1.2rem; font-weight:bold;">0 / 0</span>
-        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(1)">▶</button>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
     <div id="lightbox">
         <div class="zoom-info-panel">
             <div id="zoomName" style="color:#fff; font-size:0.95rem; text-align:center; margin-bottom:8px; width:90%; overflow:hidden; text-transform:uppercase;"></div>
@@ -763,125 +725,6 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
             
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-
-//aqui lo puse
-
-// --- SISTEMA DE ZOOM Y ARRASTRE PARA EL CÓMIC ---
-
-function updateMagTransform() {
-    const img = document.getElementById('magPage');
-    if (img) {
-        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
-    }
-}
-
-function resetMagZoom() {
-    scale = 1; pX = 0; pY = 0;
-    updateMagTransform();
-}
-
-//aqui va portada?
-// --- FUNCIÓN PARA EXTRAER LA PORTADA DEL CBZ ---
-async function getCbzCover(fileOrUrl) {
-    try {
-        const response = await fetch(fileOrUrl);
-        const blob = await response.blob();
-        const zip = await JSZip.loadAsync(blob);
-        
-        const fileNames = Object.keys(zip.files).sort();
-        
-        const coverName = fileNames.find(name => 
-            name.toLowerCase().endsWith('.jpg') || 
-            name.toLowerCase().endsWith('.jpeg') || 
-            name.toLowerCase().endsWith('.png') ||
-            name.toLowerCase().endsWith('.webp')
-        );
-
-        if (coverName) {
-            const coverBlob = await zip.file(coverName).async("blob");
-            return URL.createObjectURL(coverBlob);
-        }
-    } catch (e) {
-        console.error("Error al extraer carátula:", e);
-        return null; 
-    }
-}
-
-
-
-
-// Inicializar eventos del visor
-setTimeout(() => {
-    const magZCon = document.getElementById('magZoomContainer');
-    if (!magZCon) return;
-
-    magZCon.addEventListener('touchstart', e => {
-        if (e.touches.length === 1) {
-            isDrag = true;
-            // Guardamos la posición inicial restando el desplazamiento actual
-            start = { x: e.touches[0].clientX - pX, y: e.touches[0].clientY - pY };
-        } else if (e.touches.length === 2) {
-            isDrag = false;
-            prevDiff = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
-        }
-    }, { passive: false });
-
-        magZCon.addEventListener('touchmove', e => {
-        if (!document.getElementById('magPage').src) return;
-        e.preventDefault(); 
-
-        if (e.touches.length === 1 && isDrag) {
-            // MOVER (Sigue igual)
-            pX = e.touches[0].clientX - start.x;
-            pY = e.touches[0].clientY - start.y;
-            updateMagTransform();
-        } 
-        else if (e.touches.length === 2) {
-            // --- ZOOM CON MIRA DE PRECISIÓN ---
-            const rect = magZCon.getBoundingClientRect(); // Detecta los bordes del visor
-            const touch1 = e.touches[0];
-            const touch2 = e.touches[1];
-
-            // 1. Centro relativo al contenedor (la mira real)
-            const midX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
-            const midY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
-
-            // 2. Distancia actual entre dedos
-            let curDiff = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
-            
-            if (prevDiff > 0) {
-                const oldScale = scale;
-                
-                // Ajustamos la escala (puedes subir el 0.05 si lo notas lento)
-                if (curDiff > prevDiff) scale = Math.min(scale + 0.05, 4);
-                else scale = Math.max(scale - 0.05, 1);
-
-                // 3. LA MIRA: Calculamos cuánto debe moverse pX y pY 
-                // para que el punto bajo tus dedos no se mueva ni un píxel
-                                // --- PEGA ESTO DESDE AQUÍ ---
-                if (scale !== oldScale) {
-                    const ratio = scale / oldScale;
-                    pX = midX - (midX - pX) * ratio;
-                    pY = midY - (midY - pY) * ratio;
-                }
-                
-                updateMagTransform();
-            }
-            prevDiff = curDiff;
-        }
-    }, { passive: false });
-    // --- HASTA AQUÍ ---
-
-
-
-    magZCon.addEventListener('touchend', () => {
-        isDrag = false;
-        prevDiff = -1;
-    });
-}, 1500);
-
-
-// termine de ponerlo
             function playBurst() {
                 const now = audioCtx.currentTime;
                 // Genera 4 pulsos rápidos (Rafaga TTTT)
@@ -1130,10 +973,6 @@ setTimeout(() => {
             });
         }
 
-
-
-//parte 2
-
         function toggleConfigMode() {
             playSnd('sndClick'); isConfigMode = !isConfigMode;
             const gear = document.getElementById('mainConfigBtn');
@@ -1255,39 +1094,21 @@ setTimeout(() => {
         };
         zCon.onpointerup = zCon.onpointercancel = e => { evCache = evCache.filter(ev => ev.pointerId !== e.pointerId); if (evCache.length < 2) prevDiff = -1; if (evCache.length === 0) isDrag = false; };
 
-async function openZoom(urlMini, price, name, urlHD) {
-    const fileName = name.toLowerCase();
-    
-    // Si es un archivo de lectura, abrir el lector directamente
-    if(fileName.endsWith('.cbz') || fileName.endsWith('.zip')) {
-        loadCbzBook(urlHD, name);
-        return; 
-    }
-    
-    if(fileName.endsWith('.pdf')) {
-        window.open(urlHD, '_blank');
-        return; 
-    }
-    
-    if(fileName.endsWith('.swf')) { 
-        openFlash(urlHD, name); 
-        return; 
-    }
-
-    // Si es imagen normal, abrir el zoom negro de siempre
-    playSnd('sndClick');
-    const cleanName = name.split('.')[0];
-    currentZoomItem = { urlMini, price, name, urlHD };
-    document.getElementById('check-hd').checked = false; 
-    document.getElementById('expandedImg').src = urlMini;
-    document.getElementById('zoomName').innerText = cleanName.toUpperCase();
-    document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
-    // ... resto de tu código de openZoom ...
-    document.getElementById('lightbox').style.display = 'flex';
-    resetZoom();
-}
-
-
+        function openZoom(urlMini, price, name, urlHD){
+            if(name.toLowerCase().endsWith('.swf')) { openFlash(urlHD, name); return; }
+            playSnd('sndClick');
+            const cleanName = name.split('.')[0];
+            currentZoomItem = { urlMini, price, name, urlHD };
+            document.getElementById('check-hd').checked = false; 
+            document.getElementById('expandedImg').src = urlMini;
+            document.getElementById('zoomName').innerText = cleanName.toUpperCase();
+            document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
+            document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(urlMini, name, price, urlHD); closeLightbox(); };
+            document.getElementById('btnGameplay').onclick = function() { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); };
+            document.getElementById('lightbox').style.display = 'flex';
+            resetZoom();
+            trackData(30000); 
+        }
 
         function toggleHDInZoom() {
             if(!currentZoomItem) return;
@@ -1356,47 +1177,27 @@ async function openZoom(urlMini, price, name, urlHD) {
 
     const thumbs = files.filter(f => f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
     files.filter(f => !f.webkitRelativePath.toUpperCase().includes('THUMBNAILS')).forEach(file => {
-    const fileName = file.name.toLowerCase();
-    const isImg = file.type.startsWith('image/') || fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('.jpeg');
-    const isSwf = fileName.endsWith('.swf');
-    const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz'); // <-- NUEVO
-
-    if(isImg || isSwf || isDoc) {
-        const thumbFile = thumbs.find(t => t.name === file.name || t.name === 'LOW_' + file.name);
-        
-        // Si es PDF/CBZ y no tiene miniatura, usamos un icono por defecto
-        let urlMini;
-        if (isDoc && !thumbFile) {
-            urlMini = fileName.endsWith('.pdf') 
-                ? 'https://cdn-icons-png.flaticon.com/512/337/337946.png' 
-                : 'https://cdn-icons-png.flaticon.com/512/4831/4831011.png';
-        } else {
-            urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
-        }
-
-        const urlHD = URL.createObjectURL(file); 
-        const path = file.webkitRelativePath.toUpperCase();
-
-// 1. Prioridad: Si es SWF siempre es FLASH
-// 2. Si está en carpeta REVISTAS, es REVISTAS
-// 3. Si no, intentamos detectar la consola por el nombre de la carpeta
-
-
-
-let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELI') ? 'PELICULAS' : path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' :
+        const isImg = file.type.startsWith('image/');
+        const isSwf = file.name.toLowerCase().endsWith('.swf');
+        if(isImg || isSwf) {
+            const thumbFile = thumbs.find(t => t.name === file.name || t.name === 'LOW_' + file.name);
+            const urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
+            const urlHD = URL.createObjectURL(file); 
+            const path = file.webkitRelativePath.toUpperCase();
+            
+            let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELICULAS') ? 'PELICULAS' :
 path.includes('REVISTAS') ? 'REVISTAS' :
- /* ... resto de tus condiciones ... */
- 'OTRO';
-        
-        allItems.push({ url: urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
-    }
-});
+path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' : 'OTRO';
+            
+            allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
+        }
+    });
     stopSyncLoop(); 
     renderGrid();
     resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
 }
 
-//--fin let cat
+
         async function loadFromCloud() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${USUARIO}/${REPO}/contents/${RUTA_PRINCIPAL}`);
@@ -1430,132 +1231,58 @@ path.includes('REVISTAS') ? 'REVISTAS' :
         }
 
         function processItem(urlMini, urlHD, name, category) {
-    const fileName = name.toLowerCase();
-    const isDoc = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
-    
-    let finalUrlMini = urlMini;
-    
-    // Si es un documento y no tiene miniatura propia
-    if (isDoc && urlMini === urlHD) {
-        finalUrlMini = 'https://cdn-icons-png.flaticon.com/512/4831/4831011.png'; // Icono temporal
-        
-        // Intentar extraer la portada en segundo plano
-        getCbzCover(urlHD).then(coverUrl => {
-            if (coverUrl) {
-                // Buscamos el objeto en allItems y actualizamos su url
-                const item = allItems.find(it => it.urlHD === urlHD);
-                if (item) {
-                    item.url = coverUrl;
-                    renderGrid(); // Refrescar solo si es necesario
-                }
-            }
-        });
-    }
-
-    allItems.push({ 
-        url: finalUrlMini, 
-        urlHD: urlHD, 
-        name: name, 
-        price: priceList[name] || 0, 
-        cat: category 
-    });
-}
-//desde aqui revicion
-
-function renderGrid(){
-    const grid = document.getElementById('imageGrid'); 
-    const search = document.getElementById('searchInput').value.toUpperCase();
-    if(!grid) return;
-    grid.innerHTML = '';
-
-    // 1. LÓGICA DE ICONOS DE CONSOLAS
-    if (currentCat === 'CONSOLAS' && search === '') {
-        consoleIcons.forEach(icon => {
-            const card = document.createElement('div');
-            card.className = 'console-icon-card';
-            card.onclick = () => {
-                if (typeof playSnd === 'function') playSnd('sndClick');
-                filterCat(icon.id);
-            };
-            // ... (mantenemos tu lógica de rutas local/cloud de la parte 2)
-            const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
-            const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
-            card.innerHTML = `
-                <img src="${localPath}" 
-                     style="width:55px; height:55px; object-fit:contain; margin-bottom:10px;" 
-                     onerror="this.src='${cloudPath}'; this.onerror=()=>this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'">
-                <div class="console-label">${icon.label}</div>
-            `;
-            grid.appendChild(card);
-        });
-        return;
-    }
-
-    // 2. FILTRADO DE ITEMS
-    const itemsFiltrados = allItems.filter(i => 
-        (currentCat === 'TODO' || i.cat === currentCat) && 
-        i.name.toUpperCase().includes(search)
-    );
-
-    itemsFiltrados.forEach(i => {
-        const fileName = i.name.toLowerCase();
-        const isSwf = fileName.endsWith('.swf');
-        const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz') || fileName.endsWith('.zip');
-        
-        const d = document.createElement('div'); 
-        d.className = 'grid-item';
-        
-        // Decidir qué acción hace el click en la imagen
-        let clickAction = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
-        if(isSwf) clickAction = `openFlash('${i.urlHD}', '${i.name}')`;
-        if(isDoc) clickAction = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
-
-        // Lógica de visualización (Placeholder si hay ahorro de datos)
-        let imgContent;
-        if (typeof isDataSaver !== 'undefined' && isDataSaver && !isSwf) {
-            imgContent = `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' onclick=\'${clickAction}\'>'">🚫</div>`;
-        } else {
-            imgContent = `<img src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="${clickAction}">`;
+            const isSwf = name.toLowerCase().endsWith('.swf');
+            let finalCat = isSwf ? 'FLASH' : category; 
+            const upper = name.toUpperCase();
+            if(upper.includes('SNES')) finalCat='SNES'; else if(upper.includes('NES')) finalCat='NES'; 
+            allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: name, price: priceList[name] || 0, cat: finalCat });
         }
 
-        const btnLabel = isSwf ? 'JUGAR' : (isDoc ? 'LEER' : 'AÑADIR');
-        const btnAction = isSwf ? `openFlash('${i.urlHD}', '${i.name}')` : 
-                         (isDoc ? `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')` : 
-                         `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`);
+        function renderGrid(){
+            const grid = document.getElementById('imageGrid'); 
+            const search = document.getElementById('searchInput').value.toUpperCase();
+            grid.innerHTML = '';
 
-        d.innerHTML = `
-            <div class="price-tag">$${i.price}</div>
-            ${imgContent}
-            <button class="action-btn" style="font-size:0.9rem; padding:5px; width:100%; border:none;" onclick="${btnAction}">
-                ${btnLabel}
-            </button>
-            <div class="item-name-label" style="font-size:0.8rem; color:white; padding:5px; text-align:center; height:40px; overflow:hidden;">
-                ${i.name.split('.')[0].toUpperCase()}
-            </div>`;
+            if (currentCat === 'CONSOLAS' && search === '') {
+                consoleIcons.forEach(icon => {
+                    const card = document.createElement('div');
+                    card.className = 'console-icon-card';
+                    card.onclick = () => filterCat(icon.id);
+                    const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
+                    const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
+                    card.innerHTML = `
+                        <img src="${localPath}" 
+                             style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
+                             onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; } else { this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'; }">
+                        <div class="console-label">${icon.label}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+                return;
+            }
+
+            allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
+                const isSwf = i.name.toLowerCase().endsWith('.swf');
+                const btnLabel = isSwf ? 'JUGAR' : 'AÑADIR';
+                const d = document.createElement('div'); d.className = 'grid-item';
+                const imgTag = (isDataSaver && !isSwf) 
+                    ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' loading=\'lazy\'>'">🚫</div>`
+                    : `<img src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')">`;
+                
+                d.innerHTML = `
+                    <div class="price-tag">$${i.price}</div>
+                    ${imgTag}
+                    <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${isSwf ? `openFlash('${i.urlHD}', '${i.name}')` : `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`}">${btnLabel}</button>
+                    <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>`;
+                grid.appendChild(d);
+            });
+
+        }
+
+        function addCart(u, n, p, uHD) { cart.push({ u, n, p, urlHD: uHD }); updateCart(); }
+        function delItem(i) { playSnd('sndTrash'); cart.splice(i, 1); updateCart(); }
         
-        grid.appendChild(d);
-    });
-}
-
-
-//y aqui termina rendergrid
-// 1. Añadir al carrito (con sonido de éxito)
-function addCart(u, n, p, uHD) {
-    if (typeof playSnd === 'function') playSnd('sndClick'); 
-    cart.push({ u, n, p, urlHD: uHD });
-    updateCart();
-}
-
-// 2. Borrar del carrito (con sonido de papelera)
-function delItem(i) {
-    if (typeof playSnd === 'function') playSnd('sndTrash'); 
-    cart.splice(i, 1);
-    updateCart();
-}
-
-// 3. Actualizar la vista del carrito
-// --- INICIO DE SUSTITUCIÓN ---
-function updateCart() { 
+        function updateCart() { 
             const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
             count.innerText = cart.length; count.style.display = cart.length>0?'block':'none'; 
             let total = 0; list.innerHTML = ''; 
@@ -1807,225 +1534,6 @@ function mostrarDesdeMemoria(catSeleccionada) {
 
 
 
-let magPages = [];
-let currentMagIdx = 0;
-
-function openMagazine(name) {
-    playSnd('sndClick');
-    // Filtramos todas las imágenes que pertenecen a esta revista por nombre
-    magPages = allItems.filter(item => item.name.startsWith(name.split('_')[0]) && item.cat === 'REVISTAS')
-                       .sort((a, b) => a.name.localeCompare(b.name));
-    
-    if(magPages.length > 0) {
-        currentMagIdx = 0;
-        document.getElementById('magazineViewer').style.display = 'flex';
-        updateMagDisplay();
-    } else {
-        alert("No se encontraron páginas para esta revista.");
-    }
-}
-
-function updateMagDisplay() {
-    const item = magPages[currentMagIdx];
-    document.getElementById('magPage').src = item.urlHD;
-    document.getElementById('magTitle').innerText = item.name.split('.')[0].toUpperCase();
-    document.getElementById('magStep').innerText = (currentMagIdx + 1) + " / " + magPages.length;
-}
-
-function changePage(dir) {
-resetMagZoom();
-    playSnd('sndClick');
-    currentMagIdx += dir;
-    if (currentMagIdx < 0) currentMagIdx = 0;
-    if (currentMagIdx >= magPages.length) currentMagIdx = magPages.length - 1;
-    updateMagDisplay();
-}
-
-function closeMagazine() {
-resetMagZoom();
-    document.getElementById('magazineViewer').style.display = 'none';
-}
-
-
-
-
-
-
-async function loadCbzBook(url, name) {
-    playSnd('sndClick');
-    const viewer = document.getElementById('magazineViewer');
-    const magPage = document.getElementById('magPage');
-    
-    viewer.style.display = 'flex';
-    magPage.src = ""; // Limpia la imagen anterior de la memoria visual
-    document.getElementById('magTitle').innerText = "DESCOMPRIMIENDO: " + name.toUpperCase();
-    document.getElementById('magStep').innerText = "⌛...";
-
-    try {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        const zip = new JSZip();
-        const content = await zip.loadAsync(blob);
-        
-        // Filtro mejorado para omitir basura de carpetas comprimidas en Mac/Windows
-        const imgFiles = Object.keys(content.files)
-            .filter(n => /\.(jpg|jpeg|png|webp)$/i.test(n) && !content.files[n].dir)
-            .sort((a, b) => a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'}));
-
-        magPages = []; 
-        
-        for (let imgName of imgFiles) {
-            const imgBlob = await content.files[imgName].async("blob");
-            magPages.push({
-                urlHD: URL.createObjectURL(imgBlob),
-                name: imgName
-            });
-        }
-
-        if(magPages.length > 0) {
-            currentMagIdx = 0;
-            updateMagDisplay();
-        } else {
-            alert("El archivo no contiene imágenes legibles.");
-            closeMagazine();
-        }
-    } catch (err) {
-        console.error(err);
-        alert("Error al abrir el cómic. Asegúrate de que el archivo sea un ZIP/CBZ válido.");
-        closeMagazine();
-    }
-}
-
-// --- LÓGICA DE ZOOM PARA EL VISOR DE CÓMICS ---
-
-// Función para actualizar la transformación de la imagen del cómic
-function updateMagTransform() {
-    const img = document.getElementById('magPage');
-    // Limitamos el arrastre para que no se salga de la pantalla (opcional)
-    img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
-}
-
-// Función para resetear el zoom al cambiar de página o cerrar
-function resetMagZoom() {
-    scale = 1;
-    pX = 0;
-    pY = 0;
-    updateMagTransform();
-}
-
-// Configurar eventos táctiles y de ratón en el contenedor
-const magZCon = document.getElementById('magZoomContainer');
-
-magZCon.onpointerdown = e => {
-    // Si ya estamos cargando o no hay imagen, no hacer nada
-    if (!document.getElementById('magPage').src) return;
-    
-    evCache.push(e);
-    isDrag = true;
-    // Guardamos la posición inicial relativa al puntero
-    start = {x: e.clientX - pX, y: e.clientY - pY};
-    magZCon.setPointerCapture(e.pointerId);
-    magZCon.style.cursor = 'grabbing';
-};
-
-magZCon.onpointermove = e => {
-    if (!isDrag) return;
-
-    // Actualizar el puntero en el caché
-    for (let i = 0; i < evCache.length; i++) {
-        if (e.pointerId == evCache[i].pointerId) {
-            evCache[i] = e;
-            break;
-        }
-    }
-
-    // Lógica de Pinch-to-Zoom (dos dedos)
-    if (evCache.length == 2) {
-        let curDiff = Math.sqrt(Math.pow(evCache[1].clientX - evCache[0].clientX, 2) + Math.pow(evCache[1].clientY - evCache[0].clientY, 2));
-        
-        if (prevDiff > 0) {
-            // Sensibilidad del zoom ajustada (0.05)
-            let zoomSensitivity = 0.05;
-            if (curDiff > prevDiff) {
-                scale = Math.min(scale + zoomSensitivity, 4); // Máximo zoom 4x
-            } else if (curDiff < prevDiff) {
-                scale = Math.max(scale - zoomSensitivity, 1); // Mínimo zoom 1x
-            }
-            updateMagTransform();
-        }
-        prevDiff = curDiff;
-    } 
-    // Lógica de Arrastre (un dedo o ratón)
-    else if (isDrag && scale > 1) { // Solo arrastrar si hay zoom
-        pX = e.clientX - start.x;
-        pY = e.clientY - start.y;
-        updateMagTransform();
-    }
-};
-
-magZCon.onpointerup = magZCon.onpointercancel = e => {
-    evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
-    if (evCache.length < 2) prevDiff = -1;
-    
-    if (evCache.length === 0) {
-        isDrag = false;
-        magZCon.style.cursor = 'grab';
-    }
-};
-
-// --- AJUSTES EN FUNCIONES EXISTENTES ---
-
-// Modifica tu función changePage para resetear el zoom al cambiar de página
-const originalChangePage = changePage; // Guardamos la original
-changePage = function(dir) {
-    resetMagZoom(); // Resetea el zoom ANTES de cambiar
-    originalChangePage(dir); // Llama a la lógica original
-}
-
-// Modifica tu función closeMagazine para resetear el zoom al cerrar
-const originalCloseMagazine = closeMagazine; // Guardamos la original
-closeMagazine = function() {
-    resetMagZoom(); // Resetea el zoom al cerrar
-    originalCloseMagazine(); // Llama a la lógica original
-}
-
-
-//otro mas
-
-
-async function getCbzCover(fileUrl) {
-    try {
-        // 1. Buscamos el archivo
-        const response = await fetch(fileUrl);
-        if (!response.ok) return null;
-        const blob = await response.blob();
-        
-        // 2. Abrimos el CBZ (que es un ZIP)
-        const zip = await JSZip.loadAsync(blob);
-        
-        // 3. Listamos los archivos y buscamos la primera imagen (jpg o png)
-        const files = Object.keys(zip.files).sort();
-        const coverFile = files.find(f => 
-            f.toLowerCase().endsWith('.jpg') || 
-            f.toLowerCase().endsWith('.jpeg') || 
-            f.toLowerCase().endsWith('.png')
-        );
-
-        if (coverFile) {
-            // 4. Convertimos esa imagen interna en una URL que el navegador entienda
-            const data = await zip.file(coverFile).async("blob");
-            return URL.createObjectURL(data);
-        }
-    } catch (err) {
-        console.error("No se pudo extraer la portada de:", fileUrl, err);
-    }
-    return null;
-}
-
-
-
-
-//final
 
 </script>
 
