@@ -1130,6 +1130,10 @@ setTimeout(() => {
             });
         }
 
+
+
+//parte 2
+
         function toggleConfigMode() {
             playSnd('sndClick'); isConfigMode = !isConfigMode;
             const gear = document.getElementById('mainConfigBtn');
@@ -1372,9 +1376,17 @@ async function openZoom(urlMini, price, name, urlHD) {
 
         const urlHD = URL.createObjectURL(file); 
         const path = file.webkitRelativePath.toUpperCase();
-        
-        // Lógica de categoría (se mantiene igual, detectando REVISTAS si está en esa carpeta)
-        let cat = isSwf ? 'FLASH' : path.includes('REVISTAS') ? 'REVISTAS' : /* ... resto de tus condiciones ... */ 'OTRO';
+
+// 1. Prioridad: Si es SWF siempre es FLASH
+// 2. Si está en carpeta REVISTAS, es REVISTAS
+// 3. Si no, intentamos detectar la consola por el nombre de la carpeta
+
+
+
+let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELI') ? 'PELICULAS' : path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' :
+path.includes('REVISTAS') ? 'REVISTAS' :
+ /* ... resto de tus condiciones ... */
+ 'OTRO';
         
         allItems.push({ url: urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
     }
@@ -1384,7 +1396,7 @@ async function openZoom(urlMini, price, name, urlHD) {
     resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
 }
 
-
+//--fin let cat
         async function loadFromCloud() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${USUARIO}/${REPO}/contents/${RUTA_PRINCIPAL}`);
@@ -1419,88 +1431,131 @@ async function openZoom(urlMini, price, name, urlHD) {
 
         function processItem(urlMini, urlHD, name, category) {
     const fileName = name.toLowerCase();
-    const isSwf = fileName.endsWith('.swf');
-    const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz'); 
+    const isDoc = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
     
-    let finalCat = isSwf ? 'FLASH' : category; 
-    
-    // Si es un documento y la URL mini es igual a la HD (no hay thumbnail), ponemos un icono
     let finalUrlMini = urlMini;
+    
+    // Si es un documento y no tiene miniatura propia
     if (isDoc && urlMini === urlHD) {
-        finalUrlMini = fileName.endsWith('.pdf') 
-            ? 'https://cdn-icons-png.flaticon.com/512/337/337946.png' // Icono PDF
-            : 'https://cdn-icons-png.flaticon.com/512/4831/4831011.png'; // Icono Libro/CBZ
+        finalUrlMini = 'https://cdn-icons-png.flaticon.com/512/4831/4831011.png'; // Icono temporal
+        
+        // Intentar extraer la portada en segundo plano
+        getCbzCover(urlHD).then(coverUrl => {
+            if (coverUrl) {
+                // Buscamos el objeto en allItems y actualizamos su url
+                const item = allItems.find(it => it.urlHD === urlHD);
+                if (item) {
+                    item.url = coverUrl;
+                    renderGrid(); // Refrescar solo si es necesario
+                }
+            }
+        });
     }
 
     allItems.push({ 
-        url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : finalUrlMini, 
+        url: finalUrlMini, 
         urlHD: urlHD, 
         name: name, 
         price: priceList[name] || 0, 
-        cat: finalCat 
+        cat: category 
+    });
+}
+//desde aqui revicion
+
+function renderGrid(){
+    const grid = document.getElementById('imageGrid'); 
+    const search = document.getElementById('searchInput').value.toUpperCase();
+    if(!grid) return;
+    grid.innerHTML = '';
+
+    // 1. LÓGICA DE ICONOS DE CONSOLAS
+    if (currentCat === 'CONSOLAS' && search === '') {
+        consoleIcons.forEach(icon => {
+            const card = document.createElement('div');
+            card.className = 'console-icon-card';
+            card.onclick = () => {
+                if (typeof playSnd === 'function') playSnd('sndClick');
+                filterCat(icon.id);
+            };
+            // ... (mantenemos tu lógica de rutas local/cloud de la parte 2)
+            const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
+            const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
+            card.innerHTML = `
+                <img src="${localPath}" 
+                     style="width:55px; height:55px; object-fit:contain; margin-bottom:10px;" 
+                     onerror="this.src='${cloudPath}'; this.onerror=()=>this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'">
+                <div class="console-label">${icon.label}</div>
+            `;
+            grid.appendChild(card);
+        });
+        return;
+    }
+
+    // 2. FILTRADO DE ITEMS
+    const itemsFiltrados = allItems.filter(i => 
+        (currentCat === 'TODO' || i.cat === currentCat) && 
+        i.name.toUpperCase().includes(search)
+    );
+
+    itemsFiltrados.forEach(i => {
+        const fileName = i.name.toLowerCase();
+        const isSwf = fileName.endsWith('.swf');
+        const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz') || fileName.endsWith('.zip');
+        
+        const d = document.createElement('div'); 
+        d.className = 'grid-item';
+        
+        // Decidir qué acción hace el click en la imagen
+        let clickAction = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
+        if(isSwf) clickAction = `openFlash('${i.urlHD}', '${i.name}')`;
+        if(isDoc) clickAction = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
+
+        // Lógica de visualización (Placeholder si hay ahorro de datos)
+        let imgContent;
+        if (typeof isDataSaver !== 'undefined' && isDataSaver && !isSwf) {
+            imgContent = `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' onclick=\'${clickAction}\'>'">🚫</div>`;
+        } else {
+            imgContent = `<img src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="${clickAction}">`;
+        }
+
+        const btnLabel = isSwf ? 'JUGAR' : (isDoc ? 'LEER' : 'AÑADIR');
+        const btnAction = isSwf ? `openFlash('${i.urlHD}', '${i.name}')` : 
+                         (isDoc ? `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')` : 
+                         `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`);
+
+        d.innerHTML = `
+            <div class="price-tag">$${i.price}</div>
+            ${imgContent}
+            <button class="action-btn" style="font-size:0.9rem; padding:5px; width:100%; border:none;" onclick="${btnAction}">
+                ${btnLabel}
+            </button>
+            <div class="item-name-label" style="font-size:0.8rem; color:white; padding:5px; text-align:center; height:40px; overflow:hidden;">
+                ${i.name.split('.')[0].toUpperCase()}
+            </div>`;
+        
+        grid.appendChild(d);
     });
 }
 
 
-
-
-        function renderGrid(){
-    const grid = document.getElementById('imageGrid'); 
-    const search = document.getElementById('searchInput').value.toUpperCase();
-    grid.innerHTML = '';
-
-    // Filtramos los items y aquí empieza el forEach que buscabas
-    allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
-        const fileName = i.name.toLowerCase();
-        const isSwf = fileName.endsWith('.swf');
-        const isCbz = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
-        const isPdf = fileName.endsWith('.pdf');
-        
-        // Configuramos el botón (LEER para libros/juegos, AÑADIR para lo demás)
-        const btnLabel = (isSwf || isCbz || isPdf) ? 'LEER' : 'AÑADIR';
-        const accionBoton = (isSwf || isCbz || isPdf) 
-            ? `openZoom('${i.url}','${i.price}','${i.name}','${i.urlHD}')` 
-            : `addCart('${i.url}','${i.name}','${i.price}','${i.urlHD}')`;
-
-        const d = document.createElement('div');
-        d.className = 'grid-item';
-
-        // 1. ID único para la imagen
-        const imgId = `portada_${Math.random().toString(36).substr(2, 9)}`;
-
-        // 2. Definimos la etiqueta de imagen (con icono de respaldo si no hay thumbnail)
-        const imgTag = `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', '${i.price}', '${i.name}', '${i.urlHD}')">`;
-
-        // 3. Escribimos el HTML del cuadro
-        d.innerHTML = `
-            <div class="price-tag">$${i.price}</div>
-            ${imgTag}
-            <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${accionBoton}">${btnLabel}</button>
-            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${(i.name || '').split('.')[0].toUpperCase()}</div>`;
-
-        // 4. LA MAGIA: Si es CBZ, intentamos extraer la carátula real
-        if (isCbz && typeof JSZip !== 'undefined' && typeof getCbzCover === 'function') { 
-            getCbzCover(i.urlHD).then(urlReal => {
-                if (urlReal) {
-                    const el = document.getElementById(imgId);
-                    if (el) el.src = urlReal;
-                }
-            }).catch(e => console.log("Cargando portada..."));
-        }
-
-        grid.appendChild(d);
-    }); // <--- Este cierra el .forEach
-} // <--- Este cierra la función renderGrid
-
-//asta aqui
-
+//y aqui termina rendergrid
+// 1. Añadir al carrito (con sonido de éxito)
 function addCart(u, n, p, uHD) {
+    if (typeof playSnd === 'function') playSnd('sndClick'); 
     cart.push({ u, n, p, urlHD: uHD });
     updateCart();
 }
 
-        
-        function updateCart() { 
+// 2. Borrar del carrito (con sonido de papelera)
+function delItem(i) {
+    if (typeof playSnd === 'function') playSnd('sndTrash'); 
+    cart.splice(i, 1);
+    updateCart();
+}
+
+// 3. Actualizar la vista del carrito
+// --- INICIO DE SUSTITUCIÓN ---
+function updateCart() { 
             const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
             count.innerText = cart.length; count.style.display = cart.length>0?'block':'none'; 
             let total = 0; list.innerHTML = ''; 
