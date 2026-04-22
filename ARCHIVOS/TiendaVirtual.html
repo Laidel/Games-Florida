@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+ src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         :root { 
             --neon: #00ff41; 
@@ -26,6 +29,37 @@
             --blue: #003791;
             --cartucho: #FFFF99    
         }
+/*
+#magZoomContainer {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+*/
+
+#magZoomContainer {
+    width: 100vw;
+    height: 75vh;
+    display: flex;         /* Volvemos al Flex de la v19 */
+    align-items: center;   /* Centrado vertical automático */
+    justify-content: center; /* Centrado horizontal automático */
+    overflow: hidden;
+    background: #000;
+    touch-action: none;
+    position: relative;
+}
+
+#magPage {
+    max-width: 100%;
+    max-height: 100%;
+    transform-origin: center; /* En v19 usábamos center, es más estable */
+    will-change: transform;
+    pointer-events: none;
+    transition: none !important;
+}
+
+
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--black); color: var(--black); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; min-height: 20vh; overflow-x: hidden; padding-top: 45px; }
         
@@ -580,10 +614,8 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
         <img id="magPage" src="" 
      style="max-width:100%; max-height:100%; object-fit:contain; 
             box-shadow: 0 0 20px rgba(255,255,255,0.1); 
-            transition: none; 
-            transform-origin: 0 0;">
-
-    </div>
+            transition: transform 0.1s ease-out; 
+            transform-origin: center center;"> </div>
 
     <div style="background:#151515; width:100%; padding:20px; display:flex; justify-content:center; align-items:center; gap:20px; border-top:2px solid #333; z-index:10;">
         <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(-1)">◀</button>
@@ -591,6 +623,7 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
         <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(1)">▶</button>
     </div>
 </div>
+
 
 
 
@@ -625,12 +658,20 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
     </div>
 
     <script>
+//variables
+
         const RUTA_PRINCIPAL = "ARCHIVOS";
         const USUARIO = "Laidel";
         const REPO = "Games-Florida";
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'CONSOLAS';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
         let currentZoomItem = null;
+
+let magScale = 1, magPX = 0, magPY = 0;
+let magEvCache = [], magPrevDiff = -1;
+
+
+
 
         let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
         let isConfigMode = false;
@@ -1552,20 +1593,21 @@ async function renderTextoLista() {
 
 function procesarYMostrarTexto(texto, categoria, origen) {
     const container = document.getElementById('listaItemsContainer');
-    // Dividir por líneas y filtrar líneas vacías
     const lineas = texto.split('\n').filter(linea => linea.trim() !== "");
     
     let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray;">Origen: ${origen}</div>`;
     
-    lineas.forEach(linea => {
-        // Separamos nombre de precio si existe el formato "Nombre : Precio"
+    lineas.forEach((linea, index) => {
         const partes = linea.split(':');
         const nombre = partes[0].trim().toUpperCase();
         const precio = partes[1] ? partes[1].trim() : "---";
 
+        // El secreto está en este <span> con color yellow
         htmlFinal += `
-            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:5px 0;">
-                <span style="color:var(--white); flex:1;">${nombre}</span>
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:5px 0; font-size:0.9rem;">
+                <span style="color:var(--white); flex:1;">
+                    <b style="color:yellow; margin-right:8px;">${index + 1}.</b> ${nombre}
+                </span>
                 <span style="color:var(--neon); font-weight:bold;">$${precio}</span>
             </div>
         `;
@@ -1573,6 +1615,7 @@ function procesarYMostrarTexto(texto, categoria, origen) {
 
     container.innerHTML = htmlFinal;
 }
+
 
 function mostrarDesdeMemoria(catSeleccionada) {
     const container = document.getElementById('listaItemsContainer');
@@ -1597,6 +1640,7 @@ function mostrarDesdeMemoria(catSeleccionada) {
 }
 
 
+
 let magPages = [];
 let currentMagIdx = 0;
 
@@ -1608,6 +1652,12 @@ function openMagazine(name) {
     
     if(magPages.length > 0) {
         currentMagIdx = 0;
+
+
+document.getElementById('magZoomContainer').style.touchAction = 'none';
+
+
+
         document.getElementById('magazineViewer').style.display = 'flex';
         updateMagDisplay();
     } else {
@@ -1636,146 +1686,231 @@ resetMagZoom();
     document.getElementById('magazineViewer').style.display = 'none';
 }
 
+
+
+
+
+
 async function loadCbzBook(url, name) {
     playSnd('sndClick');
     const viewer = document.getElementById('magazineViewer');
     const magPage = document.getElementById('magPage');
     
+    // --- RESETEO DE ORIGEN ---
+    resetMagZoom(); // Esto pone pX, pY en 0 y scale en 1
+    
     viewer.style.display = 'flex';
-    magPage.src = ""; // Limpia la imagen anterior de la memoria visual
-    document.getElementById('magTitle').innerText = "DESCOMPRIMIENDO: " + name.toUpperCase();
+    magPage.src = ""; 
+    document.getElementById('magTitle').innerText = "PROCESANDO: " + name.toUpperCase();
     document.getElementById('magStep').innerText = "⌛...";
 
     try {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        const zip = new JSZip();
-        const content = await zip.loadAsync(blob);
-        
-        // Filtro mejorado para omitir basura de carpetas comprimidas en Mac/Windows
-        const imgFiles = Object.keys(content.files)
-            .filter(n => /\.(jpg|jpeg|png|webp)$/i.test(n) && !content.files[n].dir)
-            .sort((a, b) => a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'}));
-
         magPages = []; 
-        
-        for (let imgName of imgFiles) {
-            const imgBlob = await content.files[imgName].async("blob");
-            magPages.push({
-                urlHD: URL.createObjectURL(imgBlob),
-                name: imgName
-            });
+
+        if (name.toLowerCase().endsWith('.pdf')) {
+            const pdfjsLib = window['pdfjs-dist/build/pdf'];
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+            
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 2 }); 
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+                magPages.push({
+                    urlHD: URL.createObjectURL(blob),
+                    name: `Página ${i}`
+                });
+                document.getElementById('magStep').innerText = `Cargando ${i}/${pdf.numPages}`;
+            }
+        } else {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const zip = new JSZip();
+            const content = await zip.loadAsync(blob);
+            
+            const imgFiles = Object.keys(content.files)
+                .filter(n => /\.(jpg|jpeg|png|webp)$/i.test(n) && !content.files[n].dir)
+                .sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+
+            for (let imgName of imgFiles) {
+                const imgBlob = await content.files[imgName].async("blob");
+                magPages.push({
+                    urlHD: URL.createObjectURL(imgBlob),
+                    name: imgName
+                });
+            }
         }
 
         if(magPages.length > 0) {
             currentMagIdx = 0;
             updateMagDisplay();
         } else {
-            alert("El archivo no contiene imágenes legibles.");
+            alert("No se pudo leer el contenido.");
             closeMagazine();
         }
     } catch (err) {
         console.error(err);
-        alert("Error al abrir el cómic. Asegúrate de que el archivo sea un ZIP/CBZ válido.");
+        alert("Error al abrir el archivo.");
         closeMagazine();
     }
 }
 
-// --- LÓGICA DE ZOOM PARA EL VISOR DE CÓMICS ---
 
-// Función para actualizar la transformación de la imagen del cómic
+// --- LÓGICA DE ZOOM PARA EL VISOR DE CÓMICS (VERSIÓN HÍBRIDA V22.3) ---
+
 function updateMagTransform() {
     const img = document.getElementById('magPage');
-    // Limitamos el arrastre para que no se salga de la pantalla (opcional)
-    img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    if (img) {
+        // Mantenemos el centro como origen para estabilidad tipo v19
+        img.style.transformOrigin = "center center";
+        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    }
 }
 
-// Función para resetear el zoom al cambiar de página o cerrar
 function resetMagZoom() {
     scale = 1;
     pX = 0;
     pY = 0;
+    const img = document.getElementById('magPage');
+    if (img) {
+        // Forzamos que la imagen use el espacio disponible correctamente
+        img.style.width = "auto";
+        img.style.height = "auto";
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+    }
     updateMagTransform();
 }
 
-// Configurar eventos táctiles y de ratón en el contenedor
 const magZCon = document.getElementById('magZoomContainer');
+let isMovingMag = false;
 
-magZCon.onpointerdown = e => {
-    // Si ya estamos cargando o no hay imagen, no hacer nada
+magZCon.addEventListener('pointerdown', e => {
     if (!document.getElementById('magPage').src) return;
-    
+    e.preventDefault();
+    isMovingMag = true;
     evCache.push(e);
-    isDrag = true;
-    // Guardamos la posición inicial relativa al puntero
-    start = {x: e.clientX - pX, y: e.clientY - pY};
+    
+    // Matemática estable: el inicio es relativo al toque actual
+    start = { x: e.clientX - pX, y: e.clientY - pY };
     magZCon.setPointerCapture(e.pointerId);
-    magZCon.style.cursor = 'grabbing';
-};
+}, { passive: false });
 
-magZCon.onpointermove = e => {
-    if (!isDrag) return;
+magZCon.addEventListener('pointermove', e => {
+    if (!isMovingMag) return;
+    e.preventDefault();
 
-    // Actualizar el puntero en el caché
     for (let i = 0; i < evCache.length; i++) {
-        if (e.pointerId == evCache[i].pointerId) {
-            evCache[i] = e;
-            break;
-        }
+        if (e.pointerId === evCache[i].pointerId) { evCache[i] = e; break; }
     }
 
-    // Lógica de Pinch-to-Zoom (dos dedos)
-    if (evCache.length == 2) {
+    if (evCache.length === 2) {
+        // LÓGICA DE MIRILLA (ZOOM FOCAL)
         let curDiff = Math.sqrt(Math.pow(evCache[1].clientX - evCache[0].clientX, 2) + Math.pow(evCache[1].clientY - evCache[0].clientY, 2));
-        
+        let midX = (evCache[0].clientX + evCache[1].clientX) / 2;
+        let midY = (evCache[0].clientY + evCache[1].clientY) / 2;
+
         if (prevDiff > 0) {
-            // Sensibilidad del zoom ajustada (0.05)
-            let zoomSensitivity = 0.05;
-            if (curDiff > prevDiff) {
-                scale = Math.min(scale + zoomSensitivity, 4); // Máximo zoom 4x
-            } else if (curDiff < prevDiff) {
-                scale = Math.max(scale - zoomSensitivity, 1); // Mínimo zoom 1x
+            let oldScale = scale;
+            let zoomSensitivity = 0.05; // Un poco más suave para evitar saltos
+
+            if (curDiff > prevDiff) scale = Math.min(scale + zoomSensitivity, 4);
+            else scale = Math.max(scale - zoomSensitivity, 1);
+
+            if (scale !== oldScale) {
+                // Ajuste focal basado en el centro del contenedor (Estilo v19 mejorado)
+                let factor = (scale / oldScale) - 1;
+                pX -= (midX - (magZCon.clientWidth / 2) - pX) * factor;
+                pY -= (midY - (magZCon.clientHeight / 2) - pY) * factor;
+                
+                // Actualizamos start para que el movimiento sea continuo
+                start.x = midX - pX;
+                start.y = midY - pY;
             }
             updateMagTransform();
         }
         prevDiff = curDiff;
-    } 
-    // Lógica de Arrastre (un dedo o ratón)
-    else if (isDrag && scale > 1) { // Solo arrastrar si hay zoom
+    } else if (evCache.length === 1) {
+        // ARRASTRE SIMPLE
         pX = e.clientX - start.x;
         pY = e.clientY - start.y;
         updateMagTransform();
     }
-};
+}, { passive: false });
 
-magZCon.onpointerup = magZCon.onpointercancel = e => {
+magZCon.addEventListener('pointerup', e => {
+    isMovingMag = false;
     evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
     if (evCache.length < 2) prevDiff = -1;
-    
-    if (evCache.length === 0) {
-        isDrag = false;
-        magZCon.style.cursor = 'grab';
+    magZCon.releasePointerCapture(e.pointerId);
+}, { passive: false });
+
+magZCon.addEventListener('pointercancel', e => {
+    isMovingMag = false;
+    evCache = [];
+    prevDiff = -1;
+});
+
+// --- EXTRACCIÓN DE PORTADA CBZ ---
+
+async function getCbzCover(fileUrl) {
+    try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) return null;
+        const blob = await response.blob();
+        const zip = await JSZip.loadAsync(blob);
+        
+        const files = Object.keys(zip.files).sort();
+        const coverFile = files.find(f => 
+            f.toLowerCase().endsWith('.jpg') || 
+            f.toLowerCase().endsWith('.jpeg') || 
+            f.toLowerCase().endsWith('.png')
+        );
+
+        if (coverFile) {
+            const data = await zip.file(coverFile).async("blob");
+            return URL.createObjectURL(data);
+        }
+    } catch (err) {
+        console.error("Error en portada CBZ:", err);
     }
-};
-
-// --- AJUSTES EN FUNCIONES EXISTENTES ---
-
-// Modifica tu función changePage para resetear el zoom al cambiar de página
-const originalChangePage = changePage; // Guardamos la original
-changePage = function(dir) {
-    resetMagZoom(); // Resetea el zoom ANTES de cambiar
-    originalChangePage(dir); // Llama a la lógica original
+    return null;
 }
 
-// Modifica tu función closeMagazine para resetear el zoom al cerrar
-const originalCloseMagazine = closeMagazine; // Guardamos la original
-closeMagazine = function() {
-    resetMagZoom(); // Resetea el zoom al cerrar
-    originalCloseMagazine(); // Llama a la lógica original
+// --- OVERRIDES DE NAVEGACIÓN ---
+
+if (typeof changePage !== 'undefined') {
+    const originalChangePage = changePage;
+    changePage = function(dir) {
+        resetMagZoom();
+        originalChangePage(dir);
+    }
+}
+
+if (typeof closeMagazine !== 'undefined') {
+    const originalCloseMagazine = closeMagazine;
+    closeMagazine = function() {
+        resetMagZoom();
+        originalCloseMagazine();
+    }
 }
 
 
-//otro mas
+
+
+
+
+
+//otro mas para captar el cover
 
 
 async function getCbzCover(fileUrl) {
@@ -1807,76 +1942,69 @@ async function getCbzCover(fileUrl) {
     return null;
 }
 
-
-/*
-//aqui
-// --- LÓGICA DE MIRILLA CORREGIDA ---
-let evCache = [];
-let prevDiff = -1;
-let scale = 1;
-let pX = 0, pY = 0;
-let isDrag = false;
-let start = { x: 0, y: 0 };
-
-// Usamos window.onload para asegurar que la tienda ya cargó
-window.addEventListener('load', () => {
-    const magZCon = document.getElementById('magZoomContainer');
-    if (!magZCon) return;
-
-    magZCon.onpointerdown = e => {
-        if (!document.getElementById('magPage').src) return;
-        evCache.push(e);
-        isDrag = true;
-        start = { x: e.clientX - pX, y: e.clientY - pY };
-        magZCon.setPointerCapture(e.pointerId);
-    };
-
-    magZCon.onpointermove = e => {
-        if (!isDrag) return;
-        // CORRECCIÓN AQUÍ: Comparar correctamente los IDs
-        for (let i = 0; i < evCache.length; i++) {
-            if (e.pointerId === evCache[i].pointerId) { evCache[i] = e; break; }
-        }
-
-        if (evCache.length === 2) {
-            let curDiff = Math.sqrt(Math.pow(evCache[1].clientX - evCache[0].clientX, 2) + Math.pow(evCache[1].clientY - evCache[0].clientY, 2));
-            if (prevDiff > 0) {
-                if (curDiff > prevDiff) scale = Math.min(scale + 0.05, 4);
-                else if (curDiff < prevDiff) scale = Math.max(scale - 0.05, 1);
-                updateMagTransform();
-            }
-            prevDiff = curDiff;
-        } else if (isDrag && scale > 1) {
-            pX = e.clientX - start.x;
-            pY = e.clientY - start.y;
-            updateMagTransform();
-        }
-    };
-
-    magZCon.onpointerup = magZCon.onpointercancel = e => {
-        evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
-        if (evCache.length < 2) prevDiff = -1;
-        if (evCache.length === 0) isDrag = false;
-    };
-});
-
 function updateMagTransform() {
     const img = document.getElementById('magPage');
-    if (img) img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    if (img) {
+        // Esta línea es la que físicamente mueve y agranda la foto
+        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    }
 }
 
-function resetMagZoom() {
-    scale = 1; pX = 0; pY = 0;
-    updateMagTransform();
+
+
+
+// --- CIERRE DE LÓGICA Y CORRECCIONES DE SEGURIDAD ---
+
+if (typeof changePage !== 'undefined') {
+    const originalChangePage = changePage;
+    changePage = function(dir) {
+        resetMagZoom();
+        originalChangePage(dir);
+    }
 }
 
+if (typeof closeMagazine !== 'undefined') {
+    const originalCloseMagazine = closeMagazine;
+    closeMagazine = function() {
+        resetMagZoom();
+        originalCloseMagazine();
+    }
+}
 
-//‐--------fin zoom
-*/
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log("SW: Activo"))
+            .catch(err => console.log("Error SW:", err));
+    });
+}
 
-//final
+window.addEventListener('DOMContentLoaded', () => {
+    const percentText = document.getElementById('load-percentage');
+    const loader = document.getElementById('cache-loader-container');
+    if(!loader) return;
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 10) + 5;
+        if (progress > 100) progress = 100;
+        if(percentText) percentText.innerText = progress + "%";
+        if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = "none", 600);
+            }, 500);
+        }
+    }, 100);
+});
+
+setInterval(updateSessionTimer, 1000);
+setInterval(checkInternet, 5000);
+setInterval(updateOnlineCount, 10000);
+startDataCounter();
 
 </script>
 
 </body>
 </html>
+
