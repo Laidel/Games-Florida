@@ -2,10 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Florida Games v24.2.1 - Sync Sound Loop</title>
+    <title>⭐️TIENDA DE VIDEOJUEGOS⭐️</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+ src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <style>
         :root { 
             --neon: #00ff41; 
@@ -23,14 +27,39 @@
             --white: #ffffff;
             --black: #000000;
             --blue: #003791;
-            --cartucho: #FFFF99
-
-
-
-
-
-            
+            --cartucho: #FFFF99    
         }
+/*
+#magZoomContainer {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+*/
+
+#magZoomContainer {
+    width: 100vw;
+    height: 75vh;
+    display: flex;         /* Volvemos al Flex de la v19 */
+    align-items: center;   /* Centrado vertical automático */
+    justify-content: center; /* Centrado horizontal automático */
+    overflow: hidden;
+    background: #000;
+    touch-action: none;
+    position: relative;
+}
+
+#magPage {
+    max-width: 100%;
+    max-height: 100%;
+    transform-origin: center; /* En v19 usábamos center, es más estable */
+    will-change: transform;
+    pointer-events: none;
+    transition: none !important;
+}
+
+
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--black); color: var(--black); font-family: 'Courier New', Courier, monospace; margin: 0; padding: 5px; display: flex; flex-direction: column; align-items: center; min-height: 20vh; overflow-x: hidden; padding-top: 45px; }
         
@@ -42,8 +71,14 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        .data-saver-label { display: flex; align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 1.15rem; cursor: pointer; }
+        .data-saver-label { display: flex;align-items: center; gap: 4px; color: var(--taxi-yellow); font-size: 1.5rem; cursor: pointer; }
         .data-saver-label input { margin: 0; cursor: pointer; }
+
+
+
+.data-saver-label-List { display: flex; align-items: center; gap: 4px; color: var(--white); font-size: 1.5rem; cursor: pointer;}
+        .data-saver-label input { margin: 0; cursor: pointer; }
+
 
         #dataSaverCanvas {
             position: fixed;
@@ -61,16 +96,22 @@
         #onlineStatusText { font-size: 0.8rem; letter-spacing: 0.5px; }
 
         #welcomeScreen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: 9999999; 
-            background-color: var(--deep-blue);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; text-align: center; border: none;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    z-index: 9999999; 
+    /* Fondo azul profundo sólido */
+    background-color: var(--deep-blue); 
+    /* La imagen se ajusta al 60% del ancho, centrada abajo */
+    background-image: url('https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/Bienvenida.png');
+    background-position: center bottom 20px; /* 20px separado del borde inferior */
+    background-repeat: no-repeat;
+    background-size: 200px auto; /* Tamaño pequeño y controlado */
+    display: flex; flex-direction: column; align-items: center; 
+    justify-content: flex-start; /* Subimos los títulos para que no tapen a los hermanos */
+    padding-top: 80px;
+    text-align: center; border: none;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
         #welcomeScreen.fade-out { opacity: 0; visibility: hidden; }
         
         .user-counter-box {
@@ -166,7 +207,7 @@ text-align: center;
         }
 
         .container { width: 100%; max-width: 500px; flex: 1; border: 1px solid #333; border-radius: 12px; background: #050505; padding: 10px; position: relative; }
-        .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .grid-3x { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .grid-item { background: #111; border: 1px solid #222; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; margin-bottom: 15px; }
         
         .console-icon-card { 
@@ -308,9 +349,13 @@ text-align: center;
             <span id="onlineStatusText">SEÑAL</span>
         </div>
         <div id="monitorData">0.00 KB</div>
-        <label class="data-saver-label">
-            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()"> AHORRO
-        </label>
+
+<!--esto es modo Listado label-->
+
+    <label class="data-saver-label">
+            <input type="checkbox" id="dataSaverCheck" onchange="toggleDataSaver()">AHORRO
+</label>
+
         <div id="monitorTime">00:00:00</div>
     </div>
 
@@ -322,15 +367,34 @@ text-align: center;
         <div class="welcome-title-container" onclick="playSnd('sndClick'); enterApp()">
             <h1 class="welcome-title">⭐️BIENVENIDO A LA TIENDA DE JUEGOS⭐️</h1>
         </div>
-        
+
+<div id="cache-loader-container" style="margin-top: 20px;">
+    <div class="user-counter-box" style="position: relative; bottom: 0; border-color: #ffcc00; color: #ffcc00;">
+        <span class="led-online" style="background: #ffcc00; box-shadow: 0 0 8px #ffcc00;"></span>
+        Cargando Cache Virtual: <span id="load-percentage">0%</span>
+    </div>
+</div>
+
         <div class="user-counter-box">
             <div class="dot-online"></div>
             <span>Usuarios Conectados: <b id="onlineCount">--</b></span>
         </div>
-        <div class="version-tag-welcome">v24.2.1 Loop Sync</div>
-        <div class="version2-tag-welcome">2026</div>
-    </div>
 
+      <!--  RESET
+
+
+<div style="margin-top: 25px; z-index: 1000000; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; border: 1px solid #87CEEB;">
+            <a href="https://laidel.github.io/Games-Florida/ARCHIVOS/TiendaVirtual.html" 
+               target="_blank" 
+               style="color: #87CEEB; text-decoration: none; font-family: 'Courier New', monospace; font-weight: bold; font-size: 13px; text-shadow: 0 0 10px #87CEEB;">
+               🌐 PROBAR TIENDA VIRTUAL (DEMO):<br>
+               https://laidel.github.io/Games-Florida/ARCHIVOS/TiendaVirtual.html
+            </a>
+        </div> -->
+
+        <div class="version2-tag-welcome">2026</div>
+        <div class="version-tag-welcome">v24.2.1 Loop Sync</div>
+    </div>
     <div class="header-grid">
         <button id="btn-catalog" class="action-btn btn-nav active" onclick="showPage('catalogScreen')" style="background:var(--dark-blue); border: 4px solid transparent; box-shadow: 0 4px 0 var(--white); color:white;">
             <span style="font-size:2.5rem;">🎮</span><b>CATÁLOGO DE JUEGOS</b>
@@ -365,23 +429,12 @@ text-align: center;
                 <div class="download-item"><span>5. Juegos FLASH PLAYER ON-LINE</span> <a href="https://es.y8.com/tags/flash" target="_blank" class="download-link" onclick="playSnd('sndClick')">JUGAR</a></div>
 
                 <div class="download-item"><span>6. REVISTAS</span> <a href="https://www.facebook.com/Hobbyconsolas/?locale=es_LA" target="_blank" class="download-link" onclick="playSnd('sndClick')">VER</a></div>
-
-
-
-
-                <div class="download-item">
+<div class="download-item">
     <span>8. LIMPIEZA DEL SISTEMA</span> 
-    <button class="btn-reset" onclick="borrarCacheTotal()" style="background: #ff4444; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.8rem;">
+    <button class="action-btn" style="background: #ff4444; color: white; border: 2px solid #b71c1c; padding: 8px; width: auto; margin: 0; font-size: 0.7rem;" onclick="borrarCacheTotal()">
         🗑️ FORZAR LIMPIEZA DE CACHÉ
     </button>
 </div>
-
-
-
-
-
-                
-
                 <div
  class="download-item"><span>
 7. ATENCION AL CLIENTE</span> <a href="https://wa.me/54935185" target="_blank" class="download-link" onclick="playSnd('sndClick')"> ☎️ LLAMAR</a></div>
@@ -425,6 +478,19 @@ text-align: center;
             <button id="btnSyncCloud" class="action-btn" style="margin-bottom:40px; background:#2196F3; color:--white; border:4px solid var(white);" onclick="startSyncCloud()">
                 <div class="spinner"></div><span class="btn-icon">☁️</span> <span class="btn-text"><b>SINCRONIZAR DATOS CON INTERNET MODO NORMAL 🤪</b></span>
             </button>
+
+<label class="data-saver-label-List">
+<input type="checkbox"
+id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
+        </label>
+
+<div id="listadoPC" style="display:none; border: 2px solid #00FF00; border-radius: 10px; background: rgba(0,0,0,0.8); padding: 10px; margin: 10px;">
+    <!--lo deje pa luego probar otra cosa como un mojin
+<h2 style="color: #00FF00; text-align: center; font-size: 1.2rem; border-bottom: 1px solid #00FF00; padding-bottom: 5px;">LISTADO DE JUEGOS PC
+    </h2>-->
+
+    <div id="listaItemsContainer" style="color:white; font-family:monospace; font-size:0.9rem; line-height:1.6;"></div>
+</div>
             <div class="grid-3x" id="imageGrid"></div>
         </div>
 
@@ -437,6 +503,9 @@ text-align: center;
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('SERIES_ANIMADAS')">🦸 SERIES ANIMADAS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('ANIMADOS')">🧸 ANIMADOS</div>
                 <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('MUSICA')">🎵 MÚSICA</div>
+
+ <div class="extra-btn" style="border-color:var(--red);" onclick="filterVisual('REVISTAS')">🏞 REVISTAS</div>
+
                 <div class="extra-btn" style="border-color:var(--red); color:var(--white);" onclick="filterVisual('FLASH')">🕹️ JUEGOS FLASH</div>
             </div>
         </div>
@@ -533,7 +602,33 @@ text-align: center;
             </div>
         </div>
     </div>
+// abre contenedor visor
 
+<div id="magazineViewer" style="display:none; position:fixed; inset:0; background:black; z-index:2000000; flex-direction:column; align-items:center; overflow:hidden;">
+    <div style="background:#111; width:100%; padding:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--red); z-index:10;">
+        <span id="magTitle" style="color:white; font-weight:bold; font-size:0.9rem;">VISOR DE REVISTAS</span>
+        <button onclick="closeMagazine()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:4px; font-weight:bold;">CERRAR X</button>
+    </div>
+    
+    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden; touch-action:none;">
+        <img id="magPage" src="" 
+     style="max-width:100%; max-height:100%; object-fit:contain; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.1); 
+            transition: transform 0.1s ease-out; 
+            transform-origin: center center;"> </div>
+
+    <div style="background:#151515; width:100%; padding:20px; display:flex; justify-content:center; align-items:center; gap:20px; border-top:2px solid #333; z-index:10;">
+        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(-1)">◀</button>
+        <span id="magStep" style="color:var(--neon); font-family:monospace; font-size:1.2rem; font-weight:bold;">0 / 0</span>
+        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(1)">▶</button>
+    </div>
+</div>
+
+
+
+
+
+//cierre del contenedor visor
     <div id="lightbox">
         <div class="zoom-info-panel">
             <div id="zoomName" style="color:#fff; font-size:0.95rem; text-align:center; margin-bottom:8px; width:90%; overflow:hidden; text-transform:uppercase;"></div>
@@ -563,12 +658,20 @@ text-align: center;
     </div>
 
     <script>
+//variables
+
         const RUTA_PRINCIPAL = "ARCHIVOS";
         const USUARIO = "Laidel";
         const REPO = "Games-Florida";
         let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'CONSOLAS';
         let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
         let currentZoomItem = null;
+
+let magScale = 1, magPX = 0, magPY = 0;
+let magEvCache = [], magPrevDiff = -1;
+
+
+
 
         let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
         let isConfigMode = false;
@@ -944,12 +1047,18 @@ text-align: center;
         function filterVisual(cat) { showPage('catalogScreen'); document.getElementById('consoleFilter').value = cat; filterCat(cat); }
         
         function filterCat(c){ 
-            playSnd('sndClick'); 
-            currentCat = c; 
-            document.getElementById('consoleFilter').value = c;
-            renderGrid(); 
-            window.scrollTo(0, 0);
-        }
+    playSnd('sndClick'); 
+    currentCat = c; 
+    document.getElementById('consoleFilter').value = c;
+    
+    // Si el checkbox de modo listado está marcado, actualiza la lista
+    if(document.getElementById('dataSaverCheckList').checked) {
+        renderTextoLista();
+    } else {
+        renderGrid(); 
+    }
+    window.scrollTo(0, 0);
+}
 
         function showPiezas() { playSnd('sndClick'); showPage('catalogScreen'); filterCat('PIEZAS'); }
         function closeLightbox(){ document.getElementById('lightbox').style.display = 'none'; resetZoom(); currentZoomItem = null; }
@@ -970,20 +1079,52 @@ text-align: center;
         zCon.onpointerup = zCon.onpointercancel = e => { evCache = evCache.filter(ev => ev.pointerId !== e.pointerId); if (evCache.length < 2) prevDiff = -1; if (evCache.length === 0) isDrag = false; };
 
         function openZoom(urlMini, price, name, urlHD){
-            if(name.toLowerCase().endsWith('.swf')) { openFlash(urlHD, name); return; }
-            playSnd('sndClick');
-            const cleanName = name.split('.')[0];
-            currentZoomItem = { urlMini, price, name, urlHD };
-            document.getElementById('check-hd').checked = false; 
-            document.getElementById('expandedImg').src = urlMini;
-            document.getElementById('zoomName').innerText = cleanName.toUpperCase();
-            document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
-            document.getElementById('btnZoomAdd').onclick = function() { playSnd('sndAdd'); addCart(urlMini, name, price, urlHD); closeLightbox(); };
-            document.getElementById('btnGameplay').onclick = function() { window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); };
-            document.getElementById('lightbox').style.display = 'flex';
-            resetZoom();
-            trackData(30000); 
-        }
+    const fileName = name.toLowerCase();
+
+    // 1. SI ES PDF: Abrir fuera de la App inmediatamente para evitar demoras
+    if(fileName.endsWith('.pdf')) {
+        window.open(urlHD, '_blank');
+        return; 
+    }
+
+    // 2. SI ES CBZ/ZIP: Mantiene el visor interno (Magazine)
+    if(fileName.endsWith('.cbz') || fileName.endsWith('.zip')) {
+        loadCbzBook(urlHD, name);
+        return; 
+    }
+
+    // 3. SI ES FLASH (.SWF): Abre Ruffle
+    if(fileName.endsWith('.swf')) { 
+        openFlash(urlHD, name); 
+        return; 
+    }
+
+    // 4. PRODUCTO NORMAL: Menú de compra
+    playSnd('sndClick');
+    const cleanName = name.split('.')[0];
+    currentZoomItem = { urlMini, price, name, urlHD };
+
+    document.getElementById('check-hd').checked = false; 
+    document.getElementById('expandedImg').src = urlMini;
+    document.getElementById('zoomName').innerText = cleanName.toUpperCase();
+    document.getElementById('zoomPrice').innerText = "PRECIO: $" + price;
+
+    document.getElementById('btnZoomAdd').onclick = function() { 
+        playSnd('sndAdd'); 
+        addCart(urlMini, name, price, urlHD); 
+        closeLightbox(); 
+    };
+
+    document.getElementById('btnGameplay').onclick = function() { 
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(cleanName + " gameplay")}`, '_blank'); 
+    };
+
+    document.getElementById('lightbox').style.display = 'flex';
+    resetZoom();
+    trackData(30000); 
+}
+
+
 
         function toggleHDInZoom() {
             if(!currentZoomItem) return;
@@ -1024,34 +1165,95 @@ text-align: center;
         }
 
         async function loadFolder(input){
-            const files = Array.from(input.files); 
-            if(files.length === 0) { 
-                stopSyncLoop(); 
-                resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); 
-                return; 
+    const files = Array.from(input.files); 
+    if(files.length === 0) { 
+        stopSyncLoop(); 
+        resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); 
+        return; 
+    }
+    allItems = [];
+    window.localLists = {}; 
+
+    // 1. CARGA DE CONFIGURACIÓN (TXT)
+    const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
+    if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
+    
+    const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
+    if(tF){ const tx = await tF.text(); taxiP = parseFloat(tx.trim()) || 0; }
+
+    const listFiles = files.filter(f => f.name.toUpperCase().startsWith('LISTADO-') && f.name.endsWith('.txt'));
+    for (const lf of listFiles) {
+        const content = await lf.text();
+        const catName = lf.name.replace('LISTADO-', '').replace('.txt', '').toUpperCase();
+        window.localLists[catName] = content;
+    }
+
+    // 2. PROCESAMIENTO DE ARCHIVOS
+    const thumbs = files.filter(f => f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
+    
+    files.filter(f => !f.webkitRelativePath.toUpperCase().includes('THUMBNAILS')).forEach(file => {
+        const fileName = file.name.toLowerCase();
+        const isImg = file.type.startsWith('image/') || /\.(png|jpg|jpeg|webp)$/i.test(fileName);
+        const isSwf = fileName.endsWith('.swf');
+        const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz') || fileName.endsWith('.zip');
+
+        if(isImg || isSwf || isDoc) {
+            const thumbFile = thumbs.find(t => t.name === file.name || t.name === 'LOW_' + file.name);
+            
+            // Iconos de respaldo para documentos
+            let urlMini;
+            if (isDoc && !thumbFile) {
+                urlMini = fileName.endsWith('.pdf') 
+                    ? 'https://cdn-icons-png.flaticon.com/512/337/337946.png' 
+                    : 'https://cdn-icons-png.flaticon.com/512/4831/4831011.png';
+            } else {
+                urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
             }
-            allItems = [];
-            const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
-            if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
-            const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
-            if(tF){ const tx = await tF.text(); taxiP = parseFloat(tx.trim()) || 0; }
-            const thumbs = files.filter(f => f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
-            files.filter(f => !f.webkitRelativePath.toUpperCase().includes('THUMBNAILS')).forEach(file => {
-                const isImg = file.type.startsWith('image/');
-                const isSwf = file.name.toLowerCase().endsWith('.swf');
-                if(isImg || isSwf) {
-                    const thumbFile = thumbs.find(t => t.name === file.name || t.name === 'LOW_' + file.name);
-                    const urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
-                    const urlHD = URL.createObjectURL(file); 
-                    const path = file.webkitRelativePath.toUpperCase();
-                    let cat = isSwf ? 'FLASH' : path.includes('PIEZA') ? 'PIEZAS' : path.includes('SNES') ? 'SNES' : path.includes('NES') ? 'NES' : path.includes('3DS') ? '3DS' : path.includes('DS') ? 'DS' : path.includes('FIGURAS') ? 'FIGURAS 3D' : path.includes('N64') ? 'N64' : path.includes('PC') ? 'PC' : path.includes('PELI') ? 'PELICULAS' : path.includes('PS1') ? 'PS1' : path.includes('PS2') ? 'PS2' : path.includes('PS3') ? 'PS3' : path.includes('PS4') ? 'PS4' : path.includes('PSP') ? 'PSP' : path.includes('SEGA') ? 'SEGA' : path.includes('SWIT') ? 'SWITCH' : path.includes('WII') ? 'WII' : path.includes('XBOX') ? 'XBOX360' : path.includes('ANDROIDE') ? 'ANDROIDE' : 'OTRO';
-                    allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: file.name, price: priceList[file.name] || 0, cat: cat });
-                }
+
+            const urlHD = URL.createObjectURL(file); 
+            const path = file.webkitRelativePath.toUpperCase();
+            
+            // --- TU LISTA DE CONSOLAS FIEL A LA IMAGEN ---
+            let cat = isSwf ? 'FLASH' :
+                      path.includes('PIEZA') ? 'PIEZAS' :
+                      path.includes('SNES') ? 'SNES' :
+                      path.includes('NES') ? 'NES' :
+                      path.includes('3DS') ? '3DS' :
+                      path.includes('DS') ? 'DS' :
+                      path.includes('FIGURAS') ? 'FIGURAS 3D' :
+                      path.includes('N64') ? 'N64' :
+                      path.includes('PC') ? 'PC' :
+                      path.includes('PELICULAS') ? 'PELICULAS' :
+                      path.includes('REVISTAS') ? 'REVISTAS' :
+                      path.includes('PS1') ? 'PS1' :
+                      path.includes('PS2') ? 'PS2' :
+                      path.includes('PS3') ? 'PS3' :
+                      path.includes('PS4') ? 'PS4' :
+                      path.includes('PSP') ? 'PSP' :
+                      path.includes('SEGA') ? 'SEGA' :
+                      path.includes('SWIT') ? 'SWITCH' :
+                      path.includes('WII') ? 'WII' :
+                      path.includes('XBOX') ? 'XBOX360' :
+                      path.includes('ANDROIDE') ? 'ANDROIDE' :
+                      path.includes('.CBZ') ? 'REVISTAS' : 
+                      path.includes('.PDF') ? 'REVISTAS' : 
+
+ 'OTRO';
+
+            allItems.push({ 
+                url: urlMini, 
+                urlHD: urlHD, 
+                name: file.name, 
+                price: priceList[file.name] || 0, 
+                cat: cat 
             });
-            stopSyncLoop(); 
-            renderGrid();
-            resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
         }
+    });
+
+    stopSyncLoop(); 
+    renderGrid(); 
+    resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
+}
 
         async function loadFromCloud() {
             try {
@@ -1093,44 +1295,109 @@ text-align: center;
             allItems.push({ url: isSwf ? 'https://cdn-icons-png.flaticon.com/512/4603/4603953.png' : urlMini, urlHD: urlHD, name: name, price: priceList[name] || 0, cat: finalCat });
         }
 
-        function renderGrid(){
-            const grid = document.getElementById('imageGrid'); 
-            const search = document.getElementById('searchInput').value.toUpperCase();
-            grid.innerHTML = '';
 
-            if (currentCat === 'CONSOLAS' && search === '') {
-                consoleIcons.forEach(icon => {
-                    const card = document.createElement('div');
-                    card.className = 'console-icon-card';
-                    card.onclick = () => filterCat(icon.id);
-                    const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
-                    const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
-                    card.innerHTML = `
-                        <img src="${localPath}" 
-                             style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
-                             onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; } else { this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'; }">
-                        <div class="console-label">${icon.label}</div>
-                    `;
-                    grid.appendChild(card);
-                });
-                return;
-            }
 
-            allItems.filter(i => (currentCat==='TODO' || i.cat===currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
-                const isSwf = i.name.toLowerCase().endsWith('.swf');
-                const btnLabel = isSwf ? 'JUGAR' : 'AÑADIR';
-                const d = document.createElement('div'); d.className = 'grid-item';
-                const imgTag = (isDataSaver && !isSwf) 
-                    ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' loading=\'lazy\'>'">🚫</div>`
-                    : `<img src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')">`;
-                
+
+// Render Grid para LIBROS CBZ
+        // Render Grid Matrix - ACTUALIZADO CON SOPORTE CBZ
+function renderGrid() {
+    const grid = document.getElementById('imageGrid');
+    const search = document.getElementById('searchInput').value.toUpperCase();
+    grid.innerHTML = '';
+
+    if (currentCat === 'CONSOLAS' && search === '') {
+        consoleIcons.forEach(icon => {
+            const card = document.createElement('div');
+            card.className = 'console-icon-card';
+            card.onclick = () => filterCat(icon.id);
+            const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
+            const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
+            card.innerHTML = `
+                <img src="${localPath}" 
+                     style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
+                     onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; } else { this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'; }">
+                <div class="console-label">${icon.label}</div>
+            `;
+            grid.appendChild(card);
+        });
+        return;
+    }
+
+    allItems.filter(i => (currentCat === 'TODO' || i.cat === currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
+        const fileName = i.name.toLowerCase();
+        const isSwf = fileName.endsWith('.swf');
+        const isCbz = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
+        const isPdf = fileName.endsWith('.pdf');
+
+        let btnLabel = 'AÑADIR';
+        let accionBoton = `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`;
+
+        // Lógica de botones actualizada v8.3
+        if (isSwf) {
+            btnLabel = 'JUGAR';
+            accionBoton = `openFlash('${i.urlHD}', '${i.name}')`;
+        } else if (isCbz) {
+            btnLabel = 'LEER';
+            accionBoton = `openZoom('${i.url}', '${i.price}', '${i.name}', '${i.urlHD}')`;
+        } else if (isPdf) {
+            btnLabel = 'VER PDF'; // Etiqueta clara para el usuario
+            accionBoton = `window.open('${i.urlHD}', '_blank')`;
+        }
+
+        const d = document.createElement('div'); 
+        d.className = 'grid-item';
+        const imgId = `portada_${Math.random().toString(36).substr(2, 9)}`;
+
+        const imgTag = (isDataSaver && !isSwf && !isCbz && !isPdf) 
+            ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' loading=\'lazy\'>'">🚫</div>`
+            : `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')">`;
+
+        d.innerHTML = `
+            <div class="price-tag">$${i.price}</div>
+            ${imgTag}
+            <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${accionBoton}">${btnLabel}</button>
+            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${(i.name || '').split('.')[0].toUpperCase()}</div>`;
+
+        grid.appendChild(d);
+
+        if (isCbz && typeof JSZip !== 'undefined' && typeof getCbzCover === 'function') {
+            getCbzCover(i.urlHD).then(urlReal => {
+                if (urlReal) {
+                    const el = document.getElementById(imgId);
+                    if (el) el.src = urlReal;
+                }
+            }).catch(e => {});
+        }
+    });
+}
+
+
+
+//-----------------------
+
+        function addCart(u, n, p, uHD) { cart.push({ u, n, p, urlHD: uHD }); updateCart(); }
+        function delItem(i) { playSnd('sndTrash'); cart.splice(i, 1); updateCart(); }
+
+        function updateCart() { 
+            const count = document.getElementById('cartCount'); const list = document.getElementById('cartList');
+            count.innerText = cart.length; count.style.display = cart.length>0?'block':'none'; 
+            let total = 0; list.innerHTML = ''; 
+            cart.forEach((item, i) => { 
+                total += item.p; 
+                const d = document.createElement('div'); d.style = "display:flex; align-items:center; gap:10px; border-bottom:1px solid #222; padding:5px 0;";
                 d.innerHTML = `
-                    <div class="price-tag">$${i.price}</div>
-                    ${imgTag}
-                    <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${isSwf ? `openFlash('${i.urlHD}', '${i.name}')` : `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`}">${btnLabel}</button>
-                    <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${i.name.split('.')[0].toUpperCase()}</div>`;
-                grid.appendChild(d);
-            });
+                    <img src="${item.u}" style="width:35px; height:35px; border-radius:4px; object-fit:cover; cursor:pointer;" onclick="openZoom('${item.u}', ${item.p}, '${item.n}', '${item.urlHD}')">
+                    <div style="flex:1; font-size:0.6rem;">${item.n.split('.')[0]}</div>
+                    <div class="white-price">$${item.p}</div>
+                    <button style="background:var(--red); color:white; border:none; padding:2px 6px; border-radius:4px;" onclick="delItem(${i})">X</button>`;
+                list.appendChild(d);
+            }); 
+            const isTaxi = document.getElementById('check-taxi').checked;
+            if(isTaxi) total += taxiP;
+            document.getElementById('taxiStatus').innerText = isTaxi ? "INCLUIDO" : "NO INCLUIDO";
+            document.getElementById('taxiVal').innerText = "$" + (isTaxi ? taxiP.toFixed(2) : "0.00");
+            document.getElementById('finalPrice').innerText = "TOTAL: $" + total.toFixed(2); 
+            updateDateTime(); 
         }
 
         function addCart(u, n, p, uHD) { cart.push({ u, n, p, urlHD: uHD }); updateCart(); }
@@ -1168,6 +1435,581 @@ text-align: center;
         }
         function resetTicketButtons() { document.getElementById('btnGenerate').innerHTML = "📸 GENERAR TICKET"; document.getElementById('btnWA').style.display = "none"; playSnd('sndClick'); }
         function openWhatsApp() { const n = document.getElementById('cName').value || "Cliente"; window.open(`https://wa.me/54935185?text=${encodeURIComponent("Hola Florida Games, soy "+n+". Envío pedido.")}`, '_blank'); }
-    </script>
+
+
+// --- FUNCIÓN PARA BORRAR TODO EL CACHÉ ---
+async function borrarCacheTotal() {
+    // Sonido de basura para darle el toque de tu web
+    playSnd('sndTrash'); 
+
+    if (confirm("¿Deseas forzar la limpieza de caché? La aplicación se reiniciará para aplicar cambios.")) {
+        try {
+            // 1. Desregistrar Service Workers
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                }
+            }
+
+            // 2. Borrar todas las llaves de caché
+            const cacheNames = await caches.keys();
+            await Promise.all(
+                cacheNames.map(name => caches.delete(name))
+            );
+
+            alert("✅ Sistema limpiado. Recargando...");
+            
+            // 3. Recarga forzada desde el servidor
+            window.location.reload(true);
+        } catch (error) {
+            console.error("Error al limpiar caché:", error);
+            alert("❌ Hubo un error al limpiar. Inténtalo de nuevo.");
+        }
+    }
+}
+
+// --- REGISTRO DEL SW (Asegúrate que esté activo) ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Importante: tu sw.js debe estar en la raíz junto a este HTML
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log("Florida Games SW: Activo"))
+            .catch(err => console.log("Error SW:", err));
+    });
+}
+</script>
+
+
+<script>
+    // Se ejecuta apenas el HTML está listo
+    window.addEventListener('DOMContentLoaded', () => {
+        const percentText = document.getElementById('load-percentage');
+        const loader = document.getElementById('cache-loader-container');
+        let progress = 0;
+        let isImageReady = false;
+
+        // 1. Monitor de la imagen específica
+        const imgCache = new Image();
+        imgCache.src = 'Bienvenida.png'; // Nombre exacto de tu archivo
+
+        // Si la imagen ya está en caché, esto se activa casi instantáneamente
+        imgCache.onload = () => {
+            isImageReady = true;
+        };
+
+        // 2. Lógica del contador
+        const interval = setInterval(() => {
+            // Sube rápido hasta 90% para dar sensación de carga
+            if (progress < 90) {
+                progress += Math.floor(Math.random() * 5) + 2;
+            } 
+            // Solo pasa de 90% a 100% si la imagen ya se descargó o salió de caché
+            else if (isImageReady) {
+                progress += 5;
+            }
+
+            if (progress > 100) progress = 100;
+            percentText.innerText = progress + "%";
+
+            // 3. Finalizar y ocultar
+            if (progress === 100 && isImageReady) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loader.style.transition = "opacity 0.6s ease";
+                    loader.style.opacity = "0";
+                    setTimeout(() => loader.style.display = "none", 600);
+                }, 300);
+            }
+        }, 100); 
+    });
+
+
+
+//comienza el listado
+
+
+
+function toggleDataSaverList() {
+    const isListMode = document.getElementById('dataSaverCheckList').checked;
+    const grid = document.getElementById('imageGrid');
+    const listContainer = document.getElementById('listadoPC');
+    
+    playGenericSound(isListMode); // Sonido de activación
+
+    if (isListMode) {
+        grid.style.display = 'none';      // Oculta las 3 filas de carátulas
+        listContainer.style.display = 'block'; // Muestra la lista
+        renderTextoLista();               // Llena la lista con tus juegos
+        showGenericAnim("MODO LISTADO ON", false);
+    } else {
+        grid.style.display = 'grid';       // Vuelve a mostrar las carátulas
+        listContainer.style.display = 'none';
+        showGenericAnim("MODO CARÁTULAS", true);
+    }
+}
+
+//otro codigo mas par listado
+
+
+async function renderTextoLista() {
+    const container = document.getElementById('listaItemsContainer');
+    if (!container) return;
+
+    let catSeleccionada = currentCat;
+    if (catSeleccionada === 'CONSOLAS' || catSeleccionada === 'TODO') {
+        catSeleccionada = 'PC';
+    }
+
+    container.innerHTML = `<p style='color:var(--neon);'>Buscando listado...</p>`;
+
+    // PRIORIDAD 1: Datos cargados localmente mediante "SINCRONIZAR LOCAL"
+    if (window.localLists && window.localLists[catSeleccionada]) {
+        procesarYMostrarTexto(window.localLists[catSeleccionada], catSeleccionada, "MEMORIA LOCAL (OFFLINE) 📂");
+        return;
+    }
+
+    // PRIORIDAD 2: Intentar Nube (si hay internet)
+    const nombreArchivo = `LISTADO-${catSeleccionada.toUpperCase()}.txt`;
+    const rutaTxtNube = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/DESCARGAS/${nombreArchivo}`;
+
+    try {
+        const response = await fetch(rutaTxtNube);
+        if (response.ok) {
+            const texto = await response.text();
+            procesarYMostrarTexto(texto, catSeleccionada, "NUBE ☁️");
+        } else {
+            throw new Error();
+        }
+    } catch (error) {
+        // PRIORIDAD 3: Mostrar carátulas en memoria si no hay TXT
+        mostrarDesdeMemoria(catSeleccionada);
+    }
+}
+
+
+//fin
+
+function procesarYMostrarTexto(texto, categoria, origen) {
+    const container = document.getElementById('listaItemsContainer');
+    const lineas = texto.split('\n').filter(linea => linea.trim() !== "");
+    
+    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray;">Origen: ${origen}</div>`;
+    
+    lineas.forEach((linea, index) => {
+        // Suponiendo formato en TXT -> NOMBRE : PRECIO : TAMAÑO
+        // Ejemplo: Age of Empires II : 100 : 2GB
+        const partes = linea.split(':');
+        const nombre = partes[0].trim().toUpperCase();
+        const precio = partes[1] ? partes[1].trim() : "---";
+        const tamano = partes[2] ? partes[2].trim() : ""; // Captura el tercer dato (2GB)
+
+        htmlFinal += `
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:5px 0; font-size:0.9rem;">
+                <span style="color:var(--white); flex:1;">
+                    <b style="color:yellow; margin-right:8px;">${index + 1}.</b> ${nombre}
+                </span>
+                <div style="text-align:right;">
+                    <span style="color:#00CCFF; font-weight:bold; margin-right:10px;">${tamano}</span>
+                    <span style="color:var(--neon); font-weight:bold;">$${precio}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = htmlFinal;
+}
+
+
+
+function mostrarDesdeMemoria(catSeleccionada) {
+    const container = document.getElementById('listaItemsContainer');
+    const filtrados = allItems.filter(i => catSeleccionada === 'TODO' || i.cat === catSeleccionada);
+
+    if (filtrados.length === 0) {
+        container.innerHTML = `<p style="color:var(--red);">Al Sincronizar MODO APAGON 👀🕯habra datos disponibles para ${catSeleccionada}.</p>`;
+        return;
+    }
+
+    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray;">MOSTRANDO DESDE MEMORIA VOLÁTIL</div>`;
+    
+    filtrados.forEach(i => {
+        htmlFinal += `
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:5px 0;">
+                <span style="color:var(--white); flex:1;">${i.name.split('.')[0].toUpperCase()}</span>
+                <span style="color:var(--neon); font-weight:bold;">$${i.price}</span>
+            </div>
+        `;
+    });
+    container.innerHTML = htmlFinal;
+}
+
+
+
+let magPages = [];
+let currentMagIdx = 0;
+
+function openMagazine(name) {
+    playSnd('sndClick');
+    // Filtramos todas las imágenes que pertenecen a esta revista por nombre
+    magPages = allItems.filter(item => item.name.startsWith(name.split('_')[0]) && item.cat === 'REVISTAS')
+                       .sort((a, b) => a.name.localeCompare(b.name));
+    
+    if(magPages.length > 0) {
+        currentMagIdx = 0;
+
+
+document.getElementById('magZoomContainer').style.touchAction = 'none';
+
+
+
+        document.getElementById('magazineViewer').style.display = 'flex';
+        updateMagDisplay();
+    } else {
+        alert("No se encontraron páginas para esta revista.");
+    }
+}
+
+function updateMagDisplay() {
+    const item = magPages[currentMagIdx];
+    document.getElementById('magPage').src = item.urlHD;
+    document.getElementById('magTitle').innerText = item.name.split('.')[0].toUpperCase();
+    document.getElementById('magStep').innerText = (currentMagIdx + 1) + " / " + magPages.length;
+}
+
+function changePage(dir) {
+resetMagZoom();
+    playSnd('sndClick');
+    currentMagIdx += dir;
+    if (currentMagIdx < 0) currentMagIdx = 0;
+    if (currentMagIdx >= magPages.length) currentMagIdx = magPages.length - 1;
+    updateMagDisplay();
+}
+
+function closeMagazine() {
+resetMagZoom();
+    document.getElementById('magazineViewer').style.display = 'none';
+}
+
+
+
+
+
+
+async function loadCbzBook(url, name) {
+    playSnd('sndClick');
+    const viewer = document.getElementById('magazineViewer');
+    const magPage = document.getElementById('magPage');
+    
+    // --- RESETEO DE ORIGEN ---
+    resetMagZoom(); // Esto pone pX, pY en 0 y scale en 1
+    
+    viewer.style.display = 'flex';
+    magPage.src = ""; 
+    document.getElementById('magTitle').innerText = "PROCESANDO: " + name.toUpperCase();
+    document.getElementById('magStep').innerText = "⌛...";
+
+    try {
+        magPages = []; 
+
+        if (name.toLowerCase().endsWith('.pdf')) {
+            const pdfjsLib = window['pdfjs-dist/build/pdf'];
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+            
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 2 }); 
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+                magPages.push({
+                    urlHD: URL.createObjectURL(blob),
+                    name: `Página ${i}`
+                });
+                document.getElementById('magStep').innerText = `Cargando ${i}/${pdf.numPages}`;
+            }
+        } else {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const zip = new JSZip();
+            const content = await zip.loadAsync(blob);
+            
+            const imgFiles = Object.keys(content.files)
+                .filter(n => /\.(jpg|jpeg|png|webp)$/i.test(n) && !content.files[n].dir)
+                .sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+
+            for (let imgName of imgFiles) {
+                const imgBlob = await content.files[imgName].async("blob");
+                magPages.push({
+                    urlHD: URL.createObjectURL(imgBlob),
+                    name: imgName
+                });
+            }
+        }
+
+        if(magPages.length > 0) {
+            currentMagIdx = 0;
+            updateMagDisplay();
+        } else {
+            alert("No se pudo leer el contenido.");
+            closeMagazine();
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Error al abrir el archivo.");
+        closeMagazine();
+    }
+}
+
+
+// --- LÓGICA DE ZOOM PARA EL VISOR DE CÓMICS (VERSIÓN HÍBRIDA V22.3) ---
+
+function updateMagTransform() {
+    const img = document.getElementById('magPage');
+    if (img) {
+        // Mantenemos el centro como origen para estabilidad tipo v19
+        img.style.transformOrigin = "center center";
+        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    }
+}
+
+function resetMagZoom() {
+    scale = 1;
+    pX = 0;
+    pY = 0;
+    const img = document.getElementById('magPage');
+    if (img) {
+        // Forzamos que la imagen use el espacio disponible correctamente
+        img.style.width = "auto";
+        img.style.height = "auto";
+        img.style.maxWidth = "100%";
+        img.style.maxHeight = "100%";
+    }
+    updateMagTransform();
+}
+
+const magZCon = document.getElementById('magZoomContainer');
+let isMovingMag = false;
+
+magZCon.addEventListener('pointerdown', e => {
+    if (!document.getElementById('magPage').src) return;
+    e.preventDefault();
+    isMovingMag = true;
+    evCache.push(e);
+    
+    // Matemática estable: el inicio es relativo al toque actual
+    start = { x: e.clientX - pX, y: e.clientY - pY };
+    magZCon.setPointerCapture(e.pointerId);
+}, { passive: false });
+
+magZCon.addEventListener('pointermove', e => {
+    if (!isMovingMag) return;
+    e.preventDefault();
+
+    for (let i = 0; i < evCache.length; i++) {
+        if (e.pointerId === evCache[i].pointerId) { evCache[i] = e; break; }
+    }
+
+    if (evCache.length === 2) {
+        // LÓGICA DE MIRILLA (ZOOM FOCAL)
+        let curDiff = Math.sqrt(Math.pow(evCache[1].clientX - evCache[0].clientX, 2) + Math.pow(evCache[1].clientY - evCache[0].clientY, 2));
+        let midX = (evCache[0].clientX + evCache[1].clientX) / 2;
+        let midY = (evCache[0].clientY + evCache[1].clientY) / 2;
+
+        if (prevDiff > 0) {
+            let oldScale = scale;
+            let zoomSensitivity = 0.05; // Un poco más suave para evitar saltos
+
+            if (curDiff > prevDiff) scale = Math.min(scale + zoomSensitivity, 4);
+            else scale = Math.max(scale - zoomSensitivity, 1);
+
+            if (scale !== oldScale) {
+                // Ajuste focal basado en el centro del contenedor (Estilo v19 mejorado)
+                let factor = (scale / oldScale) - 1;
+                pX -= (midX - (magZCon.clientWidth / 2) - pX) * factor;
+                pY -= (midY - (magZCon.clientHeight / 2) - pY) * factor;
+                
+                // Actualizamos start para que el movimiento sea continuo
+                start.x = midX - pX;
+                start.y = midY - pY;
+            }
+            updateMagTransform();
+        }
+        prevDiff = curDiff;
+    } else if (evCache.length === 1) {
+        // ARRASTRE SIMPLE
+        pX = e.clientX - start.x;
+        pY = e.clientY - start.y;
+        updateMagTransform();
+    }
+}, { passive: false });
+
+magZCon.addEventListener('pointerup', e => {
+    isMovingMag = false;
+    evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
+    if (evCache.length < 2) prevDiff = -1;
+    magZCon.releasePointerCapture(e.pointerId);
+}, { passive: false });
+
+magZCon.addEventListener('pointercancel', e => {
+    isMovingMag = false;
+    evCache = [];
+    prevDiff = -1;
+});
+
+// --- EXTRACCIÓN DE PORTADA CBZ ---
+
+async function getCbzCover(fileUrl) {
+    try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) return null;
+        const blob = await response.blob();
+        const zip = await JSZip.loadAsync(blob);
+        
+        const files = Object.keys(zip.files).sort();
+        const coverFile = files.find(f => 
+            f.toLowerCase().endsWith('.jpg') || 
+            f.toLowerCase().endsWith('.jpeg') || 
+            f.toLowerCase().endsWith('.png')
+        );
+
+        if (coverFile) {
+            const data = await zip.file(coverFile).async("blob");
+            return URL.createObjectURL(data);
+        }
+    } catch (err) {
+        console.error("Error en portada CBZ:", err);
+    }
+    return null;
+}
+
+// --- OVERRIDES DE NAVEGACIÓN ---
+
+if (typeof changePage !== 'undefined') {
+    const originalChangePage = changePage;
+    changePage = function(dir) {
+        resetMagZoom();
+        originalChangePage(dir);
+    }
+}
+
+if (typeof closeMagazine !== 'undefined') {
+    const originalCloseMagazine = closeMagazine;
+    closeMagazine = function() {
+        resetMagZoom();
+        originalCloseMagazine();
+    }
+}
+
+
+
+
+
+
+
+//otro mas para captar el cover
+
+
+async function getCbzCover(fileUrl) {
+    try {
+        // 1. Buscamos el archivo
+        const response = await fetch(fileUrl);
+        if (!response.ok) return null;
+        const blob = await response.blob();
+        
+        // 2. Abrimos el CBZ (que es un ZIP)
+        const zip = await JSZip.loadAsync(blob);
+        
+        // 3. Listamos los archivos y buscamos la primera imagen (jpg o png)
+        const files = Object.keys(zip.files).sort();
+        const coverFile = files.find(f => 
+            f.toLowerCase().endsWith('.jpg') || 
+            f.toLowerCase().endsWith('.jpeg') || 
+            f.toLowerCase().endsWith('.png')
+        );
+
+        if (coverFile) {
+            // 4. Convertimos esa imagen interna en una URL que el navegador entienda
+            const data = await zip.file(coverFile).async("blob");
+            return URL.createObjectURL(data);
+        }
+    } catch (err) {
+        console.error("No se pudo extraer la portada de:", fileUrl, err);
+    }
+    return null;
+}
+
+function updateMagTransform() {
+    const img = document.getElementById('magPage');
+    if (img) {
+        // Esta línea es la que físicamente mueve y agranda la foto
+        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    }
+}
+
+
+
+
+// --- CIERRE DE LÓGICA Y CORRECCIONES DE SEGURIDAD ---
+
+if (typeof changePage !== 'undefined') {
+    const originalChangePage = changePage;
+    changePage = function(dir) {
+        resetMagZoom();
+        originalChangePage(dir);
+    }
+}
+
+if (typeof closeMagazine !== 'undefined') {
+    const originalCloseMagazine = closeMagazine;
+    closeMagazine = function() {
+        resetMagZoom();
+        originalCloseMagazine();
+    }
+}
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log("SW: Activo"))
+            .catch(err => console.log("Error SW:", err));
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const percentText = document.getElementById('load-percentage');
+    const loader = document.getElementById('cache-loader-container');
+    if(!loader) return;
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 10) + 5;
+        if (progress > 100) progress = 100;
+        if(percentText) percentText.innerText = progress + "%";
+        if (progress === 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = "none", 600);
+            }, 500);
+        }
+    }, 100);
+});
+
+setInterval(updateSessionTimer, 1000);
+setInterval(checkInternet, 5000);
+setInterval(updateOnlineCount, 10000);
+startDataCounter();
+
+</script>
+
 </body>
 </html>
+
