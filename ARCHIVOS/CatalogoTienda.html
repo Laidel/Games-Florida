@@ -1388,20 +1388,26 @@ function renderGrid() {
 
     // 1. SECCIÓN CONSOLAS
     if (currentCat === 'CONSOLAS' && search === '') {
-        consoleIcons.forEach(icon => {
-            const card = document.createElement('div');
-            card.className = 'console-icon-card';
-            card.onclick = () => filterCat(icon.id);
-            const localPath = icon.localUrl || `./${RUTA_PRINCIPAL}/${icon.file}`;
-            const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
-            card.innerHTML = `
-                <img src="${localPath}" style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
-                     onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; }">
-                <div class="console-label">${icon.label}</div>`;
-            grid.appendChild(card);
-        });
-        return;
-    }
+    consoleIcons.forEach(icon => {
+        const card = document.createElement('div');
+        card.className = 'console-icon-card';
+        card.onclick = () => filterCat(icon.id);
+        
+        const localPath = icon.localUrl || `./${RUTA_PRINCIPAL}/${icon.file}`;
+        const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
+        
+        // Iconos más grandes (110px) y resplandor azul fuerte
+        card.innerHTML = `
+            <img src="${localPath}" 
+                 style="width:110px; height:110px; object-fit:contain; margin-bottom:12px; filter: drop-shadow(0 0 12px #00a2ff) drop-shadow(0 0 5px #0044ff);" 
+                 onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; }">
+            <div class="console-label" style="color: #00ccff; font-size: 1.2rem; font-weight: bold; text-shadow: 0 0 10px #0044ff;">
+                ${icon.label}
+            </div>`;
+        grid.appendChild(card);
+    });
+    return;
+}
 
     // 2. SECCIÓN ITEMS (Juegos y Revistas)
     allItems.filter(i => (currentCat === 'TODO' || i.cat === currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
