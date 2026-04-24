@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
  src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -604,25 +604,22 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
     </div>
 // abre contenedor visor
 
-<div id="magazineViewer" style="display:none; position:fixed; inset:0; background:black; z-index:2000000; flex-direction:column; align-items:center; overflow:hidden;">
-    <div style="background:#111; width:100%; padding:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--red); z-index:10;">
-        <span id="magTitle" style="color:white; font-weight:bold; font-size:0.9rem;">VISOR DE REVISTAS</span>
-        <button onclick="closeMagazine()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:4px; font-weight:bold;">CERRAR X</button>
-    </div>
+<div id="magazineViewer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000; flex-direction:column; align-items:center; justify-content:center; color:white; font-family:sans-serif;">
     
-    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden; touch-action:none;">
-        <img id="magPage" src="" 
-     style="max-width:100%; max-height:100%; object-fit:contain; 
-            box-shadow: 0 0 20px rgba(255,255,255,0.1); 
-            transition: transform 0.1s ease-out; 
-            transform-origin: center center;"> </div>
+    <div id="magTitle" style="padding:10px; color:lime; font-weight:bold; text-align:center;"></div>
+    <div id="magStep" style="font-size:0.9rem; margin-bottom:5px;"></div>
 
-    <div style="background:#151515; width:100%; padding:20px; display:flex; justify-content:center; align-items:center; gap:20px; border-top:2px solid #333; z-index:10;">
-        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(-1)">◀</button>
-        <span id="magStep" style="color:var(--neon); font-family:monospace; font-size:1.2rem; font-weight:bold;">0 / 0</span>
-        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(1)">▶</button>
+    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; touch-action:none; cursor:grab;">
+        <img id="magPage" src="" style="max-width:100%; max-height:100%; object-fit:contain; transition: transform 0.1s ease-out;">
+    </div>
+
+    <div style="display:flex; gap:15px; padding:20px; background:rgba(0,0,0,0.8); width:100%; justify-content:center;">
+        <button onclick="changePage(-1)" style="padding:10px 15px; border-radius:5px; border:none; background:#333; color:white;">⬅️ Anterior</button>
+        <button onclick="changePage(1)" style="padding:10px 15px; border-radius:5px; border:none; background:#333; color:white;">Siguiente ➡️</button>
+        <button onclick="closeMagazine()" style="padding:10px 15px; border-radius:5px; border:none; background:red; color:white; font-weight:bold;">CERRAR</button>
     </div>
 </div>
+
 
 
 
@@ -1220,22 +1217,36 @@ function openZoom(urlMini, price, name, urlHD){
             loadFromCloud(); 
         }
 
-        async function loadFolder(input){
-    const files = Array.from(input.files); 
-    if(files.length === 0) { 
-        stopSyncLoop(); 
-        resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL'); 
-        return; 
+        async function loadFolder(input) {
+    const files = Array.from(input.files);
+    if (files.length === 0) {
+        stopSyncLoop();
+        resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
+        return;
     }
-    allItems = [];
-    window.localLists = {}; 
-
-    // 1. CARGA DE CONFIGURACIÓN (TXT)
-    const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
-    if(pF){ const t = await pF.text(); t.split('\n').forEach(l => { const [n, p] = l.split(':'); if(n && p) priceList[n.trim()] = parseFloat(p.trim()); }); }
     
+    allItems = [];
+    window.localLists = {};
+
+    // --- NUEVO: Mapa para capturar iconos de consola locales ---
+    const localIconsMap = {};
+    const iconFilesToLookFor = consoleIcons.map(icon => icon.file.toLowerCase());
+
+    // 1. CARGA DE CONFIGURACIÓN Y ICONOS
+    const pF = files.find(f => f.name.toLowerCase() === 'precio.txt');
+    if (pF) { 
+        const t = await pF.text(); 
+        t.split('\n').forEach(l => { 
+            const [n, p] = l.split(':'); 
+            if (n && p) priceList[n.trim()] = parseFloat(p.trim()); 
+        }); 
+    }
+
     const tF = files.find(f => f.name.toLowerCase() === 'taxi.txt');
-    if(tF){ const tx = await tF.text(); taxiP = parseFloat(tx.trim()) || 0; }
+    if (tF) { 
+        const tx = await tF.text(); 
+        taxiP = parseFloat(tx.trim()) || 0; 
+    }
 
     const listFiles = files.filter(f => f.name.toUpperCase().startsWith('LISTADO-') && f.name.endsWith('.txt'));
     for (const lf of listFiles) {
@@ -1244,19 +1255,38 @@ function openZoom(urlMini, price, name, urlHD){
         window.localLists[catName] = content;
     }
 
-    // 2. PROCESAMIENTO DE ARCHIVOS
+    // --- DETECTAR ICONOS DE CONSOLA EN LA CARPETA ---
+    files.forEach(file => {
+        const nameLow = file.name.toLowerCase();
+        if (iconFilesToLookFor.includes(nameLow)) {
+            localIconsMap[nameLow] = URL.createObjectURL(file);
+        }
+    });
+
+    // Actualizar las rutas de los iconos del menú
+    consoleIcons.forEach(icon => {
+        const fileName = icon.file.toLowerCase();
+        if (localIconsMap[fileName]) {
+            icon.localUrl = localIconsMap[fileName]; // Guardamos la URL local
+        }
+    });
+
+    // 2. PROCESAMIENTO DE ARCHIVOS (JUEGOS Y DOCUMENTOS)
     const thumbs = files.filter(f => f.webkitRelativePath.toUpperCase().includes('THUMBNAILS'));
-    
+
     files.filter(f => !f.webkitRelativePath.toUpperCase().includes('THUMBNAILS')).forEach(file => {
         const fileName = file.name.toLowerCase();
+        
+        // Evitar que los iconos de consola se listen como si fueran juegos
+        if (iconFilesToLookFor.includes(fileName)) return;
+
         const isImg = file.type.startsWith('image/') || /\.(png|jpg|jpeg|webp)$/i.test(fileName);
         const isSwf = fileName.endsWith('.swf');
         const isDoc = fileName.endsWith('.pdf') || fileName.endsWith('.cbz') || fileName.endsWith('.zip');
 
-        if(isImg || isSwf || isDoc) {
+        if (isImg || isSwf || isDoc) {
             const thumbFile = thumbs.find(t => t.name === file.name || t.name === 'LOW_' + file.name);
-            
-            // Iconos de respaldo para documentos
+
             let urlMini;
             if (isDoc && !thumbFile) {
                 urlMini = fileName.endsWith('.pdf') 
@@ -1266,10 +1296,9 @@ function openZoom(urlMini, price, name, urlHD){
                 urlMini = thumbFile ? URL.createObjectURL(thumbFile) : URL.createObjectURL(file);
             }
 
-            const urlHD = URL.createObjectURL(file); 
+            const urlHD = URL.createObjectURL(file);
             const path = file.webkitRelativePath.toUpperCase();
-            
-            // --- TU LISTA DE CONSOLAS FIEL A LA IMAGEN ---
+
             let cat = isSwf ? 'FLASH' :
                       path.includes('PIEZA') ? 'PIEZAS' :
                       path.includes('SNES') ? 'SNES' :
@@ -1292,25 +1321,22 @@ function openZoom(urlMini, price, name, urlHD){
                       path.includes('XBOX') ? 'XBOX360' :
                       path.includes('ANDROIDE') ? 'ANDROIDE' :
                       path.includes('.CBZ') ? 'REVISTAS' : 
-                      path.includes('.PDF') ? 'REVISTAS' : 
+                      path.includes('.PDF') ? 'REVISTAS' : 'OTRO';
 
- 'OTRO';
-
-            allItems.push({ 
-                url: urlMini, 
-                urlHD: urlHD, 
-                name: file.name, 
-                price: priceList[file.name] || 0, 
-                cat: cat 
+            allItems.push({
+                url: urlMini,
+                urlHD: urlHD,
+                name: file.name,
+                price: priceList[file.name] || 0,
+                cat: cat
             });
         }
     });
 
-    stopSyncLoop(); 
-    renderGrid(); 
+    stopSyncLoop();
+    renderGrid();
     resetButtonLoading('btnSyncLocal', 'SINCRONIZAR LOCAL');
 }
-
         async function loadFromCloud() {
             try {
                 const response = await fetch(`https://api.github.com/repos/${USUARIO}/${REPO}/contents/${RUTA_PRINCIPAL}`);
@@ -1354,82 +1380,84 @@ function openZoom(urlMini, price, name, urlHD){
 
 
 
-// Render Grid para LIBROS CBZ
-        // Render Grid Matrix - ACTUALIZADO CON SOPORTE CBZ
 function renderGrid() {
     const grid = document.getElementById('imageGrid');
     const search = document.getElementById('searchInput').value.toUpperCase();
+    if (!grid) return; // Seguridad extra
     grid.innerHTML = '';
 
+    // 1. SECCIÓN CONSOLAS
     if (currentCat === 'CONSOLAS' && search === '') {
         consoleIcons.forEach(icon => {
             const card = document.createElement('div');
             card.className = 'console-icon-card';
             card.onclick = () => filterCat(icon.id);
-            const localPath = `./${RUTA_PRINCIPAL}/${icon.file}`;
+            const localPath = icon.localUrl || `./${RUTA_PRINCIPAL}/${icon.file}`;
             const cloudPath = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/${RUTA_PRINCIPAL}/${icon.file}`;
             card.innerHTML = `
-                <img src="${localPath}" 
-                     style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
-                     onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; } else { this.src='https://cdn-icons-png.flaticon.com/512/5260/5260472.png'; }">
-                <div class="console-label">${icon.label}</div>
-            `;
+                <img src="${localPath}" style="width:55px; height:55px; object-fit:contain; margin-bottom:10px; filter: drop-shadow(0 0 5px var(--neon));" 
+                     onerror="if(this.src != '${cloudPath}') { this.src='${cloudPath}'; }">
+                <div class="console-label">${icon.label}</div>`;
             grid.appendChild(card);
         });
         return;
     }
 
+    // 2. SECCIÓN ITEMS (Juegos y Revistas)
     allItems.filter(i => (currentCat === 'TODO' || i.cat === currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
-        const fileName = i.name.toLowerCase();
+        const fileName = (i.name || "").toLowerCase();
         const isSwf = fileName.endsWith('.swf');
         const isCbz = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
         const isPdf = fileName.endsWith('.pdf');
+        const esRevista = i.cat === 'REVISTAS' || isCbz || isPdf;
 
+        const nombreLimpio = i.name.split('.')[0];
+
+        // Lógica de Acciones
         let btnLabel = 'AÑADIR';
         let accionBoton = `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`;
+        let accionImagen = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
 
-        // Lógica de botones actualizada v8.3
-        if (isSwf) {
+        if (esRevista) {
+            btnLabel = 'LEER';
+            // Usamos comillas simples para no chocar con las del HTML
+            accionBoton = `abrirDesdeThumbnail('${nombreLimpio}')`;
+            accionImagen = accionBoton;
+        } else if (isSwf) {
             btnLabel = 'JUGAR';
             accionBoton = `openFlash('${i.urlHD}', '${i.name}')`;
-        } else if (isCbz) {
-            btnLabel = 'LEER';
-            accionBoton = `openZoom('${i.url}', '${i.price}', '${i.name}', '${i.urlHD}')`;
-        } else if (isPdf) {
-            btnLabel = 'VER PDF'; // Etiqueta clara para el usuario
-            accionBoton = `window.open('${i.urlHD}', '_blank')`;
         }
 
         const d = document.createElement('div'); 
         d.className = 'grid-item';
         const imgId = `portada_${Math.random().toString(36).substr(2, 9)}`;
 
-        const imgTag = (isDataSaver && !isSwf && !isCbz && !isPdf) 
-            ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' loading=\'lazy\'>'">🚫</div>`
-            : `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')">`;
+        // Tag de Imagen (Con tu ahorro de datos 🚫)
+        const imgTag = (isDataSaver && !isSwf && !esRevista) 
+            ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\\'${i.url}\\' style=\\'width:100%; aspect-ratio:1; object-fit:cover;\\' loading=\\'lazy\\'>'">🚫</div>`
+            : `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover; cursor:pointer;" onclick="${accionImagen}">`;
 
         d.innerHTML = `
             <div class="price-tag">$${i.price}</div>
             ${imgTag}
             <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${accionBoton}">${btnLabel}</button>
-            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${(i.name || '').split('.')[0].toUpperCase()}</div>`;
+            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${nombreLimpio.toUpperCase()}</div>`;
 
         grid.appendChild(d);
 
+        // Portadas CBZ
         if (isCbz && typeof JSZip !== 'undefined' && typeof getCbzCover === 'function') {
-            getCbzCover(i.urlHD).then(urlReal => {
-                if (urlReal) {
-                    const el = document.getElementById(imgId);
-                    if (el) el.src = urlReal;
-                }
-            }).catch(e => {});
+            getCbzCover(i.urlHD).then(urlReal => { 
+                const el = document.getElementById(imgId);
+                if (urlReal && el) el.src = urlReal; 
+            }).catch(() => {});
         }
     });
 }
 
 
 
-//-----------------------
+//------------👀
 
         function addCart(u, n, p, uHD) { 
     cart.push({ u, n, p, urlHD: uHD }); 
@@ -1484,7 +1512,7 @@ function updateDateTime() {
 function takeSnapshot() { 
     updateDateTime();
     const btn = document.getElementById('btnGenerate');
-    btn.innerHTML = "GENERANDO...";
+    btn.innerHTML = "GENERANDO TICKET 💤...";
     
     html2canvas(document.getElementById('captureArea'), { 
         backgroundColor: "#000", 
@@ -1753,10 +1781,25 @@ resetMagZoom();
 }
 
 function closeMagazine() {
-resetMagZoom();
-    document.getElementById('magazineViewer').style.display = 'none';
-}
+    // 1. Sonido
+    if(typeof playSnd === 'function') playSnd('sndClick');
 
+    // 2. Limpieza de memoria (Lo que tenías en la foto)
+    if (magPages && magPages.length > 0) {
+        magPages.forEach(p => {
+            if (p.urlHD) URL.revokeObjectURL(p.urlHD);
+        });
+    }
+    magPages = []; 
+    currentMagIdx = 0; 
+
+    // 3. Ocultar interfaz
+    const viewer = document.getElementById('magazineViewer');
+    if (viewer) viewer.style.display = 'none';
+
+    // 4. Reset zoom
+    if(typeof resetMagZoom === 'function') resetMagZoom();
+}
 
 
 
@@ -2069,13 +2112,70 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-setInterval(updateSessionTimer, 1000);
-setInterval(checkInternet, 5000);
-setInterval(updateOnlineCount, 10000);
-startDataCounter();
+//------------------------
+
+async function abrirDesdeThumbnail(nombreBase) {
+    if (typeof playSnd === 'function') playSnd('sndClick');
+    
+    // --- CONFIGURACIÓN ---
+    const CLAVE_CORRECTA = "12345"; // <--- CAMBIA TU CLAVE DE 5 DÍGITOS AQUÍ
+    const baseGitHub = `https://raw.githubusercontent.com/${USUARIO}/${REPO}/main/ARCHIVOS/REVISTAS/`;
+    const nombreOriginal = nombreBase.trim();
+    const nombreFichero = encodeURIComponent(nombreOriginal) + ".cbz";
+    const urlFinal = baseGitHub + nombreFichero;
+
+    try {
+        // 1. VERIFICAR TAMAÑO (MÉTODO HEAD)
+        const res = await fetch(urlFinal, { method: 'HEAD' });
+        
+        if (res.ok) {
+            const sizeBytes = res.headers.get('content-length');
+            const sizeMB = sizeBytes ? (sizeBytes / (1024 * 1024)).toFixed(2) : "??";
+
+            // 2. PRIMER FILTRO: CONFIRMACIÓN DE DATOS
+            const mensajeDatos = `🇨🇺 AHORRO FLORIDA\n\n¿Abrir "${nombreOriginal}"?\nPeso: ${sizeMB} MB`;
+            
+            if (confirm(mensajeDatos)) {
+                
+                // 3. SEGUNDO FILTRO: CÓDIGO CLAVE
+                const passUser = prompt("🔐 SEGURIDAD\nIntroduce el código de 5 dígitos para autorizar la descarga:");
+
+                if (passUser === CLAVE_CORRECTA) {
+                    // SI TODO ES CORRECTO, CARGAMOS
+                    const viewer = document.getElementById('magazineViewer');
+                    if(viewer) viewer.style.display = 'flex';
+                    document.getElementById('magTitle').innerText = "DESCARGANDO...";
+                    
+                    await loadCbzBook(urlFinal, nombreOriginal);
+                } else {
+                    if (passUser !== null) {
+                        alert("❌ CÓDIGO INCORRECTO\nNo se autorizó la descarga de datos.");
+                    }
+                    // Si cancela o se equivoca, no hace nada
+                }
+            }
+        } else {
+            throw new Error("404");
+        }
+    } catch (e) {
+        alert("❌ ERROR: No se pudo conectar con el servidor.");
+        if (typeof closeMagazine === 'function') closeMagazine();
+    }
+}
+
+
+
+
+
+// --- SIGNOS VITALES DEL SISTEMA (Intervalos) ---
+// Usamos funciones anónimas para evitar errores si la función aún no carga
+setInterval(() => { if(typeof updateSessionTimer === 'function') updateSessionTimer(); }, 1000);
+setInterval(() => { if(typeof checkInternet === 'function') checkInternet(); }, 5000);
+setInterval(() => { if(typeof updateOnlineCount === 'function') updateOnlineCount(); }, 10000);
+
+if(typeof startDataCounter === 'function') startDataCounter();
 
 </script>
 
 </body>
 </html>
-
