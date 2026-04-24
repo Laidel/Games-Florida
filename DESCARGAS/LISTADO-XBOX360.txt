@@ -1,35 +1,134 @@
-Listado de Juegos (Xbox 360)
-​Ace Combat Assault Horizon:200:5GB
-​Agente 007 GoldenEye
-​Angry Birds Trilogy
-​Army of Two
-​Army of Two The 40th Day
-​Assassin's Creed IV Black Flag
-​Asura's Wrath
-​Battlefield 3
-​Batman Arkham Asylum
-​Battlefield 4
-​Battlefield Hardline
-​Ben 10 Omniverse
-​Ben 10 Ultimate Destruction
-​Binary Domain
-​BioShock Infinite
-​Blades of Time
-​Blur
-​Bob Esponja La Venganza de Plankton
-​Burnout Paradise
-​Call of Duty Black Ops 3
-​Call of Duty Ghosts
-​Call of Duty Modern Warfare 2
-​Call of Duty Modern Warfare 3
-​Crysis 2
-​Crysis 3
-​Darksiders
-​Dead Space
-​Dead Space 3
-​Deus Ex Human Revolution
-​Diablo 3 Reaper of Souls
-​Dragon Age Inquisition
+Ace Combat Assault Horizon:200:5GB
+Agente 007 GoldenEye:200:4GB
+Angry Birds Trilogy:200:2GB
+Army of Two:200:5GB
+Army of Two The 40th Day:200:6GB
+Assassin's Creed IV Black Flag:200:15GB
+Asura's Wrath:200:6.3GB
+Battlefield 3:200:14GB
+Batman Arkham Asylum:200:7GB
+Battlefield 4:200:15GB
+Battlefield Hardline:200:14GB
+Ben 10 Omniverse:200:3GB
+Ben 10 Ultimate Destruction:200:2.5GB
+Binary Domain:200:5GB
+BioShock Infinite:200:6.5GB
+Blades of Time:200:3GB
+Blur:200:6GB
+Bob Esponja La Venganza de Plankton:200:2GB
+Burnout Paradise:200:4GB
+Call of Duty Black Ops 3:200:8GB
+Call of Duty Ghosts:200:10GB
+Call of Duty Modern Warfare 2:200:7GB
+Call of Duty Modern Warfare 3:200:7.5GB
+Crysis 2:200:6GB
+Crysis 3:200:5.5GB
+Darksiders:200:7GB
+Dead Space:200:6.5GB
+Dead Space 3:200:11GB
+Deus Ex Human Revolution:200:7GB
+Diablo 3 Reaper of Souls:200:8GB
+Dragon Age Inquisition:200:16GB
+Dreamworks Super Star Kartz:200:2.5GB
+EA Sports MMA:200:6GB
+Enemy Front:200:4GB
+Fable 2:200:6.5GB
+Far Cry 3:200:6GB
+Far Cry 4:200:9GB
+Fight Night Champion:200:6GB
+Final Fantasy XIII Lightning Returns:200:10GB
+Gears of War 3:200:8GB
+Gears of War Judgment:200:7GB
+Grid Autosport:200:7GB
+GTA 5:200:16GB
+Halo 4:200:16GB
+Halo Combat Evolved Anniversary:200:7.5GB
+Halo Reach:200:7GB
+Heavy Fire Shattered Spear:200:2GB
+Hitman Absolution:200:7GB
+Injustice Gods Among Us:200:8GB
+Kane & Lynch 2 Dog Days:200:4GB
+Killer is Dead:200:5GB
+Kingdoms of Amalur Reckoning:200:7GB
+Left 4 Dead:200:5GB
+Left 4 Dead 2:200:5GB
+LEGO Batman 3:200:7GB
+LEGO El Señor de los Anillos:200:6GB
+LEGO Marvel Super Heroes:200:6.5GB
+LEGO Movie Videogame:200:6GB
+LEGO Star Wars III The Clone Wars:200:7GB
+Lord of the Rings War in the North:200:6.5GB
+Lost Planet 2:200:7GB
+Lost Planet 3:200:8GB
+Madagascar 3:200:4GB
+Mafia 2:200:6GB
+Majin and the Forsaken Kingdom:200:4GB
+Max Payne 3:200:15GB
+Medal of Honor Airborne:200:6.5GB
+Medal of Honor Limited Edition:200:7GB
+Medalla de Honor Warfighter:200:13GB
+Megamind Ultimate Showdown:200:2GB
+Metal Gear Solid V Ground Zeroes:200:3GB
+Metro Last Light:200:6GB
+Midnight Club Los Angeles:200:6.5GB
+Minecraft:200:1GB
+Monsters vs Aliens:200:5GB
+Mortal Kombat vs DC Universe:200:6GB
+MotoGP 10/11:200:4GB
+MX vs ATV Supercross:200:3GB
+NFS Rivals:200:7GB
+NFS Carbon:200:5GB
+NFS Hot Pursuit:200:6GB
+NFS Most Wanted:200:6GB
+NFS The Run:200:5GB
+Naruto Storm 3:200:7GB
+Naruto Shippuden Ultimate Ninja Storm Revolution:200:7.5GB
+NASCAR The Game Inside Line:200:4.5GB
+Operation Flashpoint Red River:200:5GB
+Plants vs Zombies:200:1GB
+Plants vs Zombies Garden Warfare:200:4GB
+Prototype 2:200:7.5GB
+Quantum Theory:200:6GB
+Rango:200:3GB
+Rayman Legends:200:6GB
+Rayman Origins:200:5GB
+Red Dead Redemption:200:7.5GB
+Red Faction Armageddon:200:6GB
+Remember Me:200:6.5GB
+Resident Evil 4:200:4GB
+Resident Evil 5:200:7GB
+Resident Evil 6:200:12GB
+Resident Evil Revelations 2:200:10GB
+Ride:200:6GB
+Rise of the Tomb Raider:200:7GB
+Sacred 3:200:6GB
+Saints Row Gat out of Hell:200:4GB
+Shadow of Mordor:200:14GB
+Sniper Elite 3:200:6.5GB
+Sonic All Stars Racing:200:5.5GB
+Sonic All Stars Racing Transformed:200:6GB
+Splinter Cell Double Agent:200:7GB
+Split/Second:200:6.5GB
+Syndicate:200:6GB
+Teenage Mutant Ninja Turtles Danger of the Ooze:200:2GB
+Tekken 6:200:7GB
+Terminator Salvation:200:5GB
+The Walking Dead Survival Instinct:200:4GB
+Thief:200:6GB
+Tom Clancy's Ghost Recon Future Soldier:200:7.5GB
+Tomb Raider:200:7GB
+Tortugas Ninja Mutantes en Manhattan:200:4GB
+Transformers Dark of the Moon:200:6GB
+Transformers War for Cybertron:200:6.5GB
+Ultimate Marvel vs Capcom 3:200:3GB
+Vanquish:200:7GB
+Wanted Weapons of Fate:200:5GB
+Warriors Orochi 3:200:7GB
+Watch Dogs:200:14GB
+Witcher 2 Assassins of Kings:200:15GB
+WWE 2016:200:8GB
+Yaiba Ninja Gaiden Z:200:5GB
+Yu-Gi-Oh! Millennium Duels:200:1GB
 ​Dreamworks Super Star Kartz
 ​EA Sports MMA
 ​Enemy Front
