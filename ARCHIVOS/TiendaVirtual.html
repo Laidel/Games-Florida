@@ -1696,7 +1696,7 @@ async function renderTextoLista() {
 
 
 
-// --- FRANCOTIRADOR TITÁN: CIERRE SIN DESACTIVAR LISTADO ---
+// --- FRANCOTIRADOR TITÁN: MANTENIENDO PLECA ACTIVADA ---
 async function capturarImagenUnicaInternet(nombre, precio, categoria) {
     if (typeof playSnd === 'function') playSnd('sndClick');
     const lightbox = document.getElementById('lightbox');
@@ -1732,17 +1732,17 @@ async function capturarImagenUnicaInternet(nombre, precio, categoria) {
         </div>
     `;
 
-    // --- FUNCIÓN DE LIMPIEZA MANTENIENDO EL MODO LISTADO ---
+    // --- FUNCIÓN DE LIMPIEZA SIN APAGAR LA PLECA ---
     const resetSistema = () => {
-        // 1. Restauramos el elemento 'expandedImg' para que el catálogo normal no se rompa
+        // 1. Restauramos el elemento 'expandedImg' para que el catálogo no se rompa a futuro
         zoomContainer.innerHTML = `<img id="expandedImg" src="" style="width:100%; transition: transform 0.1s ease-out; transform-origin: center center;">`;
         
-        // 2. Cerramos lightbox y liberamos scroll del body
+        // 2. Cerramos lightbox y liberamos scroll
         lightbox.style.display = 'none';
         document.body.style.overflow = 'auto';
 
-        // NOTA: He quitado la desactivación del Modo Listado. 
-        // La pleca se quedará encendida y el usuario seguirá en la lista.
+        // 3. MANTENEMOS LA PLECA (He quitado el código que desactivaba el chkListado)
+        // El usuario se queda en la lista de juegos.
 
         if (typeof playSnd === 'function') playSnd('sndClick');
     };
@@ -1762,6 +1762,9 @@ async function capturarImagenUnicaInternet(nombre, precio, categoria) {
         }
     };
 }
+
+
+
 
 
 
