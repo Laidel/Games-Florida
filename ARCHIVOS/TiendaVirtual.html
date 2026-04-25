@@ -1696,6 +1696,45 @@ async function renderTextoLista() {
 
 
 
+// --- FUNCIÓN DE LISTADO CON INTELIGENCIA DE CAPTURA ÚNICA ---
+function procesarYMostrarTexto(texto, categoria, origen) {
+    const container = document.getElementById('listaItemsContainer');
+    if (!container) return; // Seguridad
+    const lineas = texto.split('\n').filter(linea => linea.trim() !== "");
+    
+    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">
+        MODO LISTADO - ORIGEN: ${origen}
+    </div>`;
+    
+    lineas.forEach((linea, index) => {
+        const partes = linea.split(':');
+        const nombreStr = partes[0].trim();
+        const precio = partes[1] ? partes[1].trim() : "0";
+        const tamano = partes[2] ? partes[2].trim() : "";
+
+        let itemEnMemoria = (typeof allItems !== 'undefined') 
+            ? allItems.find(i => i.name.toUpperCase().includes(nombreStr.toUpperCase())) 
+            : null;
+
+        let accion = itemEnMemoria 
+            ? `onclick="openZoom('${itemEnMemoria.url}', ${precio}, '${nombreStr}', '${itemEnMemoria.urlHD}')"` 
+            : `onclick="capturarImagenUnicaInternet('${nombreStr}', ${precio}, '${categoria}')"`;
+
+        htmlFinal += `
+            <div ${accion} style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:10px 5px; font-size:0.9rem; cursor:pointer;" 
+                 onmouseover="this.style.background='#111'" onmouseout="this.style.background='transparent'">
+                <span style="color:var(--white); flex:1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <b style="color: #FFA500; margin-right:8px; font-family: monospace;">${index + 1}.</b> ${nombreStr.toUpperCase()}
+                </span>
+                <div style="text-align:right; display:flex; gap:12px; align-items:center;">
+                    <span style="color:#00CCFF; font-size:0.75rem; font-weight:bold;">${tamano}</span>
+                    <span style="color:var(--neon); font-weight:bold;">$${precio}</span>
+                </div>
+            </div>`;
+    });
+    container.innerHTML = htmlFinal;
+}
+
 // --- FRANCOTIRADOR TITÁN: MANTENIENDO PLECA ACTIVADA ---
 async function capturarImagenUnicaInternet(nombre, precio, categoria) {
     if (typeof playSnd === 'function') playSnd('sndClick');
