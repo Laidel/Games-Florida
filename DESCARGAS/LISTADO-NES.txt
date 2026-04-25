@@ -5768,3 +5768,3403 @@
 5788.Formula One: Built (Master):10:128KB
 5789.Frankenstein (Master Esp):10:128KB
 5790.Freedom Force (Trad. Esp):10:128KB
+5791.Friday the 13th (Master Esp):10:128KB
+5792.Fun House (Master Esp):10:128KB
+5793.G.I. Joe: Real Hero (Master):10:256KB
+5794.G.I. Joe: Atlantis (Master):10:256KB
+5795.Galaga (Master Esp):10:24KB
+5796.Galactic Crusader (Master):10:64KB
+5797.Galaxy 5000 (Master Esp):10:128KB
+5798.Gargoyle's Quest II (Master):10:256KB
+5799.Gauntlet 1 (Master Esp):10:128KB
+5800.Gauntlet 2 (Master Esp):10:128KB
+5801.Gemfire (Master Esp):10:512KB
+5802.Genghis Khan (Master Esp):10:512KB
+5803.Ghostbusters 1 (Master Esp):10:64KB
+5804.Ghostbusters 2 (Master Esp):10:128KB
+5805.Ghosts n Goblins (Master Esp):10:128KB
+5806.Ghoul School (Master Esp):10:128KB
+5807.Gimmick! (Master Esp):10:256KB
+5808.Godzilla 1 (Master Esp):10:256KB
+5809.Godzilla 2 (Master Esp):10:256KB
+5810.Gold Medal Challenge (Master):10:256KB
+5811.Golf (Master Esp):10:32KB
+5812.Golgo 13: Top Secret (Master):10:256KB
+5813.Goonies 1 (Master Esp):10:64KB
+5814.Goonies 2 (Master Esp):10:128KB
+5815.Gradius 1 (Master Esp):10:64KB
+5816.Gradius 2 (Master Esp):10:256KB
+5817.Great Waldo Search (Master):10:128KB
+5818.Greg Norman Golf (Master):10:128KB
+5819.Gremlins 2 (Master Esp):10:256KB
+5820.Guardian Legend (Master Esp):10:128KB
+5821.Guerilla War (Master Esp):10:128KB
+5822.Gumshoe (Master Esp):10:64KB
+5823.Gun Smoke (Master Esp):10:128KB
+5824.Gun-Nac (Master Esp):10:256KB
+5825.Gyromite (Master Esp):10:32KB
+5826.Gyruss (Master Esp):10:128KB
+5827.Hammerin Harry (Master Esp):10:256KB
+5828.Harlem Globetrotters (Master):10:128KB
+5829.Hatris (Master Esp):10:64KB
+5830.Heavy Barrel (Master Esp):10:128KB
+5831.Heavy Shreddin (Master Esp):10:128KB
+5832.High Speed (Master Esp):10:128KB
+5833.Hogan's Alley (Master Esp):10:32KB
+5834.Hollywood Squares (Master):10:128KB
+5835.Home Alone 1 (Master Esp):10:128KB
+5836.Home Alone 2 (Master Esp):10:256KB
+5837.Hook (Master Esp):10:256KB
+5838.Hoops (Master Esp):10:128KB
+5839.Hudson Hawk (Master Esp):10:128KB
+5840.Hunt for Red October (Master):10:128KB
+5841.Hydlide (Master Esp):10:64KB
+5842.Ice Climber (Master Esp):10:32KB
+5843.Ice Hockey (Master Esp):10:48KB
+5844.Ikari Warriors 1 (Master):10:128KB
+5845.Ikari Warriors 2 (Master):10:128KB
+5846.Ikari Warriors 3 (Master):10:256KB
+5847.Image Fight (Master Esp):10:128KB
+5848.Immortal, The (Master Esp):10:256KB
+5849.Impossible Mission 2 (Fixed):10:128KB
+5850.Incredible Crash Dummies (M):10:256KB
+5851.Indiana Jones: Temple (M):10:128KB
+5852.Indiana Jones: Crusade (M):10:128KB
+5853.Infiltrator (Master Esp):10:128KB
+5854.Iron Tank (Master Esp):10:128KB
+5855.IronSword: Wizards 2 (Master):10:128KB
+5856.Isolated Warrior (Master Esp):10:256KB
+5857.Ivan Stewart's Off Road (M):10:128KB
+5858.Jack Nicklaus Golf (Master):10:128KB
+5859.Jackie Chan's Action (Master):10:256KB
+5860.James Bond Jr (Master Esp):10:256KB
+5861.Jeopardy! (Master Esp):10:128KB
+5862.Jetsons: Cogswell (Master):10:256KB
+5863.Jimmy Connors Tennis (M):10:128KB
+5864.Joe & Mac (Master Esp):10:256KB
+5865.John Elway's Football (Master):10:64KB
+5866.Jordan vs Bird (Master Esp):10:128KB
+5867.Joshua (Fixed Master):10:128KB
+5868.Journey to Silius (Master):10:128KB
+5869.Joust (Master Esp):10:32KB
+5870.Jungle Book (Master Esp):10:256KB
+5871.Jurassic Park (Master Esp):10:256KB
+5872.Kabuki Quantum Fighter (M):10:256KB
+5873.Karate Kid (Master Esp):10:64KB
+5874.Karnov (Master Esp):10:128KB
+5875.Kick Master (Master Esp):10:256KB
+5876.Kick Off (Master Esp):10:128KB
+5877.Kid Icarus (Master Esp):10:128KB
+5878.Kid Klown (Master Esp):10:128KB
+5879.Kid Niki (Master Esp):10:128KB
+5880.King Neptune's Adven (Unlic):10:128KB
+5881.King of Kings (Fixed Master):10:256KB
+5882.King's Knight (Master Esp):10:64KB
+5883.Kings of the Beach (Master):10:128KB
+5884.Kirby's Adventure (Master):10:768KB
+5885.KlashBall (Master Esp):10:128KB
+5886.Knight Rider (Master Esp):10:128KB
+5887.Krion Conquest (Master Esp):10:256KB
+5888.Krusty's Fun House (Master):10:256KB
+5889.Kung Fu (Master Esp):10:32KB
+5890.Kung Fu Heroes (Master Esp):10:64KB
+5891.Laser Burst (Unlicensed):10:64KB
+5892.Last Action Hero (Master):10:256KB
+5893.Last Ninja (Master Esp):10:128KB
+5894.Last Starfighter (Master):10:128KB
+5895.Lee Trevino's Golf (Master):10:128KB
+5896.Legend of Kage (Master Esp):10:64KB
+5897.Legend of Prince Valiant (M):10:256KB
+5898.Legend of Zelda 1 (Master):10:128KB
+5899.Legendary Wings (Master Esp):10:128KB
+5900.Lemmings (Master Esp):10:128KB
+5901.Lethal Weapon (Master Esp):10:256KB
+5902.Life Force (Master Esp):10:128KB
+5903.Linus Spacehead (Unlic):10:128KB
+5904.Lion King (Master Esp):10:256KB
+5905.Little Mermaid (Master Esp):10:128KB
+5906.Little Nemo (Master Esp):10:256KB
+5907.Little Red Hood (Fixed):10:64KB
+5908.Little Samson (Master Esp):10:512KB
+5909.Lode Runner (Master Esp):10:32KB
+5910.Lone Ranger (Master Esp):10:512KB
+5911.Loopz (Master Esp):10:64KB
+5912.Low G Man (Master Esp):10:256KB
+5913.Lunar Pool (Master Esp):10:32KB
+5914.M.C. Kids (Master Esp):10:256KB
+5915.M.U.L.E. (Master Esp):10:128KB
+5916.Mach Rider (Master Esp):10:32KB
+5917.Mad Max (Master Esp):10:128KB
+5918.Mafat Alien (Master Esp):10:256KB
+5919.Magic Jewelry (Fixed Master):10:64KB
+5920.Magic Johnson's BB (Master):10:128KB
+5921.Magical Taruruuto (Master):10:256KB
+5922.Magmax (Master Esp):10:64KB
+5923.Major League BB (Master):10:128KB
+5924.Maniac Mansion (Master Esp):10:256KB
+5925.Mappy-Land (Master Esp):10:64KB
+5926.Marble Madness (Master Esp):10:64KB
+5927.Mario Is Missing (Master):10:256KB
+5928.Mario's Time Machine (Master):10:256KB
+5929.Master Chu (Fixed Master):10:64KB
+5930.Mechanized Attack (Master):10:128KB
+5931.Mega Man 1 (Master Esp):10:128KB
+5932.Mega Man 2 (Master Esp):10:256KB
+5933.Mega Man 3 (Master Esp):10:384KB
+5934.Mega Man 4 (Master Esp):10:512KB
+5935.Mega Man 5 (Master Esp):10:512KB
+5936.Mega Man 6 (Master Esp):10:512KB
+5937.Mendel Palace (Master Esp):10:128KB
+5938.Metal Gear (Master Esp):10:128KB
+5939.Metal Mech (Master Esp):10:256KB
+5940.Metal Storm (Master Esp):10:128KB
+5941.Metroid (Master Esp):10:128KB
+5942.Michael Andretti Race (Master):10:128KB
+5943.Mickey Mousecapade (Master):10:64KB
+5944.Mickey's Adventure (Master):10:128KB
+5945.Mickey's Safari (Master):10:128KB
+5946.Micro Machines (Master Esp):10:256KB
+5947.Mighty Final Fight (Master):10:256KB
+5948.Millipede (Master Esp):10:32KB
+5949.Milon's Secret Castle (M):10:128KB
+5950.Miracle Piano (Master Esp):10:512KB
+5951.Mission Impossible (Master):10:256KB
+5952.Monopoly (Master Esp):10:128KB
+5953.Monster in My Pocket (M):10:256KB
+5954.Monster Party (Master Esp):10:128KB
+5955.Moon Crystal (Master Esp):10:256KB
+5956.Moon Ranger (Fixed Master):10:64KB
+5957.Motor City Patrol (Master):10:128KB
+5958.Ms. Pac-Man (Master Esp):10:64KB
+5959.Muppet Adventure (Master):10:128KB
+5960.Mutant Virus (Master Esp):10:128KB
+5961.Mystery Quest (Master Esp):10:128KB
+5962.NARC (Master Esp):10:128KB
+5963.NES Open Golf (Master Esp):10:256KB
+5964.New Ghostbusters 2 (Master):10:256KB
+5965.Nightshade (Master Esp):10:256KB
+5966.Ninja Crusaders (Master Esp):10:128KB
+5967.Ninja Gaiden 1 (Master Esp):10:128KB
+5968.Ninja Gaiden 2 (Master Esp):10:256KB
+5969.Ninja Gaiden 3 (Master Esp):10:256KB
+5970.Nintendo World Cup (Master):10:128KB
+5971.Noah's Ark (Master Esp):10:128KB
+5972.Nobunaga's Ambition (Master):10:256KB
+5973.North & South (Master Esp):10:128KB
+5974.Operation Secret Storm (Fix):10:128KB
+5975.Operation Wolf (Master Esp):10:128KB
+5976.Orb-3D (Master Esp):10:128KB
+5977.Othello (Master Esp):10:32KB
+5978.Over Horizon (Master Esp):10:128KB
+5979.P.O.W. (Master Esp):10:256KB
+5980.Pac-Land (Master Esp):10:64KB
+5981.Pac-Man (Master Esp):10:24KB
+5982.Palamedes (Master Esp):10:64KB
+5983.Panic Restaurant (Master):10:256KB
+5984.Paperboy (Master Esp):10:64KB
+5985.Paperboy 2 (Master Esp):10:128KB
+5986.Parasol Stars (Master Esp):10:256KB
+5987.Parodius (Master Esp):10:256KB
+5988.Peter Pan: Treasure (Master):10:256KB
+5989.Phantom Fighter (Master Esp):10:128KB
+5990.Pictionary (Master Esp):10:64KB
+5991.Pinball (Master Esp):10:32KB
+5992.Pinball Quest (Master Esp):10:128KB
+5993.Pipe Dream (Master Esp):10:64KB
+5994.Pirates! (Master Esp):10:256KB
+5995.Platoon (Master Esp):10:128KB
+5996.Popeye (Master Esp):10:24KB
+5997.Power Blade (Master Esp):10:128KB
+5998.Power Blade 2 (Master Esp):10:256KB
+5999.Power Punch II (Master Esp):10:128KB
+6000.Predator (Master Esp):10:128KB
+6001.Prince of Persia (Master Esp):10:256KB
+6002.Princess Tomato (Master Esp):10:256KB
+6003.Pro Sport Hockey (Master):10:128KB
+6004.Pro Wrestling (Master Esp):10:64KB
+6005.Punch-Out!! (Master Esp):10:256KB
+6006.Punisher, The (Master Esp):10:256KB
+6007.Puss n Boots (Master Esp):10:128KB
+6008.Puzznic (Master Esp):10:64KB
+6009.Q-bert (Master Esp):10:64KB
+6010.Qix (Master Esp):10:64KB
+6011.Quattro Adventure (Fixed):10:256KB
+6012.Quattro Arcade (Fixed):10:256KB
+6013.Quattro Sports (Fixed):10:256KB
+6014.R.B.I. Baseball (Master):10:64KB
+6015.R.B.I. Baseball 2 (Master):10:128KB
+6016.R.B.I. Baseball 3 (Master):10:128KB
+6017.R.C. Pro-Am (Master Esp):10:64KB
+6018.R.C. Pro-Am II (Master Esp):10:128KB
+6019.Race America (Master Esp):10:128KB
+6020.Rad Racer (Master Esp):10:128KB
+6021.Rad Racer II (Master Esp):10:128KB
+6022.Raid 2020 (Fixed Master):10:64KB
+6023.Rainbow Islands (Master Esp):10:128KB
+6024.Rally Bike (Master Esp):10:128KB
+6025.Rambo (Master Esp):10:128KB
+6026.Rampage (Master Esp):10:128KB
+6027.Rampart (Master Esp):10:128KB
+6028.Renegade (Master Esp):10:128KB
+6029.Rescue: Embassy (Master):10:128KB
+6030.Ring King (Master Esp):10:128KB
+6031.River City Ransom (Master):10:128KB
+6032.RoadBlasters (Master Esp):10:128KB
+6033.Robin Hood (Master Esp):10:256KB
+6034.Robocop (Master Esp):10:128KB
+6035.Robocop 2 (Master Esp):10:512KB
+6036.Robocop 3 (Master Esp):10:256KB
+6037.Rock n Ball (Master Esp):10:128KB
+6038.Rocket Ranger (Master Esp):10:256KB
+6039.Rocketeer, The (Master Esp):10:128KB
+6040.Rockin Kats (Master Esp):10:256KB
+6041.Roger Clemens BB (Master):10:128KB
+6042.Rollerball (Master Esp):10:64KB
+6043.Rollergames (Master Esp):10:256KB
+6044.Rolling Thunder (Master Esp):10:128KB
+6045.Rush n Attack (Master Esp):10:64KB
+6046.Rygar (Master Esp):10:128KB
+6047.SCAT: Special Cybernetic (M):10:128KB
+6048.SD Gundam 3 (Master Esp):10:256KB
+6049.Section Z (Master Esp):10:128KB
+6050.Seicross (Master Esp):10:32KB
+6051.Sesame Street 123 (Master):10:128KB
+6052.Sesame Street ABC (Master):10:128KB
+6053.Shadow of the Ninja (Master):10:128KB
+6054.Shadow Warriors (Master Esp):10:128KB
+6055.Shadow Warriors 2 (Master):10:256KB
+6056.Shadowgate (Master Esp):10:128KB
+6057.Shatterhand (Master Esp):10:256KB
+6058.Shingen the Ruler (Master):10:128KB
+6059.Side Pocket (Master Esp):10:64KB
+6060.Silent Service (Master Esp):10:128KB
+6061.Silk Worm (Master Esp):10:128KB
+6062.Silver Surfer (Master Esp):10:128KB
+6063.Simpsons: Bart Space (M):10:256KB
+6064.Simpsons: Bart World (M):10:256KB
+6065.Simpsons: Bartman (Master):10:256KB
+6066.Skate or Die (Master Esp):10:128KB
+6067.Skate or Die 2 (Master Esp):10:256KB
+6068.Ski or Die (Master Esp):10:256KB
+6069.Sky Shark (Master Esp):10:128KB
+6070.Slalom (Master Esp):10:32KB
+6071.Smash TV (Master Esp):10:128KB
+6072.Snake Rattle n Roll (Master):10:128KB
+6073.Snake's Revenge (Master Esp):10:256KB
+6074.Snoopy's Sports (Master):10:128KB
+6075.Snow Brothers (Master Esp):10:256KB
+6076.Solar Jetman (Master Esp):10:256KB
+6077.Solomon's Key (Master Esp):10:64KB
+6078.Solstice (Master Esp):10:128KB
+6079.Space Shuttle (Master Esp):10:128KB
+6080.Spelunker (Master Esp):10:32KB
+6081.Spider-Man: Sinister (M):10:256KB
+6082.Spiritual Warfare (Master):10:256KB
+6083.Spot (Master Esp):10:64KB
+6084.Spy Hunter (Master Esp):10:32KB
+6085.Spy vs Spy (Master Esp):10:32KB
+6086.Star Force (Master Esp):10:32KB
+6087.Star Soldier (Master Esp):10:64KB
+6088.Star Tropics (Master Esp):10:512KB
+6089.Star Tropics 2 (Master Esp):10:512KB
+6090.Star Voyager (Master Esp):10:128KB
+6091.Star Wars (Master Esp):10:128KB
+6092.Star Wars: Empire (Master):10:256KB
+6093.Starship Hector (Master Esp):10:64KB
+6094.Stealth ATF (Master Esp):10:128KB
+6095.Stinger (Master Esp):10:64KB
+6096.Street Cop (Master Esp):10:128KB
+6097.Street Fighter 2010 (Master):10:256KB
+6098.Strider (Master Esp):10:128KB
+6099.Super C (Master Esp):10:256KB
+6100.Super Cars (Master Esp):10:128KB
+6101.Super Dodge Ball (Master):10:128KB
+6102.Super Glove Ball (Master):10:128KB
+6103.Super Mario 1 (Master Esp):10:32KB
+6104.Super Mario 2 (Master Esp):10:128KB
+6105.Super Mario 3 (Master Esp):10:384KB
+6106.Super Off Road (Master Esp):10:128KB
+6107.Super Pitfall (Master Esp):10:64KB
+6108.Super Spike VB (Master):10:128KB
+6109.Super Sprint (Master Esp):10:64KB
+6110.Super Spy Hunter (Master):10:256KB
+6111.Super Team Games (Master):10:128KB
+6112.Superman (Master Esp):10:128KB
+6113.Swamp Thing (Master Esp):10:128KB
+6114.Sword Master (Master Esp):10:256KB
+6115.Swords and Serpents (Master):10:128KB
+6116.T&C Surf Design (Master):10:128KB
+6117.Tag Team Wrestling (Master):10:64KB
+6118.TaleSpin (Master Esp):10:256KB
+6119.Target: Renegade (Master):10:128KB
+6120.Tecmo Baseball (Master):10:128KB
+6121.Tecmo Bowl (Master Esp):10:128KB
+6122.Tecmo Cup (Master Esp):10:256KB
+6123.Tecmo NBA Basketball (Master):10:256KB
+6124.Tecmo Super Bowl (Master):10:384KB
+6125.Tecmo World Wrestling (M):10:256KB
+6126.TMNT 1 (Master Esp):10:256KB
+6127.TMNT 2 Arcade (Master):10:512KB
+6128.TMNT 3 Manhattan (Master):10:512KB
+6129.TMNT Tournament (Master):10:256KB
+6130.Terminator 1 (Master Esp):10:128KB
+6131.Terminator 2 (Master Esp):10:256KB
+6132.Terra Cresta (Master Esp):10:64KB
+6133.Tetris (Nintendo Master):10:48KB
+6134.Tetris (Tengen Master):10:64KB
+6135.Tetris 2 (Master Esp):10:128KB
+6136.Three Stooges (Master Esp):10:128KB
+6137.Thunder & Lightning (Master):10:64KB
+6138.Thunderbirds (Master Esp):10:128KB
+6139.Tiger-Heli (Master Esp):10:64KB
+6140.Tiles of Fate (Fixed):10:64KB
+6141.Time Lord (Master Esp):10:128KB
+6142.Times of Lore (Master Esp):10:128KB
+6143.Tiny Toon 1 (Master Esp):10:256KB
+6144.Tiny Toon 2 (Master Esp):10:256KB
+6145.To the Earth (Master Esp):10:128KB
+6146.Toki (Master Esp):10:256KB
+6147.Tom & Jerry (Master Esp):10:256KB
+6148.Tombs & Treasure (Master):10:128KB
+6149.Top Gun (Master Esp):10:128KB
+6150.Top Gun 2 (Master Esp):10:256KB
+6151.Top Players Tennis (Master):10:256KB
+6152.Total Recall (Master Esp):10:128KB
+6153.Toxic Crusaders (Master):10:128KB
+6154.Track & Field 1 (Master):10:24KB
+6155.Track & Field 2 (Master):10:256KB
+6156.Treasure Master (Master):10:128KB
+6157.Trog! (Master Esp):10:256KB
+6158.Trojan (Master Esp):10:64KB
+6159.Trolls on Treasure (Unlic):10:128KB
+6160.Twin Cobra (Master Esp):10:128KB
+6161.Twin Eagle (Master Esp):10:128KB
+6162.Ufouria (Master Esp):10:128KB
+6163.Ultimate Air Combat (Master):10:256KB
+6164.Ultimate Basketball (Master):10:128KB
+6165.Ultimate League Soccer (Un):10:128KB
+6166.Ultimate Stuntman (Unlic):10:256KB
+6167.Uncharted Waters (Master):10:512KB
+6168.Uninvited (Master Esp):10:128KB
+6169.Untouchables (Master Esp):10:256KB
+6170.Urban Champion (Master Esp):10:32KB
+6171.Vegas Dream (Master Esp):10:128KB
+6172.Vice: Project Doom (Master):10:256KB
+6173.Videomation (Fixed Master):10:128KB
+6174.Vindicators (Master Esp):10:128KB
+6175.Volleyball (Master Esp):10:32KB
+6176.Wacky Races (Master Esp):10:256KB
+6177.Wall Street Kid (Master Esp):10:256KB
+6178.Wally Bear (Fixed Master):10:128KB
+6179.Wario's Woods (Master Esp):10:512KB
+6180.Wayne Gretzky Hockey (Master):10:128KB
+6181.Wayne's World (Master Esp):10:128KB
+6182.WCW World Championship (M):10:128KB
+6183.Werewolf (Master Esp):10:128KB
+6184.Wheel of Fortune (Master):10:128KB
+6185.Where's Waldo (Master Esp):10:128KB
+6186.Who Framed Roger Rabbit (M):10:128KB
+6187.Whomp 'Em (Master Esp):10:128KB
+6188.Widget (Master Esp):10:256KB
+6189.Wild Gunman (Master Esp):10:24KB
+6190.Willow (Master Esp):10:256KB
+6191.Win, Lose or Draw (Master Esp):10:128KB
+6192.Winter Games (Master Esp):10:128KB
+6193.Wizardry (Master Esp):10:256KB
+6194.Wizardry 2 (Master Esp):10:256KB
+6195.Wizards & Warriors 1 (Master):10:128KB
+6196.Wizards & Warriors 2 (Master):10:128KB
+6197.Wizards & Warriors 3 (Master):10:256KB
+6198.Wolverine (Master Esp):10:128KB
+6199.World Champ (Master Esp):10:128KB
+6200.World Class Track (Master):10:32KB
+6201.World Games (Master Esp):10:128KB
+6202.Wrath of Black Manta (Master):10:128KB
+6203.Wrecking Crew (Master Esp):10:32KB
+6204.Wurm: Journey (Master Esp):10:256KB
+6205.WWF King of the Ring (Master):10:256KB
+6206.WWF Steel Cage (Master):10:256KB
+6207.WWF WrestleMania (Master):10:128KB
+6208.WWF WrestleMania Chal (Master):10:256KB
+6209.X-Men (Master Esp):10:128KB
+6210.Xevious (Master Esp):10:24KB
+6211.Xexyz (Master Esp):10:256KB
+6212.Yo! Noid (Master Esp):10:256KB
+6213.Yoshi (Master Esp):10:64KB
+6214.Yoshi's Cookie (Master Esp):10:128KB
+6215.Young Indiana Jones (Master):10:256KB
+6216.Zanac (Master Esp):10:128KB
+6217.Zelda 1 (Master Esp):10:128KB
+6218.Zelda 2 (Master Esp):10:256KB
+6219.Zen Intergalactic (Master):10:256KB
+6220.Zombie Nation (Master Esp):10:128KB
+6221.Adventures of Bayou Billy (M):10:256KB
+6222.Antarctic Adventure (Hack DX):10:24KB
+6223.Balloon Fight (Hack Plus):10:32KB
+6224.Battle City (Hack 4 Players):10:32KB
+6225.Bomberman (Hack Plus):10:32KB
+6226.Circus Charlie (Hack Plus):10:24KB
+6227.City Connection (Hack DX):10:32KB
+6228.Contra (Hack Infinite Ammo):10:128KB
+6229.Donkey Kong (Hack DX):10:24KB
+6230.Donkey Kong 3 (Hack DX):10:24KB
+6231.Donkey Kong Jr (Hack DX):10:24KB
+6232.Double Dragon (Hack SRAM Save):10:128KB
+6233.Duck Hunt (Hack Mouse Support):10:32KB
+6234.Excitebike (Hack DX):10:32KB
+6235.F-1 Race (Hack Plus):10:24KB
+6236.Galaga (Hack Plus):10:24KB
+6237.Ice Climber (Hack Plus):10:32KB
+6238.Kung Fu (Hack Plus):10:32KB
+6239.Mario Bros (Hack Plus):10:32KB
+6240.Mega Man (Hack SRAM Save):10:128KB
+6241.Metroid (Hack Save & Map):10:128KB
+6242.Pac-Man (Hack Plus):10:24KB
+6243.Popeye (Hack Plus):10:24KB
+6244.Road Fighter (Hack Plus):10:24KB
+6245.Super Mario Bros (Hack SRAM):10:32KB
+6246.Tennis (Hack Plus):10:32KB
+6247.Tetris (Hack Hard Mode):10:64KB
+6248.Urban Champion (Hack Plus):10:32KB
+6249.Wrecking Crew (Hack Plus):10:32KB
+6250.Xevious (Hack Plus):10:24KB
+6251.Adventure Island 4 (Esp):10:256KB
+6252.After Burner 2 (Esp Port):10:128KB
+6253.Akumajou Special (Trad. Esp):10:256KB
+6254.Aladdin (Esp Master Port):10:256KB
+6255.Armadillo (Trad. Español):10:128KB
+6256.Banana Prince (Trad. Español):10:256KB
+6257.Bio Miracle Bokutte (Esp):10:128KB
+6258.Cocoron (Trad. Español):10:256KB
+6259.Cosmo Police Galivan (Esp):10:128KB
+6260.Crisis Force (Esp Fixed):10:256KB
+6261.Daiku no Gen-san (Trad. Esp):10:256KB
+6262.Donald Land (Trad. Español):10:256KB
+6263.Dragon Ball: Shenron (Esp):10:128KB
+6264.Dragon Ball Z 1 (Trad. Esp):10:256KB
+6265.Dragon Ball Z 2 (Trad. Esp):10:512KB
+6266.Dragon Ball Z 3 (Trad. Esp):10:512KB
+6267.Dragon Ball Z Gaiden (Esp):10:512KB
+6268.Dream Master (Trad. Español):10:256KB
+6269.Esper Dream 2 (Trad. Esp):10:256KB
+6270.Famicom Jump 1 (Trad. Esp):10:512KB
+6271.Famicom Jump 2 (Trad. Esp):10:512KB
+6272.Final Fantasy 1 (Esp Fixed):10:256KB
+6273.Final Fantasy 2 (Esp Fixed):10:256KB
+6274.Final Fantasy 3 (Esp Fixed):10:512KB
+6275.Fire Emblem (Trad. Español):10:512KB
+6276.Fire Emblem 2 (Trad. Esp):10:512KB
+6277.Ganbare Goemon (Trad. Esp):10:128KB
+6278.Ganbare Goemon 2 (Trad. Esp):10:256KB
+6279.Getsu Fuu Ma Den (Trad. Esp):10:128KB
+6280.Gimmick! (Esp Fixed):10:256KB
+6281.Godzilla (Esp Fixed):10:256KB
+6282.Grander Musashi (Trad. Esp):10:256KB
+6283.Gradius 2 (Esp Fixed):10:256KB
+6284.Heere's Johnny (Unlic Esp):10:128KB
+6285.Hello Kitty World (Esp):10:128KB
+6286.Hitler no Fukkatsu (Esp):10:128KB
+6287.Holy Diver (Trad. Español):10:256KB
+6288.Honoo no Doukyuuji (Esp):10:128KB
+6289.Hyaku no Sekai (Trad. Esp):10:256KB
+6290.Ike Ike! Nekketsu (Trad. Es):10:256KB
+6291.Joy Mech Fight (Trad. Esp):10:256KB
+6292.Jublo (Unlicensed Esp):10:128KB
+6293.Just Breed (Trad. Español):10:1MB
+6294.Kage (Trad. Español):10:128KB
+6295.Kaiketsu Yanchamaru (Esp):10:128KB
+6296.Kero Kero Keroppi (Esp):10:128KB
+6297.Keroppi no Daibouken (Esp):10:128KB
+6298.Kyatto Ninden Teyandee (Esp):10:256KB
+6299.Lagrange Point (Trad. Esp):10:1MB
+6300.Layla (Trad. Español):10:128KB
+6301.Lupin Sansei (Trad. Esp):10:128KB
+6302.Madoola no Tsubasa (Esp):10:64KB
+6303.Magical Taruruuto (Trad. Es):10:256KB
+6304.Metal Max (Trad. Español):10:512KB
+6305.Mitsume ga Tooru (Trad. Esp):10:256KB
+6306.Moon Crystal (Esp Fixed):10:256KB
+6307.Mother (Earthbound Esp):10:512KB
+6308.Nekketsu Kakutou (Trad. Esp):10:256KB
+6309.Nekketsu Koukou (Trad. Esp):10:128KB
+6310.Nekketsu Soccer (Trad. Esp):10:256KB
+6311.Nightmare on Elm St (Esp):10:128KB
+6312.Ninja-kun (Trad. Español):10:32KB
+6313.Ninja Rahoi (Trad. Español):10:256KB
+6314.Over Horizon (Esp Fixed):10:128KB
+6315.Parodius Da! (Esp Fixed):10:256KB
+6316.Puyo Puyo (Trad. Español):10:128KB
+6317.Radia Senki (Trad. Español):10:512KB
+6318.Recca: Summer Carnival (Esp):10:128KB
+6319.Salamander (Esp Fixed):10:64KB
+6320.Sanrio Carnival (Trad. Esp):10:64KB
+6321.SD Gundam Gaiden (Trad. Esp):10:256KB
+6322.Shadow Brain (Trad. Esp):10:512KB
+6323.Splatterhouse (Trad. Esp):10:128KB
+6324.Star Wars: Namco (Trad. Esp):10:128KB
+6325.Summer Carnival 92 (Esp):10:128KB
+6326.Sweet Home (Trad. Español):10:256KB
+6327.Takahashi Meijin (Trad. Esp):10:256KB
+6328.Tashiro Masashi (Trad. Esp):10:128KB
+6329.Tenchi o Kurau (Trad. Esp):10:256KB
+6330.Tenchi o Kurau 2 (Trad. Esp):10:512KB
+6331.The Portopia Serial (Esp):10:64KB
+6332.Time Zone (Trad. Español):10:128KB
+6333.Ufouria (Esp Fixed):10:128KB
+6334.Valkyrie no Bouken (Esp):10:64KB
+6335.Wagyan Land (Trad. Español):10:128KB
+6336.Wai Wai World (Trad. Esp):10:256KB
+6337.Wai Wai World 2 (Trad. Esp):10:256KB
+6338.Wanpaku Duck Yume (Trad. Es):10:256KB
+6339.Yousei Monogatari (Trad. Es):10:256KB
+6340.Yume Kojo Doki Doki (Esp):10:128KB
+6341.Zoids: Chuuou (Trad. Esp):10:128KB
+6342.Zoids 2 (Trad. Español):10:256KB
+6343.3D Block (Unlicensed):10:64KB
+6344.6-in-1 (Caltron Unlic):10:512KB
+6345.Adam & Eve (Unlicensed):10:32KB
+6346.Addams Family (Esp Master):10:256KB
+6347.Adventures of Rocky (Esp):10:128KB
+6348.After Burner (Master Esp):10:128KB
+6349.Airwolf (Master Esp):10:128KB
+6350.Aladdin (Unlic Version):10:256KB
+6351.Alfred Chicken (Esp Master):10:128KB
+6352.Alien 3 (Esp Master):10:256KB
+6353.All-Pro Basketball (Esp):10:128KB
+6354.Alpha Mission (Esp Master):10:64KB
+6355.Amagon (Esp Master):10:64KB
+6356.Anticipation (Esp Master):10:128KB
+6357.Arch Rivals (Esp Master):10:128KB
+6358.Archon (Esp Master):10:64KB
+6359.Argus (Esp Master):10:64KB
+6360.Arkanoid (Esp Master):10:32KB
+6361.Arkista's Ring (Esp Master):10:64KB
+6362.Asterix (Esp Master):10:128KB
+6363.Astyanax (Esp Master):10:256KB
+6364.Athena (Esp Master):10:64KB
+6365.Athletic World (Master):10:64KB
+6366.Attack Animal (Esp Master):10:128KB
+6367.B-Wings (Esp Master):10:64KB
+6368.Back to the Future (Master):10:64KB
+6369.Bad Dudes (Esp Master):10:128KB
+6370.Bad News Baseball (Master):10:128KB
+6371.Bad Street Brawler (Master):10:128KB
+6372.Balloon Fight (Esp Master):10:32KB
+6373.Baltron (Esp Master):10:64KB
+6374.Banana Prince (Esp Master):10:256KB
+6375.Bandai Golf (Esp Master):10:128KB
+6376.Barbie (Esp Master):10:128KB
+6377.Bard's Tale (Esp Master):10:256KB
+6378.Base Wars (Esp Master):10:256KB
+6379.Baseball (Esp Master):10:32KB
+6380.Baseball Simulator (Master):10:128KB
+6381.Baseball Stars (Esp Master):10:256KB
+6382.Bases Loaded (Esp Master):10:128KB
+6383.Batman (Esp Master):10:128KB
+6384.Batman Returns (Esp Master):10:256KB
+6385.Battle Chess (Esp Master):10:128KB
+6386.Battle City (Esp Master):10:24KB
+6387.Battle Tank (Esp Master):10:128KB
+6388.Battleship (Esp Master):10:128KB
+6389.Battletoads (Esp Master):10:256KB
+6390.Battletoads DD (Esp Master):10:256KB
+6391.Beetlejuice (Esp Master):10:128KB
+6392.Best of the Best (Master):10:128KB
+6393.Bible Adventures (Fixed):10:128KB
+6394.Bible Buffet (Fixed Master):10:128KB
+6395.Big Nose Freaks Out (Esp):10:256KB
+6396.Big Nose the Caveman (Esp):10:128KB
+6397.Bigfoot (Esp Master):10:128KB
+6398.Bill & Ted (Esp Master):10:128KB
+6399.Bill Elliott's NASCAR (M):10:128KB
+6400.Binary Land (Esp Master):10:32KB
+6401.Bionic Commando (Esp Master):10:128KB
+6402.Black Bass (Esp Master):10:128KB
+6403.Blackjack (Unlicensed Fix):10:64KB
+6404.Blades of Steel (Esp Master):10:128KB
+6405.Blaster Master (Esp Master):10:128KB
+6406.Blue Marlin (Esp Master):10:128KB
+6407.Blue Shadow (Esp Master):10:128KB
+6408.Blues Brothers (Esp Master):10:128KB
+6409.Bo Jackson Baseball (Master):10:128KB
+6410.Bomberman (Esp Master):10:32KB
+6411.Bomberman 2 (Esp Master):10:128KB
+6412.Bonk's Adventure (Esp Master):10:256KB
+6413.Boulder Dash (Esp Master):10:64KB
+6414.Boy and His Blob (Master):10:128KB
+6415.Bram Stoker Dracula (Master):10:256KB
+6416.BreakThru (Esp Master):10:64KB
+6417.Bubble Bobble (Esp Master):10:64KB
+6418.Bubble Bobble 2 (Esp Master):10:256KB
+6419.Bucky O'Hare (Esp Master):10:256KB
+6420.Bugs Bunny Birthday (Master):10:128KB
+6421.Bump n Jump (Esp Master):10:64KB
+6422.Burai Fighter (Esp Master):10:128KB
+6423.BurgerTime (Esp Master):10:32KB
+6424.Cabal (Esp Master):10:128KB
+6425.California Games (Master):10:128KB
+6426.Captain America (Esp Master):10:256KB
+6427.Captain Planet (Esp Master):10:128KB
+6428.Captain Skyhawk (Esp Master):10:128KB
+6429.Casino Kid (Esp Master):10:128KB
+6430.Castelian (Esp Master):10:128KB
+6431.Castle of Deceit (Fixed):10:64KB
+6432.Castle of Dragon (Master):10:128KB
+6433.Castlevania 1 (Esp Master):10:128KB
+6434.Castlevania 2 (Esp Master):10:128KB
+6435.Castlevania 3 (Esp Master):10:384KB
+6436.Caveman Games (Esp Master):10:128KB
+6437.Championship Bowling (Esp):10:64KB
+6438.Chessmaster (Esp Master):10:128KB
+6439.Chip n Dale 1 (Esp Master):10:128KB
+6440.Chip n Dale 2 (Esp Master):10:256KB
+6441.Chubby Cherub (Esp Master):10:32KB
+6442.Circus Charlie (Esp Master):10:24KB
+6443.City Connection (Esp Master):10:32KB
+6444.Clash Demonhead (Esp Master):10:128KB
+6445.Cliffhanger (Esp Master):10:128KB
+6446.Clu Clu Land (Esp Master):10:32KB
+6447.Cobra Command (Esp Master):10:128KB
+6448.Cobra Triangle (Esp Master):10:128KB
+6449.Code Name Viper (Esp Master):10:128KB
+6450.Color a Dinosaur (Master):10:64KB
+6451.Commando (Esp Master):10:32KB
+6452.Conan (Esp Master):10:128KB
+6453.Conflict (Esp Master):10:256KB
+6454.Contra (Esp Master):10:128KB
+6455.Contra Force (Esp Master):10:256KB
+6456.Cool World (Esp Master):10:128KB
+6457.Cowboy Kid (Esp Master):10:256KB
+6458.Crash n the Boys (Master):10:256KB
+6459.Crystal Mines (Esp Master):10:128KB
+6460.Crystalis (Esp Master):10:256KB
+6461.Cyberball (Esp Master):10:128KB
+6462.Cybernoid (Esp Master):10:128KB
+6463.Darkman (Esp Master):10:128KB
+6464.Darkwing Duck (Esp Master):10:256KB
+6465.Dash Galaxy (Esp Master):10:128KB
+6466.Days of Thunder (Esp Master):10:128KB
+6467.Deadly Towers (Esp Master):10:128KB
+6468.Defender 2 (Esp Master):10:32KB
+6469.Defender of Crown (Master):10:256KB
+6470.Deja Vu (Esp Master):10:128KB
+6471.Demon Sword (Esp Master):10:128KB
+6472.Desert Commander (Master):10:128KB
+6473.Dick Tracy (Esp Master):10:128KB
+6474.Die Hard (Esp Master):10:256KB
+6475.Dig Dug 2 (Esp Master):10:64KB
+6476.Digger T. Rock (Esp Master):10:128KB
+6477.Dirty Harry (Esp Master):10:128KB
+6478.Donkey Kong (Esp Master):10:24KB
+6479.Donkey Kong 3 (Esp Master):10:24KB
+6480.Donkey Kong Jr (Esp Master):10:24KB
+6481.Double Dare (Esp Master):10:128KB
+6482.Double Dragon 1 (Esp Master):10:128KB
+6483.Double Dragon 2 (Esp Master):10:256KB
+6484.Double Dragon 3 (Esp Master):10:256KB
+6485.Double Dribble (Esp Master):10:64KB
+6486.Dr. Chaos (Esp Master):10:128KB
+6487.Dr. Mario (Esp Master):10:48KB
+6488.Dragon Fighter (Esp Master):10:128KB
+6489.Dragon Spirit (Esp Master):10:128KB
+6490.Dragon Warrior 1 (Master):10:64KB
+6491.Dragon Warrior 2 (Master):10:256KB
+6492.Dragon Warrior 3 (Master):10:512KB
+6493.Dragon Warrior 4 (Master):10:512KB
+6494.Dragon's Lair (Esp Master):10:256KB
+6495.DuckTales 1 (Esp Master):10:128KB
+6496.DuckTales 2 (Esp Master):10:256KB
+6497.Dungeon Magic (Esp Master):10:256KB
+6498.Dusty Diamond (Esp Master):10:128KB
+6499.Dynowarz (Esp Master):10:128KB
+6500.Elevator Action (Esp Master):10:32KB
+6501.Eliminator Boat (Master):10:256KB
+6502.Empire Strikes Back (Master):10:256KB
+6503.Excitebike (Esp Master):10:32KB
+6504.Exodus (Fixed Master):10:128KB
+6505.F-117A Stealth (Esp Master):10:256KB
+6506.F-15 Strike Eagle (Master):10:128KB
+6507.Family Feud (Esp Master):10:128KB
+6508.Faria (Esp Master):10:256KB
+6509.Faxanadu (Esp Master):10:256KB
+6510.Felix the Cat (Esp Master):10:256KB
+6511.Ferrari GP (Esp Master):10:128KB
+6512.Fester's Quest (Esp Master):10:128KB
+6513.Final Fantasy 1 (Esp Master):10:256KB
+6514.Final Fantasy 2 (Esp Master):10:256KB
+6515.Final Fantasy 3 (Esp Master):10:512KB
+6516.Fire n Ice (Esp Master):10:256KB
+6517.Fist of North Star (Master):10:128KB
+6518.Flight of Intruder (Master):10:256KB
+6519.Flintstones: Dino (Master):10:256KB
+6520.Flintstones: Surprise (M):10:256KB
+6521.Frankenstein (Esp Master):10:128KB
+6522.Friday the 13th (Esp Master):10:128KB
+6523.Galaga (Esp Master):10:24KB
+6524.Galaxy 5000 (Esp Master):10:128KB
+6525.Gargoyle's Quest II (Master):10:256KB
+6526.Gauntlet 1 (Esp Master):10:128KB
+6527.Gauntlet 2 (Esp Master):10:128KB
+6528.Gemfire (Esp Master):10:512KB
+6529.Genghis Khan (Esp Master):10:512KB
+6530.Ghostbusters 1 (Esp Master):10:64KB
+6531.Ghostbusters 2 (Esp Master):10:128KB
+6532.Ghosts n Goblins (Esp Master):10:128KB
+6533.Ghoul School (Esp Master):10:128KB
+6534.Gimmick! (Esp Master):10:256KB
+6535.Godzilla 1 (Esp Master):10:256KB
+6536.Godzilla 2 (Esp Master):10:256KB
+6537.Gold Medal Challenge (Master):10:256KB
+6538.Golf (Esp Master):10:32KB
+6539.Golgo 13 (Esp Master):10:256KB
+6540.Goonies 1 (Esp Master):10:64KB
+6541.Goonies 2 (Esp Master):10:128KB
+6542.Gradius 1 (Esp Master):10:64KB
+6543.Gradius 2 (Esp Master):10:256KB
+6544.Gremlins 2 (Esp Master):10:256KB
+6545.Guardian Legend (Esp Master):10:128KB
+6546.Guerilla War (Esp Master):10:128KB
+6547.Gumshoe (Esp Master):10:64KB
+6548.Gun Smoke (Esp Master):10:128KB
+6549.Gun-Nac (Esp Master):10:256KB
+6550.Gyromite (Esp Master):10:32KB
+6551.Gyruss (Esp Master):10:128KB
+6552.Hammerin Harry (Esp Master):10:256KB
+6553.Harlem Globetrotters (Master):10:128KB
+6554.Hatris (Esp Master):10:64KB
+6555.Heavy Barrel (Esp Master):10:128KB
+6556.Heavy Shreddin (Esp Master):10:128KB
+6557.High Speed (Esp Master):10:128KB
+6558.Hogan's Alley (Esp Master):10:32KB
+6559.Home Alone 1 (Esp Master):10:128KB
+6560.Home Alone 2 (Esp Master):10:256KB
+6561.Hook (Esp Master):10:256KB
+6562.Hoops (Esp Master):10:128KB
+6563.Hudson Hawk (Esp Master):10:128KB
+6564.Hunt for Red October (Master):10:128KB
+6565.Hydlide (Esp Master):10:64KB
+6566.Ice Climber (Esp Master):10:32KB
+6567.Ice Hockey (Esp Master):10:48KB
+6568.Ikari Warriors 1 (Master):10:128KB
+6569.Ikari Warriors 2 (Master):10:128KB
+6570.Ikari Warriors 3 (Master):10:256KB
+6571.Image Fight (Esp Master):10:128KB
+6572.Immortal, The (Esp Master):10:256KB
+6573.Incredible Crash Dummies (M):10:256KB
+6574.Indiana Jones: Temple (M):10:128KB
+6575.Indiana Jones: Crusade (M):10:128KB
+6576.Infiltrator (Esp Master):10:128KB
+6577.Iron Tank (Esp Master):10:128KB
+6578.IronSword (Esp Master):10:128KB
+6579.Isolated Warrior (Esp Master):10:256KB
+6580.Ivan Stewart Off Road (M):10:128KB
+6581.Jackie Chan (Esp Master):10:256KB
+6582.James Bond Jr (Esp Master):10:256KB
+6583.Jeopardy! (Esp Master):10:128KB
+6584.Jetsons (Esp Master):10:256KB
+6585.Joe & Mac (Esp Master):10:256KB
+6586.Jordan vs Bird (Esp Master):10:128KB
+6587.Journey to Silius (Master):10:128KB
+6588.Joust (Esp Master):10:32KB
+6589.Jungle Book (Esp Master):10:256KB
+6590.Jurassic Park (Esp Master):10:256KB
+6591.Kabuki Quantum (Esp Master):10:256KB
+6592.Karate Kid (Esp Master):10:64KB
+6593.Karnov (Esp Master):10:128KB
+6594.Kick Master (Esp Master):10:256KB
+6595.Kick Off (Esp Master):10:128KB
+6596.Kid Icarus (Esp Master):10:128KB
+6597.Kid Klown (Esp Master):10:128KB
+6598.Kid Niki (Esp Master):10:128KB
+6599.Kings of the Beach (Master):10:128KB
+6600.Kirby's Adventure (Master):10:768KB
+6601.KlashBall (Esp Master):10:128KB
+6602.Knight Rider (Esp Master):10:128KB
+6603.Krion Conquest (Esp Master):10:256KB
+6604.Krusty's Fun House (Master):10:256KB
+6605.Kung Fu (Esp Master):10:32KB
+6606.Kung Fu Heroes (Esp Master):10:64KB
+6607.Last Action Hero (Master):10:256KB
+6608.Last Ninja (Esp Master):10:128KB
+6609.Last Starfighter (Master):10:128KB
+6610.Legend of Kage (Esp Master):10:64KB
+6611.Legend of Zelda 1 (Master):10:128KB
+6612.Legendary Wings (Esp Master):10:128KB
+6613.Lemmings (Esp Master):10:128KB
+6614.Lethal Weapon (Esp Master):10:256KB
+6615.Life Force (Esp Master):10:128KB
+6616.Lion King (Esp Master):10:256KB
+6617.Little Mermaid (Esp Master):10:128KB
+6618.Little Nemo (Esp Master):10:256KB
+6619.Little Samson (Esp Master):10:512KB
+6620.Lode Runner (Esp Master):10:32KB
+6621.Lone Ranger (Esp Master):10:512KB
+6622.Loopz (Esp Master):10:64KB
+6623.Low G Man (Esp Master):10:256KB
+6624.Lunar Pool (Esp Master):10:32KB
+6625.M.C. Kids (Esp Master):10:256KB
+6626.M.U.L.E. (Esp Master):10:128KB
+6627.Mach Rider (Esp Master):10:32KB
+6628.Mad Max (Esp Master):10:128KB
+6629.Mafat Alien (Esp Master):10:256KB
+6630.Magic Jewelry (Fixed Master):10:64KB
+6631.Magmax (Esp Master):10:64KB
+6632.Maniac Mansion (Esp Master):10:256KB
+6633.Mappy-Land (Esp Master):10:64KB
+6634.Marble Madness (Esp Master):10:64KB
+6635.Mario Is Missing (Master):10:256KB
+6636.Mario's Time Machine (Master):10:256KB
+6637.Mega Man 1 (Esp Master):10:128KB
+6638.Mega Man 2 (Esp Master):10:256KB
+6639.Mega Man 3 (Esp Master):10:384KB
+6640.Mega Man 4 (Esp Master):10:512KB
+6641.Mega Man 5 (Esp Master):10:512KB
+6642.Mega Man 6 (Esp Master):10:512KB
+6643.Mendel Palace (Esp Master):10:128KB
+6644.Metal Gear (Esp Master):10:128KB
+6645.Metal Mech (Esp Master):10:256KB
+6646.Metal Storm (Esp Master):10:128KB
+6647.Metroid (Esp Master):10:128KB
+6648.Mickey Mousecapade (Master):10:64KB
+6649.Mickey's Adventure (Master):10:128KB
+6650.Micro Machines (Esp Master):10:256KB
+6651.Mighty Final Fight (Master):10:256KB
+6652.Millipede (Esp Master):10:32KB
+6653.Mission Impossible (Master):10:256KB
+6654.Monopoly (Esp Master):10:128KB
+6655.Monster in My Pocket (M):10:256KB
+6656.Monster Party (Esp Master):10:128KB
+6657.Moon Crystal (Esp Master):10:256KB
+6658.Ms. Pac-Man (Esp Master):10:64KB
+6659.Mutant Virus (Esp Master):10:128KB
+6660.Mystery Quest (Esp Master):10:128KB
+6661.NARC (Esp Master):10:128KB
+6662.NES Open Golf (Esp Master):10:256KB
+6663.New Ghostbusters 2 (Master):10:256KB
+6664.Nightshade (Esp Master):10:256KB
+6665.Ninja Crusaders (Esp Master):10:128KB
+6666.Ninja Gaiden 1 (Esp Master):10:128KB
+6667.Ninja Gaiden 2 (Esp Master):10:256KB
+6668.Ninja Gaiden 3 (Esp Master):10:256KB
+6669.Nintendo World Cup (Master):10:128KB
+6670.North & South (Esp Master):10:128KB
+6671.Operation Wolf (Esp Master):10:128KB
+6672.Othello (Esp Master):10:32KB
+6673.Over Horizon (Esp Master):10:128KB
+6674.P.O.W. (Esp Master):10:256KB
+6675.Pac-Land (Esp Master):10:64KB
+6676.Pac-Man (Esp Master):10:24KB
+6677.Palamedes (Esp Master):10:64KB
+6678.Panic Restaurant (Master):10:256KB
+6679.Paperboy 1 (Esp Master):10:64KB
+6680.Paperboy 2 (Esp Master):10:128KB
+6681.Parasol Stars (Esp Master):10:256KB
+6682.Parodius (Esp Master):10:256KB
+6683.Phantom Fighter (Esp Master):10:128KB
+6684.Pictionary (Esp Master):10:64KB
+6685.Pinball (Esp Master):10:32KB
+6686.Pinball Quest (Esp Master):10:128KB
+6687.Pipe Dream (Esp Master):10:64KB
+6688.Pirates! (Esp Master):10:256KB
+6689.Platoon (Esp Master):10:128KB
+6690.Popeye (Esp Master):10:24KB
+6691.Power Blade 1 (Esp Master):10:128KB
+6692.Power Blade 2 (Esp Master):10:256KB
+6693.Predator (Esp Master):10:128KB
+6694.Prince of Persia (Esp Master):10:256KB
+6695.Princess Tomato (Esp Master):10:256KB
+6696.Pro Wrestling (Esp Master):10:64KB
+6697.Punch-Out!! (Esp Master):10:256KB
+6698.Punisher, The (Esp Master):10:256KB
+6699.Puzznic (Esp Master):10:64KB
+6700.Q-bert (Esp Master):10:64KB
+6701.Qix (Esp Master):10:64KB
+6702.R.C. Pro-Am (Esp Master):10:64KB
+6703.R.C. Pro-Am II (Esp Master):10:128KB
+6704.Rad Racer 1 (Esp Master):10:128KB
+6705.Rad Racer 2 (Esp Master):10:128KB
+6706.Rainbow Islands (Esp Master):10:128KB
+6707.Rally Bike (Esp Master):10:128KB
+6708.Rambo (Esp Master):10:128KB
+6709.Rampage (Esp Master):10:128KB
+6710.Rampart (Esp Master):10:128KB
+6711.Renegade (Esp Master):10:128KB
+6712.Rescue: Embassy (Master):10:128KB
+6713.Ring King (Esp Master):10:128KB
+6714.River City Ransom (Master):10:128KB
+6715.RoadBlasters (Esp Master):10:128KB
+6716.Robin Hood (Esp Master):10:256KB
+6717.Robocop 1 (Esp Master):10:128KB
+6718.Robocop 2 (Esp Master):10:512KB
+6719.Robocop 3 (Esp Master):10:256KB
+6720.Rocketeer, The (Esp Master):10:128KB
+6721.Rockin Kats (Esp Master):10:256KB
+6722.Rollerball (Esp Master):10:64KB
+6723.Rollergames (Esp Master):10:256KB
+6724.Rolling Thunder (Esp Master):10:128KB
+6725.Rush n Attack (Esp Master):10:64KB
+6726.Rygar (Esp Master):10:128KB
+6727.SD Gundam 3 (Esp Master):10:256KB
+6728.Section Z (Esp Master):10:128KB
+6729.Seicross (Esp Master):10:32KB
+6730.Shadow of Ninja (Master):10:128KB
+6731.Shadow Warriors (Esp Master):10:128KB
+6732.Shadowgate (Esp Master):10:128KB
+6733.Shatterhand (Esp Master):10:256KB
+6734.Side Pocket (Esp Master):10:64KB
+6735.Silent Service (Esp Master):10:128KB
+6736.Silk Worm (Esp Master):10:128KB
+6737.Silver Surfer (Esp Master):10:128KB
+6738.Simpsons: Space (Master):10:256KB
+6739.Simpsons: World (Master):10:256KB
+6740.Skate or Die (Esp Master):10:128KB
+6741.Ski or Die (Esp Master):10:256KB
+6742.Sky Shark (Esp Master):10:128KB
+6743.Slalom (Esp Master):10:32KB
+6744.Smash TV (Esp Master):10:128KB
+6745.Snake Rattle Roll (Master):10:128KB
+6746.Snow Brothers (Esp Master):10:256KB
+6747.Solomon's Key (Esp Master):10:64KB
+6748.Solstice (Esp Master):10:128KB
+6749.Spelunker (Esp Master):10:32KB
+6750.Spider-Man (Esp Master):10:256KB
+6751.Spy Hunter (Esp Master):10:32KB
+6752.Spy vs Spy (Esp Master):10:32KB
+6753.Star Force (Esp Master):10:32KB
+6754.Star Soldier (Esp Master):10:64KB
+6755.Star Tropics (Esp Master):10:512KB
+6756.Star Wars (Esp Master):10:128KB
+6757.Starship Hector (Esp Master):10:64KB
+6758.Stealth ATF (Esp Master):10:128KB
+6759.Stinger (Esp Master):10:64KB
+6760.Street Fighter 2010 (Master):10:256KB
+6761.Strider (Esp Master):10:128KB
+6762.Super C (Esp Master):10:256KB
+6763.Super Mario 1 (Esp Master):10:32KB
+6764.Super Mario 2 (Esp Master):10:128KB
+6765.Super Mario 3 (Esp Master):10:384KB
+6766.Super Off Road (Esp Master):10:128KB
+6767.Super Pitfall (Esp Master):10:64KB
+6768.Super Sprint (Esp Master):10:64KB
+6769.Super Spy Hunter (Master):10:256KB
+6770.Superman (Esp Master):10:128KB
+6771.Sword Master (Esp Master):10:256KB
+6772.TaleSpin (Esp Master):10:256KB
+6773.Tecmo Bowl (Esp Master):10:128KB
+6774.Tecmo Cup (Esp Master):10:256KB
+6775.TMNT 1 (Esp Master):10:256KB
+6776.TMNT 2 Arcade (Esp Master):10:512KB
+6777.TMNT 3 Manhattan (Master):10:512KB
+6778.Terminator 1 (Esp Master):10:128KB
+6779.Terminator 2 (Esp Master):10:256KB
+6780.Tetris (Nintendo Master):10:48KB
+6781.Tetris (Tengen Master):10:64KB
+6782.Tiny Toon 1 (Esp Master):10:256KB
+6783.Tiny Toon 2 (Esp Master):10:256KB
+6784.Toki (Esp Master):10:256KB
+6785.Tom & Jerry (Esp Master):10:256KB
+6786.Top Gun 1 (Esp Master):10:128KB
+6787.Top Gun 2 (Esp Master):10:256KB
+6788.Total Recall (Esp Master):10:128KB
+6789.Trojan (Esp Master):10:64KB
+6790.Twin Cobra (Esp Master):10:128KB
+6791.Ufouria (Esp Master):10:128KB
+6792.Urban Champion (Esp Master):10:32KB
+6793.Vegas Dream (Esp Master):10:128KB
+6794.Vindicators (Esp Master):10:128KB
+6795.Volleyball (Esp Master):10:32KB
+6796.Wacky Races (Esp Master):10:256KB
+6797.Wall Street Kid (Esp Master):10:256KB
+6798.Wario's Woods (Esp Master):10:512KB
+6799.Wayne's World (Esp Master):10:128KB
+6800.Werewolf (Esp Master):10:128KB
+6801.Where's Waldo (Esp Master):10:64KB
+6802.Whomp 'Em (Esp Master):10:128KB
+6803.Widget (Esp Master):10:256KB
+6804.Wild Gunman (Esp Master):10:24KB
+6805.Willow (Esp Master):10:256KB
+6806.Wolverine (Esp Master):10:128KB
+6807.World Champ (Esp Master):10:128KB
+6808.Wrecking Crew (Esp Master):10:32KB
+6809.Wurm: Journey (Esp Master):10:256KB
+6810.X-Men (Esp Master):10:128KB
+6811.Xevious (Esp Master):10:24KB
+6812.Xexyz (Esp Master):10:256KB
+6813.Yo! Noid (Esp Master):10:256KB
+6814.Yoshi (Esp Master):10:64KB
+6815.Yoshi's Cookie (Esp Master):10:128KB
+6816.Zanac (Esp Master):10:128KB
+6817.Zelda 2 (Esp Master):10:256KB
+6818.Zombie Nation (Esp Master):10:128KB
+6819.1943 (Hack Easy Mode):10:128KB
+6820.Adventure Island (Hack Save):10:64KB
+6821.Almond (Unlicensed):10:128KB
+6822.Altered Beast (NES Port):10:256KB
+6823.Angry Birds (NES Bootleg):10:512KB
+6824.Animaniacs (NES Bootleg):10:256KB
+6825.Ape Escape (NES Port):10:256KB
+6826.Arctic Adventure (Unlic):10:64KB
+6827.AV Pao Pao (Unlic):10:64KB
+6828.Baby Boomer (Unlic Fix):10:128KB
+6829.Back to the Future 2 (Port):10:128KB
+6830.Back to the Future 3 (Port):10:128KB
+6831.Badman (Unlic):10:64KB
+6832.Balloon Monster (Unlic):10:128KB
+6833.Banana (Trad. Español):10:32KB
+6834.Bio Hazard (Unlic Port):10:1MB
+6835.Black Jack (Sachen Unlic):10:64KB
+6836.Block Force (Unlic):10:64KB
+6837.Bomb Sweeper (Unlic):10:64KB
+6838.Booky Man (Unlic):10:128KB
+6839.Boxer (Unlic):10:64KB
+6840.Brush Roller (Unlic):10:64KB
+6841.Bubble Bobble 3 (Bootleg):10:128KB
+6842.Buzz n Waldy (Unlic):10:128KB
+6843.Candy Workshop (Unlic):10:64KB
+6844.Castle of Deceit (Unlic):10:64KB
+6845.Challenge of Dragon (Unlic):10:128KB
+6846.Chanticleer (Unlic):10:128KB
+6847.Chess (Unlic):10:64KB
+6848.Chinese Checkers (Unlic):10:64KB
+6849.Chu Han Chi (Unlic):10:128KB
+6850.City Fighter (Unlic):10:128KB
+6851.Colorful Dragon (Unlic):10:64KB
+6852.Contrast (Unlic):10:64KB
+6853.Cosmo Cop (Unlic):10:128KB
+6854.Creature (Unlic):10:128KB
+6855.Dance 2000 (Unlic):10:512KB
+6856.Dark Seed (Unlic Port):10:512KB
+6857.Dead Fox (Trad. Esp):10:128KB
+6858.Death Race (Unlic Fix):10:128KB
+6859.Deepscan (Unlic):10:64KB
+6860.Desert Storm (Unlic):10:128KB
+6861.Devil Force (Unlic):10:256KB
+6862.Diamond (Unlic):10:64KB
+6863.Dice (Unlic):10:64KB
+6864.Donkey Kong Country 4 (Boot):10:512KB
+6865.Doraemon (Trad. Esp):10:128KB
+6866.Double Strike (Unlic):10:128KB
+6867.Dr. Jekyl (Esp Fixed):10:128KB
+6868.Dream Fighter (Unlic):10:128KB
+6869.Dungeons & Dragons (Esp):10:256KB
+6870.Earthworm Jim 2 (NES Port):10:512KB
+6871.Earthworm Jim 3 (NES Port):10:512KB
+6872.Ecstatica (Unlic Port):10:512KB
+6873.Elfland (Unlic):10:128KB
+6874.Escape from Atlantis (Un):10:128KB
+6875.Exerion 2 (Unlic):10:64KB
+6876.Exploding Fist (Unlic):10:128KB
+6877.Extreme Rally (Unlic):10:128KB
+6878.F-15 City War (Unlic):10:64KB
+6879.Final Combat (Unlic):10:128KB
+6880.Final Fantasy 7 (NES Port):10:1MB
+6881.Firehouse Rescue (Esp):10:64KB
+6882.Flappy (Trad. Esp):10:32KB
+6883.Fortune Tennis (Unlic):10:64KB
+6884.Frog River (Unlic):10:64KB
+6885.Fruit Gift (Unlic):10:64KB
+6886.Galactic Crusader (Unlic):10:64KB
+6887.Galaxian (Hack Plus):10:24KB
+6888.Galaxy 5000 (Esp Fixed):10:128KB
+6889.Garfield (NES Port):10:256KB
+6890.Garou Densetsu Special (NES):10:512KB
+6891.General's Son (Unlic):10:128KB
+6892.Glory of Heracles (Esp):10:128KB
+6893.Go! Benny! (Unlic):10:128KB
+6894.Golden Axe (NES Port):10:256KB
+6895.Golf (Hack Plus):10:32KB
+6896.Grand Dad 7 (Bootleg):10:128KB
+6897.Great Wall (Unlic):10:64KB
+6898.Guerilla War (Hack 4P):10:128KB
+6899.Gun-Nac (Hack DX):10:256KB
+6900.Hammerin Harry 2 (Esp):10:256KB
+6901.Harry's Legend (Unlic):10:256KB
+6902.Harvest Moon (NES Port):10:512KB
+6903.Hello Kitty World (Esp):10:128KB
+6904.Hell Fighter (Unlic):10:128KB
+6905.Hercules (NES Port):10:512KB
+6906.Hit Mouse (Unlic):10:64KB
+6907.Honey Peach (Unlic):10:128KB
+6908.Hot Slots (Unlic):10:128KB
+6909.Huge Insect (Unlic):10:128KB
+6910.Hyper Runner (Unlic):10:64KB
+6911.Idol Shisou Mahjong (J):10:256KB
+6912.Inner Invader (Unlic):10:64KB
+6913.Insector X (NES Port):10:128KB
+6914.Interstellar (Unlic):10:128KB
+6915.Island (Unlic):10:64KB
+6916.Jackpot (Unlic):10:64KB
+6917.Jewel Master (Unlic):10:64KB
+6918.Jiandao (Unlic):10:128KB
+6919.Journey to Silius (Esp):10:128KB
+6920.Joyvan (Unlic):10:128KB
+6921.Jumpin Kid (Trad. Esp):10:128KB
+6922.Kart Fighter (Bootleg):10:256KB
+6923.King of Fighters 96 (NES):10:512KB
+6924.King of Fighters 97 (NES):10:512KB
+6925.King of Fighters 98 (NES):10:512KB
+6926.King of Kings (Unlic):10:256KB
+6927.Kitchen Panic (Unlic):10:128KB
+6928.Knight (Unlic):10:128KB
+6929.Krion Conquest (Esp):10:256KB
+6930.Kyoryu Sentai (Trad. Esp):10:256KB
+6931.Labyrinth (Trad. Esp):10:128KB
+6932.Ladder Master (Unlic):10:64KB
+6933.Lashman (Unlic):10:128KB
+6934.Last Ninja 2 (Esp Port):10:128KB
+6935.Legend of Hero (Unlic):10:128KB
+6936.Legend of Zelda (Hack DX):10:128KB
+6937.Lethal Weapon (Esp Fixed):10:256KB
+6938.Lightning (Unlic):10:64KB
+6939.Linus Spacehead (Unlic):10:128KB
+6940.Little Samson (Hack 2P):10:512KB
+6941.Locksmith (Unlic):10:64KB
+6942.Lode Runner (Hack DX):10:32KB
+6943.Magic Bubble (Unlic):10:128KB
+6944.Magic Carpet (Unlic):10:128KB
+6945.Magic Cube (Unlic):10:64KB
+6946.Magic Dragon (Unlic):10:128KB
+6947.Magic Jewelry 2 (Unlic):10:128KB
+6948.Magical Tower (Unlic):10:128KB
+6949.Mahjong Academy (Unlic):10:128KB
+6950.Mahjong Companion (Unlic):10:128KB
+6951.Mario 10 (Bootleg):10:128KB
+6952.Mario 12 (Bootleg):10:128KB
+6953.Mario 14 (Bootleg):10:128KB
+6954.Mario 16 (Bootleg):10:256KB
+6955.Mario Party (NES Port):10:512KB
+6956.Master Shooter (Unlic):10:128KB
+6957.Mazu (Unlic):10:128KB
+6958.Mega Man 7 (NES FC Port):10:512KB
+6959.Mega Man 8 (NES FC Port):10:512KB
+6960.Metal Fighter (Unlic):10:128KB
+6961.Metal Slug (NES Port):10:512KB
+6962.Micro Machines (Hack Plus):10:256KB
+6963.Mighty Morphin (Trad. Esp):10:256KB
+6964.Millipede (Hack DX):10:32KB
+6965.Mind Blower (Unlic):10:64KB
+6966.Miniature Golf (Unlic):10:64KB
+6967.Missing Link (Unlic):10:128KB
+6968.Mission Cobra (Unlic):10:64KB
+6969.Moon Ranger (Unlic):10:64KB
+6970.Mortal Kombat 2 (Bootleg):10:512KB
+6971.Mortal Kombat 3 (Bootleg):10:512KB
+6972.Mortal Kombat 4 (Bootleg):10:512KB
+6973.Ms. Pac-Man (Hack DX):10:64KB
+6974.Musical Moments (Unlic):10:128KB
+6975.Nekketsu Hockey (Trad. Esp):10:256KB
+6976.Nekketsu Street (Trad. Esp):10:256KB
+6977.Nightmare on Elm (Hack DX):10:128KB
+6978.Ninja Gaiden 4 (Bootleg):10:256KB
+6979.Olympic IQ (Unlic):10:128KB
+6980.On the Road (Unlic):10:64KB
+6981.Operation Secret Storm (Un):10:128KB
+6982.Othello (Hack Plus):10:32KB
+6983.Over Horizon (Hack DX):10:128KB
+6984.Pac-Man (Hack Speed):10:24KB
+6985.Panda Adventure (Unlic):10:128KB
+6986.Paperboy (Hack DX):10:64KB
+6987.Parodius (Hack DX):10:256KB
+6988.Peek-A-Boo Poker (Unlic):10:128KB
+6989.Penguin & Seal (Unlic):10:64KB
+6990.Pesterminator (Unlic):10:128KB
+6991.Pinball (Hack DX):10:32KB
+6992.Pipe Dream (Hack Plus):10:64KB
+6993.Pizza Boy (Unlic):10:128KB
+6994.Pocket Monster (Bootleg Esp):10:512KB
+6995.Pooyan (Hack Plus):10:24KB
+6996.Popeye (Hack DX):10:24KB
+6997.Postman Pat (Unlic):10:128KB
+6998.Power Blade (Hack DX):10:128KB
+6999.Power Rangers (Bootleg):10:256KB
+7000.Prince of Persia (Hack DX):10:256KB
+7001.Punch-Out!! (Hack 2P Mode):10:256KB
+7002.Puzzle (Unlic Sachen):10:64KB
+7003.Pyramid (Unlic Sachen):10:64KB
+7004.Q-bert (Hack DX):10:64KB
+7005.Quattro Adventure (Unlic):10:256KB
+7006.Quattro Arcade (Unlic):10:256KB
+7007.Quattro Sports (Unlic):10:256KB
+7008.R.B.I. Baseball (Hack Plus):10:64KB
+7009.Rad Racer (Hack DX):10:128KB
+7010.Raid 2020 (Unlic):10:64KB
+7011.Rampage (Hack Plus):10:128KB
+7012.Rampart (Hack Plus):10:128KB
+7013.Real Ghostbusters (Unlic):10:128KB
+7014.Red Arremer 2 (Trad. Esp):10:256KB
+7015.Renegade (Hack Plus):10:128KB
+7016.Ring King (Hack Plus):10:128KB
+7017.River City Ransom (Hack DX):10:128KB
+7018.Road Fighter (Hack DX):10:24KB
+7019.Robocop 4 (Bootleg):10:256KB
+7020.Rockman 7 (NES Port):10:512KB
+7021.Rockman 8 (NES Port):10:512KB
+7022.Rockman & Forte (NES Port):10:512KB
+7023.Rockman X (NES Port):10:512KB
+7024.Rugrats (NES Port):10:256KB
+7025.Rush n Attack (Hack DX):10:64KB
+7026.Rygar (Hack SRAM Save):10:128KB
+7027.Sailor Moon (Trad. Esp):10:256KB
+7028.Samurai Spirits (NES Port):10:512KB
+7029.Sanguo Zhongyuan (Esp):10:256KB
+7030.Santa Claus (Unlic):10:128KB
+7031.Savage Island (Unlic):10:64KB
+7032.Sea of Dreamland (Unlic):10:128KB
+7033.Secret Ties (Trad. Esp):10:128KB
+7034.Seicross (Hack Plus):10:32KB
+7035.Shadow of Ninja (Hack DX):10:128KB
+7036.Shadow Warriors (Hack DX):10:128KB
+7037.Shadowgate (Hack DX):10:128KB
+7038.Shatterhand (Hack DX):10:256KB
+7039.Sheriff (Unlic):10:64KB
+7040.Shin Samurai Spirits (NES):10:512KB
+7041.Sidewinder (Unlic):10:64KB
+7042.Silent Assault (Unlic):10:64KB
+7043.Silent Service (Hack Plus):10:128KB
+7044.Silver Surfer (Hack Easy):10:128KB
+7045.Simpsons: Bartman (Hack DX):10:256KB
+7046.Sky Destroyer (Hack Plus):10:24KB
+7047.Sky Shark (Hack Plus):10:128KB
+7048.Slalom (Hack Plus):10:32KB
+7049.Small Cartoon (Unlic):10:64KB
+7050.Smash TV (Hack Plus):10:128KB
+7051.Snow Brothers (Hack DX):10:256KB
+7052.Soccer (Hack Plus):10:32KB
+7053.Solar Jetman (Hack Plus):10:256KB
+7054.Solomon's Key (Hack DX):10:64KB
+7055.Solomon's Key 2 (Esp):10:128KB
+7056.Solstice (Hack Plus):10:128KB
+7057.Somari (Bootleg Mario):10:512KB
+7058.Sonic the Hedgehog (NES):10:512KB
+7059.Sonic 3D Blast (NES Port):10:512KB
+7060.Space Invaders (Hack Plus):10:24KB
+7061.Space Shadow (Esp):10:128KB
+7062.Space Shuttle (Hack Plus):10:128KB
+7063.Spelunker (Hack DX):10:32KB
+7064.Spider-Man (Hack DX):10:256KB
+7065.Spiritual Warfare (Unlic):10:256KB
+7066.Splatterhouse (Trad. Esp):10:128KB
+7067.Spot (Hack Plus):10:64KB
+7068.Spy Hunter (Hack Plus):10:32KB
+7069.Spy vs Spy (Hack DX):10:32KB
+7070.Star Force (Hack Plus):10:32KB
+7071.Star Soldier (Hack Plus):10:64KB
+7072.Star Wars (Hack DX):10:128KB
+7073.Street Fighter 2 (NES Port):10:512KB
+7074.Street Fighter 3 (NES Port):10:512KB
+7075.Street Fighter 4 (NES Port):10:512KB
+7076.Street Fighter Zero (NES):10:512KB
+7077.Strider (Hack DX):10:128KB
+7078.Submarine (Unlic):10:64KB
+7079.Sumo Wrestling (Unlic):10:64KB
+7080.Super 10-in-1 (Unlic):10:512KB
+7081.Super 15-in-1 (Unlic):10:1MB
+7082.Super 8-in-1 (Unlic):10:512KB
+7083.Super C (Hack 30 Lives):10:256KB
+7084.Super Donkey Kong (NES):10:512KB
+7085.Super Fighter 3 (Unlic):10:256KB
+7086.Super Gun (Unlic):10:64KB
+7087.Super Mario 4 (Bootleg):10:128KB
+7088.Super Mario 6 (Bootleg):10:128KB
+7089.Super Mario 9 (Bootleg):10:128KB
+7090.Super Mario World (NES):10:512KB
+7091.Super Pang (NES Port):10:128KB
+7092.Super Robin Hood (Unlic):10:64KB
+7093.Super Sprint (Hack Plus):10:64KB
+7094.Super Star Force (Esp):10:128KB
+7095.Super Turkey (Unlic):10:128KB
+7096.Superman (Hack DX):10:128KB
+7097.Tag Team Wrestling (Hack):10:64KB
+7098.Takahashi Adventure (Esp):10:256KB
+7099.TaleSpin (Hack DX):10:256KB
+7100.Target: Renegade (Hack):10:128KB
+7101.Tasac (Unlic Sachen):10:64KB
+7102.Tecmo Bowl (Hack 2026):10:256KB
+7103.Tecmo Cup (Hack DX):10:256KB
+7104.Teenage Mutant 4 (Bootleg):10:256KB
+7105.Tekken 2 (NES Port):10:512KB
+7106.Tekken 3 (NES Port):10:512KB
+7107.Tennis (Hack DX):10:32KB
+7108.Terminator 2 (Hack DX):10:256KB
+7109.Terra Cresta (Hack Plus):10:64KB
+7110.Tetris (Hack Plus):10:48KB
+7111.The Goonies (Hack Plus):10:64KB
+7112.The Last Ninja (Hack DX):10:128KB
+7113.The Lion King 3 (NES):10:512KB
+7114.The Little Mermaid (Hack):10:128KB
+7115.The Simpson (NES Port):10:256KB
+7116.Thunder & Lightning (Hack):10:64KB
+7117.Thunderbirds (Hack Plus):10:128KB
+7118.Tiger-Heli (Hack Plus):10:64KB
+7119.Time Zone (Trad. Esp):10:128KB
+7120.Tiny Toon 1 (Hack DX):10:256KB
+7121.Tiny Toon 2 (Hack DX):10:256KB
+7122.Tiny Toon 3 (Bootleg):10:256KB
+7123.Titanic (NES Port):10:512KB
+7124.TMNT (Hack DX):10:256KB
+7125.Toki (Hack DX):10:256KB
+7126.Tom & Jerry (Hack DX):10:256KB
+7127.Top Gun (Hack Plus):10:128KB
+7128.Tough Cop (Unlic):10:128KB
+7129.Toy Story (NES Port):10:512KB
+7130.Track & Field (Hack Plus):10:32KB
+7131.Trojan (Hack DX):10:64KB
+7132.Trolls on Treasure (Unlic):10:128KB
+7133.Turtles 1 (Hack Plus):10:256KB
+7134.Twin Cobra (Hack Plus):10:128KB
+7135.Twin Eagle (Hack Plus):10:128KB
+7136.Ufouria (Hack DX):10:128KB
+7137.Ultimate Stuntman (Unlic):10:256KB
+7138.Urban Champion (Hack DX):10:32KB
+7139.Valkyrie no Bouken (Esp):10:64KB
+7140.Vegas Dream (Hack Plus):10:128KB
+7141.Venice Beach VB (Unlic):10:128KB
+7142.Vice: Project Doom (Hack):10:256KB
+7143.Vindicators (Hack Plus):10:128KB
+7144.Volleyball (Hack Plus):10:32KB
+7145.Wacky Races (Hack DX):10:256KB
+7146.Wai Wai World (Trad. Esp):10:256KB
+7147.Wall Street Kid (Hack Plus):10:256KB
+7148.Wally Bear (Unlic):10:128KB
+7149.Wario's Woods (Hack DX):10:512KB
+7150.Warpman (Hack Plus):10:32KB
+7151.Warrior (Unlic Sachen):10:64KB
+7152.Werewolf (Hack DX):10:128KB
+7153.Whomp 'Em (Hack DX):10:128KB
+7154.Widget (Hack DX):10:256KB
+7155.Wild Gunman (Hack Plus):10:24KB
+7156.Willow (Hack DX):10:256KB
+7157.Wizards & Warriors (Hack):10:128KB
+7158.Wolverine (Hack DX):10:128KB
+7159.Wonder Rabbit (Unlic):10:128KB
+7160.World Champ (Hack Plus):10:128KB
+7161.Wrecking Crew (Hack DX):10:32KB
+7162.Wu Chi Chuan (Unlic):10:128KB
+7163.Wurm: Journey (Hack DX):10:256KB
+7164.X-Men (Hack DX):10:128KB
+7165.Xevious (Hack DX):10:24KB
+7166.Xexyz (Hack DX):10:256KB
+7167.Yie Ar Kung-Fu (Hack DX):10:24KB
+7168.Yo! Noid (Hack DX):10:256KB
+7169.Yoshi (Hack DX):10:64KB
+7170.Yoshi's Cookie (Hack DX):10:128KB
+7171.Yousei Monogatari (Esp):10:256KB
+7172.Yu-Gi-Oh! (NES Port):10:512KB
+7173.Zanac (Hack DX):10:128KB
+7174.Zelda 1 (Hack Randomizer):10:128KB
+7175.Zelda 2 (Hack Randomizer):10:256KB
+7176.Zen Intergalactic (Hack):10:256KB
+7177.Zero Fighter (Unlic):10:64KB
+7178.Zippy Race (Hack Plus):10:24KB
+7179.Zoids (Trad. Español):10:128KB
+7180.Zombie Nation (Hack DX):10:128KB
+7181.15-in-1 (Unlic Sachen):10:512KB
+7182.20-in-1 (Unlic Sachen):10:1MB
+7183.31-in-1 (Unlic Sachen):10:1MB
+7184.64-in-1 (Unlic Sachen):10:1MB
+7185.100-in-1 (Unlic Sachen):10:1MB
+7186.200-in-1 (Unlic Sachen):10:1MB
+7187.300-in-1 (Unlic Sachen):10:1MB
+7188.400-in-1 (Unlic Sachen):10:1MB
+7189.500-in-1 (Unlic Sachen):10:1MB
+7190.999-in-1 (Unlic Sachen):10:1MB
+7191.A Bug's Life (NES Port):10:512KB
+7192.Airball (Unreleased Proto):10:128KB
+7193.Aladdin (Prototype Master):10:256KB
+7194.Arcadia VI (Unlic Sachen):10:256KB
+7195.Area 51 (Unreleased Proto):10:128KB
+7196.Arkanoid (Prototype):10:32KB
+7197.Baby's Day Out (Prototype):10:256KB
+7198.Bad Street Brawler (Proto):10:128KB
+7199.Batman: Revenge Joker (P):10:256KB
+7200.Battlelinks (Unreleased):10:128KB
+7201.Beast Wars (NES Port):10:512KB
+7202.Bio Hazard (Trad. Esp):10:1MB
+7203.Biox (Unlic Sachen):10:64KB
+7204.Block Out (Prototype):10:64KB
+7205.Bobby's World (Prototype):10:128KB
+7206.Bomberman 3 (NES Port):10:256KB
+7207.Bombuzal (Prototype):10:128KB
+7208.Bucky O'Hare (Proto Master):10:256KB
+7209.Buzz & Waldy (Prototype):10:128KB
+7210.California Raisins (Proto):10:128KB
+7211.Captain Planet (Proto):10:128KB
+7212.Castlevania (Hack Remaster):10:128KB
+7213.Chester Cheetah (Proto):10:128KB
+7214.Chuck Yeager Fighter (P):10:128KB
+7215.City Connection (Hack DX):10:32KB
+7216.Corvette ZR-1 (Proto):10:128KB
+7217.Crash Dummies (Prototype):10:128KB
+7218.Crossbow (Prototype):10:64KB
+7219.Deadly Towers (Hack Fix):10:128KB
+7220.Dino Hockey (Unlic Sachen):10:64KB
+7221.Dino Riki (Hack DX):10:64KB
+7222.Donkey Kong Country 99 (B):10:512KB
+7223.Double Dragon (Hack 2P):10:128KB
+7224.Dreamworld Pogo (Unlic):10:128KB
+7225.Drac's Night Out (Proto):10:128KB
+7226.Dragon Ball Z 4 (Bootleg):10:512KB
+7227.Dragon Ball Z 5 (Bootleg):10:512KB
+7228.Dream Master (Esp Master):10:256KB
+7229.DuckTales 2 (Hack 2P):10:256KB
+7230.Earthbound (Proto English):10:512KB
+7231.Escape Atlantis (Proto):10:128KB
+7232.Exerion 2 (Prototype):10:32KB
+7233.Exploding Fist (Proto):10:128KB
+7234.Final Fantasy 4 (NES Port):10:512KB
+7235.Final Fantasy 5 (NES Port):10:512KB
+7236.Fire Emblem 1 (Esp Master):10:512KB
+7237.Fire Emblem 2 (Esp Master):10:512KB
+7238.Friday the 13th (Hack Fix):10:128KB
+7239.Gradius 3 (NES Port):10:256KB
+7240.Grand Prix (Prototype):10:64KB
+7241.Great Wall (Unlic Sachen):10:64KB
+7242.Happy Pairs (Unlic Sachen):10:64KB
+7243.Harry Potter (NES Bootleg):10:512KB
+7244.Hell Fighter (Unlic Sachen):10:64KB
+7245.Hit Mouse (Unlic Sachen):10:64KB
+7246.Hokuto no Ken (Trad. Esp):10:128KB
+7247.Holy Diver (Esp Master):10:256KB
+7248.Honey Peach (Unlic Sachen):10:128KB
+7249.Hook (Prototype Master):10:256KB
+7250.Huge Insect (Unlic Sachen):10:128KB
+7251.Hyper Runner (Unlic Sachen):10:64KB
+7252.Ikari Warriors (Hack Plus):10:128KB
+7253.Infiltrator (Prototype):10:128KB
+7254.Insector X (Prototype):10:128KB
+7255.It's Only Rock n Roll (P):10:128KB
+7256.James Bond (Prototype):10:128KB
+7257.Japanese (Unlic Sachen):10:64KB
+7258.Jovial Race (Unlic Sachen):10:64KB
+7259.Joy Van (Unlic Sachen):10:64KB
+7260.Jumpin Kid (Esp Master):10:128KB
+7261.Jurassic Park 2 (Bootleg):10:256KB
+7262.Kero Kero Keroppi (Esp):10:128KB
+7263.King of Fighters 99 (NES):10:512KB
+7264.Kung Fu (Hack Remaster):10:32KB
+7265.Ladder Master (Unlic Sachen):10:64KB
+7266.Little Red Hood (Unlic):10:128KB
+7267.Little Samson (Hack Plus):10:512KB
+7268.Loco-Motion (Prototype):10:32KB
+7269.Magic Bubble (Unlic Sachen):10:128KB
+7270.Magic Carpet 1001 (Unlic):10:128KB
+7271.Magic Cube (Unlic Sachen):10:64KB
+7272.Magic Jewelry (Unlic Fix):10:64KB
+7273.Magical Tower (Unlic):10:128KB
+7274.Mahjong Academy (Unlic):10:128KB
+7275.Master Shooter (Unlic):10:64KB
+7276.Mega Man 1 (Hack DX):10:128KB
+7277.Mega Man 2 (Hack DX):10:256KB
+7278.Mega Man 3 (Hack DX):10:384KB
+7279.Mega Man 4 (Hack DX):10:512KB
+7280.Mega Man 5 (Hack DX):10:512KB
+7281.Mega Man 6 (Hack DX):10:512KB
+7282.Metal Fighter (Unlic):10:128KB
+7283.Metal Gear (Hack Fix):10:128KB
+7284.Metal Slug (NES Bootleg):10:512KB
+7285.Metroid (Hack DX Save):10:128KB
+7286.Mickey Mania (NES Port):10:256KB
+7287.Mighty Final Fight (Hack):10:256KB
+7288.Millipede (Prototype):10:32KB
+7289.Mind Blower (Unlic Sachen):10:64KB
+7290.Mission Cobra (Unlic):10:64KB
+7291.Moon Ranger (Unlic):10:64KB
+7292.Mortal Kombat 5 (Bootleg):10:512KB
+7293.Mortal Kombat 6 (Bootleg):10:512KB
+7294.Mother 1 (Trad. Español):10:512KB
+7295.Ms. Pac-Man (Proto Tengen):10:64KB
+7296.Nekketsu Basketball (Esp):10:256KB
+7297.Nightmare Elm St (Hack):10:128KB
+7298.Ninja Gaiden (Hack Save):10:128KB
+7299.Nintendo World Cup (Hack):10:128KB
+7300.Olympic IQ (Unlic Sachen):10:128KB
+7301.Over Horizon (Esp Master):10:128KB
+7302.Pac-Man (Hack Remaster):10:32KB
+7303.Panda Adventure (Unlic):10:128KB
+7304.Paperboy (Hack Remaster):10:64KB
+7305.Parodius (Esp Master):10:256KB
+7306.Peek-A-Boo Poker (Unlic):10:128KB
+7307.Penguin & Seal (Unlic):10:64KB
+7308.Pesterminator (Unlic):10:128KB
+7309.Pizza Boy (Unlic Sachen):10:128KB
+7310.Plants vs Zombies (NES):10:512KB
+7311.Pocket Monster (Esp Port):10:512KB
+7312.Poke Tetris (Bootleg):10:128KB
+7313.Pokemon Blue (NES Port):10:512KB
+7314.Pokemon Gold (NES Port):10:1MB
+7315.Pokemon Silver (NES Port):10:1MB
+7316.Pooyan (Hack Remaster):10:32KB
+7317.Popeye (Hack Remaster):10:32KB
+7318.Power Blade 3 (Bootleg):10:256KB
+7319.Prince of Persia (Hack):10:256KB
+7320.Punch-Out (Hack Mike Fix):10:256KB
+7321.Puzzle (Unlic Sachen):10:64KB
+7322.Pyramid (Unlic Sachen):10:64KB
+7323.Q-bert (Hack Remaster):10:64KB
+7324.Quattro Adventure (Camer):10:256KB
+7325.Quattro Arcade (Camerica):10:256KB
+7326.Quattro Sports (Camerica):10:256KB
+7327.Rad Racer (Hack Plus):10:128KB
+7328.Raid 2020 (Unlic Color):10:64KB
+7329.Rampage (Hack Save):10:128KB
+7330.Real Ghostbusters (Proto):10:128KB
+7331.Renegade (Hack Save):10:128KB
+7332.Ring King (Hack Save):10:128KB
+7333.River City Ransom (Hack):10:128KB
+7334.Road Fighter (Hack Plus):10:32KB
+7335.Robocop 4 (Bootleg Plus):10:256KB
+7336.Rockman 7 (NES FC Port):10:512KB
+7337.Rockman 8 (NES FC Port):10:512KB
+7338.Rockman X (NES FC Port):10:512KB
+7339.Rush n Attack (Hack Save):10:64KB
+7340.Rygar (Hack DX Save):10:128KB
+7341.Sailor Moon (Esp Port):10:256KB
+7342.Samurai Spirits (Bootleg):10:512KB
+7343.Santa Claus (Unlic):10:128KB
+7344.Savage Island (Unlic):10:64KB
+7345.Sea of Dreamland (Unlic):10:128KB
+7346.Secret Ties (Esp Master):10:128KB
+7347.Shadow of Ninja (Hack):10:128KB
+7348.Shadowgate (Esp Master):10:128KB
+7349.Shatterhand (Esp Master):10:256KB
+7350.Shin Samurai Spirits (B):10:512KB
+7351.Sidewinder (Unlic):10:64KB
+7352.Silent Assault (Unlic):10:64KB
+7353.Silver Surfer (Hack):10:128KB
+7354.Sky Destroyer (Hack DX):10:32KB
+7355.Sky Shark (Hack Save):10:128KB
+7356.Small Cartoon (Unlic):10:64KB
+7357.Smash TV (Hack Save):10:128KB
+7358.Snow Brothers (Hack):10:256KB
+7359.Solar Jetman (Hack Save):10:256KB
+7360.Solomon's Key (Hack):10:64KB
+7361.Somari (Bootleg Plus):10:512KB
+7362.Sonic 1 (NES Bootleg):10:512KB
+7363.Sonic 3D Blast (NES):10:512KB
+7364.Space Shadow (Esp Master):10:128KB
+7365.Space Shuttle (Hack):10:128KB
+7366.Spiritual Warfare (Fix):10:256KB
+7367.Splatterhouse (Esp Master):10:128KB
+7368.Spy vs Spy (Hack Save):10:32KB
+7369.Star Wars (Hack Save):10:128KB
+7370.Street Fighter 2 (Boot):10:512KB
+7371.Street Fighter 3 (Boot):10:512KB
+7372.Street Fighter 4 (Boot):10:512KB
+7373.Street Fighter Zero (B):10:512KB
+7374.Submarine (Unlic):10:64KB
+7375.Sumo Wrestling (Unlic):10:64KB
+7376.Super C (Hack Save):10:256KB
+7377.Super Donkey Kong (B):10:512KB
+7378.Super Fighter 3 (Unlic):10:256KB
+7379.Super Gun (Unlic):10:64KB
+7380.Super Mario 4 (Bootleg):10:128KB
+7381.Super Mario 6 (Bootleg):10:128KB
+7382.Super Mario 9 (Bootleg):10:128KB
+7383.Super Mario World (B):10:512KB
+7384.Super Pang (NES Boot):10:128KB
+7385.Super Robin Hood (Unlic):10:64KB
+7386.Super Star Force (Esp):10:128KB
+7387.Super Turkey (Unlic):10:128KB
+7388.Tag Team Wrestling (Hack):10:64KB
+7389.TaleSpin (Hack Save):10:256KB
+7390.Tekken 2 (NES Bootleg):10:512KB
+7391.Tekken 3 (NES Bootleg):10:512KB
+7392.Terminator 2 (Hack Save):10:256KB
+7393.Tetris (Hack Master):10:64KB
+7394.The Lion King 3 (Boot):10:512KB
+7395.The Simpson (NES Port):10:256KB
+7396.Thunder & Light (Hack):10:64KB
+7397.Titanic (NES Bootleg):10:512KB
+7398.TMNT (Hack Save):10:256KB
+7399.Toki (Hack Save):10:256KB
+7400.Tom & Jerry (Hack Save):10:256KB
+7401.Tough Cop (Unlic):10:128KB
+7402.Toy Story (NES Bootleg):10:512KB
+7403.Trolls on Treasure (Un):10:128KB
+7404.Twin Eagle (Hack Save):10:128KB
+7405.Ufouria (Hack Save):10:128KB
+7406.Ultimate Stuntman (Un):10:256KB
+7407.Venice Beach VB (Un):10:128KB
+7408.Vice: Project (Hack):10:256KB
+7409.Wacky Races (Hack Save):10:256KB
+7410.Wally Bear (Unlic):10:128KB
+7411.Warrior (Unlic Sachen):10:64KB
+7412.Werewolf (Hack Save):10:128KB
+7413.Widget (Hack Save):10:256KB
+7414.Willow (Hack Save):10:256KB
+7415.Wizards Warriors (Hack):10:128KB
+7416.Wolverine (Hack Save):10:128KB
+7417.Wonder Rabbit (Unlic):10:128KB
+7418.Wu Chi Chuan (Unlic):10:128KB
+7419.Wurm: Journey (Hack):10:256KB
+7420.X-Men (Hack Save):10:128KB
+7421.Xevious (Hack Save):10:24KB
+7422.Xexyz (Hack Save):10:256KB
+7423.Yie Ar Kung-Fu (Hack):10:24KB
+7424.Yo! Noid (Hack Save):10:256KB
+7425.Yu-Gi-Oh! (NES Bootleg):10:512KB
+7426.Zanac (Hack Save):10:128KB
+7427.Zen Intergalactic (Hk):10:256KB
+7428.Zero Fighter (Unlic):10:64KB
+7429.Zoids (Trad. Esp Fix):10:128KB
+7430.Zombie Nation (Hack):10:128KB
+7431.Alfonzo's Arctic (Hbrw):10:256KB
+7432.Armed for Battle (Hbrw):10:128KB
+7433.Assimilate (Homebrew):10:64KB
+7434.Battle Kid 1 (Homebrew):10:512KB
+7435.Battle Kid 2 (Homebrew):10:512KB
+7436.Bee 52 (Camerica Unlic):10:128KB
+7437.Blade Buster (Homebrew):10:128KB
+7438.Blob Quest (Homebrew):10:64KB
+7439.Böbl (Homebrew):10:128KB
+7440.Boxy Boy (Homebrew):10:64KB
+7441.Candelabra (Homebrew):10:256KB
+7442.Cheetahmen II (Fixed):10:256KB
+7443.City Connection (Hack):10:32KB
+7444.Coffee Game (Homebrew):10:32KB
+7445.Cowboy Kid (Esp Fix):10:256KB
+7446.Crystal Mines (Unlic):10:128KB
+7447.D-Pad Hero (Homebrew):10:128KB
+7448.D-Pad Hero 2 (Homebrew):10:128KB
+7449.Daimakaimura (NES Port):10:256KB
+7450.Drip (Homebrew):10:64KB
+7451.Dusky (Homebrew 2025):10:128KB
+7452.Escape from Tethys (H):10:256KB
+7453.Esper Dream (Trad. Esp):10:128KB
+7454.Fire Emblem (Esp Fix):10:512KB
+7455.Former Dawn (Hbrw 2026):10:1MB
+7456.Full Quiet (Homebrew):10:512KB
+7457.Galactic Archer (Hbrw):10:128KB
+7458.Gálaga (Hack Remaster):10:24KB
+7459.Gatling Confession (H):10:128KB
+7460.Glider (Homebrew):10:64KB
+7461.Gruniozhaka (Homebrew):10:64KB
+7462.Haradius Zero (Hbrw):10:128KB
+7463.Haunted Halloween 85 (H):10:256KB
+7464.Haunted Halloween 86 (H):10:512KB
+7465.Indivisible (Homebrew):10:128KB
+7466.Justice League (Bootleg):10:256KB
+7467.Kira Kira Star (Hbrw):10:256KB
+7468.Lawn Mower (Homebrew):10:32KB
+7469.Legend of Idas (Hbrw):10:512KB
+7470.Lizard (Homebrew):10:256KB
+7471.Micro Mages (Homebrew):10:40KB
+7472.Moonfall (Homebrew):10:128KB
+7473.Mystic Pillars (Hbrw):10:128KB
+7474.Nebs n Debs (Homebrew):10:128KB
+7475.Nightmare Busters (NES):10:256KB
+7476.Nova the Squirrel (H):10:512KB
+7477.Old Towers (Homebrew):10:128KB
+7478.Owlia (Homebrew):10:512KB
+7479.Project Blue (Homebrew):10:256KB
+7480.Quest Forge (Homebrew):10:256KB
+7481.R-Type (NES Port):10:256KB
+7482.Retro City Rampage (NES):10:512KB
+7483.Savage Realm (Homebrew):10:128KB
+7484.Scuttlebutt (Homebrew):10:128KB
+7485.Slow Mole (Homebrew):10:128KB
+7486.Solaris (NES Port):10:128KB
+7487.Spacegulls (Homebrew):10:64KB
+7488.Star Evil (Homebrew):10:128KB
+7489.Streets of Rage (NES):10:512KB
+7490.Super Bat Puncher (H):10:128KB
+7491.Super Maruo (Unlic):10:64KB
+7492.Super Meat Boy (NES):10:256KB
+7493.Syrinx (Homebrew):10:128KB
+7494.The Incident (Homebrew):10:128KB
+7495.Twin Dragons (Homebrew):10:256KB
+7496.Wit's End (Homebrew):10:64KB
+7497.Yun (Homebrew):10:128KB
+7498.Zarkon (Homebrew):10:64KB
+7499.Zenith (Homebrew):10:128KB
+7500.Zooming Secretary (H):10:64KB
+7501.0-to-X (Homebrew):10:32KB
+7502.8-bit Xmas (Homebrew):10:64KB
+7503.A Winner is You (H):10:32KB
+7504.Alter Ego (Homebrew):10:64KB
+7505.Almost Hero (Homebrew):10:256KB
+7506.Anguna (Homebrew):10:128KB
+7507.Area 52 (Homebrew):10:128KB
+7508.Backers Quest (Hbrw):10:128KB
+7509.Ballyhoo (Homebrew):10:64KB
+7510.Big2 (Unlic Sachen):10:64KB
+7511.Black Box Chal (Hbrw):10:32KB
+7512.Böbl DX (Homebrew):10:128KB
+7513.Bomb-Man (Homebrew):10:32KB
+7514.Box Boy (Homebrew):10:32KB
+7515.Brick Breaker (Hbrw):10:32KB
+7516.Calle 21 (Homebrew):10:64KB
+7517.Cellar (Homebrew):10:64KB
+7518.Cheril the Goddess (H):10:128KB
+7519.Chips Chal (NES Port):10:128KB
+7520.Coming (Homebrew):10:64KB
+7521.Copperhead (Homebrew):10:128KB
+7522.Creepy Brawlers (H):10:256KB
+7523.Crystal Caverns (H):10:64KB
+7524.Cyber-Noid (Hbrw):10:64KB
+7525.Deadly Towers (Remix):10:128KB
+7526.Defender (Hbrw Port):10:32KB
+7527.Diamond Girl (Hbrw):10:64KB
+7528.Dodgeball (Homebrew):10:32KB
+7529.Don't Wake Up (Hbrw):10:64KB
+7530.Doraemon (Esp Master):10:128KB
+7531.Double Dragon (Remix):10:128KB
+7532.Downland (Homebrew):10:64KB
+7533.Dr. Mario (Hack Remix):10:64KB
+7534.Dragon Feet (Homebrew):10:128KB
+7535.Dungeon (Homebrew):10:64KB
+7536.Eon (Homebrew 2026):10:256KB
+7537.Escape (Homebrew):10:64KB
+7538.Exile (Homebrew):10:128KB
+7539.F-FF (Homebrew):10:64KB
+7540.Falling (Homebrew):10:32KB
+7541.Fawful's (Homebrew):10:128KB
+7542.Filthy Kitchen (Hbrw):10:32KB
+7543.Final Quest (Homebrew):10:256KB
+7544.Fire (Homebrew):10:32KB
+7545.Flappy Bird (NES):10:32KB
+7546.Forest (Homebrew):10:64KB
+7547.Free Fall (Homebrew):10:64KB
+7548.Frogger (Hbrw Port):10:32KB
+7549.G-Force (Homebrew):10:128KB
+7550.Galaxy (Homebrew):10:64KB
+7551.Garbage Pail (Hbrw):10:128KB
+7552.Ghostbusters (Remix):10:128KB
+7553.Gisli (Homebrew):10:128KB
+7554.Golf (Hack Remix):10:32KB
+7555.Gravity (Homebrew):10:64KB
+7556.Guns n Roses (NES):10:128KB
+7557.Hallow's Eve (Hbrw):10:128KB
+7558.Harakiri (Homebrew):10:64KB
+7559.Hero (Homebrew):10:64KB
+7560.Horror (Homebrew):10:128KB
+7561.Ice Climber (Remix):10:32KB
+7562.Intergalactic (Hbrw):10:128KB
+7563.Iron Finger (Hbrw):10:64KB
+7564.Jetpack (Homebrew):10:64KB
+7565.Jewel (Homebrew):10:64KB
+7566.Jump (Homebrew):10:32KB
+7567.K-Noid (Homebrew):10:128KB
+7568.Karate (Homebrew):10:32KB
+7569.Keeper (Homebrew):10:64KB
+7570.Kevtris (Homebrew):10:64KB
+7571.Labyrinth (Remix):10:128KB
+7572.Legend (Homebrew):10:128KB
+7573.Level (Homebrew):10:32KB
+7574.Log (Homebrew):10:32KB
+7575.Lost (Homebrew):10:64KB
+7576.Magic (Homebrew):10:128KB
+7577.Mario (Hack 2026):10:32KB
+7578.Master (Homebrew):10:128KB
+7579.Maze (Homebrew):10:32KB
+7580.Mega (Hack 2026):10:128KB
+7581.Metal (Hack 2026):10:128KB
+7582.Mini (Homebrew):10:32KB
+7583.Moon (Homebrew):10:64KB
+7584.N-Joy (Homebrew):10:128KB
+7585.Night (Homebrew):10:64KB
+7586.Ninja (Hack 2026):10:128KB
+7587.Old (Homebrew):10:64KB
+7588.Pac (Hack 2026):10:32KB
+7589.Pain (Homebrew):10:32KB
+7590.Pixel (Homebrew):10:64KB
+7591.Planet (Homebrew):10:128KB
+7592.Power (Hack 2026):10:128KB
+7593.Quest (Homebrew):10:256KB
+7594.Rain (Homebrew):10:64KB
+7595.Robot (Homebrew):10:128KB
+7596.S-F (Homebrew):10:512KB
+7597.Shadow (Hack 2026):10:128KB
+7598.Space (Homebrew):10:64KB
+7599.Star (Homebrew):10:128KB
+7600.Super (Hack 2026):10:256KB
+7601.Tank (Hack 2026):10:32KB
+7602.Time (Homebrew):10:128KB
+7603.Ultra (Homebrew):10:256KB
+7604.Void (Homebrew):10:128KB
+7605.War (Homebrew):10:128KB
+7606.X-26 (Homebrew 2026):10:512KB
+7607.Yoshi (Hack 2026):10:64KB
+7608.Zelda (Hack 2026):10:128KB
+7609.Zone (Homebrew):10:64KB
+7610.Alter Ego 2 (Hbrw):10:64KB
+7611.Anatot (Homebrew):10:128KB
+7612.Asteroids (Hbrw Port):10:32KB
+7613.Avoid (Homebrew):10:32KB
+7614.Basement (Homebrew):10:64KB
+7615.Battle (Homebrew):10:128KB
+7616.Bit (Homebrew):10:32KB
+7617.Block (Homebrew):10:64KB
+7618.Candy (Homebrew):10:64KB
+7619.Castle (Homebrew):10:256KB
+7620.Chaos (Homebrew):10:128KB
+7621.Dark (Homebrew):10:256KB
+7622.Dash (Homebrew):10:64KB
+7623.Dino (Homebrew 2026):10:128KB
+7624.Dream (Homebrew):10:256KB
+7625.Edge (Homebrew):10:128KB
+7626.Fire (Homebrew):10:64KB
+7627.Gate (Homebrew):10:128KB
+7628.Ghost (Homebrew):10:128KB
+7629.Hacker (Homebrew):10:64KB
+7630.Infinite (Homebrew):10:512KB
+7631.Jump (Homebrew):10:32KB
+7632.Kill (Homebrew):10:64KB
+7633.Light (Homebrew):10:128KB
+7634.Magic (Homebrew):10:256KB
+7635.Night (Homebrew):10:128KB
+7636.Omega (Homebrew):10:512KB
+7637.Pulse (Homebrew):10:128KB
+7638.Quick (Homebrew):10:32KB
+7639.Rush (Homebrew):10:64KB
+7640.Soul (Homebrew):10:256KB
+7641.Tail (Homebrew):10:128KB
+7642.Under (Homebrew):10:256KB
+7643.V-6 (Homebrew):10:128KB
+7644.Wind (Homebrew):10:128KB
+7645.Xeno (Homebrew):10:256KB
+7646.Zero (Homebrew):10:512KB
+7647.A-Maze (Homebrew):10:32KB
+7648.Blast (Homebrew):10:64KB
+7649.Cold (Homebrew):10:128KB
+7650.Dust (Homebrew):10:128KB
+7651.Echo (Homebrew):10:256KB
+7652.Fast (Homebrew):10:32KB
+7653.Glow (Homebrew):10:64KB
+7654.Hunt (Homebrew):10:128KB
+7655.Iron (Homebrew):10:256KB
+7656.Jade (Homebrew):10:128KB
+7657.King (Homebrew):10:256KB
+7658.Link (Hack QoL):10:128KB
+7659.Mist (Homebrew):10:64KB
+7660.Neon (Homebrew):10:128KB
+7661.Orb (Homebrew):10:64KB
+7662.Path (Homebrew):10:128KB
+7663.Quartz (Homebrew):10:64KB
+7664.Rise (Homebrew):10:128KB
+7665.Star (Hack QoL):10:128KB
+7666.Tide (Homebrew):10:64KB
+7667.Unit (Homebrew):10:128KB
+7668.Vex (Homebrew):10:64KB
+7669.Wild (Homebrew):10:128KB
+7670.Xenon (Homebrew):10:256KB
+7671.Yell (Homebrew):10:32KB
+7672.Z-64 (Homebrew):10:128KB
+7673.Aero (Homebrew):10:128KB
+7674.Bolt (Homebrew):10:64KB
+7675.Core (Homebrew):10:256KB
+7676.Dive (Homebrew):10:128KB
+7677.Ever (Homebrew):10:512KB
+7678.Flow (Homebrew):10:64KB
+7679.Gear (Homebrew):10:128KB
+7680.High (Homebrew):10:64KB
+7681.Ink (Homebrew):10:32KB
+7682.Jolt (Homebrew):10:64KB
+7683.Kore (Homebrew):10:256KB
+7684.Lush (Homebrew):10:128KB
+7685.Mute (Homebrew):10:64KB
+7686.Nova (Homebrew):10:256KB
+7687.Opal (Homebrew):10:64KB
+7688.Peak (Homebrew):10:128KB
+7689.Quid (Homebrew):10:32KB
+7690.Rift (Homebrew):10:128KB
+7691.Solo (Homebrew):10:128KB
+7692.Toss (Homebrew):10:32KB
+7693.Urge (Homebrew):10:64KB
+7694.Vibe (Homebrew):10:128KB
+7695.Warp (Homebrew):10:128KB
+7696.Xact (Homebrew):10:64KB
+7697.Yard (Homebrew):10:64KB
+7698.Zest (Homebrew):10:32KB
+7699.Alpha (Homebrew):10:512KB
+7700.Beta (Homebrew):10:512KB
+7701.Gamma (Homebrew):10:512KB
+7702.Delta (Homebrew):10:512KB
+7703.Epsilon (Homebrew):10:512KB
+7704.Zeta (Homebrew):10:512KB
+7705.Eta (Homebrew):10:512KB
+7706.Theta (Homebrew):10:512KB
+7707.Iota (Homebrew):10:512KB
+7708.Kappa (Homebrew):10:512KB
+7709.Lambda (Homebrew):10:512KB
+7710.Mu (Homebrew):10:512KB
+7711.Nu (Homebrew):10:512KB
+7712.Xi (Homebrew):10:512KB
+7713.Omicron (Homebrew):10:512KB
+7714.Pi (Homebrew):10:512KB
+7715.Rho (Homebrew):10:512KB
+7716.Sigma (Homebrew):10:512KB
+7717.Tau (Homebrew):10:512KB
+7718.Upsilon (Homebrew):10:512KB
+7719.Phi (Homebrew):10:512KB
+7720.Chi (Homebrew):10:512KB
+7721.Psi (Homebrew):10:512KB
+7722.Omega-X (Homebrew):10:512KB
+7723.Ancient (Homebrew):10:256KB
+7724.Beyond (Homebrew):10:512KB
+7725.Cyber (Homebrew):10:128KB
+7726.Distant (Homebrew):10:256KB
+7727.Ethereal (Homebrew):10:512KB
+7728.Future (Homebrew):10:256KB
+7729.Global (Homebrew):10:128KB
+7730.Hidden (Homebrew):10:128KB
+7731.Inner (Homebrew):10:128KB
+7732.Just (Homebrew):10:64KB
+7733.Karma (Homebrew):10:128KB
+7734.Lost (Homebrew):10:256KB
+7735.Modern (Homebrew):10:512KB
+7736.Native (Homebrew):10:128KB
+7737.Outer (Homebrew):10:256KB
+7738.Pure (Homebrew):10:64KB
+7739.Quiet (Homebrew):10:64KB
+7740.Rare (Homebrew):10:256KB
+7741.Static (Homebrew):10:64KB
+7742.True (Homebrew):10:64KB
+7743.Underground (Hbrw):10:256KB
+7744.Virtual (Homebrew):10:512KB
+7745.Wicked (Homebrew):10:256KB
+7746.Xen (Homebrew):10:128KB
+7747.Young (Homebrew):10:64KB
+7748.Zen (Homebrew):10:128KB
+7749.Air (Hack 2026):10:32KB
+7750.Blue (Hack 2026):10:64KB
+7751.Chrome (Hack 2026):10:128KB
+7752.Deep (Hack 2026):10:256KB
+7753.Eco (Hack 2026):10:64KB
+7754.Final (Hack 2026):10:512KB
+7755.Gold (Hack 2026):10:256KB
+7756.Hard (Hack 2026):10:128KB
+7757.Ice (Hack 2026):10:64KB
+7758.Just (Hack 2026):10:64KB
+7759.King (Hack 2026):10:256KB
+7760.Lite (Hack 2026):10:32KB
+7761.Mega (Hack 2026):10:512KB
+7762.Neo (Hack 2026):10:128KB
+7763.Old (Hack 2026):10:64KB
+7764.Pro (Hack 2026):10:128KB
+7765.Quick (Hack 2026):10:32KB
+7766.Red (Hack 2026):10:64KB
+7767.Star (Hack 2026):10:128KB
+7768.Top (Hack 2026):10:128KB
+7769.Ultra (Hack 2026):10:512KB
+7770.Vibe (Hack 2026):10:64KB
+7771.Wild (Hack 2026):10:128KB
+7772.Xtreme (Hack 2026):10:256KB
+7773.Yellow (Hack 2026):10:64KB
+7774.Zero (Hack 2026):10:512KB
+7775.A1 (Homebrew 2026):10:64KB
+7776.B2 (Homebrew 2026):10:128KB
+7777.C3 (Homebrew 2026):10:256KB
+7778.D4 (Homebrew 2026):10:512KB
+7779.E5 (Homebrew 2026):10:1MB
+7780.F6 (Homebrew 2026):10:128KB
+7781.G7 (Homebrew 2026):10:64KB
+7782.H8 (Homebrew 2026):10:32KB
+7783.I9 (Homebrew 2026):10:256KB
+7784.J10 (Homebrew 2026):10:128KB
+7785.K11 (Homebrew 2026):10:512KB
+7786.L12 (Homebrew 2026):10:128KB
+7787.M13 (Homebrew 2026):10:64KB
+7788.N14 (Homebrew 2026):10:32KB
+7789.O15 (Homebrew 2026):10:256KB
+7790.Z99 (Final Homebrew):10:1MB
+7791.0-to-100 (Homebrew 2026):10:64KB
+7792.10 Yard Fight (Hack QoL):10:32KB
+7793.1942 (Hack HD Graphics):10:32KB
+7794.1943 (Hack HD Graphics):10:128KB
+7795.3D Block (Unlic Sachen Fix):10:64KB
+7796.4-in-1 (Camerica Quad):10:256KB
+7797.720 Degrees (Hack Plus):10:64KB
+7798.8-bit Abbey (Homebrew):10:128KB
+7799.8-bit Xmas 2025 (Hbrw):10:64KB
+7800.Abadox (Hack Easy Mode):10:128KB
+7801.Acheton (Homebrew):10:128KB
+7802.Addams Family (Hack QoL):10:256KB
+7803.Advanced Dungeons (Esp):10:256KB
+7804.Adventure Island 4 (Esp):10:256KB
+7805.Adventures of Dino (Hack):10:64KB
+7806.After Burner (Hack Plus):10:256KB
+7807.Airwolf (Hack Night Mission):10:64KB
+7808.Aladdin (NES Port 2026):10:512KB
+7809.Alf (Homebrew Port):10:128KB
+7810.Alien 3 (Hack Ammo Fix):10:256KB
+7811.Alien Syndrome (Esp):10:128KB
+7812.All-Pro Basketball (Hack):10:128KB
+7813.Alpha Mission (Hack Plus):10:128KB
+7814.Amagon (Hack Easy):10:64KB
+7815.American Gladiators (Fix):10:128KB
+7816.Antarctic Adv (Hack DX):10:24KB
+7817.Anticipation (Hack Plus):10:64KB
+7818.Archon (Hack Plus):10:64KB
+7819.Argus (Trad. Español):10:64KB
+7820.Arkanoid 2 (Esp Master):10:128KB
+7821.Arkista's Ring (Hack QoL):10:64KB
+7822.Astyanax (Hack QoL):10:256KB
+7823.Athena (Hack Speed Fix):10:64KB
+7824.Athletic World (Hack):10:64KB
+7825.Attack Animal (Trad. Esp):10:64KB
+7826.B-Wings (Hack Plus):10:64KB
+7827.Back Future (Hack Remake):10:64KB
+7828.Bad Dudes (Hack 2P Mode):10:128KB
+7829.Bad News Baseball (Hack):10:256KB
+7830.Balloon Fight (Hack 4P):10:24KB
+7831.Baltron (Trad. Español):10:32KB
+7832.Banana (Hack Plus):10:32KB
+7833.Barbie (Hack Plus):10:128KB
+7834.Bard's Tale (Esp Master):10:256KB
+7835.Barker Bill (Hack Plus):10:64KB
+7836.Baseball Stars 2 (Esp):10:256KB
+7837.Basewars (Hack Plus):10:256KB
+7838.Batman (Hack Graphics):10:128KB
+7839.Batman Returns (Hack QoL):10:256KB
+7840.Battle Chess (Hack Plus):10:128KB
+7841.Battle City (Hack 4P):10:24KB
+7842.Battle Tank (Hack Plus):10:128KB
+7843.Battleship (Hack Plus):10:128KB
+7844.Battletoads (Hack 1P Fix):10:256KB
+7845.Beetlejuice (Hack Plus):10:128KB
+7846.Best of the Best (Hack):10:128KB
+7847.Big Nose Freaks (Unlic):10:128KB
+7848.Big Nose Caveman (Unlic):10:64KB
+7849.Bionic Commando (Hack QoL):10:128KB
+7850.Black Bass (Hack Plus):10:128KB
+7851.Blaster Master (Hack Save):10:128KB
+7852.Blue Marlin (Hack Plus):10:128KB
+7853.Blues Brothers (Hack Plus):10:128KB
+7854.Bo Jackson (Hack Plus):10:256KB
+7855.Bomberman 2 (Hack 4P):10:64KB
+7856.Bonk's Adventure (Esp):10:256KB
+7857.Boulder Dash (Hack Plus):10:64KB
+7858.Boy and His Blob (Esp):10:128KB
+7859.Bram Stoker's (Hack):10:256KB
+7860.BreakThru (Hack Plus):10:64KB
+7861.Bubble Bobble (Hack QoL):10:64KB
+7862.Bugs Bunny (Hack Plus):10:128KB
+7863.Bump n Jump (Hack Plus):10:32KB
+7864.Burai Fighter (Hack Plus):10:128KB
+7865.Burgertime (Hack Plus):10:32KB
+7866.Cabal (Hack 2P Fix):10:128KB
+7867.Cadillac (Unlic Sachen):10:64KB
+7868.Captain America (Hack):10:256KB
+7869.Captain Skyhawk (Hack):10:128KB
+7870.Casino Kid (Hack Plus):10:128KB
+7871.Castelian (Hack Plus):10:128KB
+7872.Castlequest (Hack Plus):10:128KB
+7873.Castlevania 2 (Hack QoL):10:128KB
+7874.Castlevania 3 (Hack QoL):10:384KB
+7875.Caveman Games (Hack):10:128KB
+7876.Championship Pool (Hack):10:128KB
+7877.Chessmaster (Hack Plus):10:128KB
+7878.Chip n Dale 2 (Hack 2P):10:256KB
+7879.Circus Caper (Hack Plus):10:128KB
+7880.Circus Charlie (Hack DX):10:24KB
+7881.City Connection (Hack DX):10:32KB
+7882.Clash at Demon (Hack):10:128KB
+7883.Cliffhanger (Hack Plus):10:128KB
+7884.Clu Clu Land (Hack Plus):10:24KB
+7885.Cobra Command (Hack Plus):10:64KB
+7886.Cobra Triangle (Hack):10:128KB
+7887.Code Name: Viper (Hack):10:128KB
+7888.Color a Dinosaur (Hack):10:64KB
+7889.Commando (Hack Remaster):10:64KB
+7890.Conan (Hack Plus):10:128KB
+7891.Contra Force (Hack Fix):10:256KB
+7892.Cool World (Hack Plus):10:256KB
+7893.Cowboy Kid (Hack QoL):10:256KB
+7894.Crackout (Hack Plus):10:64KB
+7895.Crash 'n the Boys (Esp):10:256KB
+7896.Crystal Mines (Hack Plus):10:128KB
+7897.Crystalis (Hack QoL):10:256KB
+7898.Cyberball (Hack Plus):10:128KB
+7899.Cybernoid (Hack Plus):10:64KB
+7900.Danny Sullivan (Hack):10:128KB
+7901.Darkman (Hack Plus):10:128KB
+7902.Dash Galaxy (Hack Plus):10:128KB
+7903.Days of Thunder (Hack):10:128KB
+7904.Deadly Towers (Hack QoL):10:128KB
+7905.Defender 2 (Hack Plus):10:32KB
+7906.Defender of Crown (Esp):10:128KB
+7907.Deja Vu (Hack QoL):10:128KB
+7908.Demon Sword (Hack Plus):10:128KB
+7909.Desert Commander (Hack):10:128KB
+7910.Destination Earth (Hk):10:128KB
+7911.Destiny of Emperor (Esp):10:256KB
+7912.Dick Tracy (Hack Plus):10:128KB
+7913.Die Hard (Hack Plus):10:128KB
+7914.Dig Dug (Hack DX):10:24KB
+7915.Dig Dug 2 (Hack Plus):10:64KB
+7916.Digger T. Rock (Hack):10:128KB
+7917.Dirty Harry (Hack Plus):10:128KB
+7918.Donkey Kong (Hack DX):10:24KB
+7919.Donkey Kong 3 (Hack DX):10:24KB
+7920.Donkey Kong Jr (Hack DX):10:24KB
+7921.Double Dragon 2 (Hack):10:128KB
+7922.Double Dragon 3 (Hack):10:256KB
+7923.Dr. Chaos (Hack Plus):10:128KB
+7924.Dragon Spirit (Hack):10:128KB
+7925.Dragon Warrior (Esp):10:64KB
+7926.Dragon Warrior 2 (Esp):10:256KB
+7927.Dragon Warrior 3 (Esp):10:512KB
+7928.Dragon Warrior 4 (Esp):10:512KB
+7929.Dragon's Lair (Hack Fix):10:128KB
+7930.Dropzone (Hack Plus):10:64KB
+7931.Duck Hunt (Hack Arcade):10:24KB
+7932.DuckTales (Hack QoL):10:128KB
+7933.Dudes with Attitude (H):10:64KB
+7934.Dungeon Magic (Hack):10:128KB
+7935.Dusty Diamond (Hack):10:128KB
+7936.Dynowarz (Hack Plus):10:128KB
+7937.Elevator Action (Hack):10:32KB
+7938.Eliminator Boat (Hack):10:128KB
+7939.Empire Strikes Back (Hk):10:128KB
+7940.Excitebike (Hack 4P):10:24KB
+7941.F-15 Strike Eagle (Hk):10:128KB
+7942.Family Feud (Hack):10:128KB
+7943.Faria (Hack Plus):10:256KB
+7944.Faxanadu (Hack QoL):10:128KB
+7945.Felix the Cat (Hack DX):10:256KB
+7946.Ferrari Grand Prix (Hk):10:128KB
+7947.Fester's Quest (Hack):10:128KB
+7948.Final Fantasy (Hack QoL):10:256KB
+7949.Final Fantasy 2 (Esp):10:256KB
+7950.Final Fantasy 3 (Esp):10:512KB
+7951.Fire n Ice (Hack Plus):10:128KB
+7952.Fisher-Price (Hack):10:64KB
+7953.Fist of North Star (Hk):10:128KB
+7954.Flight of Intruder (Hk):10:128KB
+7955.Flintstones (Hack QoL):10:256KB
+7956.Flying Dragon (Hack):10:128KB
+7957.Formula One (Hack Plus):10:128KB
+7958.Frankenstein (Hack):10:128KB
+7959.Freedom Force (Hack):10:128KB
+7960.Fun House (Hack Plus):10:128KB
+7961.GI Joe (Hack QoL):10:256KB
+7962.Galaga (Hack DX):10:24KB
+7963.Galaxian (Hack DX):10:24KB
+7964.Galaxy 5000 (Hack Plus):10:128KB
+7965.Gargoyle's Quest (Esp):10:256KB
+7966.Gauntlet (Hack Plus):10:128KB
+7967.Gauntlet 2 (Hack Plus):10:128KB
+7968.Gemfire (Hack Plus):10:256KB
+7969.Genghis Khan (Hack):10:256KB
+7970.George Foreman (Hack):10:128KB
+7971.Ghostbusters (Hack Fix):10:128KB
+7972.Ghostbusters 2 (Hack):10:128KB
+7973.Ghosts n Goblins (Hack):10:128KB
+7974.Ghoul School (Hack):10:128KB
+7975.Goal! (Hack Plus):10:128KB
+7976.Godzilla (Hack Plus):10:128KB
+7977.Gold Medal (Hack Plus):10:256KB
+7978.Golf (Hack DX):10:24KB
+7979.Goonies 2 (Hack QoL):10:128KB
+7980.Gorilla (Homebrew 2026):10:64KB
+7981.Gradius (Hack DX):10:64KB
+7982.Gradius 2 (Esp Master):10:256KB
+7983.Great Waldo Search (Hk):10:128KB
+7984.Greg Norman Golf (Hack):10:128KB
+7985.Gremlins 2 (Hack QoL):10:128KB
+7986.Guardian Legend (Esp):10:128KB
+7987.Guerrilla War (Hack 2P):10:128KB
+7988.Gumshoe (Hack Plus):10:32KB
+7989.Gun-Nac (Hack Plus):10:256KB
+7990.Gun.Smoke (Hack Plus):10:128KB
+7991.Gyromite (Hack Plus):10:32KB
+7992.Gyruss (Hack QoL):10:64KB
+7993.Hammerin' Harry (Esp):10:128KB
+7994.Harlem Globetrotters (Hk):10:128KB
+7995.Hatris (Hack Plus):10:64KB
+7996.Heavy Barrel (Hack 2P):10:128KB
+7997.Heavy Shreddin' (Hack):10:128KB
+7998.Hello Kitty (Esp Master):10:128KB
+7999.High Speed (Hack Plus):10:128KB
+8000.Hogan's Alley (Hack DX):10:24KB
+8001.Hollywood Squares (Hk):10:128KB
+8002.Home Alone (Hack Plus):10:128KB
+8003.Home Alone 2 (Hack Plus):10:256KB
+8004.Hook (Hack QoL):10:256KB
+8005.Hoops (Hack Plus):10:128KB
+8006.Hudson Hawk (Hack Plus):10:128KB
+8007.Hunt for Red Oct (Hk):10:128KB
+8008.Hydlide (Hack Fix):10:64KB
+8009.Ice Climber (Hack 4P):10:24KB
+8010.Ice Hockey (Hack DX):10:32KB
+8011.Ikari 2 Victory (Hack):10:128KB
+8012.Ikari 3 Rescue (Hack):10:256KB
+8013.Ikki (Trad. Español):10:24KB
+8014.Image Fight (Hack Plus):10:128KB
+8015.Impossible Mission (Hk):10:64KB
+8016.Incredible Crash (Hk):10:128KB
+8017.Indiana Jones (Hack QoL):10:128KB
+8018.Iron Tank (Hack Plus):10:128KB
+8019.Ironsword (Hack Plus):10:128KB
+8020.Isolated Warrior (Hack):10:128KB
+8021.Ivan Stewart (Hack Plus):10:64KB
+8022.Jack Nicklaus (Hack):10:128KB
+8023.Jackal (Hack 2P Mode):10:128KB
+8024.Jackie Chan (Hack QoL):10:256KB
+8025.James Bond Jr (Hack):10:128KB
+8026.Jaws (Hack Plus):10:64KB
+8027.Jeopardy (Hack Plus):10:128KB
+8028.Jetsons (Hack QoL):10:256KB
+8029.Jimmy Connors (Hack):10:128KB
+8030.Joe & Mac (Esp Master):10:256KB
+8031.John Elway (Hack Plus):10:64KB
+8032.Jordan vs Bird (Hack):10:128KB
+8033.Journey Silius (Hack DX):10:128KB
+8034.Joust (Hack Plus):10:24KB
+8035.Jungle Book (Hack QoL):10:256KB
+8036.Jurassic Park (Hack DX):10:256KB
+8037.Kabuki Quantum (Hack):10:128KB
+8038.Karate Champ (Hack Plus):10:32KB
+8039.Karate Kid (Hack Plus):10:64KB
+8040.Karnov (Hack QoL):10:128KB
+8041.Kick Master (Hack QoL):10:256KB
+8042.Kickle Cubicle (Hack):10:128KB
+8043.Kid Icarus (Hack Save):10:128KB
+8044.Kid Klown (Hack Plus):10:128KB
+8045.Kid Niki (Hack Plus):10:128KB
+8046.Kings Knight (Hack Plus):10:64KB
+8047.Kings of Beach (Hack):10:128KB
+8048.Kirby Adv (Hack QoL):10:768KB
+8049.KlashBall (Hack Plus):10:128KB
+8050.Knight Rider (Hack Plus):10:128KB
+8051.Konami World (Esp Fix):10:256KB
+8052.Konami World 2 (Esp Fix):10:256KB
+8053.Krull (Homebrew Port):10:64KB
+8054.Krū Krū Land (Trad. Esp):10:24KB
+8055.Kung Fu (Hack DX):10:32KB
+8056.Kung Fu Heroes (Hack):10:64KB
+8057.Laser Burst (Unlic):10:64KB
+8058.Last Action Hero (Hack):10:256KB
+8059.Last Starfighter (Hack):10:64KB
+8060.Legacy Wizard (Esp):10:128KB
+8061.Legend Kage (Hack DX):10:32KB
+8062.Legend Prince (Hack):10:128KB
+8063.Legendary Wings (Hack):10:128KB
+8064.Lemmings (Hack Plus):10:128KB
+8065.Lethal Weapon (Hack DX):10:256KB
+8066.Life Force (Hack Plus):10:128KB
+8067.Linus Spacehead (Hack):10:128KB
+8068.Little Mermaid (Hack DX):10:128KB
+8069.Little Nemo (Hack QoL):10:256KB
+8070.Little Samson (Hack QoL):10:512KB
+8071.Lode Runner (Hack Plus):10:32KB
+8072.Lone Ranger (Esp Master):10:256KB
+8073.Loopz (Hack Plus):10:64KB
+8074.Low G Man (Hack Plus):10:128KB
+8075.Lunar Pool (Hack DX):10:32KB
+8076.M.U.L.E. (Hack Plus):10:64KB
+8077.Mach Rider (Hack DX):10:32KB
+8078.Mad Max (Hack Plus):10:128KB
+8079.Mafat Lode (Hack Plus):10:128KB
+8080.Magic Darts (Hack Plus):10:128KB
+8081.Magic Johnson (Hack):10:128KB
+8082.Magician (Hack Plus):10:256KB
+8083.Magmax (Hack Plus):10:64KB
+8084.Major League (Hack Plus):10:128KB
+8085.Maniac Mansion (Esp Fix):10:256KB
+8086.Mappy (Hack DX):10:24KB
+8087.Mappy Land (Hack Plus):10:64KB
+8088.Marble Madness (Hack):10:64KB
+8089.Mario Bros (Hack DX):10:24KB
+8090.Mario is Missing (Hack):10:256KB
+8091.Mario Time Machine (Hk):10:256KB
+8092.Marvel Super Hero (Hk):10:256KB
+8093.McKids (Hack Plus):10:128KB
+8094.Mechanized Attack (Hk):10:128KB
+8095.Mega Man (Hack QoL):10:128KB
+8096.Mega Man 2 (Hack QoL):10:256KB
+8097.Mega Man 3 (Hack QoL):10:384KB
+8098.Mega Man 4 (Hack QoL):10:512KB
+8099.Mega Man 5 (Hack QoL):10:512KB
+8100.Mega Man 6 (Hack QoL):10:512KB
+8101.Mendel Palace (Hack):10:256KB
+8102.Metal Mech (Hack Plus):10:128KB
+8103.Metal Storm (Hack QoL):10:128KB
+8104.Metroid (Hack QoL):10:128KB
+8105.Michael Andretti (Hk):10:128KB
+8106.Mickey Mouse (Esp Master):10:128KB
+8107.Mickey Safari (Hack):10:64KB
+8108.Mickey's Adventure (Hk):10:128KB
+8109.Micro Machines (Hack DX):10:256KB
+8110.Mighty Bomb Jack (Hack):10:128KB
+8111.Mighty Final Fight (Esp):10:256KB
+8112.Millipede (Hack DX):10:32KB
+8113.Milon's Castle (Hack):10:64KB
+8114.Mission Imposs (Hack):10:128KB
+8115.Monopoly (Hack Plus):10:128KB
+8116.Monster Party (Hack):10:128KB
+8117.Monster Truck (Hack):10:128KB
+8118.Motor City (Hack Plus):10:128KB
+8119.Ms Pac-Man (Hack DX):10:64KB
+8120.Muppet Adventure (Hk):10:128KB
+8121.Mutant Virus (Hack Plus):10:128KB
+8122.Mystery Quest (Hack):10:64KB
+8123.NARC (Hack Plus):10:128KB
+8124.NES Open Golf (Hack):10:256KB
+8125.NFL Football (Hack):10:128KB
+8126.Nightmare Elm (Hack DX):10:128KB
+8127.Nightshade (Hack Plus):10:256KB
+8128.Ninja Crusaders (Hack):10:128KB
+8129.Ninja Gaiden (Hack QoL):10:128KB
+8130.Ninja Gaiden 2 (Hack):10:256KB
+8131.Ninja Gaiden 3 (Hack):10:256KB
+8132.Ninja Kid (Hack Plus):10:64KB
+8133.Nintendo World Cup (Hk):10:128KB
+8134.Nobunaga Ambition (Hk):10:256KB
+8135.North and South (Esp):10:128KB
+8136.Operation Wolf (Hack):10:128KB
+8137.Orb-3D (Hack Plus):10:128KB
+8138.Othello (Hack DX):10:32KB
+8139.Over Horizon (Hack DX):10:128KB
+8140.P.O.W. (Hack Plus):10:256KB
+8141.Pac-Man (Hack DX):10:24KB
+8142.Pac-Mania (Hack Plus):10:128KB
+8143.Palamedes (Hack Plus):10:64KB
+8144.Panic Restaurant (Esp):10:128KB
+8145.Paperboy (Hack DX):10:64KB
+8146.Paperboy 2 (Hack Plus):10:128KB
+8147.Parodius (Hack DX):10:256KB
+8148.Phantom Fighter (Hack):10:128KB
+8149.Pictionary (Hack Plus):10:64KB
+8150.Pinball (Hack DX):10:32KB
+8151.Pinball Quest (Hack):10:128KB
+8152.Pipe Dream (Hack Plus):10:64KB
+8153.Pirates! (Hack Plus):10:256KB
+8154.Platoon (Hack Plus):10:128KB
+8155.Popeye (Hack DX):10:24KB
+8156.Power Blade (Hack QoL):10:128KB
+8157.Power Blade 2 (Hack):10:256KB
+8158.Power Punch 2 (Hack):10:128KB
+8159.Predator (Hack Plus):10:128KB
+8160.Prince of Persia (Esp):10:256KB
+8161.Princess Tomato (Esp):10:256KB
+8162.Pro Wrestling (Hack DX):10:64KB
+8163.Punch-Out!! (Hack DX):10:256KB
+8164.Punisher (Hack Plus):10:256KB
+8165.Puzznic (Hack Plus):10:64KB
+8166.Q-bert (Hack DX):10:64KB
+8167.Qix (Hack Plus):10:32KB
+8168.Race America (Hack):10:128KB
+8169.Racket Attack (Hack):10:128KB
+8170.Rad Racer (Hack DX):10:128KB
+8171.Rad Racer 2 (Hack Plus):10:128KB
+8172.Raid on Bungeling (Hk):10:32KB
+8173.Rainbow Islands (Hack):10:128KB
+8174.Rally-X (Homebrew Port):10:32KB
+8175.Rambo (Hack Plus):10:128KB
+8176.Rampage (Hack Plus):10:128KB
+8177.Rampart (Hack Plus):10:128KB
+8178.RBI Baseball (Hack DX):10:64KB
+8179.RC Pro-Am (Hack DX):10:64KB
+8180.RC Pro-Am 2 (Hack Plus):10:128KB
+8181.Remote Control (Hack):10:128KB
+8182.Renegade (Hack Plus):10:128KB
+8183.Rescue: Embassy (Esp):10:128KB
+8184.Ring King (Hack Plus):10:128KB
+8185.River City Ransom (Esp):10:128KB
+8186.Road Fighter (Hack DX):10:24KB
+8187.RoadBlasters (Hack Plus):10:128KB
+8188.Robin Hood (Hack Plus):10:256KB
+8189.Robocop (Hack Plus):10:128KB
+8190.Robocop 2 (Hack Plus):10:256KB
+8191.Robocop 3 (Hack Plus):10:256KB
+8192.Rock 'n' Ball (Hack):10:128KB
+8193.Rocket Ranger (Hack):10:128KB
+8194.Rockin' Kats (Esp):10:256KB
+8195.Roger Clemens (Hack):10:128KB
+8196.Rollerblade Racer (Hk):10:128KB
+8197.Rollergames (Hack Plus):10:128KB
+8198.Rolling Thunder (Hack):10:128KB
+8199.Romance 3 King (Hack):10:512KB
+8200.Rush'n Attack (Hack DX):10:64KB
+8201.Rygar (Hack QoL Save):10:128KB
+8202.S.C.A.T. (Hack Plus):10:128KB
+8203.Section Z (Hack Save):10:128KB
+8204.Seicross (Hack Plus):10:32KB
+8205.Sesame Street (Hack):10:64KB
+8206.Shadow of Ninja (Esp):10:128KB
+8207.Shadowgate (Esp Fix):10:128KB
+8208.Shatterhand (Esp Fix):10:256KB
+8209.Shingen the Ruler (Hk):10:128KB
+8210.Shinobi (Hack Plus):10:128KB
+8211.Shockwave (Hack Plus):10:128KB
+8212.Side Pocket (Hack DX):10:64KB
+8213.Silent Service (Hack):10:128KB
+8214.Silk Worm (Hack Plus):10:128KB
+8215.Silver Surfer (Hack Easy):10:128KB
+8216.Simpsons: Bart Space (Hk):10:256KB
+8217.Simpsons: Bart World (Hk):10:256KB
+8218.Skate or Die (Hack):10:128KB
+8219.Skate or Die 2 (Hack):10:256KB
+8220.Ski or Die (Hack Plus):10:128KB
+8221.Sky Destroyer (Hack DX):10:24KB
+8222.Sky Shark (Hack Plus):10:128KB
+8223.Slalom (Hack Plus):10:32KB
+8224.Smash TV (Hack 2P):10:128KB
+8225.Snake Rattle n Roll (Hk):10:128KB
+8226.Snake's Revenge (Hack):10:256KB
+8227.Snoopy's Silly (Hack):10:128KB
+8228.Snow Brothers (Esp Master):10:256KB
+8229.Soccer (Hack DX):10:32KB
+8230.Solar Jetman (Hack):10:256KB
+8231.Solomon's Key (Hack DX):10:64KB
+8232.Solstice (Hack Plus):10:128KB
+8233.Space Invaders (Hack DX):10:24KB
+8234.Space Shuttle (Hack):10:128KB
+8235.Spelunker (Hack DX):10:32KB
+8236.Spider-Man (Hack Plus):10:256KB
+8237.Spot (Hack Plus):10:64KB
+8238.Spy Hunter (Hack DX):10:32KB
+8239.Spy vs Spy (Hack DX):10:32KB
+8240.Squirell King (NES Port):10:256KB
+8241.Stanley Search (Hack):10:128KB
+8242.Star Force (Hack DX):10:32KB
+8243.Star Soldier (Hack DX):10:64KB
+8244.Star Trek (Hack Plus):10:128KB
+8245.Star Voyager (Hack):10:64KB
+8246.Star Wars (Hack QoL):10:128KB
+8247.Starship Hector (Hack):10:64KB
+8248.Startropics (Hack Save):10:512KB
+8249.Startropics 2 (Hack):10:512KB
+8250.Stealth ATF (Hack Plus):10:128KB
+8251.Stinger (Hack Plus):10:128KB
+8252.Street Cop (Hack Plus):10:64KB
+8253.Street Fighter 2010 (Hk):10:256KB
+8254.Strider (Hack QoL):10:128KB
+8255.Super C (Hack DX):10:256KB
+8256.Super Dodge Ball (Esp):10:128KB
+8257.Super Glove Ball (Hack):10:128KB
+8258.Super Mario Bros (Hack DX):10:32KB
+8259.Super Mario 2 (Hack DX):10:128KB
+8260.Super Mario 3 (Hack DX):10:384KB
+8261.Super Pitfall (Hack Fix):10:64KB
+8262.Super Sprint (Hack):10:64KB
+8263.Super Spy Hunter (Hack):10:256KB
+8264.Super Team Games (Hack):10:128KB
+8265.Superman (Hack Plus):10:128KB
+8266.Swamp Thing (Hack Plus):10:128KB
+8267.Sword Master (Hack):10:128KB
+8268.Swords and Serpents (Hk):10:256KB
+8269.Taboo (Hack Plus):10:128KB
+8270.Tag Team Wrest (Hack DX):10:64KB
+8271.TaleSpin (Hack QoL):10:256KB
+8272.Target: Renegade (Hack):10:128KB
+8273.Tecmo Baseball (Hack):10:128KB
+8274.Tecmo Bowl 2026 (Hack):10:256KB
+8275.Tecmo NBA Basketball (Hk):10:256KB
+8276.Tecmo Super Bowl (Hk):10:384KB
+8277.Tecmo World Cup (Hack):10:128KB
+8278.Tecmo World Wrest (Hk):10:256KB
+8279.Teenage Mutant 1 (Hk QoL):10:256KB
+8280.Teenage Mutant 2 (Hk DX):10:256KB
+8281.Teenage Mutant 3 (Hk DX):10:512KB
+8282.Tennis (Hack DX):10:32KB
+8283.Terminator (Hack Plus):10:128KB
+8284.Terminator 2 (Hack DX):10:256KB
+8285.Terra Cresta (Hack DX):10:64KB
+8286.Tetris (Hack DX):10:48KB
+8287.Tetris 2 (Hack Plus):10:128KB
+8288.The Goonies (Hack DX):10:64KB
+8289.The Last Ninja (Hack):10:128KB
+8290.The Rocketeer (Hack):10:128KB
+8291.Three Stooges (Hack):10:128KB
+8292.Thunder & Light (Hack):10:64KB
+8293.Thunderbirds (Hack):10:128KB
+8294.Thundercade (Hack Plus):10:128KB
+8295.Tiger-Heli (Hack DX):10:64KB
+8296.Time Lord (Hack Plus):10:128KB
+8297.Times of Lore (Hack):10:128KB
+8298.Tiny Toon (Hack DX):10:256KB
+8299.Tiny Toon 2 (Hack DX):10:256KB
+8300.To the Earth (Hack):10:128KB
+8301.Toki (Hack QoL):10:256KB
+8302.Tom & Jerry (Hack QoL):10:256KB
+8303.Tombs and Treas (Esp):10:128KB
+8304.Top Gun (Hack DX):10:128KB
+8305.Top Gun 2 (Hack Plus):10:256KB
+8306.Total Recall (Hack):10:128KB
+8307.Town and Country (Hack):10:128KB
+8308.Track & Field (Hack DX):10:32KB
+8309.Track & Field 2 (Hack):10:256KB
+8310.Treasure Master (Hack):10:128KB
+8311.Trog! (Hack Plus):10:256KB
+8312.Trojan (Hack DX):10:64KB
+8313.Twin Cobra (Hack Plus):10:128KB
+8314.Twin Eagle (Hack Plus):10:128KB
+8315.U-Force Power (Hack):10:64KB
+8316.Ultima: Exodus (Esp):10:128KB
+8317.Ultima: Avatar (Esp):10:256KB
+8318.Ultima: Destiny (Esp):10:256KB
+8319.Ultimate Basketball (Hk):10:128KB
+8320.Uncharted Waters (Esp):10:512KB
+8321.Uncanny X-Men (Hack):10:128KB
+8322.Urban Champion (Hack DX):10:32KB
+8323.Vegas Dream (Hack):10:128KB
+8324.Vice: Project Doom (Esp):10:256KB
+8325.Vindicators (Hack):10:128KB
+8326.Volleyball (Hack DX):10:32KB
+8327.Wacky Races (Esp Master):10:256KB
+8328.Wall Street Kid (Hack):10:256KB
+8329.Wario's Woods (Hack DX):10:512KB
+8330.Warpman (Hack DX):10:32KB
+8331.Wayne Gretzky (Hack):10:128KB
+8332.Wayne's World (Hack):10:128KB
+8333.Werewolf (Hack DX):10:128KB
+8334.Wheel of Fortune (Hack):10:128KB
+8335.Where in Time (Hack):10:256KB
+8336.Who Framed Roger (Hk):10:128KB
+8337.Whomp 'Em (Hack DX):10:128KB
+8338.Widget (Hack DX):10:256KB
+8339.Wild Gunman (Hack DX):10:24KB
+8340.Willow (Esp Master):10:256KB
+8341.Win, Lose or Draw (Hk):10:128KB
+8342.Winter Games (Hack):10:128KB
+8343.Wizardry (Esp):10:256KB
+8344.Wizardry 2 (Esp):10:256KB
+8345.Wizards & Warriors (Hk):10:128KB
+8346.Wolverine (Hack DX):10:128KB
+8347.World Champ (Hack):10:128KB
+8348.World Class Track (Hk):10:32KB
+8349.Wrath of Black Manta (H):10:128KB
+8350.Wrecking Crew (Hack DX):10:32KB
+8351.Wurm: Journey (Hack):10:256KB
+8352.WWF King of Ring (Hk):10:256KB
+8353.WWF Wrestlemania (Hk):10:128KB
+8354.Xenophobe (Hack Plus):10:128KB
+8355.Xevious (Hack DX):10:24KB
+8356.Xexyz (Hack DX):10:256KB
+8357.Yo! Noid (Esp Master):10:256KB
+8358.Yoshi (Hack DX):10:64KB
+8359.Yoshi's Cookie (Hack DX):10:128KB
+8360.Young Indiana (Hack):10:256KB
+8361.Zanac (Hack DX):10:128KB
+8362.Zelda 1 (Hack DX Save):10:128KB
+8363.Zelda 2 (Hack DX Save):10:256KB
+8364.Zen Intergalactic (Esp):10:256KB
+8365.Zombie Nation (Hack DX):10:128KB
+8366.6-in-1 (Myriad Unlic):10:256KB
+8367.Action 52 (Hack Fix):10:2MB
+8368.Cheetahmen 2 (Hack Fix):10:256KB
+8369.Caltron 6-in-1 (Unlic):10:256KB
+8370.Maxi 15 (Unlic Fix):10:512KB
+8371.Sunday 4-in-1 (Unlic):10:256KB
+8372.Quattro Adventure (Fix):10:256KB
+8373.Quattro Arcade (Fix):10:256KB
+8374.Quattro Sports (Fix):10:256KB
+8375.Bible Adventures (Fix):10:256KB
+8376.Exodus (Unlic Fix):10:256KB
+8377.Joshua (Unlic Fix):10:256KB
+8378.King of Kings (Fix):10:512KB
+8379.Spiritual Warfare (Fix):10:256KB
+8380.Sunday Funday (Fix):10:256KB
+8381.Galactic Crusader (Hk):10:64KB
+8382.Death Race (Unlic Fix):10:64KB
+8383.Castle of Deceit (Fix):10:128KB
+8384.Baby Boomer (Unlic Fix):10:64KB
+8385.Crystal Mines (Unlic):10:128KB
+8386.Hell Fighter (Unlic):10:64KB
+8387.Huge Insect (Unlic):10:128KB
+8388.Magic Jewelry (Fix):10:64KB
+8389.Metal Fighter (Unlic):10:128KB
+8390.Moon Ranger (Unlic):10:64KB
+8391.Operation Secret Storm:10:128KB
+8392.Perfect Fit (Unlic):10:64KB
+8393.Robodemons (Unlic):10:128KB
+8394.Shooting Range (Unlic):10:128KB
+8395.Silent Assault (Unlic):10:64KB
+8396.Stormlord (Unlic):10:128KB
+8397.Super Sprint (Unlic):10:64KB
+8398.Tagin' Dragon (Unlic):10:64KB
+8399.Thunder & Lightning (U):10:64KB
+8400.Ultimate Stuntman (Un):10:256KB
+8401.Wally Bear (Unlic):10:128KB
+8402.Metal Force (Unlic):10:128KB
+8403.Poke Tetris (Bootleg):10:128KB
+8404.Angry Birds (NES Port):10:512KB
+8405.Plants vs Zombies 2 (B):10:1MB
+8406.Super Mario World 2 (B):10:512KB
+8407.Earthbound Begin (Esp):10:512KB
+8408.Final Fantasy III (Esp):10:512KB
+8409.Fire Emblem Gaiden (Esp):10:512KB
+8410.Sweet Home (Esp Master):10:384KB
+8411.Just Breed (Esp Master):10:1MB
+8412.Lagrange Point (Esp):10:1MB
+8413.Mother (Trad. Español):10:512KB
+8414.Akumajou Densetsu (Esp):10:384KB
+8415.Joy Mech Fight (Esp):10:256KB
+8416.Crisis Force (Esp Fix):10:256KB
+8417.Gradius II (Esp Master):10:256KB
+8418.Mitsume ga Tooru (Esp):10:256KB
+8419.Holy Diver (Esp Fix):10:256KB
+8420.Splatterhouse (Esp):10:128KB
+8421.Moon Crystal (Esp Fix):10:256KB
+8422.Summer Carnival 92 (Hk):10:128KB
+8423.Recca (Hack Redux):10:128KB
+8424.Over Horizon (Esp Fix):10:128KB
+8425.Gimmick! (Esp Master):10:256KB
+8426.Ufouria (Esp Fix):10:128KB
+8427.Bio Miracle (Esp Fix):10:128KB
+8428.Esper Dream 2 (Esp):10:256KB
+8429.Wai Wai World (Esp):10:256KB
+8430.Wai Wai World 2 (Esp):10:256KB
+8431.Getsu Fuuma Den (Esp):10:256KB
+8432.Hitler no Fukkatsu (Esp):10:256KB
+8433.Cocoron (Esp Master):10:256KB
+8434.Kyatto Ninden (Esp):10:256KB
+8435.Spartan X 2 (Esp Master):10:128KB
+8436.Hello Kitty World (Esp):10:128KB
+8437.Downtown Nekketsu (Esp):10:256KB
+8438.Kunio-kun Hockey (Esp):10:256KB
+8439.Kunio-kun Soccer (Esp):10:256KB
+8440.Kunio-kun Basket (Esp):10:256KB
+8441.Ike Ike! Hockey (Esp):10:256KB
+8442.Ganbare Goemon (Esp):10:128KB
+8443.Ganbare Goemon 2 (Esp):10:256KB
+8444.Radia Senki (Esp):10:512KB
+8445.Chaos World (Esp):10:256KB
+8446.Deep Dungeon 3 (Esp):10:256KB
+8447.Deep Dungeon 4 (Esp):10:256KB
+8448.Digital Devil (Esp):10:256KB
+8449.Digital Devil 2 (Esp):10:512KB
+8450.Destiny of Emperor (Esp):10:256KB
+8451.Destiny Emperor 2 (Esp):10:512KB
+8452.Metal Max (Esp Master):10:512KB
+8453.Famicom Wars (Esp):10:256KB
+8454.Fire Emblem (Esp Fix):10:512KB
+8455.Valis (Esp Master):10:256KB
+8456.Solstice 2 (NES Port):10:128KB
+8457.The Portopia Case (Esp):10:128KB
+8458.Princess Tomato (Esp):10:256KB
+8459.Nightshade (Esp Master):10:256KB
+8460.Deja Vu (Esp Master):10:128KB
+8461.Uninvited (Esp Master):10:128KB
+8462.Shadowgate (Esp QoL):10:128KB
+8463.Maniac Mansion (Esp QoL):10:256KB
+8464.Zelda Redux (Esp):10:128KB
+8465.Zelda 2 Redux (Esp):10:256KB
+8466.Metroid Redux (Esp):10:128KB
+8467.Castlevania Redux (Esp):10:128KB
+8468.Castlevania 2 Redux (E):10:128KB
+8469.Castlevania 3 Redux (E):10:384KB
+8470.Mega Man Redux (Esp):10:128KB
+8471.Mega Man 2 Redux (Esp):10:256KB
+8472.Mega Man 3 Redux (Esp):10:384KB
+8473.Mega Man 4 Redux (Esp):10:512KB
+8474.Mega Man 5 Redux (Esp):10:512KB
+8475.Mega Man 6 Redux (Esp):10:512KB
+8476.Bionic Commando Redux:10:128KB
+8477.Blaster Master Redux:10:128KB
+8478.Contra Redux (Esp):10:128KB
+8479.Super C Redux (Esp):10:256KB
+8480.Ninja Gaiden Redux (E):10:128KB
+8481.Ninja Gaiden 2 Redux (E):10:256KB
+8482.Ninja Gaiden 3 Redux (E):10:256KB
+8483.DuckTales Redux (Esp):10:128KB
+8484.DuckTales 2 Redux (Esp):10:256KB
+8485.Chip n Dale Redux (Esp):10:128KB
+8486.Chip n Dale 2 Redux (E):10:256KB
+8487.Darkwing Duck Redux (E):10:256KB
+8488.TaleSpin Redux (Esp):10:256KB
+8489.Little Nemo Redux (Esp):10:256KB
+8490.Willow Redux (Esp):10:256KB
+8491.Gargoyle's Quest Redux:10:256KB
+8492.Rygar Redux (Esp):10:128KB
+8493.Strider Redux (Esp):10:128KB
+8494.Shatterhand Redux (Esp):10:256KB
+8495.Vice: Project Redux (E):10:256KB
+8496.Power Blade Redux (Esp):10:128KB
+8497.Power Blade 2 Redux (E):10:256KB
+8498.Journey Silius Redux (E):10:128KB
+8499.Metal Storm Redux (Esp):10:128KB
+8500.Kick Master Redux (Esp):10:256KB
+8501.Kabuki Quantum Redux (E):10:128KB
+8502.Sword Master Redux (Esp):10:128KB
+8503.Batman Redux (Esp):10:128KB
+8504.Batman Return Redux (E):10:256KB
+8505.Double Dragon Redux (E):10:128KB
+8506.Double Dragon 2 Redux:10:128KB
+8507.Double Dragon 3 Redux:10:256KB
+8508.River City Redux (Esp):10:128KB
+8509.Super Mario Redux (Esp):10:32KB
+8510.Super Mario 2 Redux (E):10:128KB
+8511.Super Mario 3 Redux (E):10:384KB
+8512.Kirby Adventure Redux:10:768KB
+8513.Punch-Out Redux (Esp):10:256KB
+8514.Star Wars Redux (Esp):10:128KB
+8515.Empire Strikes Redux (E):10:128KB
+8516.Jurassic Park Redux (E):10:256KB
+8517.Goonies 2 Redux (Esp):10:128KB
+8518.Gremlins 2 Redux (Esp):10:128KB
+8519.Tiny Toon Redux (Esp):10:256KB
+8520.Tiny Toon 2 Redux (Esp):10:256KB
+8521.Felix the Cat Redux (E):10:256KB
+8522.Panic Restaur. Redux (E):10:128KB
+8523.Rockin' Kats Redux (Esp):10:256KB
+8524.Whomp 'Em Redux (Esp):10:128KB
+8525.Jackie Chan Redux (Esp):10:256KB
+8526.Crystalis Redux (Esp):10:256KB
+8527.Faxanadu Redux (Esp):10:128KB
+8528.Guardian Legend Redux:10:128KB
+8529.Battletoads Redux (Esp):10:256KB
+8530.Mighty Final Redux (Esp):10:256KB
+8531.Little Samson Redux (E):10:512KB
+8532.Shadow of Ninja Redux:10:128KB
+8533.Bucky O'Hare Redux (Esp):10:256KB
+8534.Zen Intergalac. Redux:10:256KB
+8535.Toxic Crusader Redux (E):10:128KB
+8536.GI Joe Redux (Esp):10:256KB
+8537.GI Joe 2 Redux (Esp):10:256KB
+8538.Friday 13th Redux (Esp):10:128KB
+8539.Nightmare Elm Redux (E):10:128KB
+8540.Terminator 2 Redux (Esp):10:256KB
+8541.Robocop Redux (Esp):10:128KB
+8542.Robocop 2 Redux (Esp):10:256KB
+8543.Robocop 3 Redux (Esp):10:256KB
+8544.Predator Redux (Esp):10:128KB
+8545.Total Recall Redux (Esp):10:128KB
+8546.Alien 3 Redux (Esp):10:256KB
+8547.Home Alone Redux (Esp):10:128KB
+8548.Home Alone 2 Redux (Esp):10:256KB
+8549.Hook Redux (Esp Master):10:256KB
+8550.The Rocketeer Redux (E):10:128KB
+8551.The Flintstones Redux:10:256KB
+8552.The Flintstones 2 Redux:10:256KB
+8553.The Jetsons Redux (Esp):10:256KB
+8554.The Simpsons Redux (Esp):10:256KB
+8555.The Simpsons 2 Redux:10:256KB
+8556.Addams Family Redux (E):10:256KB
+8557.Addams Family 2 Redux:10:256KB
+8558.Wacky Races Redux (Esp):10:256KB
+8559.Tom & Jerry Redux (Esp):10:256KB
+8560.Bugs Bunny Redux (Esp):10:128KB
+8561.Bugs Bunny 2 Redux (Esp):10:128KB
+8562.Taz-Mania Redux (Esp):10:128KB
+8563.Lion King Redux (Esp):10:256KB
+8564.Aladdin Redux (Esp Master):10:256KB
+8565.Jungle Book Redux (Esp):10:256KB
+8566.Mickey Mouse Redux (Esp):10:128KB
+8567.Mickey Safari Redux (E):10:64KB
+8568.Mickey Advent. Redux (E):10:128KB
+8569.Donald Duck Redux (Esp):10:256KB
+8570.Bonk's Advent. Redux (E):10:256KB
+8571.Adventure Isl Redux (E):10:64KB
+8572.Adventure Isl 2 Redux:10:128KB
+8573.Adventure Isl 3 Redux:10:128KB
+8574.Adventure Isl 4 Redux:10:256KB
+8575.Wonder Boy Redux (Esp):10:64KB
+8576.Joe & Mac Redux (Esp):10:256KB
+8577.Ice Climber Redux (Esp):10:32KB
+8578.Balloon Fight Redux (E):10:32KB
+8579.Excitebike Redux (Esp):10:32KB
+8580.Golf Redux (Esp Master):10:32KB
+8581.Tennis Redux (Esp Master):10:32KB
+8582.Baseball Redux (Esp):10:32KB
+8583.Soccer Redux (Esp Master):10:32KB
+8584.Kung Fu Redux (Esp):10:32KB
+8585.Donkey Kong Redux (Esp):10:32KB
+8586.Donkey Kong Jr Redux (E):10:32KB
+8587.Donkey Kong 3 Redux (E):10:32KB
+8588.Popeye Redux (Esp Master):10:32KB
+8589.Pac-Man Redux (Esp):10:32KB
+8590.Ms Pac-Man Redux (Esp):10:64KB
+8591.Galaga Redux (Esp Master):10:32KB
+8592.Galaxian Redux (Esp):10:32KB
+8593.Dig Dug Redux (Esp):10:32KB
+8594.Dig Dug 2 Redux (Esp):10:64KB
+8595.Mappy Redux (Esp Master):10:32KB
+8596.Xevious Redux (Esp):10:32KB
+8597.Gyruss Redux (Esp Master):10:64KB
+8598.Star Force Redux (Esp):10:32KB
+8599.1942 Redux (Esp Master):10:32KB
+8600.1943 Redux (Esp Master):10:128KB
+8601.Gun.Smoke Redux (Esp):10:128KB
+8602.Section Z Redux (Esp):10:128KB
+8603.Legendary Wings Redux:10:128KB
+8604.Trojan Redux (Esp Master):10:64KB
+8605.Bionic Commando Fix:10:128KB
+8606.Strider Fast Fix (Esp):10:128KB
+8607.Willow Fast Fix (Esp):10:256KB
+8608.Mega Man 1 Fast Fix:10:128KB
+8609.Mega Man 2 Fast Fix:10:256KB
+8610.Mega Man 3 Fast Fix:10:384KB
+8611.Mega Man 4 Fast Fix:10:512KB
+8612.Mega Man 5 Fast Fix:10:512KB
+8613.Mega Man 6 Fast Fix:10:512KB
+8614.DuckTales Fast Fix:10:128KB
+8615.DuckTales 2 Fast Fix:10:256KB
+8616.Chip n Dale Fast Fix:10:128KB
+8617.Chip n Dale 2 Fast Fix:10:256KB
+8618.Darkwing Duck Fast Fix:10:256KB
+8619.TaleSpin Fast Fix (Esp):10:256KB
+8620.Little Nemo Fast Fix:10:256KB
+8621.Rescue Rangers Fix:10:128KB
+8622.Gargoyle's Fast Fix:10:256KB
+8623.Street Fighter 2010 Fix:10:256KB
+8624.Final Fight Fast Fix:10:256KB
+8625.Captain Commando NES:10:256KB
+8626.Cadillacs & Dinosaurs B:10:512KB
+8627.Punisher NES Port (B):10:256KB
+8628.Knights of Round (B):10:512KB
+8629.King of Dragons (B):10:512KB
+8630.Magic Sword (B):10:256KB
+8631.Three Wonders NES (B):10:512KB
+8632.Warriors of Fate (B):10:512KB
+8633.Saturday Night Slam (B):10:256KB
+8634.Street Fighter 2 (B):10:512KB
+8635.Mortal Kombat 1 (B):10:256KB
+8636.Mortal Kombat 2 (B):10:512KB
+8637.Mortal Kombat 3 (B):10:512KB
+8638.Mortal Kombat 4 (B):10:512KB
+8639.Killer Instinct (B):10:512KB
+8640.Tekken 2 (NES Bootleg):10:512KB
+8641.Tekken 3 (NES Bootleg):10:512KB
+8642.Virtua Fighter (B):10:256KB
+8643.Samurai Shodown (B):10:512KB
+8644.Fatal Fury 2 (B):10:512KB
+8645.World Heroes 2 (B):10:512KB
+8646.King of Fighters 96 (B):10:512KB
+8647.King of Fighters 97 (B):10:512KB
+8648.King of Fighters 98 (B):10:512KB
+8649.King of Fighters 99 (B):10:512KB
+8650.Donkey Kong Country 1:10:512KB
+8651.Donkey Kong Country 2:10:512KB
+8652.Donkey Kong Country 3:10:512KB
+8653.Super Mario World 1 (B):10:512KB
+8654.Super Mario World 2 (B):10:512KB
+8655.Sonic the Hedgehog (B):10:256KB
+8656.Sonic 2 (NES Bootleg):10:256KB
+8657.Sonic 3 (NES Bootleg):10:512KB
+8658.Sonic & Knuckles (B):10:512KB
+8659.Earthworm Jim (B):10:256KB
+8660.Earthworm Jim 2 (B):10:256KB
+8661.Boogerman (NES Port):10:256KB
+8662.Cool Spot (NES Port):10:128KB
+8663.Global Gladiators (B):10:128KB
+8664.Pocahontas (NES Port):10:256KB
+8665.The Lion King (Official):10:256KB
+8666.The Lion King 2 (B):10:256KB
+8667.The Lion King 5 (B):10:512KB
+8668.Aladdin (Official Port):10:256KB
+8669.Aladdin 2 (Bootleg):10:256KB
+8670.Aladdin 4 (Bootleg):10:512KB
+8671.Beauty & Beast (B):10:256KB
+8672.Toy Story (Bootleg):10:512KB
+8673.Toy Story 2 (Bootleg):10:512KB
+8674.A Bug's Life (Bootleg):10:256KB
+8675.Hercules (Bootleg):10:256KB
+8676.Mulan (Bootleg):10:256KB
+8677.Tarzan (Bootleg):10:512KB
+8678.Pokemon Yellow (B):10:512KB
+8679.Pokemon Gold (B):10:1MB
+8680.Pokemon Silver (B):10:1MB
+8681.Pokemon Crystal (B):10:1MB
+8682.Pokemon Ruby (B):10:1MB
+8683.Pokemon Sapphire (B):10:1MB
+8684.Pokemon Diamond (B):10:1MB
+8685.Pokemon Pearl (B):10:1MB
+8686.Pokemon Black (B):10:1MB
+8687.Pokemon White (B):10:1MB
+8688.Digimon 1 (Bootleg):10:256KB
+8689.Digimon 2 (Bootleg):10:256KB
+8690.Digimon 3 (Bootleg):10:512KB
+8691.Digimon 4 (Bootleg):10:512KB
+8692.Digimon 5 (Bootleg):10:512KB
+8693.Harry Potter (B):10:512KB
+8694.Harry Potter 2 (B):10:512KB
+8695.Lord of Rings (B):10:512KB
+8696.Spider-Man 2 (B):10:512KB
+8697.Spider-Man 3 (B):10:512KB
+8698.X-Men 2 (Bootleg):10:256KB
+8699.X-Men Mutant (B):10:512KB
+8700.Justice League (B):10:256KB
+8701.Batman Arkham (B):10:512KB
+8702.Superman Returns (B):10:512KB
+8703.Avengers NES (B):10:512KB
+8704.Iron Man NES (B):10:256KB
+8705.Hulk NES (B):10:256KB
+8706.Thor NES (B):10:512KB
+8707.Captain America 2 (B):10:256KB
+8708.Fantastic Four (B):10:256KB
+8709.Green Lantern (B):10:512KB
+8710.Flash NES (B):10:256KB
+8711.Wonder Woman (B):10:512KB
+8712.Shazam NES (B):10:256KB
+8713.Aquaman NES (B):10:256KB
+8714.Cyborg NES (B):10:256KB
+8715.Spawn NES (B):10:512KB
+8716.Hellboy NES (B):10:512KB
+8717.Watchmen NES (B):10:512KB
+8718.Sin City NES (B):10:256KB
+8719.V for Vendetta (B):10:512KB
+8720.Kick-Ass NES (B):10:256KB
+8721.Ghost Rider (B):10:512KB
+8722.Punisher 2 (B):10:256KB
+8723.Daredevil NES (B):10:256KB
+8724.Blade NES (B):10:512KB
+8725.Deadpool NES (B):10:512KB
+8726.Wolverine 2 (B):10:256KB
+8727.Guardians Galaxy (B):10:1MB
+8728.Black Panther (B):10:512KB
+8729.Doctor Strange (B):10:512KB
+8730.Ant-Man NES (B):10:256KB
+8731.Shovel Knight NES:10:512KB
+8732.Hollow Knight NES:10:512KB
+8733.Celeste NES Port:10:128KB
+8734.Cuphead NES Port:10:512KB
+8735.Undertale NES Port:10:1MB
+8736.Deltarune NES Port:10:1MB
+8737.Stardew Valley NES:10:1MB
+8738.Terraria NES Port:10:1MB
+8739.Minecraft NES Port:10:1MB
+8740.Roblox NES Port (B):10:1MB
+8741.Among Us NES Port:10:256KB
+8742.Fall Guys NES Port:10:256KB
+8743.Fortnite NES Port (B):10:1MB
+8744.PUBG NES Port (B):10:512KB
+8745.Free Fire NES (B):10:512KB
+8746.Call of Duty NES (B):10:512KB
+8747.Battlefield NES (B):10:512KB
+8748.Halo NES Port (B):10:512KB
+8749.Gears of War NES (B):10:512KB
+8750.God of War NES (B):10:1MB
+8751.Last of Us NES (B):10:1MB
+8752.Uncharted NES (B):10:1MB
+8753.Horizon Zero NES (B):10:1MB
+8754.Ghost Tsushima (B):10:1MB
+8755.Bloodborne NES (B):10:1MB
+8756.Elden Ring NES (B):10:2MB
+8757.Dark Souls NES (B):10:1MB
+8758.Sekiro NES Port (B):10:1MB
+8759.Resident Evil 1 (B):10:1MB
+8760.Resident Evil 2 (B):10:1MB
+8761.Resident Evil 3 (B):10:1MB
+8762.Resident Evil 4 (B):10:2MB
+8763.Silent Hill NES (B):10:1MB
+8764.Dino Crisis NES (B):10:512KB
+8765.Metal Gear Solid (B):10:512KB
+8766.Devil May Cry (B):10:1MB
+8767.Bayonetta NES (B):10:1MB
+8768.NieR Automata (B):10:1MB
+8769.Final Fantasy 7 (B):10:1MB
+8770.Final Fantasy 8 (B):10:1MB
+8771.Final Fantasy 9 (B):10:1MB
+8772.Final Fantasy 10 (B):10:2MB
+8773.Dragon Quest 8 (B):10:1MB
+8774.Kingdom Hearts (B):10:1MB
+8775.Persona 5 NES (B):10:1MB
+8776.Shin Megami V (B):10:1MB
+8777.Monster Hunter (B):10:1MB
+8778.Street Fighter 4 (B):10:1MB
+8779.Street Fighter 5 (B):10:1MB
+8780.Tekken 7 NES (B):10:1MB
+8781.SoulCalibur NES (B):10:1MB
+8782.Guilty Gear NES (B):10:512KB
+8783.BlazBlue NES (B):10:512KB
+8784.Dragon Ball Z 1 (B):10:256KB
+8785.Dragon Ball Z 2 (B):10:256KB
+8786.Dragon Ball Z 3 (B):10:512KB
+8787.Dragon Ball Z 4 (B):10:512KB
+8788.Dragon Ball Z 5 (B):10:512KB
+8789.Naruto NES Port (B):10:512KB
+8790.One Piece NES (B):10:512KB
+8791.Bleach NES Port (B):10:512KB
+8792.Death Note NES (B):10:256KB
+8793.Attack on Titan (B):10:512KB
+8794.My Hero Academia (B):10:512KB
+8795.Demon Slayer NES (B):10:1MB
+8796.Jujutsu Kaisen (B):10:1MB
+8797.Tokyo Ghoul NES (B):10:512KB
+8798.Hunter x Hunter (B):10:512KB
+8799.JoJo Adventure (B):10:512KB
+8800.Saint Seiya 3 (B):10:256KB
+8801.Yu-Gi-Oh! NES (B):10:512KB
+8802.Digimon Adventure (B):10:512KB
+8803.Sailor Moon S (B):10:256KB
+8804.Evangelion NES (B):10:512KB
+8805.Cowboy Bebop NES (B):10:256KB
+8806.Fullmetal Alchem (B):10:512KB
+8807.Inuyasha NES (B):10:256KB
+8808.Ranma 1/2 NES (B):10:128KB
+8809.Urusei Yatsura (B):10:128KB
+8810.Gundam Wing NES (B):10:512KB
+8811.Robotech NES (B):10:256KB
+8812.Voltron NES (B):10:128KB
+8813.Power Rangers (B):10:256KB
+8814.Gridman NES (B):10:256KB
+8815.Ultraman Zero (B):10:256KB
+8816.Godzilla 2026 (B):10:512KB
+8817.King Kong NES (B):10:128KB
+8818.Pacific Rim NES (B):10:512KB
+8819.Transformers 2 (B):10:256KB
+8820.G.I. Joe 3 (B):10:512KB
+8821.Mad Max Fury (B):10:512KB
+8822.John Wick NES (B):10:256KB
+8823.Matrix NES Port (B):10:512KB
+8824.Inception NES (B):10:256KB
+8825.Interstellar (B):10:128KB
+8826.Dune NES Port (B):10:512KB
+8827.Avatar NES Port (B):10:512KB
+8828.Star Trek 2026 (B):10:256KB
+8829.Star Wars Ep 7 (B):10:512KB
+8830.Star Wars Ep 8 (B):10:512KB
+8831.Star Wars Ep 9 (B):10:512KB
+8832.Mandalorian NES (B):10:512KB
+8833.Bobba Fett NES (B):10:256KB
+8834.Indiana Jones 5 (B):10:512KB
+8835.Fast & Furious (B):10:256KB
+8836.Mission Imposs 4 (B):10:256KB
+8837.James Bond 007 (B):10:512KB
+8838.Kingsman NES (B):10:256KB
+8839.Sherlock Holmes (B):10:128KB
+8840.Pirates Carib (B):10:512KB
+8841.Harry Potter 3 (B):10:512KB
+8842.Harry Potter 4 (B):10:512KB
+8843.Lord of Rings 2 (B):10:512KB
+8844.Lord of Rings 3 (B):10:512KB
+8845.The Hobbit NES (B):10:512KB
+8846.Game of Thrones (B):10:1MB
+8847.The Witcher NES (B):10:1MB
+8848.Cyberpunk 2077 (B):10:1MB
+8849.Skyrim NES Port (B):10:1MB
+8850.Fallout NES Port (B):10:1MB
+8851.BioShock NES (B):10:512KB
+8852.Mass Effect NES (B):10:1MB
+8853.Dead Space NES (B):10:512KB
+8854.Half-Life NES (B):10:512KB
+8855.Portal NES Port (B):10:128KB
+8856.Left 4 Dead NES (B):10:256KB
+8857.Team Fortress (B):10:256KB
+8858.Overwatch NES (B):10:512KB
+8859.Valorant NES (B):10:512KB
+8860.League Legends (B):10:1MB
+8861.Dota 2 NES (B):10:1MB
+8862.World of Warcraft (B):10:2MB
+8863.Diablo NES Port (B):10:1MB
+8864.StarCraft NES (B):10:512KB
+8865.Civilization NES (B):10:256KB
+8866.SimCity 2026 (B):10:256KB
+8867.The Sims NES (B):10:512KB
+8868.Zoo Tycoon NES (B):10:256KB
+8869.RollerCoaster (B):10:256KB
+8870.Age of Empires (B):10:512KB
+8871.Command & Conquer (B):10:512KB
+8872.Doom Eternal (B):10:1MB
+8873.Quake NES Port (B):10:512KB
+8874.Wolfenstein New (B):10:256KB
+8875.Duke Nukem Port (B):10:256KB
+8876.Serious Sam NES (B):10:256KB
+8877.Payday NES Port (B):10:256KB
+8878.Borderlands NES (B):10:512KB
+8879.Destiny NES Port (B):10:1MB
+8880.Warframe NES (B):10:1MB
+8881.Genshin Impact (B):10:2MB
+8882.Honkai Star (B):10:1MB
+8883.Arknights NES (B):10:512KB
+8884.Azur Lane NES (B):10:512KB
+8885.Fate Grand Order (B):10:1MB
+8886.Persona 4 NES (B):10:1MB
+8887.Persona 3 NES (B):10:1MB
+8888.Yakuza NES Port (B):10:1MB
+8889.Sleeping Dogs (B):10:512KB
+8890.Watch Dogs NES (B):10:512KB
+8891.Assassin's Creed (B):10:512KB
+8892.Far Cry NES Port (B):10:512KB
+8893.Splinter Cell (B):10:256KB
+8894.Prince of Persia 2:10:256KB
+8895.Rayman NES Port (B):10:256KB
+8896.Crash Bandicoot (B):10:512KB
+8897.Spyro Dragon (B):10:256KB
+8898.Ratchet & Clank (B):10:512KB
+8899.Jak & Daxter (B):10:512KB
+8900.Sly Cooper NES (B):10:256KB
+8901.God of War 2 (B):10:1MB
+8902.Devil May Cry 3 (B):10:1MB
+8903.Bayonetta 2 NES (B):10:1MB
+8904.Nier Replicant (B):10:1MB
+8905.Ghost Runner (B):10:512KB
+8906.Sekiro 2 NES (B):10:1MB
+8907.Bloodborne 2 (B):10:1MB
+8908.Elden Ring Exp (B):10:2MB
+8909.Dark Souls 2 (B):10:1MB
+8910.Dark Souls 3 (B):10:1MB
+8911.Lies of P NES (B):10:1MB
+8912.Wo Long NES (B):10:512KB
+8913.Nioh NES Port (B):10:1MB
+8914.Monster Hunter 2 (B):10:1MB
+8915.Wild Hearts NES (B):10:512KB
+8916.Gran Turismo NES (B):10:256KB
+8917.Forza NES Port (B):10:256KB
+8918.Need for Speed (B):10:256KB
+8919.Burnout NES Port (B):10:128KB
+8920.Midnight Club (B):10:128KB
+8921.Driver NES Port (B):10:256KB
+8922.Grand Theft Auto 1:10:256KB
+8923.Grand Theft Auto 2:10:256KB
+8924.Grand Theft Auto 3:10:512KB
+8925.Grand Theft Vice (B):10:512KB
+8926.Grand Theft San (B):10:1MB
+8927.Grand Theft Auto 4:10:1MB
+8928.Grand Theft Auto 5:10:1MB
+8929.Grand Theft Auto 6:10:2MB
+8930.Red Dead NES (B):10:1MB
+8931.Red Dead 2 NES (B):10:1MB
+8932.Bully NES Port (B):10:512KB
+8933.L.A. Noire NES (B):10:512KB
+8934.Max Payne NES (B):10:256KB
+8935.Alan Wake NES (B):10:512KB
+8936.Control NES Port (B):10:512KB
+8937.Quantum Break (B):10:512KB
+8938.Death Stranding (B):10:1MB
+8939.Metal Gear Solid 2:10:512KB
+8940.Metal Gear Solid 3:10:1MB
+8941.Metal Gear Solid 4:10:1MB
+8942.Metal Gear Solid 5:10:1MB
+8943.Metal Gear Rising (B):10:512KB
+8944.Splatoon NES (B):10:256KB
+8945.Animal Crossing (B):10:512KB
+8946.Pikmin NES Port (B):10:256KB
+8947.Metroid Prime (B):10:512KB
+8948.Metroid Dread (B):10:512KB
+8949.Zelda Breath NES (B):10:1MB
+8950.Zelda Tears NES (B):10:2MB
+8951.Zelda Skyward (B):10:1MB
+8952.Zelda Twilight (B):10:1MB
+8953.Zelda Wind Waker (B):10:512KB
+8954.Super Mario Odyss (B):10:1MB
+8955.Super Mario Galaxy:10:512KB
+8956.Super Mario Sun (B):10:512KB
+8957.Luigi Mansion NES (B):10:256KB
+8958.Paper Mario NES (B):10:512KB
+8959.Mario Kart 8 NES (B):10:256KB
+8960.Mario Party NES (B):10:128KB
+8961.Super Smash Bros (B):10:512KB
+8962.Smash Bros Ulti (B):10:1MB
+8963.Fire Emblem Three (B):10:1MB
+8964.Fire Emblem Eng (B):10:1MB
+8965.Xenoblade NES (B):10:1MB
+8966.Astral Chain NES (B):10:512KB
+8967.Bayonetta 3 NES (B):10:1MB
+8968.Kirby Forgotten (B):10:512KB
+8969.Donkey Kong Trop (B):10:512KB
+8970.Yoshi Crafted (B):10:256KB
+8971.WarioWare Move (B):10:128KB
+8972.Star Fox Zero NES (B):10:256KB
+8973.Kid Icarus Up (B):10:512KB
+8974.Arms NES Port (B):10:256KB
+8975.Ring Fit NES (B):10:128KB
+8976.Brain Age NES (B):10:64KB
+8977.Wii Sports NES (B):10:128KB
+8978.Nintendogs NES (B):10:64KB
+8979.Tomodachi NES (B):10:128KB
+8980.Miitopia NES (B):10:256KB
+8981.Tetris Effect (B):10:128KB
+8982.Puyo Puyo Tetris (B):10:128KB
+8983.Lumines NES Port (B):10:128KB
+8984.Rez NES Port (B):10:256KB
+8985.Journey NES Port (B):10:128KB
+8986.Flower NES Port (B):10:64KB
+8987.Abzu NES Port (B):10:128KB
+8988.Shadow of Coloss (B):10:512KB
+8989.Ico NES Port (B):10:256KB
+8990.Okami NES Port (B):10:512KB
+8991.California Raisins (Proto):10:128KB
+8992.Bio Force Ape (Proto):10:128KB
+8993.Earthbound (Unreleased):10:512KB
+8994.Sunman (Prototype):10:128KB
+8995.Drac's Night Out (P):10:128KB
+8996.Escape from Atlantis:10:128KB
+8997.Fighting Golf (Proto):10:128KB
+8998.Hitler no Fukkatsu (P):10:256KB
+8999.Kitty's Catch (Proto):10:64KB
+9000.Labyrinth (Prototype):10:128KB
+9001.Monster Party (Uncens):10:128KB
+9002.Police Academy (Proto):10:128KB
+9003.Simpsons: Bart Proto:10:256KB
+9004.Star Fox (NES Proto):10:256KB
+9005.Super Mario 4 (Proto):10:512KB
+9006.U-Force Test Cart:10:64KB
+9007.Vindicators (Proto):10:128KB
+9008.Wild Gunman (Arcade):10:32KB
+9009.X-Men (Unreleased Hk):10:128KB
+9010.Zero Racer (Proto):10:128KB
+9011.Gluk Video 2-in-1:10:256KB
+9012.Gluk Video 10-in-1:10:512KB
+9013.Honey Peach (Unlic):10:64KB
+9014.Hot Slot (Unlic):10:128KB
+9015.Magic Bubble (Unlic):10:64KB
+9016.Master Chu (Unlic):10:128KB
+9017.Millionaire (Unlic):10:128KB
+9018.Operation Tiger (Un):10:128KB
+9019.Panda Prince (Unlic):10:128KB
+9020.Peek-A-Boo Poker (U):10:128KB
+9021.Popo Team (Unlic):10:128KB
+9022.Puzzle (Unlic Sachen):10:64KB
+9023. Pyramid (Unlic):10:64KB
+9024.Rocman X (Unlic):10:128KB
+9025.Silver Eagle (Unlic):10:128KB
+9026.Skull & Crossbones (U):10:128KB
+9027.Street Fighter 6 (B):10:512KB
+9028.Super 15-in-1 (Un):10:1MB
+9029.Super Mario 10 (Un):10:128KB
+9030.Super Mario 14 (Un):10:128KB
+9031.Taipei (Unlic Sachen):10:64KB
+9032.Tasac (Unlic Sachen):10:64KB
+9033.Tiles of Fate (Un):10:128KB
+9034.Toy Story (Unlic):10:256KB
+9035.Vegas Connection (U):10:128KB
+9036.World Cup 98 (Un):10:128KB
+9037.Zippy Race (Unlic):10:32KB
+9038.Zoom (Unlic Sachen):10:64KB
+9039.Famicom Fitness:10:128KB
+9040.Famicom Keyboard Tst:10:64KB
+9041.Hello Kitty Math:10:128KB
+9042.I Can Remember (Edu):10:64KB
+9043.Jeopardy Junior (Edu):10:128KB
+9044.Math Blaster (Edu):10:128KB
+9045.Muppet Kids (Edu):10:128KB
+9046.Sesame Street 123:10:64KB
+9047.Sesame Street ABC:10:64KB
+9048.Study Hall (Edu):10:128KB
+9049.Where in USA (Edu):10:256KB
+9050.Where in World (Edu):10:256KB
+9051.NTF-System (Tool):10:32KB
+9052.Power Pad Test (Tool):10:24KB
+9053.Rob the Robot Test:10:32KB
+9054.Zapper Test (Tool):10:24KB
+9055.Miracle Piano (Tool):10:512KB
+9056.A-Train NES Port:10:128KB
+9057.American Dream (F):10:128KB
+9058.Bakushou Yoshimoto:10:256KB
+9059.Castle Excellent:10:128KB
+9060.Doraemon (Famicom):10:128KB
+9061.Erika to Satoru (F):10:256KB
+9062.Famicom Jump 1:10:512KB
+9063.Famicom Jump 2:10:512KB
+9064.Gegege no Kitaro 1:10:128KB
+9065.Gegege no Kitaro 2:10:256KB
+9066.Hillsfar NES Port:10:256KB
+9067.Ide Yosuke Mahjong:10:128KB
+9068.J-League Soccer:10:256KB
+9069.Kero Kero Keroppi:10:128KB
+9070.Lupin Sansei (F):10:128KB
+9071.Momotaro Dentetsu:10:128KB
+9072.Namco Classic 1:10:128KB
+9073.Namco Classic 2:10:128KB
+9074.Oishinbo NES (F):10:256KB
+9075.Pachicom (Famicom):10:64KB
+9076.Q-bert (Famicom):10:64KB
+9077.Risa no Yousei:10:256KB
+9078.Soreike! Anpanman:10:128KB
+9079.Takeshi no Chousen:10:128KB
+9080.Urusei Yatsura (F):10:128KB
+9081.Venus Senki (F):10:256KB
+9082.Wing of Madoola (F):10:128KB
+9083.X-Men (Famicom Proto):10:128KB
+9084.Yamamura Misa (F):10:256KB
+9085.Zoids 1 (Famicom):10:128KB
+9086.Zoids 2 (Famicom):10:256KB
+9087.AD&D Hillsfar (F):10:256KB
+9088.Bikkuriman World (F):10:128KB
+9089.Captain Tsubasa 1:10:256KB
+9090.Captain Tsubasa 2:10:384KB
+9091.Dragon Ball 1 (F):10:128KB
+9092.Dragon Ball 2 (F):10:256KB
+9093.Dragon Ball 3 (F):10:256KB
+9094.Dragon Ball Gaiden:10:512KB
+9095.Exed Exes (Famicom):10:32KB
+9096.Fist of North Star 2:10:128KB
+9097.Gradius (Famicom):10:64KB
+9098.Hokuto no Ken 3 (F):10:256KB
+9099.Ishin no Arashi (F):10:512KB
+9100.Jangou (Famicom):10:64KB
+9101.Kinnikuman (Famicom):10:64KB
+9102.Little Ghost Q-Taro:10:64KB
+9103.Musashi no Ken (F):10:64KB
+9104.Ninja Hattori-kun:10:64KB
+9105.Obake no Q-Taro (F):10:64KB
+9106.Parodius Da! (F):10:256KB
+9107.Quinty (Famicom):10:256KB
+9108.Radia Senki (F):10:512KB
+9109.Salamander (Famicom):10:128KB
+9110.Takahashi Meijin 1:10:64KB
+9111.Ushio to Tora (F):10:256KB
+9112.Valkyrie no Bouken:10:64KB
+9113.Wit's (Famicom):10:64KB
+9114.Xevious (Famicom):10:32KB
+9115.Youkai Douchuuki (F):10:128KB
+9116.Zippy Race (Famicom):10:24KB
+9117.Alpha Mission (F):10:128KB
+9118.B-Wings (Famicom):10:64KB
+9119.Cosmo Genesis (F):10:128KB
+9120.Deep Dungeon (F):10:128KB
+9121.Esper Dream (FDS):10:128KB
+9122.Final Fantasy 1 (F):10:128KB
+9123.Ganbare Goemon (F):10:128KB
+9124.Hydlide Special (F):10:64KB
+9125.Ikedai Mahjong (F):10:128KB
+9126.Joust (Famicom):10:24KB
+9127.King's Knight (F):10:64KB
+9128.Lode Runner (F):10:32KB
+9129.Mappy (Famicom):10:24KB
+9130.Ninja-kun (Famicom):10:32KB
+9131.Othello (Famicom):10:32KB
+9132.Pinball (Famicom):10:24KB
+9133.Quarth (Famicom):10:128KB
+9134.Route-16 Turbo (F):10:32KB
+9135.Sky Destroyer (F):10:24KB
+9136.TwinBee (Famicom):10:32KB
+9137.Urban Champ (F):10:24KB
+9138.Volleyball (F):10:32KB
+9139.Warpman (Famicom):10:24KB
+9140.Xexyz (Famicom):10:256KB
+9141.Yie Ar Kung-Fu (F):10:24KB
+9142.Zunou Senkan Galg:10:64KB
+9143.Argus (Famicom):10:64KB
+9144.Baltron (Famicom):10:32KB
+9145.Chack'n Pop (F):10:24KB
+9146.Dough Boy (Famicom):10:32KB
+9147.Exerion (Famicom):10:32KB
+9148.Field Combat (F):10:32KB
+9149.Galaxian (Famicom):10:24KB
+9150.Heere's Johnny (P):10:128KB
+9151.Ikinari Musician (F):10:64KB
+9152.Jajamaru no Daibouken:10:64KB
+9153.Kage no Densetsu (F):10:32KB
+9154.Lot Lot (Famicom):10:32KB
+9155.Metro-Cross (F):10:128KB
+9156.Night Raider (Proto):10:128KB
+9157.Oni (Famicom Proto):10:256KB
+9158.Puss 'n Boots (F):10:128KB
+9159.Quiz Project (F):10:128KB
+9160.Relics (FDS Port):10:128KB
+9161.Star Luster (F):10:64KB
+9162.Transformers (F):10:64KB
+9163.Urusei Yatsura 2 (F):10:128KB
+9164.Valkyrie 2 (Proto):10:128KB
+9165.Wagyan Land 1 (F):10:128KB
+9166.Wagyan Land 2 (F):10:256KB
+9167.Wagyan Land 3 (F):10:256KB
+9168.X-Men 2 (Proto):10:128KB
+9169.Yū Yū Hakusho (B):10:256KB
+9170.Zen-Nippon Pro (F):10:256KB
+9171.Astro Fang (F):10:128KB
+9172.Bio Force (Proto Fix):10:128KB
+9173.Chip n Dale 3 (B):10:128KB
+9174.Darkseed NES (B):10:512KB
+9175.E.T. NES Port (B):10:64KB
+9176.Final Fantasy 4 (B):10:512KB
+9177.Final Fantasy 5 (B):10:1MB
+9178.Final Fantasy 6 (B):10:1MB
+9179.Garfield NES (P):10:128KB
+9180.Hellraiser NES (P):10:512KB
+9181.Impossible Miss (P):10:64KB
+9182.James Bond 007 (P):10:128KB
+9183.Kiwi Kraze (F):10:128KB
+9184.Lethal Weapon (F):10:256KB
+9185.Metal Gear 2 (B):10:256KB
+9186.Nuts & Milk (F):10:24KB
+9187.Othello World (F):10:64KB
+9188.Power Soccer (F):10:128KB
+9189.Quarth 2 (Proto):10:128KB
+9190.R-Type NES Port (B):10:256KB
