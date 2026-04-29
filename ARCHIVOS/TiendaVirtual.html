@@ -1782,6 +1782,7 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     container.innerHTML = htmlFinal;
 }
 
+//🏞🏞
 // --- FUNCIÓN ACTUALIZADA CON TU IMAGEN PERSONALIZADA ---
 
 function abrirVisorExtra(nombre) {
@@ -1794,19 +1795,37 @@ function abrirVisorExtra(nombre) {
 
     titulo.innerText = nombre.toUpperCase();
     
-    // 🖼️ CARGAMOS TU TV PERSONALIZADA DESDE TU CARPETA LOCAL/ONLINE
-    img.src = "ARCHIVOS/CONSOLAS/tv-listado.png"; 
+    // 🌐 DIRECCIÓN DIRECTA DE TU GITHUB
+    // Esta es la ruta que el navegador sí puede leer como imagen
+    const rutaGithub = "https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/CONSOLAS/tv-listado.png";
+
+    // 📺 INTENTO 1: Intentamos cargarla desde GitHub
+    img.src = rutaGithub; 
     
     visor.style.display = 'flex';
 
-    // Configuración del botón para buscar carátulas en Google
+    // 🔄 GESTOR DE ERRORES: Si falla el internet, intenta buscarla en el celular (Local)
+    img.onerror = function() {
+        if (img.src === rutaGithub) {
+            console.log("Falla Online, intentando ruta local del celular...");
+            img.src = "ARCHIVOS/CONSOLAS/tv-listado.png"; 
+        } else {
+            // Si ambas fallan, ponemos el fondo oscuro para que no salga el icono roto
+            img.style.background = "#000";
+            console.error("No se pudo cargar la imagen de la TV en ninguna ruta.");
+        }
+    };
+
     btnGoogle.onclick = function() {
         if(typeof playSnd === 'function') playSnd('sndClick');
-        // Busca la carátula oficial para que el usuario la vea
         const query = encodeURIComponent(nombre + " game official cover art");
         window.open(`https://www.google.com/search?q=${query}&tbm=isch`, '_blank');
     };
 }
+
+
+
+//=============
 
 function cerrarVisorExtra() {
     if(typeof playSnd === 'function') playSnd('sndClick');
