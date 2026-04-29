@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
+    <script
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
  src="https://unpkg.com/@ruffle-rs/ruffle"></script>
@@ -337,6 +337,30 @@ text-align: center;
 
         .hd-switch-container { display: flex; align-items: center; gap: 10px; background: rgba(0,255,65,0.1); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--neon); margin-bottom: 10px; justify-content: center; }
         .hd-label { color: var(--neon); font-size: 0.7rem; font-weight: bold; text-shadow: 0 0 5px var(--neon); }
+
+// 💭 pagina extra visor del listado 
+
+<div id="visorImagenListado" class="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; flex-direction:column; align-items:center; justify-content:center;">
+    <div style="position:relative; width:90%; max-width:400px; background:#111; border:2px solid var(--neon); border-radius:10px; padding:15px; text-align:center;">
+        <button onclick="cerrarVisorExtra()" style="position:absolute; top:-15px; right:-15px; background:var(--red); color:white; border:none; border-radius:50%; width:35px; height:35px; font-weight:bold; cursor:pointer; z-index:11;">X</button>
+        
+        <h3 id="nombreJuegoVisor" style="color:var(--white); margin-bottom:10px; font-size:1.1rem; text-transform:uppercase;"></h3>
+        
+        <div id="contenedorImgVisor" style="width:100%; aspect-ratio:1; background:#000; border-radius:5px; overflow:hidden; margin-bottom:15px; display:flex; align-items:center; justify-content:center;">
+            <img id="imgJuegoVisor" src="" style="width:100%; height:100%; object-fit:contain;">
+        </div>
+
+        <button id="btnGoogleImages" class="action-btn" style="width:100%; border-radius:5px; padding:10px;">🔍 VER MÁS IMÁGENES</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+//final stiles
     </style>
 </head>
 <body>
@@ -604,22 +628,25 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
     </div>
 // abre contenedor visor
 
-<div id="magazineViewer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:10000; flex-direction:column; align-items:center; justify-content:center; color:white; font-family:sans-serif;">
-    
-    <div id="magTitle" style="padding:10px; color:lime; font-weight:bold; text-align:center;"></div>
-    <div id="magStep" style="font-size:0.9rem; margin-bottom:5px;"></div>
-
-    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; touch-action:none; cursor:grab;">
-        <img id="magPage" src="" style="max-width:100%; max-height:100%; object-fit:contain; transition: transform 0.1s ease-out;">
+<div id="magazineViewer" style="display:none; position:fixed; inset:0; background:black; z-index:2000000; flex-direction:column; align-items:center; overflow:hidden;">
+    <div style="background:#111; width:100%; padding:10px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--red); z-index:10;">
+        <span id="magTitle" style="color:white; font-weight:bold; font-size:0.9rem;">VISOR DE REVISTAS</span>
+        <button onclick="closeMagazine()" style="background:red; color:white; border:none; padding:5px 15px; border-radius:4px; font-weight:bold;">CERRAR X</button>
     </div>
+    
+    <div id="magZoomContainer" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; cursor:grab; overflow:hidden; touch-action:none;">
+        <img id="magPage" src="" 
+     style="max-width:100%; max-height:100%; object-fit:contain; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.1); 
+            transition: transform 0.1s ease-out; 
+            transform-origin: center center;"> </div>
 
-    <div style="display:flex; gap:15px; padding:20px; background:rgba(0,0,0,0.8); width:100%; justify-content:center;">
-        <button onclick="changePage(-1)" style="padding:10px 15px; border-radius:5px; border:none; background:#333; color:white;">⬅️ Anterior</button>
-        <button onclick="changePage(1)" style="padding:10px 15px; border-radius:5px; border:none; background:#333; color:white;">Siguiente ➡️</button>
-        <button onclick="closeMagazine()" style="padding:10px 15px; border-radius:5px; border:none; background:red; color:white; font-weight:bold;">CERRAR</button>
+    <div style="background:#151515; width:100%; padding:20px; display:flex; justify-content:center; align-items:center; gap:20px; border-top:2px solid #333; z-index:10;">
+        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(-1)">◀</button>
+        <span id="magStep" style="color:var(--neon); font-family:monospace; font-size:1.2rem; font-weight:bold;">0 / 0</span>
+        <button class="action-btn" style="width:70px; margin:0;" onclick="changePage(1)">▶</button>
     </div>
 </div>
-
 
 
 
@@ -654,50 +681,65 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
 
     <script>
 //variables
+// --- CONFIGURACIÓN E IDENTIDAD ---
+const RUTA_PRINCIPAL = "ARCHIVOS";
+const USUARIO = "Laidel";
+const REPO = "Games-Florida";
 
-        const RUTA_PRINCIPAL = "ARCHIVOS";
-        const USUARIO = "Laidel";
-        const REPO = "Games-Florida";
-        let allItems = [], cart = [], priceList = {}, taxiP = 0, currentCat = 'CONSOLAS';
-        let scale = 1, pX = 0, pY = 0, start = {x:0, y:0}, isDrag = false, evCache = [], prevDiff = -1;
-        let currentZoomItem = null;
+// --- SEGURIDAD Y ACCESO ---
+const PASS_BIBLIOTECA = "1234"; // Tu clave de acceso
+let bibliotecaDesbloqueada = false; // Control de sesión para no pedir la clave repetidas veces
 
+// --- ESTADOS DEL SISTEMA ---
+let allItems = [];
+let cart = [];
+let priceList = {};
+let taxiP = 0;
+let currentCat = 'CONSOLAS';
+let currentZoomItem = null;
+
+// --- INTERFAZ Y RENDIMIENTO ---
+let totalBytes = 0;
+let sessionSeconds = 0;
+let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
+let isLastOnlineStatus = false;
+let syncAudioTimer = null; 
+
+// --- CONTROL DE ZOOM (LIGHTBOX GENERAL) ---
+let scale = 1, pX = 0, pY = 0, start = {x:0, y:0};
+let isDrag = false, evCache = [], prevDiff = -1;
+
+// --- CONTROL DE ZOOM (BIBLIOTECA / REVISTAS) ---
 let magScale = 1, magPX = 0, magPY = 0;
 let magEvCache = [], magPrevDiff = -1;
 
+// --- CONFIGURACIÓN DE CONTROLES (SNES / FLASH) ---
+let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
+let isConfigMode = false;
+let targetButton = null;
 
+// --- ICONOS DE CONSOLAS ---
+const consoleIcons = [
+    { id: 'ANDROIDE',  label: 'ANDROIDE',       file: 'androide.png' },
+    { id: 'SNES',      label: 'SUPER NINTENDO', file: 'snes.png' },
+    { id: 'NES',       label: 'NINTENDO',       file: 'nes.png' },
+    { id: 'PS1',       label: 'PS1',            file: 'ps1.png' },
+    { id: 'PS2',       label: 'PS2',            file: 'ps2.png' },
+    { id: 'PS3',       label: 'PS3',            file: 'ps3.png' },
+    { id: 'PS4',       label: 'PS4',            file: 'ps4.png' },
+    { id: 'SWITCH',    label: 'SWITCH',         file: 'switch.png' },
+    { id: 'PSP',       label: 'PSP',            file: 'psp.png' },
+    { id: 'WII',       label: 'WII',            file: 'wii.png' },
+    { id: 'N64',       label: 'N64',            file: 'n64.png' },
+    { id: '3DS',       label: '3DS',            file: '3ds.png' },
+    { id: 'DS',        label: 'DS',             file: 'ds.png' },
+    { id: 'PC',        label: 'PC',             file: 'pc.png' },
+    { id: 'SEGA',      label: 'SEGA',           file: 'sega.png' },
+    { id: 'XBOX360',   label: 'XBOX 360',       file: 'xbox360.png' },
+    { id: 'FLASH',     label: 'FLASH',          file: 'flash.png' },
+    { id: 'FIGURAS 3D', label: '3D PRINT',      file: 'figuras3d.png' }
+];
 
-
-        let keyConfig = { 'X': 32, 'Y': 17, 'A': 16, 'B': 13, 'SELECT': 9, 'START': 27 };
-        let isConfigMode = false;
-        let targetButton = null;
-
-        let totalBytes = 0;
-        let sessionSeconds = 0;
-        let isDataSaver = localStorage.getItem('dataSaverEnabled') === 'true';
-        let isLastOnlineStatus = false;
-        let syncAudioTimer = null; // Para el bucle de sonido
-
-        const consoleIcons = [
-            { id: 'ANDROIDE', label: 'ANDROIDE', file: 'androide.png' },
-            { id: 'SNES', label: 'SUPER NINTENDO', file: 'snes.png' },
-            { id: 'NES', label: 'NINTENDO', file: 'nes.png' },
-            { id: 'PS1', label: 'PS1', file: 'ps1.png' },
-            { id: 'PS2', label: 'PS2', file: 'ps2.png' },
-            { id: 'PS3', label: 'PS3', file: 'ps3.png' },
-            { id: 'PS4', label: 'PS4', file: 'ps4.png' },
-            { id: 'SWITCH', label: 'SWITCH', file: 'switch.png' },
-            { id: 'PSP', label: 'PSP', file: 'psp.png' },
-            { id: 'Wii', label: 'Wii', file: 'wii.png' },
-            { id: 'N64', label: 'N64', file: 'n64.png' },
-            { id: '3DS', label: '3DS', file: '3ds.png' },
-            { id: 'DS', label: 'DS', file: 'ds.png' },
-            { id: 'PC', label: 'PC', file: 'pc.png' },
-            { id: 'SEGA', label: 'SEGA', file: 'sega.png' },
-            { id: 'XBOX360', label: 'XBOX 360', file: 'xbox360.png' },
-            { id: 'FLASH', label: 'FLASH', file: 'flash.png' },
-            { id: 'FIGURAS 3D', label: '3D PRINT', file: 'figuras3d.png' }
-        ];
 
         // --- SISTEMA DE SONIDO AJUSTADO MODO RÁFAGA 3DS ---
         function playSyncLoop() {
@@ -1135,9 +1177,30 @@ zCon.onpointerup = zCon.onpointercancel = e => {
     if (evCache.length === 0) isDrag = false; 
 };
 
+//🧭
+
 function openZoom(urlMini, price, name, urlHD){
     const fileName = name.toLowerCase();
+    const esLectura = fileName.endsWith('.pdf') || fileName.endsWith('.cbz') || fileName.endsWith('.zip');
 
+    // 2. Validación de contraseña para Revistas y PDFs
+    if (esLectura && !bibliotecaDesbloqueada) {
+        const intento = prompt("🔐 INGRESE CONTRASEÑA DE BIBLIOTECA:");
+        
+        if (intento === PASS_BIBLIOTECA) {
+            bibliotecaDesbloqueada = true;
+            playSnd('sndClick');
+            showGenericAnim("ACCESO CONCEDIDO ✅", false);
+        } else {
+            if (intento !== null) { // Si no canceló el prompt
+                playSnd('sndTrash'); 
+                showGenericAnim("CONTRASEÑA INCORRECTA ❌", true);
+            }
+            return; // Bloquea la apertura
+        }
+    }
+
+    // --- Lógica original de apertura ---
     if(fileName.endsWith('.pdf')) {
         window.open(urlHD, '_blank');
         return; 
@@ -1176,6 +1239,7 @@ function openZoom(urlMini, price, name, urlHD){
     resetZoom();
     trackData(30000); 
 }
+
 
 
 
@@ -1380,13 +1444,13 @@ function openZoom(urlMini, price, name, urlHD){
 
 
 
+// Render Grid para LIBROS CBZ
+        // Render Grid Matrix - ACTUALIZADO CON SOPORTE CBZ
 function renderGrid() {
     const grid = document.getElementById('imageGrid');
     const search = document.getElementById('searchInput').value.toUpperCase();
-    if (!grid) return; // Seguridad extra
     grid.innerHTML = '';
 
-    // 1. SECCIÓN CONSOLAS
     if (currentCat === 'CONSOLAS' && search === '') {
     consoleIcons.forEach(icon => {
         const card = document.createElement('div');
@@ -1409,61 +1473,56 @@ function renderGrid() {
     return;
 }
 
-    // 2. SECCIÓN ITEMS (Juegos y Revistas)
     allItems.filter(i => (currentCat === 'TODO' || i.cat === currentCat) && i.name.toUpperCase().includes(search)).forEach(i => {
-        const fileName = (i.name || "").toLowerCase();
+        const fileName = i.name.toLowerCase();
         const isSwf = fileName.endsWith('.swf');
         const isCbz = fileName.endsWith('.cbz') || fileName.endsWith('.zip');
         const isPdf = fileName.endsWith('.pdf');
-        const esRevista = i.cat === 'REVISTAS' || isCbz || isPdf;
 
-        const nombreLimpio = i.name.split('.')[0];
-
-        // Lógica de Acciones
         let btnLabel = 'AÑADIR';
         let accionBoton = `playSnd('sndAdd'); addCart('${i.url}', '${i.name}', ${i.price}, '${i.urlHD}')`;
-        let accionImagen = `openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')`;
 
-        if (esRevista) {
-            btnLabel = 'LEER';
-            // Usamos comillas simples para no chocar con las del HTML
-            accionBoton = `abrirDesdeThumbnail('${nombreLimpio}')`;
-            accionImagen = accionBoton;
-        } else if (isSwf) {
+        // Lógica de botones (v8.3+)
+        if (isSwf) {
             btnLabel = 'JUGAR';
             accionBoton = `openFlash('${i.urlHD}', '${i.name}')`;
+        } else if (isCbz) {
+            btnLabel = 'LEER';
+            accionBoton = `openZoom('${i.url}', '${i.price}', '${i.name}', '${i.urlHD}')`;
+        } else if (isPdf) {
+            btnLabel = 'VER PDF'; 
+            accionBoton = `window.open('${i.urlHD}', '_blank')`;
         }
 
         const d = document.createElement('div'); 
         d.className = 'grid-item';
         const imgId = `portada_${Math.random().toString(36).substr(2, 9)}`;
 
-        // Tag de Imagen (Con tu ahorro de datos 🚫)
-        const imgTag = (isDataSaver && !isSwf && !esRevista) 
-            ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\\'${i.url}\\' style=\\'width:100%; aspect-ratio:1; object-fit:cover;\\' loading=\\'lazy\\'>'">🚫</div>`
-            : `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover; cursor:pointer;" onclick="${accionImagen}">`;
+        const imgTag = (isDataSaver && !isSwf && !isCbz && !isPdf) 
+            ? `<div class="placeholder-img" onclick="this.outerHTML='<img src=\'${i.url}\' style=\'width:100%; aspect-ratio:1; object-fit:cover;\' loading=\'lazy\'>'">🚫</div>`
+            : `<img id="${imgId}" src="${i.url}" loading="lazy" style="width:100%; aspect-ratio:1; object-fit:cover;" onclick="openZoom('${i.url}', ${i.price}, '${i.name}', '${i.urlHD}')">`;
 
         d.innerHTML = `
             <div class="price-tag">$${i.price}</div>
             ${imgTag}
             <button class="action-btn" style="font-size:0.95rem; padding:5px; margin:0; border-radius:0;" onclick="${accionBoton}">${btnLabel}</button>
-            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${nombreLimpio.toUpperCase()}</div>`;
+            <div style="font-size:1.05rem; color:white; padding:5px 1px; text-align:center; height:52px; overflow:hidden; line-height:1;">${(i.name || '').split('.')[0].toUpperCase()}</div>`;
 
         grid.appendChild(d);
 
-        // Portadas CBZ
         if (isCbz && typeof JSZip !== 'undefined' && typeof getCbzCover === 'function') {
-            getCbzCover(i.urlHD).then(urlReal => { 
-                const el = document.getElementById(imgId);
-                if (urlReal && el) el.src = urlReal; 
-            }).catch(() => {});
+            getCbzCover(i.urlHD).then(urlReal => {
+                if (urlReal) {
+                    const el = document.getElementById(imgId);
+                    if (el) el.src = urlReal;
+                }
+            }).catch(e => {});
         }
     });
 }
 
 
-
-//------------👀
+//-----------------------
 
         function addCart(u, n, p, uHD) { 
     cart.push({ u, n, p, urlHD: uHD }); 
@@ -1518,7 +1577,7 @@ function updateDateTime() {
 function takeSnapshot() { 
     updateDateTime();
     const btn = document.getElementById('btnGenerate');
-    btn.innerHTML = "GENERANDO TICKET 💤...";
+    btn.innerHTML = "GENERANDO...";
     
     html2canvas(document.getElementById('captureArea'), { 
         backgroundColor: "#000", 
@@ -1688,130 +1747,331 @@ async function renderTextoLista() {
 }
 
 
-
-
 //fin
 
+// 💭💭 PROCESAR TEXTOS Y VISOR EXTRA
 
-
-
-
-// --- FUNCIÓN DE LISTADO CON INTELIGENCIA DE CAPTURA ÚNICA ---
 function procesarYMostrarTexto(texto, categoria, origen) {
     const container = document.getElementById('listaItemsContainer');
-    if (!container) return; // Seguridad
     const lineas = texto.split('\n').filter(linea => linea.trim() !== "");
     
-    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">
-        MODO LISTADO - ORIGEN: ${origen}
-    </div>`;
+    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">Origen: ${origen}</div>`;
     
     lineas.forEach((linea, index) => {
         const partes = linea.split(':');
-        const nombreStr = partes[0].trim();
-        const precio = partes[1] ? partes[1].trim() : "0";
+        const nombreOriginal = partes[0].trim();
+        const nombre = nombreOriginal.toUpperCase();
+        const precio = partes[1] ? partes[1].trim() : "---";
         const tamano = partes[2] ? partes[2].trim() : "";
 
-        let itemEnMemoria = (typeof allItems !== 'undefined') 
-            ? allItems.find(i => i.name.toUpperCase().includes(nombreStr.toUpperCase())) 
-            : null;
-
-        let accion = itemEnMemoria 
-            ? `onclick="openZoom('${itemEnMemoria.url}', ${precio}, '${nombreStr}', '${itemEnMemoria.urlHD}')"` 
-            : `onclick="capturarImagenUnicaInternet('${nombreStr}', ${precio}, '${categoria}')"`;
-
+        // Al tocar la fila se activa el Visor Extra de imagen
         htmlFinal += `
-            <div ${accion} style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:10px 5px; font-size:0.9rem; cursor:pointer;" 
-                 onmouseover="this.style.background='#111'" onmouseout="this.style.background='transparent'">
-                <span style="color:var(--white); flex:1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    <b style="color: #FFA500; margin-right:8px; font-family: monospace;">${index + 1}.</b> ${nombreStr.toUpperCase()}
+            <div onclick="abrirVisorExtra('${nombreOriginal.replace(/'/g, "\\'")}')" 
+                 style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #111; padding:10px 5px; font-size:0.9rem; cursor:pointer; transition: 0.2s;"
+                 onmouseover="this.style.background='#0f0f0f'" onmouseout="this.style.background='transparent'">
+                <span style="color:var(--white); flex:1; padding-right:10px;">
+                    <b style="color:yellow; margin-right:8px;">${index + 1}.</b> ${nombre}
                 </span>
-                <div style="text-align:right; display:flex; gap:12px; align-items:center;">
-                    <span style="color:#00CCFF; font-size:0.75rem; font-weight:bold;">${tamano}</span>
+                <div style="text-align:right; display:flex; flex-direction:column;">
+                    <span style="color:#00CCFF; font-weight:bold; font-size:0.75rem;">${tamano}</span>
                     <span style="color:var(--neon); font-weight:bold;">$${precio}</span>
                 </div>
-            </div>`;
+            </div>
+        `;
     });
     container.innerHTML = htmlFinal;
 }
 
-// --- FRANCOTIRADOR TITÁN: MANTENIENDO PLECA ACTIVADA ---
-async function capturarImagenUnicaInternet(nombre, precio, categoria) {
-    if (typeof playSnd === 'function') playSnd('sndClick');
-    const lightbox = document.getElementById('lightbox');
-    const zoomContainer = document.getElementById('zoomContainer');
-    const query = encodeURIComponent(nombre + " " + categoria + " cover");
-    const urlBing = `https://www.bing.com/images/search?q=${query}&form=HDRSC2&first=1&adlt=off`;
-    const urlYoutube = `https://www.youtube.com/results?search_query=${encodeURIComponent(nombre + " gameplay")}`;
+// --- FUNCIÓN ACTUALIZADA CON TU IMAGEN PERSONALIZADA ---
 
-    document.body.style.overflow = 'hidden';
-    lightbox.style.display = 'flex';
-    lightbox.style.zIndex = "100000"; 
+function abrirVisorExtra(nombre) {
+    if(typeof playSnd === 'function') playSnd('sndClick');
+    
+    const visor = document.getElementById('visorImagenListado');
+    const img = document.getElementById('imgJuegoVisor');
+    const titulo = document.getElementById('nombreJuegoVisor');
+    const btnGoogle = document.getElementById('btnGoogleImages');
 
-    zoomContainer.innerHTML = `
-        <div id="fondoTVNegro" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9998;"></div>
-        <div id="interfazTV" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; flex-direction: column; align-items: center; padding-top: 10px; overflow: hidden;">
-            <h2 style="color: #00ff00; font-family: monospace; margin: 0; font-size: 1.3rem; text-align: center; text-shadow: 0 0 5px #00ff00;">${nombre.toUpperCase()}</h2>
-            <div style="color: #fff; font-family: monospace; font-size: 1.8rem; font-weight: bold; margin: 2px 0;">$${precio}</div>
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; width: 95%; position: relative; z-index: 10005;">
-                <button id="btnAtrasFinal" style="background: #ff4444; color: white; border: 2px solid #fff; border-radius: 8px; padding: 12px; font-weight: bold; flex: 1; cursor: pointer;">ATRÁS</button>
-                <button id="btnAnadirFinal" style="background: #ccff00; color: #000; border: 2px solid #000; border-radius: 8px; padding: 12px; font-weight: bold; flex: 1; box-shadow: 0 0 10px #ccff00; cursor: pointer;">AÑADIR +</button>
-            </div>
-            <div style="width: 130vw; height: 130vw; max-height: 550px; position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center; z-index: 10000;">
-                <div id="contenedorVisor" style="position: absolute; top: 38.5%; left: 20.5%; width: 44%; height: 38.5%; overflow-x: hidden; overflow-y: scroll; background: #000; border-radius: 25px; z-index: 1; -webkit-overflow-scrolling: touch;">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3000px; z-index: 5; background: transparent;"></div>
-                    <iframe src="${urlBing}" style="width: 300%; height: 3000px; border: none; margin-top: -380px; position: absolute; left: -100%; z-index: 1;"></iframe>
-                </div>
-                <img src="https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/CONSOLAS/tv-listado.png" 
-                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; object-fit: contain;">
-            </div>
-            <div style="position: absolute; bottom: 20px; width: 95%; z-index: 10005;">
-                <button onclick="window.open('${urlYoutube}', '_blank')" style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 20px; font-weight: bold; width: 100%; box-shadow: 0 0 20px #ff0000; display: flex; align-items: center; justify-content: center; cursor: pointer;">▶ VER GAMEPLAY</button>
-            </div>
-        </div>
-    `;
+    titulo.innerText = nombre.toUpperCase();
+    
+    // 🖼️ CARGAMOS TU TV PERSONALIZADA DESDE TU CARPETA LOCAL/ONLINE
+    img.src = "ARCHIVOS/CONSOLAS/tv-listado.png"; 
+    
+    visor.style.display = 'flex';
 
-    // --- FUNCIÓN DE LIMPIEZA SIN APAGAR LA PLECA ---
-    const resetSistema = () => {
-        // 1. Restauramos el elemento 'expandedImg' para que el catálogo no se rompa a futuro
-        zoomContainer.innerHTML = `<img id="expandedImg" src="" style="width:100%; transition: transform 0.1s ease-out; transform-origin: center center;">`;
-        
-        // 2. Cerramos lightbox y liberamos scroll
-        lightbox.style.display = 'none';
-        document.body.style.overflow = 'auto';
-
-        // 3. MANTENEMOS LA PLECA (He quitado el código que desactivaba el chkListado)
-        // El usuario se queda en la lista de juegos.
-
-        if (typeof playSnd === 'function') playSnd('sndClick');
-    };
-
-    document.getElementById('btnAtrasFinal').onclick = (e) => {
-        e.stopPropagation();
-        resetSistema();
-    };
-
-    document.getElementById('btnAnadirFinal').onclick = (e) => {
-        e.stopPropagation();
-        if (typeof playSnd === 'function') playSnd('sndAdd');
-        if (typeof addCart === 'function') {
-            const iconoProvisional = 'https://cdn-icons-png.flaticon.com/512/686/686589.png';
-            addCart(iconoProvisional, nombre, parseFloat(precio), iconoProvisional);
-            resetSistema();
-        }
+    // Configuración del botón para buscar carátulas en Google
+    btnGoogle.onclick = function() {
+        if(typeof playSnd === 'function') playSnd('sndClick');
+        // Busca la carátula oficial para que el usuario la vea
+        const query = encodeURIComponent(nombre + " game official cover art");
+        window.open(`https://www.google.com/search?q=${query}&tbm=isch`, '_blank');
     };
 }
 
+function cerrarVisorExtra() {
+    if(typeof playSnd === 'function') playSnd('sndClick');
+    document.getElementById('visorImagenListado').style.display = 'none';
+}
 
+function mostrarDesdeMemoria(catSeleccionada) {
+    const container = document.getElementById('listaItemsContainer');
+    const filtrados = allItems.filter(i => catSeleccionada === 'TODO' || i.cat === catSeleccionada);
 
+    if (filtrados.length === 0) {
+        container.innerHTML = `<p style="color:var(--red);">Al Sincronizar MODO APAGON 👀🕯habra datos disponibles para ${catSeleccionada}.</p>`;
+        return;
+    }
 
+    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">MOSTRANDO DESDE MEMORIA VOLÁTIL</div>`;
+    
+    filtrados.forEach(i => {
+        htmlFinal += `
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:8px 0; cursor:pointer;" onclick="abrirVisorExtra('${i.name.split('.')[0]}')">
+                <span style="color:var(--white); flex:1;">${i.name.split('.')[0].toUpperCase()}</span>
+                <span style="color:var(--neon); font-weight:bold;">$${i.price}</span>
+            </div>
+        `;
+    });
+    container.innerHTML = htmlFinal;
+}
 
+// 📚 LÓGICA DE REVISTAS Y CBZ
 
+let magPages = [];
+let currentMagIdx = 0;
 
+function openMagazine(name) {
+    playSnd('sndClick');
+    magPages = allItems.filter(item => item.name.startsWith(name.split('_')[0]) && item.cat === 'REVISTAS')
+                       .sort((a, b) => a.name.localeCompare(b.name));
+    
+    if(magPages.length > 0) {
+        currentMagIdx = 0;
+        document.getElementById('magZoomContainer').style.touchAction = 'none';
+        document.getElementById('magazineViewer').style.display = 'flex';
+        updateMagDisplay();
+    } else {
+        alert("No se encontraron páginas.");
+    }
+}
 
+function updateMagDisplay() {
+    const item = magPages[currentMagIdx];
+    document.getElementById('magPage').src = item.urlHD;
+    document.getElementById('magTitle').innerText = item.name.split('.')[0].toUpperCase();
+    document.getElementById('magStep').innerText = (currentMagIdx + 1) + " / " + magPages.length;
+}
 
+function changePage(dir) {
+    resetMagZoom();
+    playSnd('sndClick');
+    currentMagIdx += dir;
+    if (currentMagIdx < 0) currentMagIdx = 0;
+    if (currentMagIdx >= magPages.length) currentMagIdx = magPages.length - 1;
+    updateMagDisplay();
+}
+
+function closeMagazine() {
+    resetMagZoom();
+    document.getElementById('magazineViewer').style.display = 'none';
+}
+
+async function loadCbzBook(url, name) {
+    // Seguridad: Si no está desbloqueada, pedir clave
+    if (!bibliotecaDesbloqueada) {
+        const intento = prompt("🔐 INGRESE CONTRASEÑA DE BIBLIOTECA:");
+        if (intento === PASS_BIBLIOTECA) {
+            bibliotecaDesbloqueada = true;
+            if(typeof showGenericAnim === 'function') showGenericAnim("ACCESO CONCEDIDO ✅", false);
+        } else {
+            if (intento !== null) {
+                playSnd('sndTrash');
+                if(typeof showGenericAnim === 'function') showGenericAnim("CONTRASEÑA INCORRECTA ❌", true);
+            }
+            return;
+        }
+    }
+
+    playSnd('sndClick');
+    const viewer = document.getElementById('magazineViewer');
+    const magPage = document.getElementById('magPage');
+    
+    resetMagZoom(); 
+    viewer.style.display = 'flex';
+    magPage.src = ""; 
+    document.getElementById('magTitle').innerText = "PROCESANDO: " + name.toUpperCase();
+    document.getElementById('magStep').innerText = "⌛...";
+
+    try {
+        magPages = []; 
+        if (name.toLowerCase().endsWith('.pdf')) {
+            const pdfjsLib = window['pdfjs-dist/build/pdf'];
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+            
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 2 }); 
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+                magPages.push({ urlHD: URL.createObjectURL(blob), name: `Página ${i}` });
+                document.getElementById('magStep').innerText = `Cargando ${i}/${pdf.numPages}`;
+            }
+        } else {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const zip = new JSZip();
+            const content = await zip.loadAsync(blob);
+            const imgFiles = Object.keys(content.files)
+                .filter(n => /\.(jpg|jpeg|png|webp)$/i.test(n) && !content.files[n].dir)
+                .sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+            for (let imgName of imgFiles) {
+                const imgBlob = await content.files[imgName].async("blob");
+                magPages.push({ urlHD: URL.createObjectURL(imgBlob), name: imgName });
+            }
+        }
+        if(magPages.length > 0) { currentMagIdx = 0; updateMagDisplay(); }
+    } catch (err) {
+        console.error(err);
+        closeMagazine();
+    }
+}
+
+// --- 🛠️ ESTA ES LA FUNCIÓN DEL COVER QUE FALTABA ---
+async function getCbzCover(fileUrl) {
+    try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) return null;
+        const blob = await response.blob();
+        const zip = await JSZip.loadAsync(blob);
+        
+        // Filtra y busca la primera imagen real (salta carpetas del sistema)
+        const files = Object.keys(zip.files)
+            .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f) && !f.includes('__MACOSX'))
+            .sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
+
+        if (files.length > 0) {
+            const data = await zip.file(files[0]).async("blob");
+            return URL.createObjectURL(data);
+        }
+    } catch (err) {
+        console.error("Error extrayendo portada:", err);
+    }
+    return null;
+}
+
+// 🔍 LÓGICA DE ZOOM HÍBRIDA
+
+function updateMagTransform() {
+    const img = document.getElementById('magPage');
+    if (img) {
+        img.style.transformOrigin = "center center";
+        img.style.transform = `translate(${pX}px, ${pY}px) scale(${scale})`;
+    }
+}
+
+function resetMagZoom() {
+    scale = 1; pX = 0; pY = 0;
+    const img = document.getElementById('magPage');
+    if (img) {
+        img.style.maxWidth = "100%"; img.style.maxHeight = "100%";
+    }
+    updateMagTransform();
+}
+
+const magZCon = document.getElementById('magZoomContainer');
+let isMovingMag = false;
+
+magZCon.addEventListener('pointerdown', e => {
+    if (!document.getElementById('magPage').src) return;
+    e.preventDefault();
+    isMovingMag = true;
+    evCache.push(e);
+    start = { x: e.clientX - pX, y: e.clientY - pY };
+    magZCon.setPointerCapture(e.pointerId);
+}, { passive: false });
+
+magZCon.addEventListener('pointermove', e => {
+    if (!isMovingMag) return;
+    e.preventDefault();
+    for (let i = 0; i < evCache.length; i++) {
+        if (e.pointerId === evCache[i].pointerId) { evCache[i] = e; break; }
+    }
+    if (evCache.length === 2) {
+        let curDiff = Math.sqrt(Math.pow(evCache[1].clientX - evCache[0].clientX, 2) + Math.pow(evCache[1].clientY - evCache[0].clientY, 2));
+        let midX = (evCache[0].clientX + evCache[1].clientX) / 2;
+        let midY = (evCache[0].clientY + evCache[1].clientY) / 2;
+        if (prevDiff > 0) {
+            let oldScale = scale;
+            if (curDiff > prevDiff) scale = Math.min(scale + 0.05, 4);
+            else scale = Math.max(scale - 0.05, 1);
+            if (scale !== oldScale) {
+                let factor = (scale / oldScale) - 1;
+                pX -= (midX - (magZCon.clientWidth / 2) - pX) * factor;
+                pY -= (midY - (magZCon.clientHeight / 2) - pY) * factor;
+                start.x = midX - pX; start.y = midY - pY;
+            }
+            updateMagTransform();
+        }
+        prevDiff = curDiff;
+    } else if (evCache.length === 1) {
+        pX = e.clientX - start.x;
+        pY = e.clientY - start.y;
+        updateMagTransform();
+    }
+}, { passive: false });
+
+magZCon.addEventListener('pointerup', e => {
+    isMovingMag = false;
+    evCache = evCache.filter(ev => ev.pointerId !== e.pointerId);
+    if (evCache.length < 2) prevDiff = -1;
+    magZCon.releasePointerCapture(e.pointerId);
+}, { passive: false });
+
+// --- FIN DE LÓGICA Y SERVICE WORKERS ---
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+    });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('cache-loader-container');
+    if(!loader) return;
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 5;
+        if(document.getElementById('load-percentage')) document.getElementById('load-percentage').innerText = progress + "%";
+        if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => { loader.style.opacity = "0"; setTimeout(() => loader.style.display = "none", 600); }, 500);
+        }
+    }, 100);
+});
+
+setInterval(updateSessionTimer, 1000);
+setInterval(checkInternet, 5000);
+setInterval(updateOnlineCount, 10000);
+if(typeof startDataCounter === 'function') startDataCounter();
 
 </script>
+
+<div id="visorImagenListado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:20000; flex-direction:column; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+    <div style="position:relative; width:85%; max-width:380px; background:#050505; border:3px solid var(--neon); border-radius:15px; padding:20px; text-align:center; box-shadow: 0 0 25px var(--online-blue);">
+        <button onclick="cerrarVisorExtra()" style="position:absolute; top:-15px; right:-15px; background:var(--red); color:white; border:none; border-radius:50%; width:40px; height:40px; font-weight:bold; cursor:pointer; box-shadow: 0 0 10px red;">X</button>
+        <h3 id="nombreJuegoVisor" style="color:var(--white); margin-bottom:15px; font-size:1.2rem; text-transform:uppercase;"></h3>
+        <div style="width:100%; aspect-ratio:1; background:#111; border-radius:8px; overflow:hidden; margin-bottom:20px; border:1px solid #333; display:flex; align-items:center; justify-content:center;">
+            <img id="imgJuegoVisor" src="" style="width:100%; height:100%; object-fit:contain;">
+        </div>
+        <button id="btnGoogleImages" class="action-btn" style="width:100%; border-radius:8px; padding:12px; font-weight:bold; background:linear-gradient(45deg, #00a2ff, #0044ff); border:none; color:white;">🔍 BUSCAR EN GOOGLE</button>
+    </div>
+</div>
 
 </body>
 </html>
