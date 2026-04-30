@@ -340,23 +340,34 @@ text-align: center;
 
 // 💭 pagina extra visor del listado 
 
-<div id="visorImagenListado" class="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:10000; flex-direction:column; align-items:center; justify-content:center;">
-    <div style="position:relative; width:90%; max-width:400px; background:#111; border:2px solid var(--neon); border-radius:10px; padding:15px; text-align:center;">
-        <button onclick="cerrarVisorExtra()" style="position:absolute; top:-15px; right:-15px; background:var(--red); color:white; border:none; border-radius:50%; width:35px; height:35px; font-weight:bold; cursor:pointer; z-index:11;">X</button>
-        
-        <h3 id="nombreJuegoVisor" style="color:var(--white); margin-bottom:10px; font-size:1.1rem; text-transform:uppercase;"></h3>
-        
-        <div id="contenedorImgVisor" style="width:100%; aspect-ratio:1; background:#000; border-radius:5px; overflow:hidden; margin-bottom:15px; display:flex; align-items:center; justify-content:center;">
-            <img id="imgJuegoVisor" src="" style="width:100%; height:100%; object-fit:contain;">
+<div id="visorImagenListado" class="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:10000; flex-direction:column; align-items:center; overflow:hidden;">
+    
+    <div style="position:absolute; top:0; width:100%; padding:15px; z-index:100; background:linear-gradient(to bottom, black, transparent); text-align:center;">
+        <h3 id="nombreJuegoVisor" style="color:#0f0; text-shadow:0 0 10px #0f0; margin:0 0 10px 0; text-transform:uppercase;"></h3>
+        <div style="display:flex; gap:10px; width:90%; margin:auto;">
+            <button onclick="cerrarVisorExtra()" style="flex:1; background:#ff4444; border-radius:8px; padding:12px; font-weight:bold; color:white; border:none; cursor:pointer;">ATRÁS</button>
+            <button style="flex:1; background:#ccff00; border-radius:8px; padding:12px; font-weight:bold; border:none; cursor:pointer;">AÑADIR +</button>
         </div>
+    </div>
 
-        <button id="btnGoogleImages" class="action-btn" style="width:100%; border-radius:5px; padding:10px;">🔍 VER MÁS IMÁGENES</button>
+    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; position:relative;">
+        
+        <div style="position:relative; width:140%; height:140%; display:flex; align-items:center; justify-content:center;">
+            <img id="imgJuegoVisor" src="https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/CONSOLAS/tv-listado.png" style="width:100%; height:100%; object-fit:contain; position:absolute; z-index:10; pointer-events:none;">
+            
+            <div id="cristalTv" style="position:absolute; width:46%; height:38%; top:38%; left:30.5%; background:#111; border-radius:15px; overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center;">
+                <iframe id="navegadorTv" src="" style="width:100%; height:100%; border:none; display:none;"></iframe>
+                <div id="estaticaTv" style="width:100%; height:100%; background: url('https://media.giphy.com/media/oEI9uWUicLxrBKRD77/giphy.gif'); background-size:cover; opacity:0.2;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="position:absolute; bottom:0; width:100%; padding:20px; z-index:100; background:linear-gradient(to top, black, transparent); text-align:center;">
+        <button id="btnGoogleImages" style="width:90%; max-width:400px; background:red; color:white; padding:15px; border-radius:10px; font-weight:bold; border:none; cursor:pointer; box-shadow: 0 0 15px red;">
+            📺 ENCENDER / VER GAMEPLAY
+        </button>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -364,6 +375,7 @@ text-align: center;
     </style>
 </head>
 <body>
+
 
     <canvas id="dataSaverCanvas" width="300" height="150"></canvas>
 
@@ -1782,54 +1794,60 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     container.innerHTML = htmlFinal;
 }
 
-//🏞🏞
-// --- FUNCIÓN ACTUALIZADA CON TU IMAGEN PERSONALIZADA ---
+//🏞🏞 ====================
+// 📺 SECCIÓN: VISOR TV FLORIDA
+//VERCION ESTABLE
 
 function abrirVisorExtra(nombre) {
     if(typeof playSnd === 'function') playSnd('sndClick');
     
     const visor = document.getElementById('visorImagenListado');
-    const img = document.getElementById('imgJuegoVisor');
     const titulo = document.getElementById('nombreJuegoVisor');
-    const btnGoogle = document.getElementById('btnGoogleImages');
+    const btnGameplay = document.getElementById('btnAccionTv'); 
+    const iframe = document.getElementById('navegadorTv');
+    const estatica = document.getElementById('estaticaTv');
+
+    document.body.style.overflow = 'hidden';
+
+    // 1. Limpieza total antes de mostrar nada
+    if(iframe) {
+        iframe.src = "";
+        iframe.style.display = "none";
+    }
+    if(estatica) estatica.style.display = "block";
 
     titulo.innerText = nombre.toUpperCase();
-    
-    // 🌐 DIRECCIÓN DIRECTA DE TU GITHUB
-    // Esta es la ruta que el navegador sí puede leer como imagen
-    const rutaGithub = "https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/CONSOLAS/tv-listado.png";
-
-    // 📺 INTENTO 1: Intentamos cargarla desde GitHub
-    img.src = rutaGithub; 
-    
     visor.style.display = 'flex';
 
-    // 🔄 GESTOR DE ERRORES: Si falla el internet, intenta buscarla en el celular (Local)
-    img.onerror = function() {
-        if (img.src === rutaGithub) {
-            console.log("Falla Online, intentando ruta local del celular...");
-            img.src = "ARCHIVOS/CONSOLAS/tv-listado.png"; 
-        } else {
-            // Si ambas fallan, ponemos el fondo oscuro para que no salga el icono roto
-            img.style.background = "#000";
-            console.error("No se pudo cargar la imagen de la TV en ninguna ruta.");
-        }
+    // 2. BUSCADOR ALTERNATIVO (Evita el bloqueo de sesión de Google)
+    // Usamos Bing en modo ligero para que la imagen cargue sin carteles blancos
+    const queryBusqueda = encodeURIComponent(nombre + " cover art pc");
+    iframe.src = `https://www.bing.com/images/search?q=${queryBusqueda}&first=1&scenario=ImageBasicHover`;
+    
+    iframe.onload = function() {
+        if(estatica) estatica.style.display = "none";
+        iframe.style.display = "block";
     };
 
-    btnGoogle.onclick = function() {
+    // 3. Botón de Video (YouTube)
+    btnGameplay.onclick = function() {
         if(typeof playSnd === 'function') playSnd('sndClick');
-        const query = encodeURIComponent(nombre + " game official cover art");
-        window.open(`https://www.google.com/search?q=${query}&tbm=isch`, '_blank');
+        if(estatica) estatica.style.display = "block";
+        
+        const queryYoutube = encodeURIComponent(nombre + " gameplay español");
+        iframe.src = `https://www.youtube.com/results?search_query=${queryYoutube}`;
+        
+        // Efecto visual de cambio de canal
+        setTimeout(() => { if(estatica) estatica.style.display = "none"; }, 1200);
     };
 }
-
-
-
-//=============
 
 function cerrarVisorExtra() {
     if(typeof playSnd === 'function') playSnd('sndClick');
     document.getElementById('visorImagenListado').style.display = 'none';
+    const iframe = document.getElementById('navegadorTv');
+    if(iframe) iframe.src = ""; // Liberamos memoria
+    document.body.style.overflow = 'auto';
 }
 
 function mostrarDesdeMemoria(catSeleccionada) {
@@ -1837,16 +1855,17 @@ function mostrarDesdeMemoria(catSeleccionada) {
     const filtrados = allItems.filter(i => catSeleccionada === 'TODO' || i.cat === catSeleccionada);
 
     if (filtrados.length === 0) {
-        container.innerHTML = `<p style="color:var(--red);">Al Sincronizar MODO APAGON 👀🕯habra datos disponibles para ${catSeleccionada}.</p>`;
+        container.innerHTML = `<p style="color:var(--red);">Al Sincronizar MODO APAGON 👀🕯 habra datos disponibles para ${catSeleccionada}.</p>`;
         return;
     }
 
     let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">MOSTRANDO DESDE MEMORIA VOLÁTIL</div>`;
     
     filtrados.forEach(i => {
+        const nombreLimpio = i.name.split('.')[0].toUpperCase();
         htmlFinal += `
-            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:8px 0; cursor:pointer;" onclick="abrirVisorExtra('${i.name.split('.')[0]}')">
-                <span style="color:var(--white); flex:1;">${i.name.split('.')[0].toUpperCase()}</span>
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:12px 8px; cursor:pointer;" onclick="abrirVisorExtra('${i.name.split('.')[0]}')">
+                <span style="color:var(--white); flex:1;">${nombreLimpio}</span>
                 <span style="color:var(--neon); font-weight:bold;">$${i.price}</span>
             </div>
         `;
@@ -1854,7 +1873,11 @@ function mostrarDesdeMemoria(catSeleccionada) {
     container.innerHTML = htmlFinal;
 }
 
-// 📚 LÓGICA DE REVISTAS Y CBZ
+//cierre visor Extra TV
+
+
+
+// 📚 LÓGICA DE REVISTAS Y CBZ (INTACTA)
 
 let magPages = [];
 let currentMagIdx = 0;
@@ -1896,7 +1919,6 @@ function closeMagazine() {
 }
 
 async function loadCbzBook(url, name) {
-    // Seguridad: Si no está desbloqueada, pedir clave
     if (!bibliotecaDesbloqueada) {
         const intento = prompt("🔐 INGRESE CONTRASEÑA DE BIBLIOTECA:");
         if (intento === PASS_BIBLIOTECA) {
@@ -1961,31 +1983,24 @@ async function loadCbzBook(url, name) {
     }
 }
 
-// --- 🛠️ ESTA ES LA FUNCIÓN DEL COVER QUE FALTABA ---
 async function getCbzCover(fileUrl) {
     try {
         const response = await fetch(fileUrl);
         if (!response.ok) return null;
         const blob = await response.blob();
         const zip = await JSZip.loadAsync(blob);
-        
-        // Filtra y busca la primera imagen real (salta carpetas del sistema)
         const files = Object.keys(zip.files)
             .filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f) && !f.includes('__MACOSX'))
             .sort((a, b) => a.localeCompare(b, undefined, {numeric: true}));
-
         if (files.length > 0) {
             const data = await zip.file(files[0]).async("blob");
             return URL.createObjectURL(data);
         }
-    } catch (err) {
-        console.error("Error extrayendo portada:", err);
-    }
+    } catch (err) { console.error(err); }
     return null;
 }
 
-// 🔍 LÓGICA DE ZOOM HÍBRIDA
-
+// 🔍 LÓGICA DE ZOOM HÍBRIDA (INTACTA)
 function updateMagTransform() {
     const img = document.getElementById('magPage');
     if (img) {
@@ -2060,20 +2075,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    const loader = document.getElementById('cache-loader-container');
-    if(!loader) return;
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += 5;
-        if(document.getElementById('load-percentage')) document.getElementById('load-percentage').innerText = progress + "%";
-        if (progress >= 100) {
-            clearInterval(interval);
-            setTimeout(() => { loader.style.opacity = "0"; setTimeout(() => loader.style.display = "none", 600); }, 500);
-        }
-    }, 100);
-});
-
 setInterval(updateSessionTimer, 1000);
 setInterval(checkInternet, 5000);
 setInterval(updateOnlineCount, 10000);
@@ -2081,15 +2082,40 @@ if(typeof startDataCounter === 'function') startDataCounter();
 
 </script>
 
-<div id="visorImagenListado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:20000; flex-direction:column; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
-    <div style="position:relative; width:85%; max-width:380px; background:#050505; border:3px solid var(--neon); border-radius:15px; padding:20px; text-align:center; box-shadow: 0 0 25px var(--online-blue);">
-        <button onclick="cerrarVisorExtra()" style="position:absolute; top:-15px; right:-15px; background:var(--red); color:white; border:none; border-radius:50%; width:40px; height:40px; font-weight:bold; cursor:pointer; box-shadow: 0 0 10px red;">X</button>
-        <h3 id="nombreJuegoVisor" style="color:var(--white); margin-bottom:15px; font-size:1.2rem; text-transform:uppercase;"></h3>
-        <div style="width:100%; aspect-ratio:1; background:#111; border-radius:8px; overflow:hidden; margin-bottom:20px; border:1px solid #333; display:flex; align-items:center; justify-content:center;">
-            <img id="imgJuegoVisor" src="" style="width:100%; height:100%; object-fit:contain;">
-        </div>
-        <button id="btnGoogleImages" class="action-btn" style="width:100%; border-radius:8px; padding:12px; font-weight:bold; background:linear-gradient(45deg, #00a2ff, #0044ff); border:none; color:white;">🔍 BUSCAR EN GOOGLE</button>
+//🌎
+// VER EN TV GRANDE
+
+<div id="visorImagenListado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:100000; flex-direction:column; align-items:center; justify-content:flex-start; overflow:hidden; padding-top:20px; backdrop-filter: blur(10px);">
+    
+    <div style="width:100%; text-align:center; margin-bottom:10px; z-index:100015;">
+        <h3 id="nombreJuegoVisor" style="color:#0f0; text-shadow:0 0 10px #0f0; margin:0; font-size:1.1rem; text-transform:uppercase; font-family: 'Courier New', Courier, monospace;"></h3>
+        <p style="color:white; font-weight:bold; font-size:1.5rem; margin:2px 0; letter-spacing: 1px;">$150 💰</p>
     </div>
+
+    <div style="width:95%; max-width:450px; display:flex; gap:12px; margin-bottom:20px; z-index:100020;">
+        <button onclick="cerrarVisorExtra()" style="flex:1; background:linear-gradient(#ff4444, #990000); color:white; border:2px solid #500; border-radius:12px; padding:15px; font-weight:bold; cursor:pointer; font-size:0.9rem; box-shadow: 0 4px 10px rgba(255,0,0,0.3); active {transform: translateY(2px); box-shadow: none;}">⬅️ ATRÁS</button>
+        <button onclick="if(typeof playSnd === 'function') playSnd('sndClick')" style="flex:1; background:linear-gradient(#ccff00, #668800); color:black; border:2px solid #334400; border-radius:12px; padding:15px; font-weight:bold; cursor:pointer; font-size:0.9rem; box-shadow: 0 4px 10px rgba(204,255,0,0.3);">➕ AÑADIR</button>
+    </div>
+
+    <div style="position:relative; width:100%; max-width:600px; aspect-ratio: 1.1 / 1; display:flex; align-items:center; justify-content:center; transform: scale(1.18); margin-top: -10px;">
+        
+        <img src="https://raw.githubusercontent.com/Laidel/Games-Florida/main/ARCHIVOS/CONSOLAS/tv-listado.png" 
+             style="width:100%; height:100%; object-fit:contain; position:absolute; top:0; left:0; z-index:30; pointer-events:none;">
+
+        <div id="pantallaRealTv" style="position:absolute; width:65%; height:53%; top:19.8%; left:15.8%; background:#050505; border-radius:15px; overflow:hidden; z-index:10; border: 1px solid #222;">
+            
+            <iframe id="navegadorTv" src="" style="width:100%; height:100%; border:none; display:none; background:#fff;"></iframe>
+            
+            <div id="estaticaTv" style="width:100%; height:100%; background: url('https://media.giphy.com/media/oEI9uWUicLxrBKRD77/giphy.gif'); background-size:cover; opacity:0.25;"></div>
+        </div>
+    </div>
+
+    <div style="width:95%; max-width:450px; margin-top:35px; z-index:100020;">
+        <button id="btnAccionTv" style="width:100%; background:linear-gradient(#ff0000, #660000); color:white; padding:20px; border-radius:18px; font-weight:bold; border:2px solid #400; box-shadow: 0 0 25px rgba(255,0,0,0.5); cursor:pointer; text-transform:uppercase; font-size:1.1rem; letter-spacing:1px;">
+            🎬 VER GAMEPLAY (YOUTUBE)
+        </button>
+    </div>
+
 </div>
 
 </body>
