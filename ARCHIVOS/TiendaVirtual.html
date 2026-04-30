@@ -1794,33 +1794,105 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     container.innerHTML = htmlFinal;
 }
 
-//🏞🏞 ====================
-// 📺 SECCIÓN: VISOR TV FLORIDA
-//VERCION ESTABLE
+// ========================================================
+// 🛒 INICIO: LÓGICA GLOBAL DEL CARRITO (CONEXIÓN TICKET)
+// ========================================================
+let carritoJuegos = [];
 
-function abrirVisorExtra(nombre) {
+function agregarAlCarrito(nombre, precio) {
+    // 1. Validar precio y limpiar datos
+    const valor = precio || "200";
+    const juego = { nombre: nombre, precio: valor };
+    carritoJuegos.push(juego);
+    
+    // 2. Efecto de sonido (si existe la función)
+    if(typeof playSnd === 'function') playSnd('sndAdd');
+    
+    // 3. Vincular con la función addCart original de Florida Games
+    // Esto asegura que se vea en la lista visual del carrito
+    if(typeof addCart === 'function') {
+        const iconoTemp = 'https://cdn-icons-png.flaticon.com/512/686/686589.png';
+        addCart(iconoTemp, nombre, parseFloat(valor), iconoTemp);
+    }
+
+    // 4. Actualización visual del total en el Ticket
+    let sumaTotal = 0;
+    // Si usas el array 'cart' original de la app, lo sumamos de ahí
+    const fuenteDatos = (typeof cart !== 'undefined') ? cart : carritoJuegos;
+    
+    fuenteDatos.forEach(j => {
+        let p = (typeof j.p !== 'undefined') ? j.p : j.precio;
+        sumaTotal += parseFloat(p);
+    });
+
+    const totalTicket = document.getElementById('finalPrice') || document.querySelector('div[style*="font-size: 25px"]');
+    if(totalTicket) {
+        totalTicket.innerText = "TOTAL: $" + sumaTotal.toFixed(2);
+        totalTicket.style.color = "#00FF00"; 
+    }
+    
+    if(typeof showGenericAnim === 'function') showGenericAnim("¡AÑADIDO!", false);
+}
+// ========================================================
+// 🛒 FIN: LÓGICA DEL CARRITO
+// ========================================================
+
+
+// ========================================================
+// 📺 INICIO: VISOR TV FLORIDA (ENCUADRE 13% / 18%)
+// ========================================================
+function abrirVisorExtra(nombre, precio) {
     if(typeof playSnd === 'function') playSnd('sndClick');
     
+    const precioReal = precio || "200"; 
     const visor = document.getElementById('visorImagenListado');
     const titulo = document.getElementById('nombreJuegoVisor');
     const btnGameplay = document.getElementById('btnAccionTv'); 
     const iframe = document.getElementById('navegadorTv');
     const estatica = document.getElementById('estaticaTv');
+    
+    // --- LÓGICA DE BOTÓN AÑADIR DENTRO DEL TV ---
+    const botones = document.querySelectorAll('button');
+    botones.forEach(b => {
+        if(b.innerText.includes('AÑADIR')) {
+            b.onclick = function() {
+                agregarAlCarrito(nombre, precioReal);
+                if(window.innerWidth < 600) cerrarVisorExtra(); // Opcional: cerrar al añadir en móvil
+            };
+        }
+    });
+
+    // --- CONFIGURACIÓN TÉCNICA DEL VISOR (FRANCOTIRADOR) ---
+    const contenedorTv = iframe.parentElement;
+    if(contenedorTv) {
+        contenedorTv.style.width = "125vw"; 
+        contenedorTv.style.minWidth = "125vw";
+        contenedorTv.style.marginTop = "40px"; 
+        contenedorTv.style.position = "relative";
+    }
+
+    // Encuadre preciso para que encaje en el cristal del PNG
+    iframe.style.position = "absolute";
+    iframe.style.width = "52%"; 
+    iframe.style.height = "48%";
+    iframe.style.left = "18%"; 
+    iframe.style.top = "13%"; 
+    iframe.style.zIndex = "10";
+    iframe.style.border = "none";
+
+    if(estatica) {
+        estatica.style.display = "block";
+        estatica.style.width = "52%"; 
+        estatica.style.height = "48%";
+        estatica.style.left = "18%"; 
+        estatica.style.top = "13%";
+    }
 
     document.body.style.overflow = 'hidden';
-
-    // 1. Limpieza total antes de mostrar nada
-    if(iframe) {
-        iframe.src = "";
-        iframe.style.display = "none";
-    }
-    if(estatica) estatica.style.display = "block";
-
     titulo.innerText = nombre.toUpperCase();
     visor.style.display = 'flex';
 
-    // 2. BUSCADOR ALTERNATIVO (Evita el bloqueo de sesión de Google)
-    // Usamos Bing en modo ligero para que la imagen cargue sin carteles blancos
+    // --- SINTONIZACIÓN (BING IMAGES) ---
     const queryBusqueda = encodeURIComponent(nombre + " cover art pc");
     iframe.src = `https://www.bing.com/images/search?q=${queryBusqueda}&first=1&scenario=ImageBasicHover`;
     
@@ -1829,51 +1901,28 @@ function abrirVisorExtra(nombre) {
         iframe.style.display = "block";
     };
 
-    // 3. Botón de Video (YouTube)
+    // --- BOTÓN GAMEPLAY ---
     btnGameplay.onclick = function() {
         if(typeof playSnd === 'function') playSnd('sndClick');
-        if(estatica) estatica.style.display = "block";
-        
-        const queryYoutube = encodeURIComponent(nombre + " gameplay español");
-        iframe.src = `https://www.youtube.com/results?search_query=${queryYoutube}`;
-        
-        // Efecto visual de cambio de canal
-        setTimeout(() => { if(estatica) estatica.style.display = "none"; }, 1200);
+        const queryVideo = encodeURIComponent(nombre + " gameplay español pc");
+        // Usamos Bing Videos para que cargue dentro del TV sin problemas de permisos
+        iframe.src = `https://www.bing.com/videos/search?q=${queryVideo}&view=detail&FORM=VIRE`;
     };
 }
 
 function cerrarVisorExtra() {
     if(typeof playSnd === 'function') playSnd('sndClick');
-    document.getElementById('visorImagenListado').style.display = 'none';
+    const visor = document.getElementById('visorImagenListado');
+    if(visor) visor.style.display = 'none';
     const iframe = document.getElementById('navegadorTv');
-    if(iframe) iframe.src = ""; // Liberamos memoria
+    if(iframe) iframe.src = ""; 
     document.body.style.overflow = 'auto';
 }
+// ========================================================
+// 📺 FIN: VISOR TV FLORIDA
+// ========================================================
 
-function mostrarDesdeMemoria(catSeleccionada) {
-    const container = document.getElementById('listaItemsContainer');
-    const filtrados = allItems.filter(i => catSeleccionada === 'TODO' || i.cat === catSeleccionada);
 
-    if (filtrados.length === 0) {
-        container.innerHTML = `<p style="color:var(--red);">Al Sincronizar MODO APAGON 👀🕯 habra datos disponibles para ${catSeleccionada}.</p>`;
-        return;
-    }
-
-    let htmlFinal = `<div style="margin-bottom:10px; font-size:0.7rem; color:gray; text-align:center;">MOSTRANDO DESDE MEMORIA VOLÁTIL</div>`;
-    
-    filtrados.forEach(i => {
-        const nombreLimpio = i.name.split('.')[0].toUpperCase();
-        htmlFinal += `
-            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #111; padding:12px 8px; cursor:pointer;" onclick="abrirVisorExtra('${i.name.split('.')[0]}')">
-                <span style="color:var(--white); flex:1;">${nombreLimpio}</span>
-                <span style="color:var(--neon); font-weight:bold;">$${i.price}</span>
-            </div>
-        `;
-    });
-    container.innerHTML = htmlFinal;
-}
-
-//cierre visor Extra TV
 
 
 
