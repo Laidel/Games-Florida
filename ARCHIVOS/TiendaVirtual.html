@@ -1772,17 +1772,16 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     lineas.forEach((linea, index) => {
         const partes = linea.split(':');
         const nombreOriginal = partes[0].trim();
-        const nombre = nombreOriginal.toUpperCase();
-        const precio = partes[1] ? partes[1].trim() : "---";
+        const precio = partes[1] ? partes[1].trim() : "0"; // Precio real del TXT
         const tamano = partes[2] ? partes[2].trim() : "";
 
-        // Al tocar la fila se activa el Visor Extra de imagen
+        // Pasamos nombre, precio y tamaño a la función del Visor
         htmlFinal += `
-            <div onclick="abrirVisorExtra('${nombreOriginal.replace(/'/g, "\\'")}')" 
+            <div onclick="abrirVisorExtra('${nombreOriginal.replace(/'/g, "\\'")}', '${precio}', '${tamano}')" 
                  style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #111; padding:10px 5px; font-size:0.9rem; cursor:pointer; transition: 0.2s;"
                  onmouseover="this.style.background='#0f0f0f'" onmouseout="this.style.background='transparent'">
                 <span style="color:var(--white); flex:1; padding-right:10px;">
-                    <b style="color:yellow; margin-right:8px;">${index + 1}.</b> ${nombre}
+                    <b style="color:yellow; margin-right:8px;">${index + 1}.</b> ${nombreOriginal.toUpperCase()}
                 </span>
                 <div style="text-align:right; display:flex; flex-direction:column;">
                     <span style="color:#00CCFF; font-weight:bold; font-size:0.75rem;">${tamano}</span>
@@ -1794,7 +1793,7 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     container.innerHTML = htmlFinal;
 }
 
-// ========================================================
+//🏞🏞 codigo ESTABLE
 // 🛒 INICIO: LÓGICA GLOBAL DEL CARRITO (CONEXIÓN TICKET)
 // ========================================================
 let carritoJuegos = [];
@@ -1838,29 +1837,37 @@ function agregarAlCarrito(nombre, precio) {
 // ========================================================
 
 
-// ========================================================
 // 📺 INICIO: VISOR TV FLORIDA (ENCUADRE 13% / 18%)
 // ========================================================
-function abrirVisorExtra(nombre, precio) {
+function abrirVisorExtra(nombre, precio, tamano) {
     if(typeof playSnd === 'function') playSnd('sndClick');
     
-    const precioReal = precio || "200"; 
+    // Capturamos el precio real que viene del listado TXT
+    const precioReal = precio || "0"; 
     const visor = document.getElementById('visorImagenListado');
     const titulo = document.getElementById('nombreJuegoVisor');
+    
+    // --- NUEVO: MARCADOR DE PRECIO REAL EN EL TV ---
+    // Buscamos el elemento <p> que contiene el precio dentro del visor
+    const precioDisplay = visor.querySelector('p[style*="font-size: 1.5rem"]');
+    if(precioDisplay) {
+        precioDisplay.innerHTML = `$${precioReal} 💰`; // Actualiza el precio visualmente
+    }
+
     const btnGameplay = document.getElementById('btnAccionTv'); 
     const iframe = document.getElementById('navegadorTv');
     const estatica = document.getElementById('estaticaTv');
     
-    // --- LÓGICA DE BOTÓN AÑADIR DENTRO DEL TV ---
-    const botones = document.querySelectorAll('button');
-    botones.forEach(b => {
-        if(b.innerText.includes('AÑADIR')) {
-            b.onclick = function() {
-                agregarAlCarrito(nombre, precioReal);
-                if(window.innerWidth < 600) cerrarVisorExtra(); // Opcional: cerrar al añadir en móvil
-            };
-        }
-    });
+    // --- LÓGICA DE BOTÓN AÑADIR (CON PRECIO REAL) ---
+    // Buscamos específicamente el botón de AÑADIR dentro del visor
+    const btnAdd = Array.from(visor.querySelectorAll('button')).find(b => b.innerText.includes('AÑADIR'));
+    if(btnAdd) {
+        btnAdd.onclick = function() {
+            // Mandamos al carrito el nombre y el precio real del listado
+            agregarAlCarrito(nombre, precioReal);
+            if(window.innerWidth < 600) cerrarVisorExtra(); 
+        };
+    }
 
     // --- CONFIGURACIÓN TÉCNICA DEL VISOR (FRANCOTIRADOR) ---
     const contenedorTv = iframe.parentElement;
@@ -1905,7 +1912,6 @@ function abrirVisorExtra(nombre, precio) {
     btnGameplay.onclick = function() {
         if(typeof playSnd === 'function') playSnd('sndClick');
         const queryVideo = encodeURIComponent(nombre + " gameplay español pc");
-        // Usamos Bing Videos para que cargue dentro del TV sin problemas de permisos
         iframe.src = `https://www.bing.com/videos/search?q=${queryVideo}&view=detail&FORM=VIRE`;
     };
 }
@@ -1921,6 +1927,7 @@ function cerrarVisorExtra() {
 // ========================================================
 // 📺 FIN: VISOR TV FLORIDA
 // ========================================================
+
 
 
 
