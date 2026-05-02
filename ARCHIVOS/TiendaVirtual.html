@@ -2268,14 +2268,16 @@ if(typeof startDataCounter === 'function') startDataCounter();
 
 // --- BOTÓN DE YOUTUBE (SALTO A APP EXTERNA) ---
 
-<div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px;">
+<div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px; position: relative; z-index: 10005;">
     <button id="btnGameplay" 
             class="action-btn yt-btn" 
-            onclick="const textoBusqueda = document.querySelector('h2')?.innerText || 'gameplay'; window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(textoBusqueda + ' gameplay'), '_blank')"
-            style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 15px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000;">
-        <span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b>
+            onclick="const tituloJuego = document.querySelector('h2')?.innerText.trim() || 'videojuego'; window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(tituloJuego + ' gameplay español'), '_blank')"
+            style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 18px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000; font-family: sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <span style="font-size: 1.2rem;">▶</span> 
+        <b style="font-size: 1rem;">VER GAMEPLAY EN YOUTUBE</b>
     </button>
 </div>
+
 
 
 
