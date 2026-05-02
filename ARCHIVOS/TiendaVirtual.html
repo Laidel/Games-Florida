@@ -688,7 +688,7 @@ id="dataSaverCheckList" onchange="toggleDataSaverList()">MODO LISTADO
             </div>
         </div>
         <div id="zoomContainer"><img id="expandedImg" src="" crossorigin="anonymous"></div>
-        <div class="youtube-bar"><button id="btnGameplay" class="action-btn yt-btn"><span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b></button></div>
+        <div class="youtube-bar"><button id="btnGameplay" class="action-btn yt-btn"><span>▶</span> <b>VER GAMEPLAY EN YOUTUBE ♦️</b></button></div>
     </div>
 
     <script>
@@ -1793,9 +1793,15 @@ function procesarYMostrarTexto(texto, categoria, origen) {
     container.innerHTML = htmlFinal;
 }
 
-//🏞🏞 codigo ESTABLE
+
+
+
+//==============================
+//🏞🏞 codigo ESTABLE + precio en TV
+
 // 🛒 INICIO: LÓGICA GLOBAL DEL CARRITO (CONEXIÓN TICKET)
-// ========================================================
+// ==============================
+
 let carritoJuegos = [];
 
 function agregarAlCarrito(nombre, precio) {
@@ -1839,64 +1845,139 @@ function agregarAlCarrito(nombre, precio) {
 
 // 📺 INICIO: VISOR TV FLORIDA (ENCUADRE 13% / 18%)
 // ========================================================
-function abrirVisorExtra(nombre, precio, tamano) {
+function abrirVisorExtra(nombre, precio) {
     if(typeof playSnd === 'function') playSnd('sndClick');
     
-    // Capturamos el precio real que viene del listado TXT
+    // Captura el precio dinámico del listado (variable real)
     const precioReal = precio || "0"; 
+
     const visor = document.getElementById('visorImagenListado');
     const titulo = document.getElementById('nombreJuegoVisor');
     
-    // --- NUEVO: MARCADOR DE PRECIO REAL EN EL TV ---
-    // Buscamos el elemento <p> que contiene el precio dentro del visor
-    const precioDisplay = visor.querySelector('p[style*="font-size: 1.5rem"]');
-    if(precioDisplay) {
-        precioDisplay.innerHTML = `$${precioReal} 💰`; // Actualiza el precio visualmente
-    }
+    // NUEVO: Buscamos el elemento donde pondremos el precio dinámico
+    const etiquetaPrecio = document.getElementById('precioRealVisor'); 
 
     const btnGameplay = document.getElementById('btnAccionTv'); 
     const iframe = document.getElementById('navegadorTv');
     const estatica = document.getElementById('estaticaTv');
     
-    // --- LÓGICA DE BOTÓN AÑADIR (CON PRECIO REAL) ---
-    // Buscamos específicamente el botón de AÑADIR dentro del visor
-    const btnAdd = Array.from(visor.querySelectorAll('button')).find(b => b.innerText.includes('AÑADIR'));
+    // 1. Escribimos el nombre y el PRECIO REAL en neón
+    titulo.innerText = nombre.toUpperCase();
+    if(etiquetaPrecio) {
+        etiquetaPrecio.innerHTML = `$${precioReal} <span style="filter: grayscale(0);">💰</span>`;
+        // Aplicamos el estilo neón de Florida Games
+        etiquetaPrecio.style.color = "#ccff00"; // Tu verde neón
+        etiquetaPrecio.style.textShadow = "0 0 10px #ccff00"; 
+    }
+
+
+//============================;
+    
+    // --- LÓGICA DE BOTÓN AÑADIR (SIN CONGELAR) ---
+    // Buscamos el botón por ID o por texto "AÑADIR"
+    const btnAdd = document.getElementById('btnSumarVisor') || Array.from(visor.querySelectorAll('button')).find(b => b.innerText.includes('AÑADIR'));
+    
     if(btnAdd) {
+        // Reiniciamos el evento para que no se duplique ni se congele
+        btnAdd.onclick = null; 
         btnAdd.onclick = function() {
-            // Mandamos al carrito el nombre y el precio real del listado
             agregarAlCarrito(nombre, precioReal);
+            
+            // Animación rápida de pulsación
+            btnAdd.style.transform = "scale(0.95)";
+            setTimeout(() => { btnAdd.style.transform = "scale(1)"; }, 100);
+
             if(window.innerWidth < 600) cerrarVisorExtra(); 
         };
     }
 
-    // --- CONFIGURACIÓN TÉCNICA DEL VISOR (FRANCOTIRADOR) ---
-    const contenedorTv = iframe.parentElement;
-    if(contenedorTv) {
-        contenedorTv.style.width = "125vw"; 
-        contenedorTv.style.minWidth = "125vw";
-        contenedorTv.style.marginTop = "40px"; 
-        contenedorTv.style.position = "relative";
-    }
+   // --- CONFIGURACIÓN TÉCNICA DEL VISOR (CALIBRACIÓN MANUAL) ---
 
-    // Encuadre preciso para que encaje en el cristal del PNG
+// 1. AJUSTE DEL MUEBLE (La imagen PNG de la TV)
+const imgTv = visor.querySelector('img[src*="tv-listado.png"]');
+if(imgTv) {
+    // scale(1.1) aumenta el tamaño de la TV un 10%
+    imgTv.style.transform = "scale(1.1)"; 
+    imgTv.style.transformOrigin = "center center";
+}
+
+// 2. ENCUADRE DE LA VENTANA (El hueco negro donde se ve el contenido)
+// Modifica estos valores para mover la pantalla por el cristal amarillo
+const anchoPantalla = "54%";    // Ancho del área de visión
+const altoPantalla = "52%";     // Alto del área de visión
+const desdeIzquierda = "18.5%"; // Posición horizontal (más alto = más a la derecha)
+const desdeArriba = "20.5%";    // Posición vertical (más alto = más abajo)
+
+// 3. CONFIGURACIÓN DEL CONTENEDOR (La "caja" que tiene el scroll)
+const contenedor = iframe.parentElement;
+if(contenedor) {
+    contenedor.style.position = "absolute";
+    contenedor.style.width = anchoPantalla;
+    contenedor.style.height = altoPantalla;
+    contenedor.style.left = desdeIzquierda;
+    contenedor.style.top = desdeArriba;
+    contenedor.style.overflowX = "hidden"; // Bloquea el movimiento hacia los lados
+    contenedor.style.overflowY = "scroll"; // Activa el movimiento arriba/abajo
+    contenedor.style.background = "#000";  // Fondo negro por si la imagen tarda en cargar
+    contenedor.style.borderRadius = "20px";
+    contenedor.style.zIndex = "1";
+    contenedor.style.webkitOverflowScrolling = "touch"; // Hace que el scroll sea suave en móviles
+
+    // 4. EL IFRAME (El contenido real de la web de Bing/Google)
     iframe.style.position = "absolute";
-    iframe.style.width = "52%"; 
-    iframe.style.height = "48%";
-    iframe.style.left = "18%"; 
-    iframe.style.top = "13%"; 
-    iframe.style.zIndex = "10";
+    iframe.style.width = "300%";    // Se hace 3 veces más ancho para ocultar menús laterales
+    iframe.style.height = "3000px"; // Altura grande para que haya mucho contenido que desplazar
     iframe.style.border = "none";
-
-    if(estatica) {
-        estatica.style.display = "block";
-        estatica.style.width = "52%"; 
-        estatica.style.height = "48%";
-        estatica.style.left = "18%"; 
-        estatica.style.top = "13%";
+    iframe.style.left = "-100%";    // Centra el zoom horizontalmente
+    
+    // marginTop: Sube o baja el contenido INTERNO. 
+    // Úsalo para tapar la barra de búsqueda de Bing.
+    iframe.style.marginTop = "-380px"; 
+    
+    // scale: Ajusta el tamaño de las letras y fotos dentro de la TV.
+    iframe.style.transform = "scale(1.3)"; 
+    iframe.style.zIndex = "1";
+    
+    // 5. EL ESCUDO PROTECTOR (La capa invisible que bloquea el CLIC pero deja el SCROLL)
+    let escudo = document.getElementById('escudoProtector');
+    if(!escudo) {
+        escudo = document.createElement('div');
+        escudo.id = 'escudoProtector';
+        contenedor.appendChild(escudo);
     }
+    escudo.style.position = "absolute";
+    escudo.style.top = "0";
+    escudo.style.left = "0";
+    escudo.style.width = "100%";
+    escudo.style.height = "3000px"; // Debe ser igual de alto que el iframe para cubrirlo todo
+    escudo.style.zIndex = "5";      // Está por encima del iframe para recibir el toque
+    escudo.style.background = "transparent"; // Nadie lo ve, pero ahí está
+}
+
+// 6. AJUSTE DE LA ESTÁTICA (El efecto de "lluvia" de TV vieja)
+if(estatica) {
+    estatica.style.display = "block";
+    estatica.style.position = "absolute";
+    estatica.style.width = "100%"; 
+    estatica.style.height = "100%"; 
+    estatica.style.top = "0";
+    estatica.style.left = "0";
+    estatica.style.zIndex = "6"; // Se muestra encima de todo mientras carga
+    estatica.style.pointerEvents = "none"; // El dedo la atraviesa para llegar al scroll
+}
+
+
+
+
+
+
+
+
+
+
 
     document.body.style.overflow = 'hidden';
-    titulo.innerText = nombre.toUpperCase();
+    titulo.innerText = nombre.split('.')[0].toUpperCase(); // Quita el .exe o .iso del nombre
     visor.style.display = 'flex';
 
     // --- SINTONIZACIÓN (BING IMAGES) ---
@@ -1904,13 +1985,19 @@ function abrirVisorExtra(nombre, precio, tamano) {
     iframe.src = `https://www.bing.com/images/search?q=${queryBusqueda}&first=1&scenario=ImageBasicHover`;
     
     iframe.onload = function() {
-        if(estatica) estatica.style.display = "none";
-        iframe.style.display = "block";
+        // Al terminar de cargar, la estática desaparece
+        setTimeout(() => {
+            if(estatica) estatica.style.display = "none";
+            iframe.style.display = "block";
+        }, 300);
     };
 
     // --- BOTÓN GAMEPLAY ---
     btnGameplay.onclick = function() {
         if(typeof playSnd === 'function') playSnd('sndClick');
+        if(estatica) estatica.style.display = "block";
+        iframe.style.display = "none";
+        
         const queryVideo = encodeURIComponent(nombre + " gameplay español pc");
         iframe.src = `https://www.bing.com/videos/search?q=${queryVideo}&view=detail&FORM=VIRE`;
     };
@@ -1927,7 +2014,6 @@ function cerrarVisorExtra() {
 // ========================================================
 // 📺 FIN: VISOR TV FLORIDA
 // ========================================================
-
 
 
 
@@ -2144,9 +2230,11 @@ if(typeof startDataCounter === 'function') startDataCounter();
 <div id="visorImagenListado" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); z-index:100000; flex-direction:column; align-items:center; justify-content:flex-start; overflow:hidden; padding-top:20px; backdrop-filter: blur(10px);">
     
     <div style="width:100%; text-align:center; margin-bottom:10px; z-index:100015;">
-        <h3 id="nombreJuegoVisor" style="color:#0f0; text-shadow:0 0 10px #0f0; margin:0; font-size:1.1rem; text-transform:uppercase; font-family: 'Courier New', Courier, monospace;"></h3>
-        <p style="color:white; font-weight:bold; font-size:1.5rem; margin:2px 0; letter-spacing: 1px;">$150 💰</p>
-    </div>
+    <h3 id="nombreJuegoVisor" style="color:#0f0; text-shadow:0 0 10px #0f0; margin:0; font-size:1.1rem; text-transform:uppercase; font-family: 'Courier New', Courier, monospace;"></h3>
+    
+    <p id="precioRealVisor" style="color: #ffffff; font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: bold; margin-top: 5px; filter: grayscale(0);">$-- <span style="filter: grayscale(0);">💰</span></p>
+</div>
+
 
     <div style="width:95%; max-width:450px; display:flex; gap:12px; margin-bottom:20px; z-index:100020;">
         <button onclick="cerrarVisorExtra()" style="flex:1; background:linear-gradient(#ff4444, #990000); color:white; border:2px solid #500; border-radius:12px; padding:15px; font-weight:bold; cursor:pointer; font-size:0.9rem; box-shadow: 0 4px 10px rgba(255,0,0,0.3); active {transform: translateY(2px); box-shadow: none;}">⬅️ ATRÁS</button>
@@ -2166,11 +2254,41 @@ if(typeof startDataCounter === 'function') startDataCounter();
         </div>
     </div>
 
+
+<!--
     <div style="width:95%; max-width:450px; margin-top:35px; z-index:100020;">
         <button id="btnAccionTv" style="width:100%; background:linear-gradient(#ff0000, #660000); color:white; padding:20px; border-radius:18px; font-weight:bold; border:2px solid #400; box-shadow: 0 0 25px rgba(255,0,0,0.5); cursor:pointer; text-transform:uppercase; font-size:1.1rem; letter-spacing:1px;">
             🎬 VER GAMEPLAY (YOUTUBE)
         </button>
     </div>
+-->
+
+
+
+
+// --- BOTÓN DE YOUTUBE (SALTO A APP EXTERNA) ---
+
+// 1. Primero definimos la dirección (esto va dentro de tu función de apertura)
+const urlYoutubeReal = `https://www.youtube.com/results?search_query=${encodeURIComponent(nombre + " gameplay")}`;
+
+// 2. Sustituye tu HTML por este (nota el onclick="window.open(...)")
+const barraYoutube = `
+    <div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px;">
+        <button id="btnGameplay" 
+                class="action-btn yt-btn" 
+                onclick="window.open('${urlYoutubeReal}', '_blank')"
+                style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 15px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000;">
+            <span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b>
+        </button>
+    </div>
+`;
+
+// 3. Lo añades al contenedor (ajusta 'zoomContainer' según tu estructura)
+document.getElementById('zoomContainer').insertAdjacentHTML('afterend', barraYoutube);
+
+
+
+
 
 </div>
 
