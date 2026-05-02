@@ -2268,29 +2268,16 @@ if(typeof startDataCounter === 'function') startDataCounter();
 
 // --- BOTÓN DE YOUTUBE (SALTO A APP EXTERNA) ---
 
-// 1. Primero definimos la dirección (esto va dentro de tu función de apertura)
-const urlYoutubeReal = `https://www.youtube.com/results?search_query=${encodeURIComponent(nombre + " gameplay")}`;
-
-// 2. Sustituye tu HTML por este (nota el onclick="window.open(...)")
-const barraYoutube = `
-    <div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px;">
-        <button id="btnGameplay" 
-                class="action-btn yt-btn" 
-                onclick="window.open('${urlYoutubeReal}', '_blank')"
-                style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 15px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000;">
-            <span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b>
-        </button>
-    </div>
-`;
-
-// 3. Lo añades al contenedor (ajusta 'zoomContainer' según tu estructura)
-document.getElementById('zoomContainer').insertAdjacentHTML('afterend', barraYoutube);
-
-
-
-
-
+<div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px;">
+    <button id="btnGameplay" 
+            class="action-btn yt-btn" 
+            onclick="const textoBusqueda = document.querySelector('h2')?.innerText || 'gameplay'; window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(textoBusqueda + ' gameplay'), '_blank')"
+            style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 15px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000;">
+        <span>▶</span> <b>VER GAMEPLAY EN YOUTUBE</b>
+    </button>
 </div>
+
+
 
 </body>
 </html>
