@@ -2222,6 +2222,29 @@ setInterval(checkInternet, 5000);
 setInterval(updateOnlineCount, 10000);
 if(typeof startDataCounter === 'function') startDataCounter();
 
+
+
+
+
+
+
+// Función global para que el botón siempre funcione
+function verEnYoutubeReal() {
+    if (typeof playSnd === 'function') playSnd('sndClick');
+    
+    // Capturamos el nombre directamente del título que ya escribimos en el visor
+    const elementoTitulo = document.getElementById('nombreJuegoVisor');
+    const nombreJuego = elementoTitulo ? elementoTitulo.innerText : "videojuego";
+    
+    // Creamos la búsqueda limpia
+    const busqueda = encodeURIComponent(nombreJuego + " gameplay español pc");
+    const urlFinal = "https://www.youtube.com/results?search_query=" + busqueda;
+    
+    // Salto directo a la App o Web de YouTube
+    window.open(urlFinal, '_blank');
+}
+
+
 </script>
 
 //🌎
@@ -2268,15 +2291,22 @@ if(typeof startDataCounter === 'function') startDataCounter();
 
 // --- BOTÓN DE YOUTUBE (SALTO A APP EXTERNA) ---
 
-<div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 15px; position: relative; z-index: 10005;">
+<div class="youtube-bar" style="width: 100%; display: flex; justify-content: center; margin-top: 35px; position: relative; z-index: 100050;">
     <button id="btnGameplay" 
             class="action-btn yt-btn" 
-            onclick="const tituloJuego = document.querySelector('h2')?.innerText.trim() || 'videojuego'; window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(tituloJuego + ' gameplay español'), '_blank')"
-            style="background: #ff0000; color: white; border: 2px solid #fff; border-radius: 12px; padding: 18px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 15px #ff0000; font-family: sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px;">
-        <span style="font-size: 1.2rem;">▶</span> 
+            onclick="verEnYoutubeReal()"
+            style="background: linear-gradient(#ff0000, #a00000); color: white; border: 2px solid #fff; border-radius: 12px; padding: 20px; font-weight: bold; width: 90%; cursor: pointer; box-shadow: 0 0 20px rgba(255,0,0,0.6); display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase;">
+        <span style="font-size: 1.3rem;">▶</span> 
         <b style="font-size: 1rem;">VER GAMEPLAY EN YOUTUBE</b>
     </button>
 </div>
+
+
+
+
+
+
+
 
 
 
