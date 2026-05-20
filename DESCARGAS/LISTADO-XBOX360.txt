@@ -98,7 +98,6 @@ Rango:250:4GB
 Rayman Legends:250:6.5GB
 Rayman Origins:250:5GB
 Red Dead Redemption:250:7.5GB
-Red Dead Redemption Undead Nightmare:250:7GB
 Red Faction Armageddon:250:5.5GB
 Remember Me:250:5.5GB
 Resident Evil 4 HD:250:3.5GB
